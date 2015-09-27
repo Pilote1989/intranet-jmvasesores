@@ -1,0 +1,63 @@
+/*Tabla contenedora de mensajes*/
+.alertTable{
+	font-family:"Arial";
+	font-size:11px;
+	color:#FFFFFF;
+	width:100%;
+	margin:0px 0px 0px 0px;
+	text-align: center;
+}
+.alertTable table{
+	width:100%;
+	margin:0px 0px 0px 0px;
+}
+.alertTable table tr td{
+	text-align:center;
+}
+/*Tabla de mensaje de Error*/
+.alertTable_ERROR{
+        background-color: #990000;
+        border-style: outset;
+        border-width: 2px;
+        border-color: #990000;
+}
+.alertCell_ERROR{
+	font-family:"Arial";
+	font-size:11px;
+	font-weight:bold;
+	color:#FFFFFF;
+	text-align: center;
+        background-color: #CC6600;
+        padding: 3px;
+}
+/*Tabla de mensaje de Advertencia*/
+.alertTable_WARNING{
+        background-color: #FF9900;/*FF9900*/
+        /*border-style: outset;*/
+        border-width: 0px;
+        border-color: #FF9900;
+}
+.alertCell_WARNING{
+	font-family:"Arial";
+	font-size:11px;
+	font-weight:bold;
+	color:#FFFFFF;
+	text-align: center;
+        background-color: #FF8800;
+        padding: 3px;
+}
+/*Tabla de mensaje de Exito*/
+.alertTable_SUCCESS{
+        background-color: #6FA637;
+        border-width: 0px;
+        border-color: #6FA637;
+}
+.alertCell_SUCCESS{
+	font-family:"Arial";
+	font-size:11px;
+	font-weight:bold;
+	color:#FFFFFF;
+	text-align: center;
+        background-color: #7CBB3E;
+        padding: 3px;
+}

@@ -1,0 +1,8 @@
+# Diccionario de frases a utilizar en el sitio web
+# 
+# - La sintaxis de cada linea es [id][codigoLenguaje][frase]
+# - La frase puede contener comodines, (%s) que serán reemplazados por el parametro entregado
+# - Lineas que comiencen con '#' corresponden a comentarios
+# - Los id de cada termino pueden ser strings o numeros
+[1][en][Follow the white rabbit!]
+[1][es][Sigue al conejo blanco!]

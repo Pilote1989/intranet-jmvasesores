@@ -1,0 +1,156 @@
+<block start="Anulada"/>
+<div class="alert alert-danger">
+	<button data-dismiss="alert" class="close" type="button">
+		<i class="icon-remove"></i>
+	</button>
+	La poliza se encuentra anulada. <br>
+</div>
+<block end="Anulada"/>
+<block start="NoAnulada"/>
+<!--
+<div class="alert alert-info">
+	<button data-dismiss="alert" class="close" type="button">
+		<i class="icon-remove"></i>
+	</button>
+	Mostrando la vigencia: {fechaInicio} - {fechaFin} <br>
+</div>-->
+<block end="NoAnulada"/>
+<div class="profile-user-info profile-user-info-striped">
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Estado </div>
+		<div class="profile-info-value"> <i class="icon-circle {colorEstado}"></i>&nbsp;&nbsp;&nbsp;{estado}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Nombre </div>
+		<div class="profile-info-value"> {nombre}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Compan&iacute;a </div>
+		<div class="profile-info-value"> {compania}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Ramo </div>
+		<div class="profile-info-value"> {ramo}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Inicio del Vigencia </div>
+		<div class="profile-info-value"> {fechaInicio}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Fin del Vigencia </div>
+		<div class="profile-info-value"> {fechaFin}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Poliza en PDF </div>
+		<div class="profile-info-value">
+			<block start="siPDF"/>
+			<a href="uploads/{pdf}" target="_blank"><i class="icon-save"></i> Descargar</a>
+			<block end="siPDF"/>
+			<block start="noPDF"/>
+			No hay archivo
+			<block end="noPDF"/>
+			&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Observaciones </div>
+		<div class="profile-info-value"> {observaciones}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Documento </div>
+		<div class="profile-info-value"> {documento}&nbsp; </div>
+	</div>
+</div>
+
+<h3 class="header smaller lighter blue">Facturacion</h3>
+
+<div class="profile-user-info profile-user-info-striped">
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Estado Comision </div>
+		<div class="profile-info-value"> {estadoCobranza}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Aviso de Cobranza </div>
+		<div class="profile-info-value"> {cobranza}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Moneda </div>
+		<div class="profile-info-value"> {moneda}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Prima Neta </div>
+		<div class="profile-info-value"> {primaNeta}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Derecho de Emision </div>
+		<div class="profile-info-value"> {derecho}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Intereses </div>
+		<div class="profile-info-value"> {intereses}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> IGV </div>
+		<div class="profile-info-value"> {igv}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Total Factura </div>
+		<div class="profile-info-value"> {factura}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Comision - % </div>
+		<div class="profile-info-value"> {comision}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Comision </div>
+		<div class="profile-info-value"> {comisionNum}&nbsp; </div>
+	</div>
+    <block start="datosComision"/>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Estado Comision Cedida </div>
+		<div class="profile-info-value"> {estadoComisionCedida}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Asesor </div>
+		<div class="profile-info-value"> {asesor}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Comision Cedida - % </div>
+		<div class="profile-info-value"> {comisionCedida}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Comision Cedida </div>
+		<div class="profile-info-value"> {comisionCedidaNum}&nbsp; </div>
+	</div>
+    <block end="datosComision"/>
+</div>
+
+<block start="admin"/>
+<h3 class="header smaller lighter blue">Vigencias</h3>
+
+<div class="table-responsive">
+	<table id="sample-table-3" class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th align="center" width="10%">ID</th>
+				<th align="center" width="20%">Inicio de Vigencia</th>
+				<th align="center" width="20%">Fin de Vigencia</th>
+				<th align="center" width="20%">Estado</th>
+				<th align="center" width="15%">Prima Periodo</th>
+				<th align="center" width="15%">Opciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<loop start="vigencias"/>
+			<tr>
+				<td align="center">{vigencias.idLista}</td>
+				<td align="center">{vigencias.inicioVigencia}</td>
+				<td align="center">{vigencias.finVigencia}</td>
+				<td align="center">{vigencias.estado}</td>
+				<td align="center">{vigencias.prima}</td>
+				<td align="center"><div class="action-buttons"> <a class="blue" href="?do=polizas.ver&idPoliza={matriz}&vig={vigencias.idVigencia}"> <i class="icon-zoom-in bigger-130"></i> </a> </div></td>
+			</tr>
+			<loop end="vigencias"/>
+		</tbody>
+	</table>
+</div>
+<block end="admin"/>

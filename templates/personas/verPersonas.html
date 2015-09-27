@@ -1,0 +1,118 @@
+<div class="widget-box">
+	<div class="widget-header">
+		<h4>Filtros de Busqueda</h4>
+		<div class="widget-toolbar"> <a data-action="collapse" href="#"> <i class="icon-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="icon-remove"></i> </a> </div>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<form class="form-horizontal" role="form" id="principal" name="principal">
+				<!-- <legend>Form</legend> -->
+				<fieldset>
+					<div class="form-group">
+						<label for="nombre" class="col-sm-3 control-label no-padding-right"> Nombre </label>
+						<div class="col-sm-9">
+							<input name="nombre" type="text" class="col-sm-12" id="nombre" value="{nombre}" onKeyPress="return disableEnterKey(event)" placeholder="Nombre">
+						</div>
+					</div>
+				  <div class="form-group">
+					<label for="apellidoPaterno" class="col-sm-3 control-label no-padding-right"> Apellido Paterno </label>
+						<div class="col-sm-9">
+						  <input name="apellidoPaterno" type="text" class="col-sm-12" id="apellidoPaterno" value="{apellidoPaterno}" onKeyPress="return disableEnterKey(event)" placeholder="Apellido Paterno">
+						</div>
+					</div>
+				  <div class="form-group">
+					<label for="apellidoMaterno" class="col-sm-3 control-label no-padding-right"> Apellido Materno </label>
+						<div class="col-sm-9">
+						  <input name="apellidoMaterno" type="text" class="col-sm-12" id="apellidoMaterno" value="{apellidoMaterno}" onKeyPress="return disableEnterKey(event)" placeholder="Apellido Materno">
+						</div>
+					</div>
+				  <div class="form-group">
+					<label for="usuario" class="col-sm-3 control-label no-padding-right"> Usuario </label>
+						<div class="col-sm-9">
+						  <input name="usuario" type="text" class="col-sm-12" id="usuario" value="{usuario}" onKeyPress="return disableEnterKey(event)" placeholder="Usuario">
+						</div>
+					</div>
+				  <div class="form-group">
+					<label for="correo" class="col-sm-3 control-label no-padding-right"> Correo </label>
+						<div class="col-sm-9">
+						  <input name="correo" type="text" class="col-sm-12" id="correo" value="{correo}" onKeyPress="return disableEnterKey(event)" placeholder="Correo">
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+						<label for="limite" class="col-sm-3 control-label no-padding-right"> Limite </label>
+						<div class="col-sm-9">
+							<select id="limite" name="limite" onkeypress="return disableEnterKey(event)">
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>
+								<option value="60">60</option>
+								<option value="70">70</option>
+								<option value="80">80</option>
+								<option value="90">90</option>
+								<option value="100">100</option>
+							</select>
+						</div>
+					</div>
+                    
+                    
+                    
+				</fieldset>
+				<input name="busqueda" type="hidden" id="busqueda" value="1" />
+				<div class="form-actions center">
+					<button class="btn btn-sm btn-success" type="button" onClick="cargarFormulario('principal','?do=personas.busquedaPersonas&pagina=1','divBusquedaPersonas');">
+						Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+					</button>
+					<button class="btn btn-sm btn-danger" type="button" id="limpiar" onClick="window.location='?do=personas.verPersonas&limpiar=1'" value="Limpiar Filtros">
+						Limpiar Filtros <i class="icon-trash icon-on-right bigger-110"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	var parentAccordion=new TINY.accordion.slider("parentAccordion");
+	parentAccordion.init("accFiltro","h4",0,0);
+</script> 
+<script>
+
+	function disableEnterKey(e){
+		var key;
+		if(window.event)
+		key = window.event.keyCode;     //IE
+		else
+		key = e.which;     //firefox
+		
+		if(key == 13)
+		return false;
+		else
+		return true;
+	}	
+	function limpiarExportar(divC){
+		var el;
+		el= document.getElementById(divC);
+		el.innerHTML = "";
+	}
+</script>
+<h3 class="row header smaller lighter blue">
+	<span class="col-xs-12"> Resultados de Búsqueda </span><!-- /span --> 
+</h3>
+<div class="row">
+	<div class="col-xs-12"> 
+		<!-- PAGE CONTENT BEGINS -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="divBusquedaPersonas" style="height:430px"> </div>
+			</div>
+		</div>
+		<!-- PAGE CONTENT ENDS --> 
+	</div>
+	<!-- /.col --> 
+</div>
+<script>
+	cargarFormulario('principal','?do=personas.busquedaPersonas','divBusquedaPersonas');
+
+</script>

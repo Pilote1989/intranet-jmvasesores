@@ -1,0 +1,252 @@
+<h1>
+	{titulo}
+</h1>
+    <form id="formLogin" name="formLogin" action="?do=personas.autentificar&login=1" onsubmit="return validarDatosLoginBr();" method="post">
+	<table class="formTable_1" style="width:600px; padding-left:200px;">
+    	<tr>
+			<td colspan="2" class="titulo1">
+				Voluntários cadastrados
+			</td>
+		</tr>
+        <tr>
+            <th>
+                Email do voluntário
+            </th>
+            <td>
+                <input type="text" id="email" name="email" maxlength="100" size="50">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Senha
+            </th>
+
+            <td>
+                <input type="password" id="passwordl" name="passwordl" maxlength="30" size="20">
+<block start="bloqueInscripcion"/>
+   				<input type="hidden" id="inscripcionLibre" name="inscripcionLibre" value="{inscripcionLibre}" />
+<block end="bloqueInscripcion"/>
+<block start="bloqueUnidad"/>
+   				<input type="hidden" id="idUnidadOrganizacional" name="idUnidadOrganizacional" value="{idUnidadOrganizacional}" />
+<block end="bloqueUnidad"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="divErrores" style="padding-left:20px">
+                {errorLogin}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            	<input type="submit" value="Continuar">
+            </td>
+        </tr>
+       	<tr>
+            <th colspan="2">
+                <a href="?do=personas.enviarCorreo">Esqueceu a sua senha?</a>
+            </th>
+        </tr>
+	</table>
+</form>
+<br />
+<br	/>
+<form action="?do=personas.registrarPersona" id="formulario" name="formulario" onsubmit="return validarDatosRegistroBr();" method="post">
+    <table  class="formTable_1" style="width:600px; padding-left:200px;">
+        <tr>
+            <td colspan="2" class="titulo1">
+                Cadastro de voluntários novos
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="titulo2">
+                Informação do usuario
+            </td>
+        </tr>
+        <tr>
+            <th>
+                eMail
+            </th>
+            <td>
+                <input type="text" id="mail" name="mail" maxlength="100" size="50" value="{mail}" />
+                <input type="hidden" name="nuevo" value="1" />
+<block start="bloqueInscripcion"/>
+   				<input type="hidden" id="inscripcionLibre" name="inscripcionLibre" value="{inscripcionLibre}" />
+<block end="bloqueInscripcion"/>
+<block start="bloqueUnidad"/>
+   				<input type="hidden" id="idUnidadOrganizacional" name="idUnidadOrganizacional" value="{idUnidadOrganizacional}" />
+<block end="bloqueUnidad"/>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#D5D9EE" colspan="2">
+	            Crie uma <strong>Senha Teto</strong> para seu novo usuario. Isso garante que ninguém poderá <strong>ver</strong> ou <strong>modificar</strong> seus dados.
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Criar Senha Teto
+            </th>
+            <td>
+                <input type="password" id="password" name="password" maxlength="30" size="20" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Confirmar Senha Teto
+            </th>
+            <td>
+                <input type="password" id="password_2" name="password_2" maxlength="30" size="20" />
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="titulo2" colspan="2">
+                Dados pessoais
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <td>
+                <input type="text" id="nombres" name="nombres" maxlength="200" size="50" value="{nombres}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Sobrenome
+            </th>
+            <td>
+                <input type="text" id="apellidoPaterno" name="apellidoPaterno" maxlength="200" size="50" value="{apellidoPaterno}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Sobrenome de solteira da mãe
+            </th>
+            <td>
+                <input type="text" id="apellidoMaterno" name="apellidoMaterno" maxlength="200" size="50" value="{apellidoMaterno}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Data de nascimento
+            </th>
+            <td>
+                <input name="fechaNacimiento" id="fechaNacimiento" size="20" maxlength="300" type="text" class="datepicker" value="{fechaNacimiento}" > <br/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Sexo
+            </th>
+            <td>
+                <select name="sexo" id="sexo">
+					<option value="M">Masculino</option>
+					<option value="F">Feminino</option>
+				</select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Telefone
+            </th>
+            <td>
+				<input type="text" id="telefono" name="telefono" maxlength="200" size="50" value="{telefono}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Celular
+            </th>
+            <td>
+				<input type="text" id="telefonoMovil" name="telefonoMovil" maxlength="200" size="50" value="{telefonoMovil}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                País de origem
+            </th>
+            <td>
+                <select id="idPais" name="idPais" onchange="if(this.value != ''){ cargarPagina('Universidad', 'idPais', this.value, '', '{universidad}'); cargarPagina('Carrera', 'idPais', this.value, '', '{carrera}'); }">
+                    {paises}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Universidade
+            </th>
+            <td>
+    	    	<div id="Universidad">
+                    <select id="idUniversidad" name="idUniversidad">
+                    </select>				
+				</div>
+	     	</td>
+        </tr>
+        <tr>
+            <th>
+                Carreira
+            </th>
+            <td>
+	   	    	<div id="Carrera">
+                    <select id="idCarrera" name="idCarrera">
+                    </select>				
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Ano
+            </th>
+            <td>
+                <input type="text" id="anoEstudio" name="anoEstudio" maxlength="30" size="20" value="{anoEstudio}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                RG ou CPF
+            </th>
+            <td>
+                <input type="text" id="dni" name="dni" maxlength="30" size="20" value="{dni}" />
+            </td>
+        </tr>
+       	<tr>
+       		<td colspan="2">
+                <div id="divErroresRegistro" style="padding-left:20px">
+                {errorRegistro}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+				<script>
+					setSelect("idPais", "{pais}");
+					setSelect("sexo", "{sexo}");
+					
+					function setSelect(idSelect,startValue){
+						var select;
+						select=document.getElementById(idSelect);
+						
+						for(y=0;y<select.options.length;y++){
+							if(select.options[y].value==startValue){
+								select.options[y].selected=true;
+							}
+						}
+						
+						if ( select.fireEvent ){ // IE 5.5(WIN)
+							select.fireEvent("onChange");
+						}else{ // Mozilla, Safari...
+							var evt = document.createEvent("HTMLEvents");
+							evt.initEvent("change",true,true);
+							select.dispatchEvent( evt );
+						}
+					} 
+				</script>
+                <input type="submit" id="guardar" name="guardar" value="Registrar" onclick="return validarDatosRegistroBr(formLogin);" />
+            </td>
+        </tr>
+	</table>
+</form>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+	<!--
+		Command que sera ejecutado si no se define el parametro
+		'do' en llamado a receiver
+		ej: index.php?do=someAction
+	-->
+	<defaultCommand>login</defaultCommand>
+	<!--
+		Template con extension '.html' que contendra por defecto el codigo html
+		resultante de la ejecucion de un command.
+	-->
+	<defaultLayout>public</defaultLayout>
+	<!--
+		Nombre de la sesion que manejara el sitio (para distintas instancias
+		del software operando en un mismo servidor).
+	-->
+	<sessionName>utpmpSocial</sessionName>
+	<!--
+		Lista de paths, relativas a la ubicacion del receiver (index.php)
+	-->
+	<paths>
+		<commands>commands</commands>
+		<templates>templates</templates>
+		<lib>lib</lib>
+		<eocene>eocene</eocene>
+		<autoLoad>lib/autoLoad</autoLoad>
+		<layouts>templates/layouts</layouts>
+	</paths>
+	<dbInfo>
+		<dbType>mysql</dbType>
+		<host>jmvclientes.db.8222403.hostedresource.com</host>
+		<userid>jmvclientes</userid>
+		<password>seJMV28.</password>
+		<database>jmvclientes</database>
+	</dbInfo>
+	<!--
+		appSettings is an optional node. You can place any thing here 
+		and access it from $fc->appSettings
+	-->
+	<appSettings>
+	</appSettings>
+
+	<!--
+	    Booleano que indica si el software se usa en modo depuracion.
+	    Si debugMode=false, se omitiran las salidas anexas a la ejecucion del command.
+	    -->
+	<debugMode>true</debugMode>
+</config>

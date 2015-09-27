@@ -1,0 +1,109 @@
+<div class="page-header">
+  <h1> Ver Cliente <small> <i class="icon-double-angle-right"></i> {nombre} </small> </h1>
+</div>
+<div class="row">
+  <div class="col-sm-2 center">
+    <span class="btn btn-app btn-primary no-hover"> <span class="line-height-1 bigger-230"> {polizas} </span> <br>
+    <span class="line-height-1 smaller-90"> Polizas </span> </span>
+    <div class="hr hr12 dotted">
+    </div>
+    <button onClick="location.href='?do=clientes.eliminarCliente&idCliente={idCliente}';" class="btn btn-xs btn-danger">
+      <i class="icon-cross bigger-120"></i>Eliminar Cliente
+    </button>
+  </div>
+  <div class="col-sm-10">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"> <a href="#home" data-toggle="tab"> <i class="green icon-home bigger-110"></i> Datos Basicos </a> </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+        <block start="mensaje"/>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">
+              <i class="icon-remove"></i>
+            </button>
+            <strong> <i class="icon-remove"></i> Error! </strong> {m} <br>
+          </div>
+        <block end="mensaje"/>
+          <div class="profile-user-info profile-user-info-striped">
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Nombre
+              </div>
+              <div class="profile-info-value">
+                {nombre}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Direcci&oacute;n
+              </div>
+              <div class="profile-info-value">
+                <i class="icon-map-marker light-orange bigger-110"></i> {direccion}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Distrito
+              </div>
+              <div class="profile-info-value">
+                {distrito}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Tipo de Documento
+              </div>
+              <div class="profile-info-value">
+                {tipoDoc}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Documento
+              </div>
+              <div class="profile-info-value">
+                {doc}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Correo
+              </div>
+              <div class="profile-info-value">
+                {correo}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Correo Alternativo
+              </div>
+              <div class="profile-info-value">
+                {correo2}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Asesor
+              </div>
+              <div class="profile-info-value">
+                {asesor}&nbsp;
+              </div>
+            </div>
+          </div>
+          <block start="bloqueEditarClientes"/>
+          
+          <hr />
+          <div class="center">
+            <button onClick="location.href='?do=clientes.editarDatosBasicos&idCliente={idCliente}';" class="btn btn-xs btn-success">
+              <i class="icon-edit bigger-120"></i>Editar
+            </button>
+          </div>
+          <block end="bloqueEditarClientes"/>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+@charset "utf-8";
+td {
+	font-family: "Trebuchet MS", Arial, Veranda, sans-serif;
+	padding: 2px;
+}
+
+#calback {
+	background: transparent url('calWaiting.gif') no-repeat 50% 100px;
+	margin: 0 auto;
+	width: 250px;
+	height: 300px;
+}
+
+#calendar {
+	width: 100%;
+	height: 300px;
+}
+
+.cal {
+	background: #365D86;
+	width: 100%; 
+}
+
+.calhead {
+	width: 100%;
+	font-weight: bold;
+	color: #FFF;
+	font-size: 20px;      
+}
+
+.calhead img {
+	border: none;
+}
+
+.dayhead {
+	height: 25px;
+	background: #EEE;
+}
+
+.dayhead td {
+	text-align: center;
+	color: #000;
+}
+
+.dayrow {
+	background: #FFF;
+	height: 30px;
+}
+
+.dayrow td {
+	width: 40px;
+	color: #000;
+	font-size: .9em;
+}
+
+.day {
+	float: left;
+}
+
+.dayover {
+	background: #EEE;
+}
+
+.dayout {
+	background: #FFF;
+}
+.semana1 {
+	background: #8aa7c4;
+	float: left;
+	width: 100%;
+	height: 100%;
+	cursor:pointer;
+}
+.semana2 {
+	background: #8ac492;
+	float: left;
+	width: 100%;
+	height: 100%;
+	cursor:pointer;
+}
+.semana3 {
+	background: #c4b48a;
+	float: left;
+	width: 100%;
+	height: 100%;
+	cursor:pointer;
+}
+.semana4 {
+	background: #c4978a;
+	float: left;
+	width: 100%;
+	height: 100%;
+	cursor:pointer;
+}
+.semana5 {
+	background: #c48a9f;
+	float: left;
+	width: 100%;
+	height: 100%;
+	cursor:pointer;
+}

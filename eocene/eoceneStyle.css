@@ -1,0 +1,14 @@
+ .eoceneError{
+ 	text-align:left;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+ }
+ .eoceneError h1{
+ 	font-size: 25px;
+ 	font-weight: 100;
+	color: #336600;
+ }
+ .eoceneError h2{
+ 	font-size: 13px;
+ 	font-weight: bold;
+	color: #006699;
+ }

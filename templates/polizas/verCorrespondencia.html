@@ -1,0 +1,113 @@
+<div class="center">
+  <button id="btnMsg" class="btn btn-xs btn-primary">
+    <i class="icon-comment bigger-120"></i>Agregar Correspondencia
+  </button>
+</div>
+<block start="bloqueResultados"/>
+<div class="table-responsive" style="margin-top:10px">
+  <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th align="center">Numero</th>
+        <th align="center">Detalle</th>
+        <th align="center">Fecha</th>
+        <th align="center"> Opc. </th>
+      </tr>
+    </thead>
+    <tbody>
+      <loop start="cartas"/>
+      <tr>
+        <td align="center"> {cartas.numero} </td>
+        <td align="center"> {cartas.detalle} </td>
+        <td align="center"> {cartas.fecha} </td>
+        <td align="center"><div class="action-buttons">
+            <a class="blue abreLink" x-link="http://intranet.jmvasesores.com/?do=cartas.crear&idCarta={cartas.idCarta}" href="#"> <i class="icon-zoom-in bigger-130"></i> </a> <a class="blue abreLink" x-link="http://intranet.jmvasesores.com/?do=cartas.procesarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-print bigger-130"></i> </a> <a class="blue elimina" x-link="http://intranet.jmvasesores.com/?do=cartas.eliminarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+          </div></td>
+      </tr>
+      <loop end="cartas"/>
+    </tbody>
+  </table>
+</div>
+<div id="dialog-message">
+  <div class="alert alert-info bigger-110">
+    La carta se eliminara permanentemente, no sera posible recuperarla.
+  </div>
+  <div class="space-6">
+  </div>
+  <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+</div>
+<block end="bloqueResultados"/>
+<block start="bloqueNoResultados"/>
+No hay cartas para esta p&oacute;liza.
+<block end="bloqueNoResultados"/>
+<script type="text/javascript">
+		var child;
+		var timer;
+		$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+			_title: function(title) {
+				if (!this.options.title ) {
+					title.html("&#160;");
+				} else {
+					title.html(this.options.title);
+				}
+			}
+		}));
+		$( "#dialog-message" ).dialog({
+			resizable: false,
+			modal: true,
+			title_html: true,
+			title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar la carta?</h4></div>",
+			autoOpen: false,
+			modal: true,
+			buttons: [
+				{
+					html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+					"class" : "btn btn-danger btn-xs",
+					click: function() {
+						$.ajax({
+							type: "POST",
+							dataType: "json",
+							url: $(this).data('link'),
+							success: function() {
+								$("#tab-2").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+								$("#tab-2").load('/?do=polizas.verCorrespondencia&idPoliza={idPoliza}');					
+								checkChild();
+							}
+						});
+						$( this ).dialog( "close" );
+					}
+				}
+				,
+				{
+					html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+					"class" : "btn btn-xs",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]			
+		});	
+		jQuery('.abreLink').click( function() {
+ 			child = window.open($(this).attr("x-link"), "editaVe", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
+			event.preventDefault();
+			timer = setInterval(checkChild, 500);
+		});	
+		jQuery('#btnMsg').click( function() {
+ 			child = window.open("http://intranet.jmvasesores.com/?do=cartas.crear&idPoliza={idPoliza}", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
+			event.preventDefault();
+			timer = setInterval(checkChild, 500);
+		});	
+		jQuery('.elimina').click( function() {
+			event.preventDefault();
+			$( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
+		});	
+		
+		function checkChild() {
+			if (child.closed) {
+				clearInterval(timer);
+				$("#tab-2").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+				$("#tab-2").load('/?do=polizas.verCorrespondencia&idPoliza={idPoliza}');
+			}
+		}
+
+</script>

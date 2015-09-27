@@ -1,0 +1,73 @@
+<div class="page-header">
+  <h1> Ver Persona <small> <i class="icon-double-angle-right"></i> {nombre} </small>
+    <div class="btn-group pull-right">
+      <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown"> <i class="icon-cogs bigger-120"></i> Opciones <span class="icon-caret-down icon-on-right"></span> </button>
+      <ul class="dropdown-menu dropdown-info pull-right">
+        <li> <a href="/?do=personas.editarDatosBasicos&amp;idPersona={idPersona}">Editar Persona</a> </li>
+        <li> <a class="x-ajax" href="#" x-link="/?do=personas.resetearClave&amp;idPersona={idPersona}">Resetear Clave</a> </li>
+        <li> <a href="/?do=personas.estadoUsuario&amp;idPersona={idPersona}">Deshabilitar/Habilitar</a> </li>
+      </ul>
+    </div>
+  </h1>
+</div>
+<div id="alerta"></div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"> <a href="#home" data-toggle="tab"> <i class="green icon-home bigger-110"></i> Datos Basicos </a> </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+          <div class="profile-user-info profile-user-info-striped">
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Nombre </div>
+              <div class="profile-info-value"> {nombre}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Apellido Paterno </div>
+              <div class="profile-info-value"> {apellidoPaterno}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Apellido Materno </div>
+              <div class="profile-info-value"> {apellidoMaterno}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> RUC </div>
+              <div class="profile-info-value"> {ruc}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Correo </div>
+              <div class="profile-info-value"> {correo}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Usuario </div>
+              <div class="profile-info-value"> {usuario}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Estado </div>
+              <div class="profile-info-value"> {estado}&nbsp; </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Comision </div>
+              <div class="profile-info-value">
+               {comision}%&nbsp; </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.x-ajax').on('click', function(e) {
+	$.ajax({
+	url:$(this).attr('x-link'),
+	dataType: 'json',
+    })
+    .done(function(data) { // Variable data contains the data we get from serverside
+		$('#alerta').html(data);
+	});
+	e.preventDefault();
+});
+</script> 

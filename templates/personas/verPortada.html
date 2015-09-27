@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1> Portada <small> <i class="icon-double-angle-right"></i> JMV Seguros </small> </h1>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-block alert-success">
+      <i class="icon-ok green"></i> Bienvenido <strong class="green"> Intranet Clientes JMV <small>(v2.0)</small> </strong>. </div>
+  </div>
+  <block start="admin"/>
+  <div class="col-xs-12">
+    <div class="col-sm-12">
+      <div class="well well-lg">
+        <h4 class="red"><i class="icon-comments"></i> Comisiones por Liquidar</h4>
+        Hay <strong>{porLiquidar}</strong> comisiones pendientes de liquidar.
+        <button class="link btn btn-xs btn-danger pull-right" x-link="?do=liquidaciones.editarDatosBasicos"> <span class="bigger-110">Ver</span> <i class="icon-arrow-right icon-on-right"></i> </button>
+      </div>
+      <div class="well well-lg">
+        <h4 class="green"><i class="icon-comments"></i> Polizas por Vencer</h4>
+        Hay <strong>{porVencer}</strong> p&oacute;lizas que vencen esta semana.
+        <button class="btn btn-xs btn-success pull-right"> <span class="bigger-110">Ver</span> <i class="icon-arrow-right icon-on-right"></i> </button>
+      </div>
+      <div class="well well-lg">
+        <h4 class="blue"><i class="icon-comments"></i> Recordatorios por Enviar</h4>
+        Mañana se enviaran <strong>{recordatoriosPorEnviar}</strong> recordatorios de cupones pendientes.
+        <button class="link btn btn-xs btn-info pull-right" x-link="?do=admin.recordatorios"> <span class="bigger-110">Ver</span> <i class="icon-arrow-right icon-on-right"></i> </button>
+      </div>
+    </div>
+  </div>
+  <block end="admin"/>
+</div>
+
+<script>
+$( ".link" ).click(function() {
+	location.replace($(this).attr("x-link"));
+});
+</script>

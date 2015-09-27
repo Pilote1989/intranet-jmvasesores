@@ -1,0 +1,145 @@
+<block start="Anulada"/>
+    <div class="alert alert-danger">
+        <button data-dismiss="alert" class="close" type="button">
+            <i class="icon-remove"></i>
+        </button>
+        La poliza se encuentra anulada. <br>
+    </div>
+<block end="Anulada"/>
+<block start="NoAnulada"/>
+        <div class="center">
+          <button id="agregaAsegurado" class="btn btn-xs btn-primary">
+            <i class="icon-comment bigger-120"></i>Agregar Asegurado
+          </button>
+        </div>
+        
+        <div id="dialog-general">
+        	alerta!
+        </div>
+        <block start="bloqueResultados"/>
+        <div class="table-responsive" style="margin-top:10px">
+          <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th align="center"> Nombre </th>
+                <th align="center"> Documento </th>
+                <th align="center"> Fecha de Nacimiento </th>
+                <th align="center"> Edad Al Inicio </th>
+                <th align="center"> Opc. </th>
+              </tr>
+            </thead>
+            <tbody>
+              <loop start="asegurados"/>
+              <tr>
+                <td align="center"> {asegurados.nombre} </td>
+                <td align="center"> {asegurados.tipoDoc} - {asegurados.documento} </td>
+                <td align="center"> {asegurados.nacimiento} </td>
+                <td align="center"> {asegurados.edad} </td>
+                <td align="center"><div class="action-buttons">
+                    <a class="blue elimina" x-link="http://intranet.jmvasesores.com/?do=poliza.eliminarAsegurado&idPoliza={asegurados.idVehiculo}&idAsegurado={asegurados.idAsegurado}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+                  </div></td>
+              </tr>
+              <loop end="asegurados"/>
+            </tbody>
+          </table>
+        </div>
+        <div id="dialog-message">
+          <div class="alert alert-info bigger-110">
+            El asegurado se eliminara de la poliza.
+          </div>
+          <div class="space-6">
+          </div>
+          <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+        </div>
+        <block end="bloqueResultados"/>
+        <block start="bloqueNoResultados"/>
+        No hay asegurados para esta p&oacute;liza.
+        <block end="bloqueNoResultados"/>
+        <script type="text/javascript">
+                var child;
+                var timer;
+                $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+                    _title: function(title) {
+                        if (!this.options.title ) {
+                            title.html("&#160;");
+                        } else {
+                            title.html(this.options.title);
+                        }
+                    }
+                }));
+				
+                $( "#dialog-general" ).dialog({
+                    resizable: false,
+                    modal: true,
+                    title_html: true,
+                    autoOpen: false,
+                    maxWidth:700,
+                    width: 700,
+				});
+				$( "#dialog-message" ).dialog({
+                    resizable: false,
+                    modal: true,
+                    title_html: true,
+                    title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Asegurado?</h4></div>",
+                    autoOpen: false,
+                    buttons: [
+                        {
+                            html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+                            "class" : "btn btn-danger btn-xs",
+                            click: function() {
+                                $.ajax({
+                                    type: "POST",
+                                    dataType: "json",
+                                    url: $(this).data('link'),
+                                    success: function() {
+										$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+										$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+                                    }
+                                });
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                        ,
+                        {
+                            html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+                            "class" : "btn btn-xs",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    ]			
+                });	
+                jQuery('.abreLink').click( function() {
+					//verVehiculo
+					$.ajax({
+						url: $(this).attr('x-link'),
+						success: function(responseText){
+							$('#dialog-general').html(responseText);					
+							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Asegurado</h4></div>");
+							$( "#dialog-general" ).dialog("open");
+						},
+						error: function(responseText){
+						}
+					});
+                    event.preventDefault();
+                });	
+                jQuery('#agregaAsegurado').click( function() {
+					$.ajax({
+						url: '/?do=polizas.agregarAsegurado&idPoliza={idPoliza}',
+						success: function(responseText){
+							$('#dialog-general').html(responseText);					
+							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Asegurado</h4></div>");
+							$( "#dialog-general" ).dialog("open");
+						},
+						error: function(responseText){
+						}
+					});
+                    event.preventDefault();
+                });	
+                jQuery('.elimina').click( function() {
+                    event.preventDefault();
+                    $( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
+                });	
+        
+        </script>
+<block end="NoAnulada"/>

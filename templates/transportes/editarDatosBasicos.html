@@ -1,0 +1,292 @@
+<div class="widget-box">
+	<div class="widget-header">
+		<h4>Declaracion de Transportes</h4>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<form class="form-horizontal" enctype="multipart/form-data" method="POST" name="principal2" id="principal2" action="?do=transportes.procesarDatosBasicos" role="form">
+				<fieldset>
+					<div class="form-group">
+						<label for="contratante" class="col-sm-3 control-label no-padding-right">Contratante</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" {readonly} name="contratante" type="text"  id="contratante" value="{contratante}" placeholder="Contratante">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="direccion" class="col-sm-3 control-label no-padding-right">Direccion</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" {readonly} name="direccion" type="text"  id="direccion" value="{direccion}" placeholder="Direccion">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="ruc" class="col-sm-3 control-label no-padding-right">RUC</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" {readonly} name="ruc" type="text"  id="ruc" value="{ruc}" placeholder="RUC">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="tipoDeMercaderia" class="col-sm-3 control-label no-padding-right">Tipo de Mercaderia</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" name="tipoDeMercaderia" type="text"  id="tipoDeMercaderia" value="{tipoDeMercaderia}" placeholder="Tipo de Mercaderia">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="descripcionMercaderia" class="col-sm-3 control-label no-padding-right">Descripcion de la Mercaderia</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" name="descripcionMercaderia" type="text"  id="descripcionMercaderia" value="{descripcionMercaderia}" placeholder="Descripcion de la Mercaderia">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="lugarOrigen" class="col-sm-3 control-label no-padding-right">Lugar de Origen</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" name="lugarOrigen" type="text"  id="lugarOrigen" value="{lugarOrigen}" placeholder="Lugar de Origen">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="fechaSalida" class="col-sm-3 control-label no-padding-right">Fecha de Salida</label>
+						<div class="col-sm-9"><div class="input-group">
+							<input type="text" name="fechaSalida" value="{fechaSalida}" data-date-format="dd/mm/yyyy" readonly class="form-control date-picker" id="fechaSalida">
+							<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div>
+                            </div>
+					</div>
+                    
+					<div class="form-group">
+						<label for="paisOrigen" class="col-sm-3 control-label no-padding-right">Pais de Origen</label>
+						<div class="col-sm-9"> <div class="clearfix">
+							<select name="pais" class="col-sm-12 col-xs-12">
+								{paises}
+							</select>						
+						 </div></div>
+					</div>
+					<div class="form-group">
+						<label for="lugarDestino" class="col-sm-3 control-label no-padding-right">Lugar de Destino</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12"  name="lugarDestino" type="text"  id="lugarDestino" value="{lugarDestino}" placeholder="Lugar de Destino">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="fechaLlegada" class="col-sm-3 control-label no-padding-right">Fecha de Llegada</label>
+						<div class="col-sm-9"><div class="input-group">
+							<input type="text" name="fechaLlegada" value="{fechaLlegada}" data-date-format="dd/mm/yyyy" readonly class="form-control date-picker" id="fechaLlegada">
+							<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div></div>
+					</div>
+					<div class="form-group">
+						<label for="medioTransporte" class="col-sm-3 control-label no-padding-right">Medio de Transporte</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<select name="medioTransporte" class="col-sm-12 col-xs-12">
+								<option {medioTransporteVacio}></option>
+								<option value="Aereo" {medioTransporteAereo}>Aereo</option>
+								<option value="Terrestre" {medioTransporteTerrestre}>Terrestre</option>
+								<option value="Maritimo" {medioTransporteMaritimo}>Maritimo</option>
+							</select>
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="proovedor" class="col-sm-3 control-label no-padding-right">Proveedor</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12"  name="proovedor" type="text"  id="proovedor" value="{proovedor}" placeholder="Proveedor">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="nombreBuque" class="col-sm-3 control-label no-padding-right">Nombre del Buque</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12"  name="nombreBuque" type="text"  id="nombreBuque" value="{nombreBuque}" placeholder="Nombre del Buque">
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="trasbordo" class="col-sm-3 control-label no-padding-right">Trasborbo</label>
+						<div class="col-sm-9">
+							<input class="ace ace-switch ace-switch-4"  name="trasbordo" type="checkbox" id="trasbordo" value="{trasbordo}" {checked}>
+							<span class="lbl"></span> </div>
+					</div>
+					<div class="form-group">
+						<label for="tipoContenedor" class="col-sm-3 control-label no-padding-right">Tipo de Contenedor</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<select name="tipoContenedor" class="col-sm-12 col-xs-12">
+								<option {contenedorVacio}></option>
+								<option value="Exclusivo" {contenedorExclusivo}>Exclusivo</option>
+								<option value="Consolidado" {contenedorConsolidado}>Consolidado</option>
+							</select>
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="tipoEmbalaje" class="col-sm-3 control-label no-padding-right">Tipo de Embalaje</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12"  name="tipoEmbalaje" type="text" id="tipoEmbalaje" value="{tipoEmbalaje}" placeholder="Tipo de Embalaje" />
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="fob" class="col-sm-3 control-label no-padding-right">Valor FOB</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12 cam"  name="fob" type="text" id="fob" value="{valorFob}"/>
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="aduana" class="col-sm-3 control-label no-padding-right">Derechos de Aduana</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12 cam"  name="aduana" type="text" id="aduana" value="{aduana}"/>
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="flete" class="col-sm-3 control-label no-padding-right">Valor del Flete</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12 cam"  name="flete" type="text" id="flete" value="{valorFlete}"/>
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="sobreseguro" class="col-sm-3 control-label no-padding-right">Sobreseguro</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12"  name="sobreseguro" type="text" id="sobreseguro" {readonly} value="{sobreseguro}"/>
+						</div></div>
+					</div>
+					<div class="form-group">
+						<label for="sumaAsegurada" class="col-sm-3 control-label no-padding-right">Suma Asegurada</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12" {readonly} name="sumaAsegurada" type="text" id="sumaAsegurada"/>
+						</div>
+					</div></div>
+					<div class="form-group">
+						<label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones</label>
+						<div class="col-sm-9"><div class="clearfix">
+							<input class="col-sm-12 col-xs-12"  name="observaciones" type="text" id="observaciones" value="{observaciones}"  placeholder="Observaciones" />
+						</div></div>
+					</div>
+				</fieldset>
+				<div class="form-actions center">
+					<button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2">
+						Enviar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var numero = ( parseInt(document.principal2.fob.value) + parseInt(document.principal2.flete.value) + parseInt(document.principal2.aduana.value) ) * 1.1;
+	document.principal2.sumaAsegurada.value = numero.toFixed(2);
+	$(".cam").change(function () {
+		var numero = ( parseInt(document.principal2.fob.value) + parseInt(document.principal2.flete.value) + parseInt(document.principal2.aduana.value) ) * 1.1;
+		document.principal2.sumaAsegurada.value = numero.toFixed(2);
+	}); 
+	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
+				
+	$('#principal2').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			tipoDeMercaderia: {
+				required: true,
+			},
+			descripcionMercaderia: {
+				required: true,
+			},
+			lugarOrigen: {
+				required: true,
+			},
+			fechaSalida: {
+				required: true,
+			},
+			paisOrigen: {
+				required: true,
+			},
+			lugarDestino: {
+				required: true,
+			},
+			fechaLlegada: {
+				required: true,
+			},
+			medioTransporte: {
+				required: true,
+			},
+			proovedor: {
+				required: true,
+			},
+			nombreBuque: {
+				required: true,
+			},
+			tipoContenedor: {
+				required: true,
+			},
+			tipoEmbalaje: {
+				required: true,
+			},
+		},
+
+		messages: {
+			tipoDeMercaderia: {
+				required: "Ingrese el tipo de mercaderia.",
+			},
+			descripcionMercaderia: {
+				required: "Ingrese la descripcion de la mercaderia.",
+			},
+			lugarOrigen: {
+				required: "Ingrese el lugar de origen.",
+			},
+			fechaSalida: {
+				required: "Ingrese la fecha de salida.",
+			},
+			paisOrigen: {
+				required: "Ingrese el pais de origen",
+			},
+			lugarDestino: {
+				required: "Ingrese el lugar de destino.",
+			},
+			fechaLlegada: {
+				required: "Ingrese la fecha de llegada.",
+			},
+			medioTransporte: {
+				required: "Ingrese el medio de transporte.",
+			},
+			proovedor: {
+				required: "Ingrese el proveedor.",
+			},
+			nombreBuque: {
+				required: "Ingrese el numero de buque.",
+			},
+			tipoContenedor: {
+				required: "Ingrese el tipo de contenedor",
+			},
+			tipoEmbalaje: {
+				required: "Ingrese el tipo de embalaje",
+			},
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		}
+	});
+	$('#enviarPrincipal2').click(function() {
+
+		if($("#principal2").valid()){
+			$("#principal2").submit();
+		}
+	});
+			
+</script>
