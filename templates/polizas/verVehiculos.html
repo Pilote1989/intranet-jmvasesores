@@ -144,6 +144,13 @@
                 });	
                 jQuery('.elimina').click( function() {
                     event.preventDefault();
+					$( "#dialog-message" ).dialog({
+						autoOpen: false,
+						  close : function(){
+							$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+							$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+						  }  	
+					});
                     $( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
                 });	
         

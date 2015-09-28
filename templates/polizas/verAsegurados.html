@@ -36,7 +36,7 @@
                 <td align="center"> {asegurados.nacimiento} </td>
                 <td align="center"> {asegurados.edad} </td>
                 <td align="center"><div class="action-buttons">
-                    <a class="blue elimina" x-link="http://intranet.jmvasesores.com/?do=poliza.eliminarAsegurado&idPoliza={asegurados.idVehiculo}&idAsegurado={asegurados.idAsegurado}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+                    <a class="blue elimina" x-link="/?do=polizas.eliminarAsegurado&id={asegurados.id}" href="#"> <i class="icon-trash bigger-130"></i> </a>
                   </div></td>
               </tr>
               <loop end="asegurados"/>
@@ -139,6 +139,7 @@
                 jQuery('.elimina').click( function() {
                     event.preventDefault();
                     $( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
+
                 });	
         
         </script>

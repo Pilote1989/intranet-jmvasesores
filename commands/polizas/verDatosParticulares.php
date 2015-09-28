@@ -87,6 +87,7 @@ class verDatosParticulares extends sessionCommand{
 					$listaAsegurados[$i]["documento"] = $aseguradoTemp->getDoc();	
 					$listaAsegurados[$i]["nacimiento"] = "-";
 					$listaAsegurados[$i]["edad"] = "-";
+					$listaAsegurados[$i]["id"] = $asegurado->getId();
 					$i++;
 				}			
 				$this->addLoop("asegurados", $listaAsegurados);
