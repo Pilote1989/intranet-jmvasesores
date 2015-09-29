@@ -138,8 +138,9 @@
                     event.preventDefault();
                 });	
                 jQuery('.elimina').click( function() {
+					var lin = $(this).attr("x-link");
                     event.preventDefault();
-                    $( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
+                    $( "#dialog-message" ).data('link', lin).dialog("open");
 
                 });	
         

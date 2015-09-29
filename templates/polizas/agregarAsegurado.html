@@ -90,7 +90,7 @@ $('#buscarClientes').click(function() {
 			
 	}
 });
-$('#resultados').on( 'click', 'button .agregaAsegurado', function (e) {
+$('#resultados').on( 'click', 'button.agregaAsegurado', function (e) {
 	var idCliente = $(this).attr('x-link');
 	var idPoliza = $(this).attr('x-pol');
 	$.ajax({
