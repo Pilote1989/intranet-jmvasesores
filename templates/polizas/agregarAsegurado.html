@@ -54,7 +54,6 @@
   </div>
 </div>
 <div class="form-actions center" style="margin:0px;">
-  <button class="btn btn-sm" type="button" id="crearCliente" name="crearCliente">Crear Nuevo <i class="icon-plus icon-on-right bigger-110"></i></button>
   <button class="btn btn-sm btn-success" type="button" id="buscarClientes" name="buscarClientes"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>		
 </div>
 </div>
@@ -88,9 +87,10 @@ $('#buscarClientes').click(function() {
 					$("#resultados").html(data);
 				}
 			});	
+			
 	}
 });
-$('#resultados').on( 'click', 'button', function (e) {
+$('#resultados').on( 'click', 'button .agregaAsegurado', function (e) {
 	var idCliente = $(this).attr('x-link');
 	var idPoliza = $(this).attr('x-pol');
 	$.ajax({

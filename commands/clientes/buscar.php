@@ -89,6 +89,7 @@ class buscar extends sessionCommand{
 		}
 		
 		$this->addLoop("clientes",$clientes);
+		$this->addVar("idPoliza",$this->request->idPoliza);
 
 		$this->processTemplate("clientes/buscar.html");
 		
