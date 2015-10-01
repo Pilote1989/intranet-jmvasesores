@@ -29,7 +29,7 @@ class Poliza extends DBObject{
 		if($this->getAnulada()==1){
 			return '<span class="label label-danger">Anulada</span>';
 		}
-		if($today<strtotime($fin) && $today>=strtotime($inicio)){
+		if($today<=strtotime($fin) && $today>=strtotime($inicio)){
 			return '<span class="label label-success">Vigente</span>';
 		}elseif($today>strtotime($fin)){
 			return '<span class="label label-warning">Vencida</span>';
