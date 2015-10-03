@@ -134,18 +134,9 @@ if(date('d')=='25'){
 		<li>Ramo: " . $row["ramo"] . "</li>
 		<li>Cia de Seguros: " . $row["compania"] . "</li>
 	</ul>
-	<p>Asimismo, le(s) recordamos que es importante que cumpla con su declaracion, para asi evitar caer en falta en caso de ocurrir algun accidente de trabajo con lamentables consecuencias, al respecto nos permitimos enviarle adjunto el formulario electronico en Excel el cual debera de enviarnos via correo electronico consignando la informacion que en el se solicita, una vez recepcionado procederemos a gestionar la(s) contancia(s) de cobertura asi como la(s) liquidacion(es) de primas respectivas las mismas que se las enviaremos por correo electronico.</p>
-	<p>Respecto al pago le informamos que este lo puede(n) efectuar directamente en cualquiera de las oficinas de la aseguradora o si prefieren por medio de las Web de todos los bancos afiliados efectuando el abono a cualquiera de las cuentas bancarias de la compania de seguros Rimac que le detallamos a continuacion, para lo cual agradeceremos nos envie el voucher de deposito para aplicar el pago respectivo :</p>
-	
-	<table border='1' cellpadding='5'>
-	<tr><td>BANCO</td><td>PARA LA COBERTURA DE SALUD</td><td>PARA LA COBERTURA DE PENSION</td></tr>
-	<tr><td>Banco de Credito del Peru</td><td>Rimac EPS  S/. 193-1087433-0-70</td><td>Rimac Internacional BCP S/. 193-0034841-0-28</td></tr>
-	<tr><td>Interbank</td><td>Rimac Internacional S/. 030-0000346437 </td><td>Rimac Internacional S/. 030-0000346437 </td></tr>
-	<tr><td>Scotiabank</td><td>Rimac EPS   S/. 032-1133</td><td>Rimac Internacional   S/. 001-3192032</td></tr>
-	<tr><td>BBVA Bco.Continental</td><td>Rimac EPS  S/. 0011-0686-39-0100019141</td><td>Rimac Internacional S/. 0011-0686-38-0100007879</td></tr>
-	</table>
-	<p>Cabe mencionar que este correo tiene caracter estrictamente informativo sobre el cupon que esta por vencer y no es un recordatorio de  los pagos que a la fecha estan vencidos y que pudiera tener pendientes de pago con vuestra aseguradora.</p>
-	<p>Asimismo en caso de ya haber efectuado el pago del documento indicado, agradeceremos se sirvan no tomar la presente comunicacion.</p>
+	<p>Asimismo, le(s) recordamos que es importante que cumpla con su declaracion, para asi evitar caer en falta en caso de ocurrir algun accidente de trabajo con lamentables consecuencias, al respecto recuerde que su declaración la debe de efectuar utilizando el formato en Excel que le hiciéramos llegar para la emisión de la poliza, el cual debera de enviarnos via correo electronico consignando la informacion que en el se solicita, una vez recepcionado procederemos a gestionar la(s) contancia(s) de cobertura asi como la(s) liquidacion(es) de primas respectivas las mismas que se las enviaremos por correo electronico.</p>
+	<p>Respecto al pago le informamos que este lo puede(n) efectuar directamente en cualquiera de las oficinas de su aseguradora o si prefieren por medio de las Web de todos los bancos afiliados.</p>
+	<p>Asimismo en caso de ya haber efectuado su declaración mensual, agradeceremos se sirvan no tomar la presente comunicación.</p>
 	<p>Muy Cordialmente.</p>
 	<p><strong></strong><strong><em>Julio Martinez Vargas Caro</em></strong><br />
 	<strong><em>SERVICIO AUTOMATICO DE SEGURO COMPLEMENTARIO DE TRABAJO DE RIESGO
@@ -157,7 +148,6 @@ if(date('d')=='25'){
 	";
 	echo $html . "<br />";
 		$mail->Body     =  $html;
-		$mail->AddAttachment('sctr.xls', 'sctr.xls'); ;
 		$mail->CharSet = "UTF-8";
 		//$mail->Send();
 			
