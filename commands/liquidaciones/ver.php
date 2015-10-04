@@ -42,13 +42,16 @@ class ver extends sessionCommand{
 		$this->addVar("subtotal", number_format($fac,2));
 		$this->addVar("igv", number_format(($fac*0.18),2));
 		$this->addVar("totalFactura", number_format(($fac*1.18),2));
-		
-		
 		$this->addLoop("cobros",$listaCobros);
-		
-		
 		$this->addLayout("admin");
-		$this->processTemplate("liquidaciones/verLiquidacion.html");
+		if($liquidacion->getBono()=="1"){
+			$this->addVar("subtotal", number_format($liquidacion->getSubTotal(),2));
+			$this->addVar("igv", number_format($liquidacion->getIgv(),2));
+			$this->addVar("totalFactura", number_format($liquidacion->getTotalFactura(),2));
+			$this->processTemplate("liquidaciones/verBono.html");	
+		}else{
+			$this->processTemplate("liquidaciones/verLiquidacion.html");	
+		}
 	}
 }
 ?>

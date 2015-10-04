@@ -94,16 +94,27 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "liquidaciones.verLiquidaciones"){
 			$this->addVar("liquidaciones", "class='active open'");
 			$this->addVar("liquidaciones.verLiquidaciones", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.editarDatosBasicos"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.editarDatosBasicos", "class='active'");
 		}elseif($this->request->doFalso == "liquidaciones.reportes"){
 			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.reportes", "class='cedidas'");
-		}elseif($this->request->doFalso == "liquidaciones.reportes"){
+			$this->addVar("liquidaciones.reportes", "class='active'");
+		}elseif($this->request->doFalso == "liquidaciones.verCedidas"){
 			$this->addVar("liquidaciones", "class='active open'");
 			$this->addVar("liquidaciones.cedidas", "class='active'");
+		}elseif($this->request->doFalso == "liquidaciones.crearBono"){
+			$this->addVar("liquidaciones", "class='active open'");
+			$this->addVar("liquidaciones.crear", "class='open'");
+			$this->addVar("liquidaciones.submenu", "style='display: block;'");
+			$this->addVar("liquidaciones.bonos", "class='active'");
+		}elseif($this->request->doFalso == "liquidaciones.editarDatosBasicos"){
+			$this->addVar("liquidaciones", "class='active open'");
+			$this->addVar("liquidaciones.crear", "class='open'");
+			$this->addVar("liquidaciones.submenu", "style='display: block;'");
+			$this->addVar("liquidaciones.editarDatosBasicos", "class='active'");
 		}
+		
+		
+		
+		
 		$this->processTemplate("menus/menuAdministracion.html");
 	}
 }
