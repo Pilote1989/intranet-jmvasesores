@@ -25,7 +25,8 @@ class crearBono extends sessionCommand{
 			$this->addVar("companias",$selectCompania);
 		}else{
 			$this->addEmptyVar("factura");			
-			$this->addEmptyVar("fechaFactura");
+			$this->addEmptyVar("fechaFactura");	
+			$this->addEmptyVar("idLiquidacion");
 			$this->addEmptyVar("obser");
 			$this->addVar("subTotal","0.00");
 			$this->addVar("igv","0.00");
