@@ -7,6 +7,17 @@ class crearBono extends sessionCommand{
 		$companias=Fabrica::getAllFromDB("Compania",array(),"nombre ASC");	
 		if($this->request->idLiquidacion){
 			$liquidacion = Fabrica::getFromDB("Liquidacion",$this->request->idLiquidacion);	
+			$monedas = array("Dolares","Soles","Euros");
+			$selectMonedas = '';
+			foreach ($monedas as $valor) {
+				if($liquidacion->getMoneda() == $valor){
+					$selectMonedas=$selectMonedas.'\n<option value="'.$valor.'" selected="selected">'.$valor.'</option>';
+				}else{
+					$selectMonedas=$selectMonedas.'\n<option value="'.$valor.'">'.$valor.'</option>';
+				}
+			}
+			$this->addVar("monedas",$selectMonedas);
+			
 			$this->addVar("factura",$liquidacion->getFactura());			
 			$this->addVar("fechaFactura",$liquidacion->getFechaFactura("DATE"));
 			$this->addVar("obser",$liquidacion->getObservaciones());
@@ -24,6 +35,12 @@ class crearBono extends sessionCommand{
 			}
 			$this->addVar("companias",$selectCompania);
 		}else{
+			$monedas = array("Dolares","Soles","Euros");
+			$selectMonedas = '';
+			foreach ($monedas as $valor) {
+				$selectMonedas=$selectMonedas.'\n<option value="'.$valor.'">'.$valor.'</option>';
+			}
+			$this->addVar("monedas",$selectMonedas);
 			$this->addEmptyVar("factura");			
 			$this->addEmptyVar("fechaFactura");	
 			$this->addEmptyVar("idLiquidacion");

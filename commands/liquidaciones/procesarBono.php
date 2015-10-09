@@ -15,6 +15,7 @@ class procesarBono extends sessionCommand{
 			$liquidacion->setFechaFactura($this->request->fecha,"DATE");
 			$liquidacion->setObservaciones($this->request->obser);
 			$liquidacion->setSubTotal($this->request->subTotal);
+			$liquidacion->setMoneda($this->request->moneda);
 			$liquidacion->setIgv($this->request->igv);
 			$liquidacion->setTotalFactura($this->request->totalFac);
 			$liquidacion->setBono("1");			
@@ -27,6 +28,7 @@ class procesarBono extends sessionCommand{
 			$liquidacion->setFechaFactura($this->request->fecha,"DATE");
 			$liquidacion->setObservaciones($this->request->obser);
 			$liquidacion->setSubTotal($this->request->subTotal);
+			$liquidacion->setMoneda($this->request->moneda);
 			$liquidacion->setIgv($this->request->igv);
 			$liquidacion->setTotalFactura($this->request->totalFac);
 			$liquidacion->setBono("1");

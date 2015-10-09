@@ -46,6 +46,7 @@ class ver extends sessionCommand{
 		$this->addLayout("admin");
 		if($liquidacion->getBono()=="1"){
 			$this->addVar("subtotal", number_format($liquidacion->getSubTotal(),2));
+			$this->addVar("moneda", $liquidacion->getMoneda());
 			$this->addVar("igv", number_format($liquidacion->getIgv(),2));
 			$this->addVar("totalFactura", number_format($liquidacion->getTotalFactura(),2));
 			$this->processTemplate("liquidaciones/verBono.html");	
