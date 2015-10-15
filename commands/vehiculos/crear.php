@@ -27,7 +27,7 @@ class crear extends sessionCommand{
 					$selectAnios .= "\n<option value='" . $anio . "'>" . $anio . "</option>";
 					$anio--;
 				}
-				$this->addEmptyVar("placa");
+				$this->addVar("placa",$this->request->placa);
 				$this->addEmptyVar("sumaAsegurada");
 				$this->addEmptyVar("color");
 				$this->addEmptyVar("motor");	
@@ -57,6 +57,7 @@ class crear extends sessionCommand{
 				$this->addVar("endosatario", $vehiculo->getEndosatario());
 				$this->addVar("tipo", $vehiculo->getTipo());
 				$this->addVar("idMarca", $vehiculo->idMarca());
+				$this->addVar("idPoliza", $this->request->idPol);
 
 				if($vehiculo->getGps()=="1"){
 					$this->addVar("gps", " checked");
@@ -86,7 +87,7 @@ class crear extends sessionCommand{
 				}
 				$this->addVar("marcas",$selectMarcas);
 				$this->addVar("anios",$selectAnios);
-				$this->addVar("idPoliza", $vehiculo->getIdPoliza());
+				$this->addVar("idPoliza", $this->request->idPol);
 				$this->addVar("idVehiculo", $this->request->idVehiculo);
 				$this->addBlock("bloqueIdVehiculo");
 				$this->addBlock("bloqueEditarVehiculo");

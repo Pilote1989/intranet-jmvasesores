@@ -6,7 +6,8 @@ class verDatosParticulares extends sessionCommand{
 		if($this->request->idPoliza){
 			$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
 			if($poliza->getIdRamo()=="2"){
-				$vehiculos = Fabrica::getAllFromDB("Vehiculo", array("idPoliza = '" .$this->request->idPoliza . "'"));	
+				$vehiculos = Fabrica::getAllFromDB("VehiculoEnPoliza", array("idPoliza = '" .$this->request->idPoliza . "'"));	
+				//$vehiculos = Fabrica::getAllFromDB("Vehiculo", array("idPoliza = '" .$this->request->idPoliza . "'"));	
 				$listaVehiculos = array();
 				$i = 0;
 				if(count($vehiculos)){
@@ -14,7 +15,8 @@ class verDatosParticulares extends sessionCommand{
 				}else{
 					$this->addBlock("bloqueNoResultados");				
 				}
-				foreach($vehiculos as $vehiculo){
+				foreach($vehiculos as $vehiculoTemp){
+					$vehiculo = Fabrica::getFromDB("Vehiculo", $vehiculoTemp->getIdVehiculo());
 					$listaVehiculos[$i]["idVehiculo"] = $vehiculo->getId();
 					$listaVehiculos[$i]["placa"] = $vehiculo->getPlaca();	
 					$listaVehiculos[$i]["sumaAsegurada"] = $vehiculo->getSumaAsegurada();	

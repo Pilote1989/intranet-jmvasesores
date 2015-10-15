@@ -41,8 +41,8 @@
                 <td align="center"> {vehiculos.marca} - {vehiculos.modelo} </td>
                 <td align="center"> {vehiculos.color} </td>
                 <td align="center"><div class="action-buttons">
-                    <a class="blue abreLink" x-link="http://intranet.jmvasesores.com/?do=vehiculos.crear&idVehiculo={vehiculos.idVehiculo}" href="#"> <i class="icon-edit bigger-130"></i> </a> 
-                    <a class="blue elimina" x-link="http://intranet.jmvasesores.com/?do=vehiculos.eliminarVehiculo&idVehiculo={vehiculos.idVehiculo}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+                    <a class="blue abreLink" x-link="/?do=vehiculos.crear&idVehiculo={vehiculos.idVehiculo}&idPol={idPoliza}" href="#"> <i class="icon-edit bigger-130"></i> </a> 
+                    <a class="blue elimina" x-link="/?do=vehiculos.eliminarVehiculo&idVehiculo={vehiculos.idVehiculo}&idPol={idPoliza}" href="#"> <i class="icon-trash bigger-130"></i> </a>
                   </div></td>
               </tr>
               <loop end="vehiculos"/>
@@ -79,8 +79,8 @@
                     modal: true,
                     title_html: true,
                     autoOpen: false,
-                    maxWidth:500,
-                    width: 500,
+                    maxWidth:700,
+                    width: 700,
 				});
 				$( "#dialog-message" ).dialog({
                     resizable: false,
@@ -131,7 +131,7 @@
                 });	
                 jQuery('#agregaVehiculo').click( function() {
 					$.ajax({
-						url: '/?do=vehiculos.crear&idPoliza={idPoliza}',
+						url: '/?do=polizas.agregarVehiculo&idPoliza={idPoliza}',
 						success: function(responseText){
 							$('#dialog-general').html(responseText);					
 							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Vehiculo</h4></div>");

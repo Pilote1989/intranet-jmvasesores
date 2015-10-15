@@ -28,3 +28,16 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
     });
   });
 };
+
+$('body').on( 'keydown', 'input', function (event) {
+   var x = event.which;
+   if (x === 13) {
+       event.preventDefault();
+   }
+});
+function disableEnterKey(event) {
+   var x = event.which;
+   if (x === 13) {
+       event.preventDefault();
+   }
+}
