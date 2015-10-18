@@ -63,12 +63,12 @@ class buscar extends sessionCommand{
 		}
 		
 		$i=0;
-		
+		//print_r($listaVehiculos);
 		foreach($listaVehiculos as $vehiculo){
 			//$actual = Fabrica::getFromDB("Poliza", $poliza["idPersona"]);
 			$vehiculos[$i]["placa"] = $vehiculo["placa"];
-			$vehiculos[$i]["marca"] = "marca";
-			$vehiculos[$i]["modelo"] = "modelo";
+			$vehiculos[$i]["marca"] = $vehiculo["marca"];
+			$vehiculos[$i]["modelo"] = $vehiculo["modelo"];
 			if(in_array($vehiculo["idVehiculo"],$veh)){
 				$vehiculos[$i]["estado"] = '<button class="btn btn-minier btn-inverse disabled">En Poliza</button>';
 			}else{
