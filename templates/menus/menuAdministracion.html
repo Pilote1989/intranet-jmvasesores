@@ -18,12 +18,15 @@
     </ul>
   </li>
   <block start="vendedor"/>
-  <li {polizas}> <a class="dropdown-toggle" href="#"> <i class="icon-folder-open "></i> <span class="menu-text"> Polizas </span> <b class="arrow icon-angle-down"></b> </a>
+  <li {polizas}> <a class="dropdown-toggle" href="#"> <i class="icon-folder-open"></i> <span class="menu-text"> Polizas </span> <b class="arrow icon-angle-down"></b> </a>
     <ul class="submenu">
       <block start="admin"/>
       <li {polizas.editarDatosBasicos}><a href="?do=polizas.editarDatosBasicos"> <i class="icon-double-angle-right"></i> Crear un Poliza</a></li>
       <block end="admin"/>
       <li {polizas.verPolizas}><a href="?do=polizas.verPolizas"> <i class="icon-double-angle-right"></i> Buscar Polizas</a></li>
+      <block start="admin"/>
+      <li {vehiculos.verVehiculos}><a href="?do=vehiculos.verVehiculos"> <i class="icon-double-angle-right"></i> Buscar Vehiculos</a></li>
+      <block end="admin"/>
     </ul>
   </li>
   <block start="admin"/>
