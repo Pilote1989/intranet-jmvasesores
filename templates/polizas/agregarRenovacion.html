@@ -250,7 +250,7 @@
 		var comCP = $('option:selected', this).attr('x-com');
 		var comC = (parseFloat(com)*parseFloat(comCP)/100).toFixed(2);
 		$("#comisionVendedorP").val(comCP);
-		$("#comisionVendedor").val(comC);
+		$("#comisionVendedor").val(comC);	
 	})
 	
 	
@@ -289,7 +289,9 @@
 		var prim = jQuery("#prima").val();
 		var por = jQuery("#comisionP").val();
 		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
-		jQuery("#comision").val(com);		
+		jQuery("#comision").val(com);	
+		var temp91 = (parseFloat($("#comision").val())*parseFloat($("#comisionVendedorP").val())/100).toFixed(2);
+		$("#comisionVendedor").val(temp91);	
 	});
 	
 	jQuery("#prima").keyup(function () {
@@ -309,7 +311,9 @@
 			jQuery("#comision").val(0.00);	
 		}else{
 			jQuery("#comision").val(com);
-		}		
+		}
+		var temp91 = (parseFloat($("#comision").val())*parseFloat($("#comisionVendedorP").val())/100).toFixed(2);
+		$("#comisionVendedor").val(temp91);
 	});
 	
 	jQuery('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){

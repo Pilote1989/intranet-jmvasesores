@@ -22,6 +22,9 @@ class procesarRenovacion extends sessionCommand{
 		$cobro->setAvisoDeCobranza($this->request->cobranza);
 		$cobro->setComisionP($this->request->comisionP);
 		$cobro->setComision($this->request->comision);
+		$cobro->setComisionCedidaP($this->request->comisionVendedorP);
+		$cobro->setComisionCedida($this->request->comisionVendedor);
+		$cobro->setIdPersona($this->request->idPersona);
 		$cobro->storeIntoDB();
 		$dbLink=&FrontController::instance()->getLink();
 		
