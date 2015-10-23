@@ -134,7 +134,7 @@
         <label for="comisionVendedorP" class="col-sm-3 control-label no-padding-right">Comision Vendedor (%)</label>
         <div class="col-sm-9">
           <div class="clearfix">
-            <input name="comisionVendedorP" type="text"  id="comisionP" value="{comisionVendedorP}" onKeyPress="return disableEnterKey(event)" placeholder="Comision Vendedor (%)" class="col-sm-12" {readonlyVendedor}>
+            <input name="comisionVendedorP" type="text"  id="comisionVendedorP" value="{comisionVendedorP}" onKeyPress="return disableEnterKey(event)" placeholder="Comision Vendedor (%)" class="col-sm-12" {readonlyVendedor}>
           </div>
         </div>
       </div>
@@ -170,6 +170,8 @@
 	$("#idPersona").change(function () {
 		if($("#idPersona").val() != "1"){
 			jQuery("#divComisionVendedor").show('slow');
+			jQuery("#comisionVendedorP").val($("#idPersona option:selected").attr('x-com'));
+			$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
 		}else{
 			jQuery("#divComisionVendedor").hide('slow');
 		}
@@ -177,6 +179,7 @@
 
  	$('#contenedor2').hide();
 	$('#anterior').hide();
+	$('#enviarEndoso').hide();
 	$('#enviarEndoso').hide();
 	
 	$('#siguiente').click(function() {
@@ -289,6 +292,7 @@
 		$('#primaComercial').val( Math.round(( parseFloat($('#primaNeta').val()) + parseFloat($('#derechoEmision').val()))*100 ) /100 );
 		$('#igv').val( Math.round($('#primaComercial').val() * 0.18 * 100)/100 );
 		$('#totalFactura').val( Math.round((parseFloat($('#igv').val()) + parseFloat($('#intereses').val()) + parseFloat($('#primaComercial').val()))*100) / 100 );
+		$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
 	});
 	$('#derechoEmision').keyup(function (){
 		$('#primaComercial').val( Math.round(( parseFloat($('#primaNeta').val()) + parseFloat($('#derechoEmision').val()))*100 ) /100 );
@@ -300,9 +304,17 @@
 		$('#igv').val( Math.round($('#primaComercial').val() * 0.18 * 100)/100 );
 		$('#totalFactura').val( Math.round((parseFloat($('#igv').val()) + parseFloat($('#intereses').val()) + parseFloat($('#primaComercial').val()))*100) / 100 );
 	});
+	
 	$('#comisionP').keyup(function (){
 		$('#comision').val( Math.round(($('#primaNeta').val() * $('#comisionP').val()))/100);
+		$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
 	});
+
+	
+	$("#comisionVendedorP").keyup(function () {	
+		$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
+	});
+
 	
 
 	

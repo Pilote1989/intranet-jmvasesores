@@ -38,9 +38,9 @@ class crearEndoso extends sessionCommand{
 				$selectCompania = '<option value=""></option>';
 				foreach($personas as $persona){
 					if($cobro->getIdPersona()!=$persona->getId()){
-						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" >'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
+						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" x-com='.$persona->getComision().'>'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
 					}else{
-						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" selected="selected">'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
+						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" selected="selected" x-com='.$persona->getComision().'>'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
 						
 					}
 				}
@@ -61,7 +61,9 @@ class crearEndoso extends sessionCommand{
 				}
 			}else{
 				//si no lo mando, creo
-				$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);	
+				$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
+				$cobro = Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
+				$cliente = Fabrica::getFromDB("Cliente",$poliza->getIdCliente());
 				$this->addVar("accion", "Crear Endoso");
 				$this->addEmptyVar("documento");
 				$this->addEmptyVar("detalle");
@@ -75,20 +77,20 @@ class crearEndoso extends sessionCommand{
 				$this->addVar("igv","0.00");
 				$this->addVar("intereses","0.00");
 				$this->addVar("totalFactura","0.00");
-				$this->addVar("comisionP","0.00");
+				$this->addVar("comisionP",$cobro->getComisionP());
 				$this->addVar("comision","0.00");
-				$this->addVar("comisionVendedorP","0.00");
 				$this->addVar("comisionVendedor","0.00");
 				$this->addEmptyVar("idPersona");
 				$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
 				$selectCompania = '<option value=""></option>';
 				foreach($personas as $persona){
-					if($persona->getId() != "1"){
-						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'">'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';					
+					if($cliente->getIdPersona()!=$persona->getId()){
+						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" x-com='.$persona->getComision().'>'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
 					}else{
-						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" selected="selected">'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
-					}
-				}	
+						$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" selected="selected" x-com='.$persona->getComision().'>'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
+						$this->addVar("comisionVendedorP",number_format($persona->getComision(),2));
+					}	
+				}
 				$this->addVar("personas",$selectPersona);			
 				
 			}
