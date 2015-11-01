@@ -15,6 +15,9 @@ class ver extends sessionCommand{
 		}
 		$this->addVar("cia",Fabrica::getFromDB("Compania", $liquidacion->getIdCompania())->getNombre());
 		$cobros = Fabrica::getAllFromDB("Cobro",array("idLiquidacion = '" . $this->request->idLiquidacion . "'"));
+		if(count($cobros)==0){
+		$this->addBlock("vacio");	
+		}
 		$fac = 0;
 		$listaCobros = array();
 		foreach($cobros as $cobro){

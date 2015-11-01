@@ -26,6 +26,18 @@
           </div>
           <!-- row -->
           
+          <block start="vacio"/>
+          <div class="space">
+          </div>
+          <div class="row">
+            <div class="alert alert-block alert-warning">
+              <p> <strong> <i class="icon-ok"></i> ¡Atencion! </strong> Esta liquidacion no está liquidando ninguna comision, ¿Desea eliminarla? </p>
+              <p>
+                <button class="btn btn-sm btn-warning" id="eliminaComision">Eliminar</button>
+              </p>
+            </div>
+          </div>
+          <block end="vacio"/>
           <div class="space">
           </div>
           <div>
@@ -47,14 +59,10 @@
                 <loop start="cobros"/>
                 <tr>
                   <td class="center"><div class="btn-group">
-                      <button id="eliminar" x-id="{cobros.id}" data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-light">
-                        <span class="icon-caret-down icon-only"></span>
-                      </button>
+                      <button id="eliminar" x-id="{cobros.id}" data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-light"> <span class="icon-caret-down icon-only"></span> </button>
                       <ul class="dropdown-menu">
-                        <li> 
-                        <a href="?do=polizas.ver&idPoliza={cobros.poliza}&vig={cobros.poliza}"><i class="icon-zoom-in bigger-110 blue"></i> Ver Poliza </a></li>
-                        <li> 
-                        <a href="#" x-id="{cobros.id}" class="confirma"><i class="icon-remove bigger-110 red"></i> Eliminar </a></li>
+                        <li> <a href="?do=polizas.ver&idPoliza={cobros.poliza}&vig={cobros.poliza}"><i class="icon-zoom-in bigger-110 blue"></i> Ver Poliza </a></li>
+                        <li> <a href="#" x-id="{cobros.id}" class="confirma"><i class="icon-remove bigger-110 red"></i> Eliminar </a></li>
                       </ul>
                     </div></td>
                   <td class="center">{cobros.id}</td>
@@ -113,7 +121,26 @@
     </div>
   </div>
 </div>
+  <div id="dialog-message">
+    <div class="alert alert-info bigger-110">
+      Se eliminará la liquidacion permanentemente.
+    </div>
+    <div class="space-6">
+    </div>
+    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  </div>
 <script>
+
+$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+	_title: function(title) {
+		if (!this.options.title ) {
+			title.html("&#160;");
+		} else {
+			title.html(this.options.title);
+		}
+	}
+}));
+
 $(".confirma").on("click", function(e) {
 	e.preventDefault();
 	var temp = $(this).attr("x-id");
@@ -123,4 +150,49 @@ $(".confirma").on("click", function(e) {
 		}
 	});
 });
-</script>
+
+$( "#dialog-message" ).dialog({
+	resizable: false,
+	modal: true,
+	title_html: true,
+	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+	autoOpen: false,
+	buttons: [
+		{
+			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			"class" : "btn btn-danger btn-xs",
+			click: function() {
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: '?do=liquidaciones.eliminarLiquidacion&idLiquidacion={idLiquidacion}',
+					success: function() {
+						window.location.href = "?do=liquidaciones.verLiquidaciones";
+					}
+				});
+				$( this ).dialog( "close" );
+			}
+		}
+		,
+		{
+			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			"class" : "btn btn-xs",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]			
+});	
+
+$( "#eliminaComision" ).on('click', function(e) {
+	event.preventDefault();
+	$( "#dialog-message" ).dialog({
+		autoOpen: false,
+		  close : function(){
+			$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+			$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza=446');
+		  }  	
+	});
+	$( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
+});
+</script> 
