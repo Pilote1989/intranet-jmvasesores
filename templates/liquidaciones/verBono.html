@@ -8,7 +8,20 @@
           <span class="invoice-info-label">Fecha:</span> <span class="blue">{fechaFactura}</span>
         </div>
         <div class="widget-toolbar hidden-480">
-          <a href="?do=liquidaciones.crearBono&idLiquidacion={idLiquidacion}"> <i class="icon-edit"></i> </a>
+            <div class="btn-group ">
+							<button class="btn btn-xs btn-info">Opciones</button>
+							<button data-toggle="dropdown" class="btn btn-xs btn-info  dropdown-toggle">
+								<span class="icon-caret-down icon-only"></span>
+							</button>
+								<ul class="dropdown-menu dropdown-info">
+									<li>
+										<a href="?do=liquidaciones.crearBono&idLiquidacion={idLiquidacion}"><i class="icon-edit"></i> Editar Liquidacion</a>
+									</li>
+									<li>
+										<a href="#" id="eliminaLiquidacion"><i class="icon-trash red"></i> Eliminar Liquidacion</a>
+									</li>
+								</ul>
+						</div>          
         </div>
       </div>
       <div class="widget-body">
@@ -96,7 +109,25 @@
     </div>
   </div>
 </div>
+  <div id="dialog-message">
+    <div class="alert alert-info bigger-110">
+      Se eliminará la liquidacion permanentemente.
+    </div>
+    <div class="space-6">
+    </div>
+    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  </div>
 <script>
+$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+	_title: function(title) {
+		if (!this.options.title ) {
+			title.html("&#160;");
+		} else {
+			title.html(this.options.title);
+		}
+	}
+}));
+
 $(".confirma").on("click", function(e) {
 	e.preventDefault();
 	var temp = $(this).attr("x-id");
@@ -106,4 +137,46 @@ $(".confirma").on("click", function(e) {
 		}
 	});
 });
+
+$( "#eliminaLiquidacion" ).on('click', function(e) {
+	e.preventDefault();
+	$( "#dialog-message" ).dialog({
+		autoOpen: false 	
+	});
+	$( "#dialog-message" ).dialog("open");
+});
+
+
+$( "#dialog-message" ).dialog({
+	resizable: false,
+	modal: true,
+	title_html: true,
+	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar la Liquidacion?</h4></div>",
+	autoOpen: false,
+	buttons: [
+		{
+			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			"class" : "btn btn-danger btn-xs",
+			click: function() {
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: '?do=liquidaciones.eliminarLiquidacion&idLiquidacion={idLiquidacion}',
+					success: function() {
+						window.location.href = "?do=liquidaciones.verLiquidaciones";
+					}
+				});
+				$( this ).dialog( "close" );
+			}
+		}
+		,
+		{
+			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			"class" : "btn btn-xs",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]			
+});	
 </script> 
