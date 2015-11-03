@@ -25,7 +25,18 @@
             
           </div>
           <!-- row -->
-          
+          <block start="vacio"/>
+          <div class="space">
+          </div>
+          <div class="row">
+            <div class="alert alert-block alert-warning">
+              <p> <strong> <i class="icon-ok"></i> ¡Atencion! </strong> Esta liquidacion no está liquidando ninguna comision, ¿Desea eliminarla? </p>
+              <p>
+                <button class="btn btn-sm btn-warning" id="eliminaComision">Eliminar</button>
+              </p>
+            </div>
+          </div>
+          <block end="vacio"/>
           <div class="space">
           </div>
           <div>
@@ -113,7 +124,25 @@
     </div>
   </div>
 </div>
+  <div id="dialog-message">
+    <div class="alert alert-info bigger-110">
+      Se eliminará la liquidacion permanentemente.
+    </div>
+    <div class="space-6">
+    </div>
+    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  </div>
 <script>
+$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+	_title: function(title) {
+		if (!this.options.title ) {
+			title.html("&#160;");
+		} else {
+			title.html(this.options.title);
+		}
+	}
+}));
+
 $(".confirma").on("click", function(e) {
 	e.preventDefault();
 	var temp = $(this).attr("x-id");
@@ -122,5 +151,45 @@ $(".confirma").on("click", function(e) {
 			window.location.replace("/?do=liquidaciones.eliminarCedida&idCobro=" + temp);
 		}
 	});
+});
+$( "#dialog-message" ).dialog({
+	resizable: false,
+	modal: true,
+	title_html: true,
+	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+	autoOpen: false,
+	buttons: [
+		{
+			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			"class" : "btn btn-danger btn-xs",
+			click: function() {
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: '?do=liquidaciones.eliminarLiquidacionCedida&idCedida={idCedida}',
+					success: function() {
+						window.location.href = "?do=liquidaciones.verCedidas";
+					}
+				});
+				$( this ).dialog( "close" );
+			}
+		}
+		,
+		{
+			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			"class" : "btn btn-xs",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]			
+});	
+
+$( "#eliminaComision" ).on('click', function(e) {
+	event.preventDefault();
+	$( "#dialog-message" ).dialog({
+		autoOpen: false	
+	});
+	$( "#dialog-message" ).dialog("open");
 });
 </script>

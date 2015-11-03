@@ -16,6 +16,9 @@ class verCedida extends sessionCommand{
 		$persona = Fabrica::getFromDB("Persona", $cedida->getIdPersona());
 		$this->addVar("per", $persona->getNombres() . " " . $persona->getApellidoPaterno() . " " . $persona->getApellidoMaterno());
 		$cobros = Fabrica::getAllFromDB("Cobro",array("idCedida = '" . $this->request->idCedida . "'"));
+		if(count($cobros)==0){
+			$this->addBlock("vacio");	
+		}
 		$fac = 0;
 		$listaCobros = array();
 		foreach($cobros as $cobro){
