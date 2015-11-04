@@ -8,16 +8,20 @@ class login extends BaseCommand{
 		if($this->request->error){
 			$this->addVar("errorLogin", "Error de Login");
 			if($this->request->error == 1){
-				$this->addVar("errorLogin", "Usuario y/o Clave no validos");
+				$this->addBlock("error");
+				$this->addVar("errorLogin", "Usuario y/o contraseña no validos");
+			}else if($this->request->error == 2){
+				$this->addBlock("error");
+				$this->addVar("errorLogin", "Ingrese sus datos");
 			}
 		}else{
 			$this->addEmptyVar("errorLogin");
 				
 		}
 		
-		$this->addLayout("public");
+		$this->addLayout("publicLight");
 
-		$this->processTemplate("login.html");
+		$this->processTemplate("loginLight.html");
 
 	}
 }

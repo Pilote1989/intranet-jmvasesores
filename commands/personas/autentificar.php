@@ -8,7 +8,7 @@ class autentificar extends SessionCommand{
 		if(!isset($_GET['login'])){
 			if(Persona::login($this->request->mail, $this->request->password)){
 				$usuario=$this->getUsuario();
-				//Si no tiene acceso a las construcciones
+				//Si no tiene acceso
 				if(isset($_SESSION["URL_ACTUAL"])){
 					$fc->redirect($_SESSION["URL_ACTUAL"]);
 				}else{
@@ -24,12 +24,9 @@ class autentificar extends SessionCommand{
 					}else{
 						$fc->redirect("?do=personas.verPortada");
 					}
-					//}else{
-					//	$fc->redirect("?do=reportes.estadoInscripciones");
-					//}
 				}
 			}else{
-					$fc->redirect("?do=login&error=1");
+					$fc->redirect("?do=login&error=2");
 			}
 		}else{
 			$fc->redirect("?do=login&error=1");			
