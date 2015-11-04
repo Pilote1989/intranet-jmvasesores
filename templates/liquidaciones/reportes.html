@@ -27,8 +27,17 @@
               </div>
             </div>
           </div>
+          <div class="form-group" id="divAsesor" style="display:none">
+            <label for="asesor" class="col-sm-3 control-label no-padding-right">Asesor</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <select class="col-sm-12" name="asesor" id="asesor">
+                {selectAsesores}
+                </select>
+              </div>
+            </div>
+          </div>
           <div class="col-xs-6">
-            <!-- PAGE CONTENT BEGINS -->
             <div class="form-group">
               <label class="col-sm-6 control-label no-padding-right" for="form-field-1"> Año </label>
               <div class="col-sm-6">
@@ -39,7 +48,6 @@
             </div>
           </div>
           <div class="col-xs-6">
-            <!-- PAGE CONTENT BEGINS -->
             <div class="form-group">
               <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Mes </label>
               <div class="col-sm-6">
@@ -91,11 +99,18 @@ $("#busca").on("click", function (e) {
 		$('#load').show();
 		$('#alerta').hide();
 		$("#pantalla").empty();
-		$("#pantalla").load( "?do=liquidaciones.buscarMes&vista=1&reporte=" + $('#reporte').val() + "&mes=" + $('#mes').val() + "&anio=" +  $('#anio').val(), function(){
+		$("#pantalla").load( "?do=liquidaciones.buscarMes&vista=1&reporte=" + $('#reporte').val() + "&mes=" + $('#mes').val() + "&anio=" +  $('#anio').val() + "&asesor=" + $('#asesor').val(), function(){
 			$('#load').hide();
 		});
 	}else{
 		$('#alerta').show();
 	}
-})
+});
+$('#reporte').change(function (r){
+	if($(this).val()=="3"){
+		$('#divAsesor').show('slow');
+	}else{
+		$('#divAsesor').hide('slow');
+	}
+});
 </script> 

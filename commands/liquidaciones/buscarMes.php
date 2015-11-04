@@ -108,7 +108,12 @@ class buscarMes extends sessionCommand{
 				}
 			}else if($this->request->reporte=="3"){
 				//comisiones cedidas
-				$cedidas = Fabrica::getAllFromDB("Cedida",array("MONTH(fechaFactura) = '" . $this->request->mes . "'", "YEAR(fechaFactura) = '" . $this->request->anio . "'"));
+				if($this->request->asesor!=""){
+					$cedidas = Fabrica::getAllFromDB("Cedida",array("MONTH(fechaFactura) = '" . $this->request->mes . "'", "YEAR(fechaFactura) = '" . $this->request->anio . "'","idPersona = '" . $this->request->asesor . "'"));
+				}else{
+					$cedidas = Fabrica::getAllFromDB("Cedida",array("MONTH(fechaFactura) = '" . $this->request->mes . "'", "YEAR(fechaFactura) = '" . $this->request->anio . "'"));
+				}
+				
 				$i=0;
 				$lista = array();
 				$comisionSoles = 0;
