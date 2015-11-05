@@ -185,6 +185,7 @@ class buscarMes extends sessionCommand{
 				$this->addVar("mesNum", $this->request->mes);
 				$this->addVar("mes", $meses[$this->request->mes]);
 				$this->addVar("anio", $this->request->anio);
+				$this->addVar("asesor", $this->request->asesor);
 				if($this->request->vista!=1){
 					$this->addLayout("adminAlone");
 					$this->processTemplate("liquidaciones/reporteCedidas2.html");
