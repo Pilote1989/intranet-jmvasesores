@@ -21,7 +21,9 @@
         <td align="center"> {cartas.detalle} </td>
         <td align="center"> {cartas.fecha} </td>
         <td align="center"><div class="action-buttons">
-            <a class="blue abreLink" x-link="http://intranet.jmvasesores.com/?do=cartas.crear&idCarta={cartas.idCarta}" href="#"> <i class="icon-zoom-in bigger-130"></i> </a> <a class="blue abreLink" x-link="http://intranet.jmvasesores.com/?do=cartas.procesarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-print bigger-130"></i> </a> <a class="blue elimina" x-link="http://intranet.jmvasesores.com/?do=cartas.eliminarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+            <a class="blue abreLink" x-link="/?do=cartas.crear&idCarta={cartas.idCarta}" href="#"> <i class="icon-zoom-in bigger-130"></i> </a> 
+            <a class="blue abreLink" x-link="/?do=cartas.procesarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-print bigger-130"></i> </a> 
+            <a class="blue elimina" x-link="/?do=cartas.eliminarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-trash bigger-130"></i> </a>
           </div></td>
       </tr>
       <loop end="cartas"/>
@@ -93,7 +95,7 @@ No hay cartas para esta p&oacute;liza.
 			timer = setInterval(checkChild, 500);
 		});	
 		jQuery('#btnMsg').click( function() {
- 			child = window.open("http://intranet.jmvasesores.com/?do=cartas.crear&idPoliza={idPoliza}", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
+ 			child = window.open("/?do=cartas.crear&idPoliza={idPoliza}", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
 			event.preventDefault();
 			timer = setInterval(checkChild, 500);
 		});	
