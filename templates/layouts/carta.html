@@ -104,12 +104,11 @@ tinymce.init({
 		<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
 	</div>
 </div>
-
 <div class="main-container">
 <div class="page-content">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-      <h3 class="header blue lighter"> Crear Carta - JMV - {numero} - {anio}<span id="guardada" class="label label-success pull-right">Guardada</span> <span id="sinGuardar" class="label label-warning pull-right" style="display:none;">Sin Guardar</span></h3>
+      <h3 class="header blue lighter"> Crear Carta <span id="guardada" class="label label-success pull-right" style="display:none;">Guardada</span> <span id="sinGuardar" class="label label-warning pull-right" style="display:none;">Sin Guardar</span><span id="nueva" class="label label-danger pull-right">Nueva</span></h3>
       </h3>
     </div>
   </div>
@@ -118,21 +117,25 @@ tinymce.init({
       <div class="col-xs-12 col-sm-10 col-sm-offset-1" style="height:610px">
         <div class="form-group">
           <textarea id="texto" name="texto">
-            {carta}
+			<MainCommand/>
           </textarea>
         </div>
         <div class="form-group">
           <label for="detalle" class="col-sm-3 control-label no-padding-right">Detalle de la Carta </label>
           <div class="col-sm-9">
-            <input name="detalle" type="text" class="col-sm-12 col-xs-12" id="detalle" placeholder="Detalle" value="{detalle}">
+            <input name="detalle" class="col-sm-12 col-xs-12" type="text" id="detalle" placeholder="Detalle">
           </div>
         </div>
       </div>
     </div>
-    <input type="hidden" id="idCarta" name="idCarta" value="{idCarta}" />
+    <block start="poliza"/>
+    <input type="hidden" id="idPoliza" name="idPoliza" value="{idPoliza}" />
+    <block end="poliza"/>
     <div class="clearfix form-actions">
-      <div class="col-md-12 col-sm-12 center">
-        <button id="envio" name="envio" class="btn btn-info" type="button"> <i class="icon-ok bigger-110"></i> Guardar </button>
+      <div class="col-md-offset-3 col-md-9 center">
+        <button id="envio" name="envio" class="btn btn-info" type="button">
+          <i class="icon-ok bigger-110"></i> Guardar
+        </button>
       </div>
     </div>
   </form>
@@ -156,13 +159,13 @@ jQuery(function($) {
 			success: function(data) {
 				if(data["respuesta"]=="OLD"){
 					//OK no hago nada	
-			$( "#dialog-message" ).dialog("close");
+					$( "#dialog-message" ).dialog("close");
 					$('#sinGuardar').hide();
 					$('#guardada').show();
 					$('#nueva').hide();
 				}else{
 					//Carta Nueva, tengo que recargar la pagina
-					window.location.replace("/?do=cartas.crear&idCarta=" + data["ids"]);
+					window.location.replace("/?do=cartas.editar&idCarta=" + data["ids"]);
 				}
 			}
 		});
