@@ -5,7 +5,23 @@
 		<span class="pull-right inline">
 			<span class="btn-toolbar inline middle no-margin"> 
 				<span class="btn-group no-margin" data-toggle="buttons" id="accordion-style">
-					<button id="target" class="btn btn-light btn-xs"><i class="icon-print icono bigger-125"></i> Imprimir </button>
+											<div class="btn-group">
+												<button class="btn btn-xs btn-info">Herramientas</button>
+
+												<button data-toggle="dropdown" class="btn btn-xs btn-info dropdown-toggle">
+													<span class="icon-caret-down icon-only"></span>
+												</button>
+
+												<ul class="dropdown-menu pull-right">
+													<li>
+														<a href="#" id="imprimir">Imprimir</a>
+													</li>
+
+													<li>
+														<a href="#" id="exportar">Exportar</a>
+													</li>
+												</ul>
+											</div>					
 				</span>
 			</span> 
 		</span> 
@@ -71,12 +87,23 @@
 	</table>
 </div>
 
+<script src="/assets/js/jquery.btechco.excelexport.js"></script>
+<script src="/assets/js/jquery.base64.js"></script>
 <script>
 var child;
-jQuery('#target').click( function() {
+jQuery('#imprimir').click( function(event) {
 	child = window.open("/?do=reportes.comisionesPendientes&vista=1", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=850,height=840");
 	event.preventDefault();
 });		
+
+jQuery('#exportar').click( function(event) {
+	$("#sample-table-2").btechco_excelexport({
+                containerid: "sample-table-2"
+               , datatype: $datatype.Table
+            });
+	event.preventDefault();
+});
+
 // Find all objects to highlight.
 $(".st").each(function(index) {
     // For each one, peek at the previous object.
