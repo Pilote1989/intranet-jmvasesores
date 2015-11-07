@@ -100,6 +100,9 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "liquidaciones.reportes"){
 			$this->addVar("liquidaciones", "class='active open'");
 			$this->addVar("liquidaciones.reportes", "class='active'");
+		}elseif($this->request->doFalso == "reportes.comisionesPendientes"){
+			$this->addVar("liquidaciones", "class='active open'");
+			$this->addVar("reportes.comisionesPendientes", "class='active'");
 		}elseif($this->request->doFalso == "liquidaciones.verCedidas"){
 			$this->addVar("liquidaciones", "class='active open'");
 			$this->addVar("liquidaciones.cedidas", "class='active'");
