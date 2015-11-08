@@ -64,18 +64,43 @@
 				<td align="center">{clientes.cobro.totalFactura}</td>
 				<td align="center">{clientes.cobro.comisionP}% - {clientes.cobro.comision}</td>
 				<td align="center">{clientes.cobro.vendedor}</td>
-				<td align="center">{clientes.cobro.comisionCedidaP}% - {clientes.cobro.comisionCedida}</td>
+				<td align="center">{clientes.cobro.comisionCedidaP} - {clientes.cobro.comisionCedida}</td>
 			</tr>
           <loop end="clientes.cobro"/>
 		{clientes.usd}
 		{clientes.sol}
 		{clientes.eur}
     <loop end="clientes"/>
-    <!--
-    <tr>
-    <td><div class="hr hr8 hr-double hr-dotted">
-    </div></td>
-	</tr>--->
+	<tr style="border-right: white 2px solid;border-left: white 2px solid;">
+    <td colspan="12">&nbsp;</td>
+	</tr>
+	<tr>
+	   <td colspan="5">&nbsp;</td>
+	   <td colspan="2" align="center">Total Dolares</td>
+	   <td>&nbsp;</td>
+	   <td align="center">{granTotalDolares}</td>
+	   <td align="center">{granComDolares}</td>
+	   <td>&nbsp;</td>
+	   <td align="center">{granComVenDolares}</td>
+	</tr>
+	<tr>
+	   <td colspan="5">&nbsp;</td>
+	   <td colspan="2" align="center">Total Soles</td>
+	   <td>&nbsp;</td>
+	   <td align="center">{granTotalSoles}</td>
+	   <td align="center">{granComSoles}</td>
+	   <td>&nbsp;</td>
+	   <td align="center">{granComVenSoles}</td>
+	</tr>
+	<tr>
+	   <td colspan="5">&nbsp;</td>
+	   <td colspan="2" align="center">Total Euros</td>
+	   <td>&nbsp;</td>
+	   <td align="center">{granTotalEuros}</td>
+	   <td align="center">{granComEuros}</td>
+	   <td>&nbsp;</td>
+	   <td align="center">{granComVenEuros}</td>
+	</tr>
 </tbody>
 
 	</table>

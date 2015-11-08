@@ -39,6 +39,15 @@ class comisionesPendientes extends sessionCommand{
 			
 			$i = 0;
 			$lista = array();
+			$granTotalSoles = 0;
+			$granTotalDolares = 0;
+			$granTotalEuros = 0;
+			$granComSoles = 0;
+			$granComDolares = 0;
+			$granComEuros = 0;
+			$granComVenSoles = 0;
+			$granComVenDolares = 0;
+			$granComVenEuros = 0;
 			foreach($listaClientes as $cliente){
 				$totalSoles = 0;
 				$totalDolares = 0;
@@ -60,8 +69,8 @@ class comisionesPendientes extends sessionCommand{
 						rtf.doc as doc, 
 						r.sigla as ramo, 
 						com.sigla as comp,
-						DATE_FORMAT(rtf.inicioVigencia,'%m/%d/%Y') as inicioVigencia,
-						DATE_FORMAT(rtf.finVigencia,'%m/%d/%Y') as finVigencia,
+						DATE_FORMAT(rtf.inicioVigencia,'%d/%m/%Y') as inicioVigencia,
+						DATE_FORMAT(rtf.finVigencia,'%d/%m/%Y') as finVigencia,
 						c.primaNeta as primaNeta,
 						c.totalFactura as totalFactura,
 						c.comisionP as comisionP,
@@ -118,28 +127,38 @@ class comisionesPendientes extends sessionCommand{
 					$lista[$i]["cobro"][$j]["primaNeta"]=$cobro["primaNeta"];
 					$lista[$i]["cobro"][$j]["comisionP"]=$cobro["comisionP"];
 					$lista[$i]["cobro"][$j]["comision"]=$cobro["comision"];
-					$lista[$i]["cobro"][$j]["comisionCedidaP"]=$cobro["comisionCedidaP"];
-					$lista[$i]["cobro"][$j]["comisionCedida"]=$cobro["comisionCedida"];
 					$vendedor = Fabrica::getFromDB("Persona",$cobro["vendedor"]);
 					$lista[$i]["cobro"][$j]["vendedor"]=$vendedor->getNombres().' '.$vendedor->getApellidoPaterno().' '.$vendedor->getApellidoMaterno();
-					
+					if($cobro["vendedor"]=="1"){
+						$lista[$i]["cobro"][$j]["comisionCedidaP"]="";
+						$lista[$i]["cobro"][$j]["comisionCedida"]="";
+					}else{
+						$lista[$i]["cobro"][$j]["comisionCedidaP"]=$cobro["comisionCedidaP"]."%";
+						$lista[$i]["cobro"][$j]["comisionCedida"]=$cobro["comisionCedida"];						
+					}
 					if($cobro["moneda"]=="Dolares"){
 						$lista[$i]["cobro"][$j]["moneda"]="USD";
 						$totalDolares += $cobro["totalFactura"];
 						$comDolares += $cobro["comision"];
-						$comVenDolares += $cobro["comisionCedida"];
+						if($cobro["vendedor"]!="1"){
+							$comVenDolares += $cobro["comisionCedida"];
+						}
 						$checkDolares = true;
 					}else if($cobro["moneda"]=="Soles"){
 						$lista[$i]["cobro"][$j]["moneda"]="SOL";
 						$totalSoles += $cobro["totalFactura"];
 						$comSoles += $cobro["comision"];
-						$comVenSoles += $cobro["comisionCedida"];
+						if($cobro["vendedor"]!="1"){
+							$comVenSoles += $cobro["comisionCedida"];
+						}
 						$checkSoles = true;
 					}else if($cobro["moneda"]=="Euros"){
 						$lista[$i]["cobro"][$j]["moneda"]="EUR";
 						$totalEuros += $cobro["totalFactura"];
 						$comEuros += $cobro["comision"];
-						$comVenEuros += $cobro["comisionCedida"];
+						if($cobro["vendedor"]!="1"){
+							$comVenEuros += $cobro["comisionCedida"];
+						}
 						$checkEuros = true;
 					}
 				}
@@ -185,7 +204,27 @@ class comisionesPendientes extends sessionCommand{
 					</tr>';
 					$lista[$i]["eur"] = $temp;
 				}
+				$granTotalSoles += $totalSoles;
+				$granTotalDolares += $totalDolares;
+				$granTotalEuros += $totalEuros;
+				$granComSoles += $comSoles;
+				$granComDolares += $comDolares;
+				$granComEuros += $comEuros;
+				$granComVenSoles += $comVenSoles;
+				$granComVenDolares += $comVenDolares;
+				$granComVenEuros += $comVenEuros;
 			}
+			
+			$this->addVar("granTotalSoles",$granTotalSoles);
+			$this->addVar("granTotalDolares",$granTotalDolares);
+			$this->addVar("granTotalEuros",$granTotalEuros);
+			$this->addVar("granComSoles",$granComSoles);
+			$this->addVar("granComDolares",$granComDolares);
+			$this->addVar("granComEuros",$granComEuros);
+			$this->addVar("granComVenSoles",$granComVenSoles);
+			$this->addVar("granComVenDolares",$granComVenDolares);
+			$this->addVar("granComVenEuros",$granComVenEuros);
+				
 			$this->addLoop("clientes", $lista);
 		if($this->request->vista=="1"){
 			$this->addLayout("adminAlone");
