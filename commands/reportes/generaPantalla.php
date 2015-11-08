@@ -96,15 +96,31 @@ class generaPantalla extends sessionCommand{
 			
 			$i=0;
 			$polizas = array();
-			
-			//falta moneda!
+			$totalSoles = 0;
+			$totalDolares = 0;
+			$totalEuros = 0;
+			$comSoles = 0;
+			$comDolares = 0;
+			$comEuros = 0;
+			$pnSoles = 0;
+			$pnDolares = 0;
+			$pnEuros = 0;
 			foreach($listaPolizas as $poliza){
 				//$actual = Fabrica::getFromDB("Poliza", $poliza["idPersona"]);	
 				if($poliza["moneda"]="Dolares"){
+					$totalDolares += $poliza["totalFactura"];
+					$comDolares += $poliza["comision"];
+					$pnDolares += $poliza["primaNeta"];
 					$polizas[$i]["moneda"] = "DOL";
 				}else if($poliza["moneda"]="Soles"){
+					$totalSoles += $poliza["totalFactura"];
+					$comSoles += $poliza["comision"];
+					$pnSoles += $poliza["primaNeta"];
 					$polizas[$i]["moneda"] = "SOL";
 				}else if($poliza["moneda"]="Euros"){
+					$totalEuros += $poliza["totalFactura"];
+					$comEuros += $poliza["comision"];
+					$pnEuros += $poliza["primaNeta"];
 					$polizas[$i]["moneda"] = "EUR";
 				}
 				$polizas[$i]["idPoliza"] = $poliza["idPoliza"];		
@@ -118,7 +134,7 @@ class generaPantalla extends sessionCommand{
 				$polizas[$i]["primaNeta"] = round($poliza["primaNeta"], 2);
 				$polizas[$i]["comisionP"] = round($poliza["comisionP"], 2);
 				$polizas[$i]["comision"] = round($poliza["comision"], 2);
-				if($poliza["liq"]=""){
+				if($poliza["liq"]==""){
 					$polizas[$i]["liq"] = "Pendiente";
 				}else{
 					$polizas[$i]["liq"] = "Pagada";
@@ -129,6 +145,15 @@ class generaPantalla extends sessionCommand{
 				$i++;				
 			}			
 			$this->addLoop("polizas", $polizas);
+			$this->addVar("totalSoles",$totalSoles);
+			$this->addVar("totalDolares",$totalDolares);
+			$this->addVar("totalEuros",$totalEuros);
+			$this->addVar("comSoles",$comSoles);
+			$this->addVar("comDolares",$comDolares);
+			$this->addVar("comEuros",$comEuros);
+			$this->addVar("pnSoles",$pnSoles);
+			$this->addVar("pnDolares",$pnDolares);
+			$this->addVar("pnEuros",$pnEuros);
 
 			if($this->request->vista!=1){
 				$this->addLayout("adminAlone");
