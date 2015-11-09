@@ -155,9 +155,12 @@ class generaPantalla extends sessionCommand{
 			$this->addVar("pnDolares",$pnDolares);
 			$this->addVar("pnEuros",$pnEuros);
 
-			if($this->request->vista!=1){
+			if($this->request->vista==0){
 				$this->addLayout("adminAlone");
 				$this->processTemplate("reportes/generaPantalla2.html");
+			}else if($this->request->vista==2){
+				//vista normal
+				$this->processTemplate("reportes/generaPantalla3.html");
 			}else{
 				//vista normal
 				$this->processTemplate("reportes/generaPantalla.html");

@@ -37,7 +37,7 @@ class procesarDatosBasicos extends sessionCommand{
 			$id=$cliente->getId();
 		}
 		
-		$fc->redirect("?do=clientes.verDatosBasicos&idCliente=".$id);
+		$fc->redirect("?do=clientes.ver&idCliente=".$id);
 	}
 }
 ?>

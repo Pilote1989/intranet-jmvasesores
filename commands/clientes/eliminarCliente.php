@@ -9,7 +9,7 @@ class eliminarCliente extends sessionCommand{
 			
 			$polizas=Fabrica::getAllFromDB("Poliza",array("idCliente = " . $this->request->idCliente, "estado = '1'"));
 			if(count($polizas)>0){
-				$fc->redirect("?do=clientes.verDatosBasicos&idCliente=" . $this->request->idCliente . "&m=1");				
+				$fc->redirect("?do=clientes.ver&idCliente=" . $this->request->idCliente . "&m=1");				
 			}else{
 				$cliente=Fabrica::getFromDB("Cliente",$this->request->idCliente);
 				$cliente->setEstado('0');
