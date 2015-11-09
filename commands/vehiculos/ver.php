@@ -29,8 +29,8 @@ class ver extends sessionCommand{
 					p.inicioVigencia AS inicioVigencia,
 					p.finVigencia AS finVigencia
 				FROM
-					vehiculoenpoliza vp,
-					poliza p, cliente cli, compania com
+					VehiculoEnPoliza vp,
+					Poliza p, Cliente cli, Compania com
 				WHERE
 					vp.idPoliza = p.idPoliza
 					AND 
