@@ -131,29 +131,29 @@ class generaPantalla extends sessionCommand{
 				$polizas[$i]["nombreRamo"] = $poliza["nombreRamo"];
 				$polizas[$i]["siglaCompania"] = $poliza["siglaCompania"];
 				$polizas[$i]["avisoDeCobranza"] = $poliza["avisoDeCobranza"];
-				$polizas[$i]["primaNeta"] = round($poliza["primaNeta"], 2);
-				$polizas[$i]["comisionP"] = round($poliza["comisionP"], 2);
-				$polizas[$i]["comision"] = round($poliza["comision"], 2);
+				$polizas[$i]["primaNeta"] = number_format($poliza["primaNeta"], 2);
+				$polizas[$i]["comisionP"] = number_format($poliza["comisionP"], 2);
+				$polizas[$i]["comision"] = number_format($poliza["comision"], 2);
 				if($poliza["liq"]==""){
 					$polizas[$i]["liq"] = "Pendiente";
 				}else{
 					$polizas[$i]["liq"] = "Pagada";
 				}
-				$polizas[$i]["totalFactura"] = round($poliza["totalFactura"], 2);
+				$polizas[$i]["totalFactura"] = number_format($poliza["totalFactura"], 2);
 				$polizas[$i]["inicioVigencia"] = date("d/m/Y",strtotime($poliza["inicioVigencia"]));
 				$polizas[$i]["finVigencia"] = date("d/m/Y",strtotime($poliza["finVigencia"]));
 				$i++;				
 			}			
 			$this->addLoop("polizas", $polizas);
-			$this->addVar("totalSoles",$totalSoles);
-			$this->addVar("totalDolares",$totalDolares);
-			$this->addVar("totalEuros",$totalEuros);
-			$this->addVar("comSoles",$comSoles);
-			$this->addVar("comDolares",$comDolares);
-			$this->addVar("comEuros",$comEuros);
-			$this->addVar("pnSoles",$pnSoles);
-			$this->addVar("pnDolares",$pnDolares);
-			$this->addVar("pnEuros",$pnEuros);
+			$this->addVar("totalSoles",number_format($totalSoles,2));
+			$this->addVar("totalDolares",number_format($totalDolares,2));
+			$this->addVar("totalEuros",number_format($totalEuros,2));
+			$this->addVar("comSoles",number_format($comSoles,2));
+			$this->addVar("comDolares",number_format($comDolares,2));
+			$this->addVar("comEuros",number_format($comEuros,2));
+			$this->addVar("pnSoles",number_format($pnSoles,2));
+			$this->addVar("pnDolares",number_format($pnDolares,2));
+			$this->addVar("pnEuros",number_format($pnEuros,2));
 
 			if($this->request->vista==0){
 				$this->addLayout("adminAlone");
