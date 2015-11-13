@@ -79,6 +79,8 @@ class verDatosBasicos extends sessionCommand{
 			}
 			$vigencias = Fabrica::getAllFromDB("Poliza", array("numeroPoliza = '" . $poliza->getNumeroPoliza() . "'","estado = '1'"), "inicioVigencia DESC");			
 			foreach($vigencias as $vigencia){
+				$cobroTemp = Fabrica::getFromDB("Cobro",$vigencia->getIdCobro());
+				$listaVigencias[$i]["aviso"] = $cobroTemp->getAvisoDeCobranza();
 				$listaVigencias[$i]["inicioVigencia"] = $vigencia->getInicioVigencia("DATE");
 				$listaVigencias[$i]["finVigencia"] = $vigencia->getFinVigencia("DATE");
 				
