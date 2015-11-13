@@ -22,6 +22,7 @@ class procesarDatosBasicos extends sessionCommand{
 		}else{
 			$poliza = new Poliza();
 			$cobro = new Cobro();
+			$poliza->setNumeroPoliza($this->request->numeroPoliza);
 		}
 		
 		$cobro->setMoneda($this->request->moneda);
@@ -50,7 +51,6 @@ class procesarDatosBasicos extends sessionCommand{
 		$poliza->setObservaciones($this->request->observaciones);
 		$poliza->setMoneda($this->request->moneda);
 		$poliza->setIdRamo($this->request->idRamo);
-		$poliza->setNumeroPoliza($this->request->numeroPoliza);
 		$poliza->setIdCompania($this->request->idCompania);
 		$poliza->setInicioVigencia($this->request->fechaInicio,"DATE");
 		$poliza->setFinVigencia($this->request->fechaFin,"DATE");

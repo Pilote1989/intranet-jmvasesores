@@ -105,6 +105,7 @@ class editarDatosBasicos extends sessionCommand{
 				
 			}
 		}else{
+			$this->addBlock("numeroPoliza");
 			$this->addBlock("polizaPDFn");
 			$this->addBlock("bloqueEditarPolizas");
 			$this->addEmptyVar("cliente");
