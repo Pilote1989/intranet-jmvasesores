@@ -37,7 +37,10 @@ class ver extends sessionCommand{
 					}
 				}
 			}
-			$poliza = Fabrica::getFromDB("Poliza",$seleccionada);			
+			$poliza = Fabrica::getFromDB("Poliza",$seleccionada);
+			if($poliza->getTipo()!="POL"){
+				$this->addBlock("eliminaRenovacion");
+			}
 			$inicio =  $poliza->getInicioVigencia("DATE");
 			$fin =  $poliza->getFinVigencia("DATE");			
 			$this->addVar("vigenciaSeleccionada", $inicio . " - " . $fin);			
@@ -108,6 +111,9 @@ class ver extends sessionCommand{
 				$this->addVar("cor", "");
 				$this->addVar("bas", "active");
 			}	
+			if($this->request->m=="ee"){
+				$this->addBlock("ee");
+			}
 			$this->addLayout("admin");
 			$this->processTemplate("polizas/ver.html");
 		}

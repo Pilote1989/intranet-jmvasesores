@@ -6,8 +6,14 @@ class eliminarRenovacion extends sessionCommand{
 		$fc->import("lib.Poliza");
 		if($this->request->idPoliza){
 			$poliza=Fabrica::getFromDB("Poliza",$this->request->idPoliza);
-			$poliza->setEstado('0');
-			$poliza->storeIntoDB();
+			if($poliza->getTipo()!="POL"){
+				$poliza->setEstado('0');
+				$poliza->storeIntoDB();
+				$fc->redirect("?do=polizas.ver&idPoliza&idPoliza=" . $poliza->matriz());
+			}else{
+				$fc->redirect("?do=polizas.ver&idPoliza&idPoliza=" . $poliza->matriz() . "&m=ee");
+			}
+			/*
 			//http://intranet.jmvasesores.com/?do=polizas.ver&idPoliza=274&vig=288
 			$vigencias = Fabrica::getAllFromDB("Poliza", array("numeroPoliza = " . $poliza->getNumeroPoliza(), "estado = '1'"), "inicioVigencia ASC");
 			if(count($vigencias)>0){
@@ -15,7 +21,7 @@ class eliminarRenovacion extends sessionCommand{
 			}else{
 				$fc->redirect("?do=polizas.verPolizas");
 			}
-			
+			*/
 		}else{
 			$fc->redirect("?do=polizas.verPolizas");
 		}				

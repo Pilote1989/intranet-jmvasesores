@@ -11,7 +11,9 @@
         <li> <a href="/?do=polizas.editarDatosParticulares&idPoliza={idPoliza}">Editar Datos Particulares</a> </li>
         <li> <a href="/?do=polizas.agregarRenovacion&idPoliza={matriz}">Agregar Renovacion</a> </li>
         <li> <a href="/?do=polizas.anularRenovacion&idPoliza={idPoliza}" id="anula">Anular Renovacion</a> </li>
+        <block start="eliminaRenovacion"/>
         <li> <a href="/?do=polizas.eliminarRenovacion&idPoliza={idPoliza}" id="elimina">Eliminar Renovacion</a> </li>
+        <block end="eliminaRenovacion"/>
       </ul>
     </div>
     <block end="admin"/>
@@ -79,6 +81,8 @@
     </div>
   </div>
 </div>
+<link rel="stylesheet" href="assets/css/jquery.gritter.css" />
+<script src="assets/js/jquery.gritter.min.js"></script>
 <script>
 
 $(document).ready(function(){
@@ -95,4 +99,15 @@ $(document).ready(function(){
 		return confirm("¿Estas seguro que deseas anular la poliza?");
 	});
 });
+
+<block start="ee"/>
+					$.gritter.add({
+						title: '¡Error!',
+						text: 'No se puede eliminar esta poliza al ser la primera en ingresar al sistema.',
+						sticky: true,
+						time: '',
+						class_name: 'gritter-error'
+					});
+<block end="ee"/>
+
 </script>
