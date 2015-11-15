@@ -48,6 +48,18 @@
 				<td colspan="9" align="center"><b>{comTexto}</b></td>
 			<tr>
 			<block end="com"/>
+			<block start="inicio"/>
+			<tr>
+				<td colspan="4" align="center"><b>Inicio de Vigencia:</b></td>
+				<td colspan="10" align="center"><b>{inicio}<input type="hidden" name="inicioVigencia" id="inicioVigencia" value="{inicio}"/></b></td>
+			<tr>
+			<block end="inicio"/>
+			<block start="fin"/>
+			<tr>
+				<td colspan="4" align="center"><b>Fin de Vigencia:</b></td>
+				<td colspan="10" align="center"><b>{fin}<input type="hidden" name="finVigencia" id="finVigencia" value="{fin}"/></b></td>
+			<tr>
+			<block end="fin"/>
 			<tr>
 				<th align="center">Aviso</th>
 				<th align="center">Ramo</th>

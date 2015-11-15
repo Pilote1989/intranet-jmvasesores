@@ -4,7 +4,9 @@ class generaPantalla extends sessionCommand{
 		// -> Banner
 		$fc=FrontController::instance();
 		$usuario=$this->getUsuario();
-		$this->addVar("doFalso", $this->request->do);	
+		$this->addVar("doFalso", $this->request->do);
+		//var_dump($this->request);
+		
 		if($this->request->ase || $this->request->com || $this->request->ram){
 			if($this->request->ase!=""){
 				$where[]="rtf.idCliente = '".$this->request->ase."'";
@@ -32,6 +34,26 @@ class generaPantalla extends sessionCommand{
 				$this->addBlock("com");	
 			}else{
 				$this->addEmptyVar("com");
+			}
+			
+			
+			if($this->request->inicioVigencia){
+				$inicioVigencia = explode(" - ", $this->request->inicioVigencia);
+				$inicioVigencia[0] = $this->procesarFecha($inicioVigencia[0]);
+				$inicioVigencia[1] = $this->procesarFecha($inicioVigencia[1]);
+				$where[]="rtf.inicioVigencia >= '".$inicioVigencia[0]."'";
+				$where[]="rtf.inicioVigencia <= '".$inicioVigencia[1]."'";
+				$this->addVar("inicio",$this->request->inicioVigencia);
+				$this->addBlock("inicio");	
+			}
+			if($this->request->finVigencia){
+				$finVigencia = explode(" - ", $this->request->finVigencia);
+				$finVigencia[0] = $this->procesarFecha($finVigencia[0]);
+				$finVigencia[1] = $this->procesarFecha($finVigencia[1]);
+				$where[]="rtf.finVigencia >= '".$finVigencia[0]."'";
+				$where[]="rtf.finVigencia <= '".$finVigencia[1]."'";
+				$this->addVar("fin",$this->request->finVigencia);
+				$this->addBlock("fin");
 			}
 			
 			$where[]="rtf.idCliente = cli.idCliente";
@@ -69,7 +91,7 @@ class generaPantalla extends sessionCommand{
 				".$whereCondition."
 				ORDER BY numeroPoliza, inicioVigencia
 			";
-			//echo "<br / >" . $query;
+			//echo "<br / >" . $query . "<br / >";
 			
 			$query=utf8_decode($query);		
 			$link=&$this->fc->getLink();
@@ -167,6 +189,9 @@ class generaPantalla extends sessionCommand{
 			}
 			
 		}
+	}
+	function procesarFecha($fecha){
+		return date('Y-m-d', strtotime(str_replace('/', '-', $fecha)));
 	}
 }
 ?>

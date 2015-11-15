@@ -27,27 +27,40 @@
 	</span><!-- /span --> 
 </h3>
 
+<form method="post" action="?do=reportes.generaPantalla&vista=0" target="TheWindow" id="TheForm">
 <div class="table-responsive">
 	<table id="sample-table-2" class="table table-condensed table-striped table-bordered table-hover">
 		<thead>
 			<block start="asegurado"/>
 			<tr>
 				<td colspan="4" align="center"><b>Cliente:</b></td>
-				<td colspan="10" align="center"><b>{aseTexto}</b></td>
+				<td colspan="10" align="center"><b>{aseTexto}<input type="hidden" name="ase" id="ase" value="{ase}"/></b></td>
 			<tr>
 			<block end="asegurado"/>
 			<block start="ramo"/>
 			<tr>
 				<td colspan="4" align="center"><b>Ramo:</b></td>
-				<td colspan="10" align="center"><b>{ramTexto}</b></td>
+				<td colspan="10" align="center"><b>{ramTexto}<input type="hidden" name="ram" id="ram" value="{ram}"/></b></td>
 			<tr>
 			<block end="ramo"/>
 			<block start="com"/>
 			<tr>
 				<td colspan="4" align="center"><b>Compania:</b></td>
-				<td colspan="10" align="center"><b>{comTexto}</b></td>
+				<td colspan="10" align="center"><b>{comTexto}<input type="hidden" name="com" id="com" value="{com}"/></b></td>
 			<tr>
 			<block end="com"/>
+			<block start="inicio"/>
+			<tr>
+				<td colspan="4" align="center"><b>Inicio de Vigencia:</b></td>
+				<td colspan="10" align="center"><b>{inicio}<input type="hidden" name="inicioVigencia" id="inicioVigencia" value="{inicio}"/></b></td>
+			<tr>
+			<block end="inicio"/>
+			<block start="fin"/>
+			<tr>
+				<td colspan="4" align="center"><b>Fin de Vigencia:</b></td>
+				<td colspan="10" align="center"><b>{fin}<input type="hidden" name="finVigencia" id="finVigencia" value="{fin}"/></b></td>
+			<tr>
+			<block end="fin"/>
 			<tr>
 				<th align="center">Aviso</th>
 				<th align="center">Ramo</th>
@@ -110,6 +123,7 @@
 		</tbody>
 	</table>
 </div>
+</form>
 <style>
 .table tbody>tr>td{
 	padding:auto 2px !important;
@@ -122,8 +136,11 @@
 <script>
 var child;
 jQuery('#imprimir').click( function(event) {
-	child = window.open("/?do=reportes.generaPantalla&vista=0&ase={ase}&com={com}&ram={ram}", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
-	event.preventDefault();
+	var f = document.getElementById('TheForm');
+	window.open('', 'TheWindow', "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
+	f.submit();
+	/*child = window.open("/?do=reportes.generaPantalla&vista=0&ase={ase}&com={com}&ram={ram}", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
+	*/event.preventDefault();
 });
 jQuery('#exportar').click( function(event) {
 	$("#sample-table-2").btechco_excelexport({

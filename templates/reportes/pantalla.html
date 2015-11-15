@@ -9,17 +9,17 @@
         <!-- <legend>Form</legend> -->
         <fieldset>
           <div class="form-group">
-            <label for="idCompania" class="col-sm-3 control-label no-padding-right"> Compañia </label>
+            <label for="com" class="col-sm-3 control-label no-padding-right"> Compañia </label>
             <div class="col-sm-9">
-              <select name="idCompania" class="chosen-select" id="idCompania" data-placeholder="Escoja una Compañia...">
+              <select name="com" class="chosen-select" id="com" data-placeholder="Escoja una Compañia...">
 				{companias}
               </select>
             </div>
           </div>
           <div class="form-group">
-            <label for="idRamo" class="col-sm-3 control-label no-padding-right"> Ramo </label>
+            <label for="ram" class="col-sm-3 control-label no-padding-right"> Ramo </label>
             <div class="col-sm-9">
-              <select name="idRamo" class="chosen-select" id="idRamo" data-placeholder="Escoja un Ramo...">
+              <select name="ram" class="chosen-select" id="ram" data-placeholder="Escoja un Ramo...">
                 
 						{ramos}
               
@@ -27,12 +27,34 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="idRamo" class="col-sm-3 control-label no-padding-right"> Cliente </label>
+            <label for="ase" class="col-sm-3 control-label no-padding-right"> Cliente </label>
             <div class="col-sm-9">
-              <select name="idAsegurado" class="chosen-select" id="idAsegurado"  data-placeholder="Escoja un Cliente...">
+              <select name="ase" class="chosen-select" id="ase"  data-placeholder="Escoja un Cliente...">
 				{clientes}
               </select>
             </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="inicioVigencia">Inicio de Vigencia</label>
+            <div class="col-sm-9">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-calendar bigger-110"></i>
+								</span>
+								<input class="form-control date-pick" type="text" name="inicioVigencia" id="inicioVigencia" />
+							</div>
+						</div>            
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="finVigencia">Fin de Vigencia</label>
+            <div class="col-sm-9">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-calendar bigger-110"></i>
+								</span>
+								<input class="form-control date-pick" type="text" name="finVigencia" id="finVigencia" />
+							</div>
+						</div>            
           </div>
           
         </fieldset>
@@ -57,6 +79,11 @@
 <div id="reporte">
 </div>
 <script>
+$('input.date-pick').daterangepicker({format: 'DD/MM/YYYY'}).prev().on(ace.click_event, function(){
+	$(this).next().focus();
+});
+
+
 $('#load').hide();
 $('#alerta').hide();
 $(".chosen-select").chosen({
@@ -76,12 +103,22 @@ $("#busAsegurado").click(function() {
 	  $("#asegurado").prop( "disabled", false );
 });
 function enviaForm(){
-	if($('#idAsegurado').val()!="" || $('#idCompania').val()!="" || $('#idRamo').val()!=""){
+	if($('#ase').val()!="" || $('#com').val()!="" || $('#ram').val()!=""){
 		$('#load').show();
 		$('#alerta').hide();
-		$( "#reporte" ).load( "?do=reportes.generaPantalla&vista=1&ase=" + $('#idAsegurado').val() + "&com=" +  $('#idCompania').val() + "&ram=" +  $('#idRamo').val(), function(){
+		//alert($('#inicioVigencia').val() + " - " +  $('#finVigencia').val());
+		/*$( "#reporte" ).load( "?do=reportes.generaPantalla&vista=1&ase=" + $('#idAsegurado').val() + "&com=" +  $('#idCompania').val() + "&ram=" +  $('#idRamo').val() + "&i=" +  $('#inicioVigencia').data('date') + "&f=" +  $('#finVigencia').data('date'), function(){
 			$('#load').hide();
-		});
+		});*/
+    $.ajax({
+        'url': '?do=reportes.generaPantalla&vista=1',
+        'type': 'POST',
+        'data': $('#principal').serialize(),
+        'success': function(server_response){
+          $("#reporte").html(server_response);
+          $('#load').hide();
+        }
+    });
 	}else{
 		$('#alerta').show();
 	}
