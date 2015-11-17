@@ -11,13 +11,14 @@ class procesarDatosBasicos extends sessionCommand{
 		if($this->request->idPoliza){
 				//echo "1w";
 			$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
+			/*
 			$numeroPoliza = $poliza->getNumeroPoliza();
 			$vigencias = Fabrica::getAllFromDB("Poliza", array("numeroPoliza = '" . $numeroPoliza . "'","estado = '1'"), "inicioVigencia DESC");		
 			foreach($vigencias as $vigencia){
 				$vigencia->setNumeroPoliza($this->request->numeroPoliza);
 				//echo "1";
 				$vigencia->storeIntoDB();
-			}
+			}*/
 			$cobro = Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
 		}else{
 			$poliza = new Poliza();
