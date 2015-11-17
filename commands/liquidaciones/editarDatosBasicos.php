@@ -18,7 +18,15 @@ class editarDatosBasicos extends sessionCommand{
 				$seleccionados[] = '"'.$cobro->getId().'"';
 				$seleccionados_tipo[] = '"'.$cobro->tipo().'"';
 				//echo $cobro->tipo() . " - " . $cobro->getId(). "<br />";
+				if($cobro->getMoneda()=="Dolares"){
+					$this->addVar("moneda","1");
+				}elseif($cobro->getMoneda()=="Soles"){
+					$this->addVar("moneda","2");
+				}elseif($cobro->getMoneda()=="Euros"){
+					$this->addVar("moneda","3");
+				}
 			}
+			
 			$this->addVar("ids",implode(",", $seleccionados));
 			$this->addVar("tipos",implode(",", $seleccionados_tipo));
 			
