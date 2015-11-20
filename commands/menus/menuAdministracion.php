@@ -23,6 +23,7 @@ class menuAdministracion extends SessionCommand{
 		$this->addEmptyVar("polizas");
 		$this->addEmptyVar("polizas.editarDatosBasicos");
 		$this->addEmptyVar("polizas.verPolizas");
+		$this->addEmptyVar("polizas.busquedaEspecial");
 		$this->addEmptyVar("clientes");
 		$this->addEmptyVar("clientes.editarDatosBasicos");
 		$this->addEmptyVar("clientes.verClientes");
@@ -66,6 +67,9 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "polizas.verPolizas"){
 			$this->addVar("polizas", "class='active open'");
 			$this->addVar("polizas.verPolizas", "class='active'");
+		}elseif($this->request->doFalso == "polizas.busquedaEspecial"){
+			$this->addVar("polizas", "class='active open'");
+			$this->addVar("polizas.busquedaEspecial", "class='active'");
 		}elseif($this->request->doFalso == "vehiculos.verVehiculos"){
 			$this->addVar("polizas", "class='active open'");
 			$this->addVar("vehiculos.verVehiculos", "class='active'");

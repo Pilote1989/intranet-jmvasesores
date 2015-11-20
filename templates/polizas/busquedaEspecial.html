@@ -1,0 +1,75 @@
+<div class="page-header">
+  <h1> Herramienta <small> <i class="icon-double-angle-right"></i>&nbsp;&nbsp;Busqueda de Poliza</small>
+  </h1>
+</div>
+<div class="row">
+	<div class="col-sm-offset-2 col-sm-8">
+          <div class="form-group">
+            <label for="aviso" class="col-sm-3 control-label no-padding-right">Aviso de Cobranza </label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="aviso" type="text"  id="aviso" onKeyPress="return disableEnterKey(event)" placeholder="Aviso de Cobranza" class="col-sm-12">
+            </div>
+            </div>
+          </div>
+		<div class="space"></div>
+		<div class="row">
+		    <div class="clearfix form-actions">
+				<div class="center">
+					<button class="btn btn-info" type="button" id="buscar">
+						<i class="icon-ok bigger-110"></i>
+						Buscar
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			
+<div class="alert alert-danger" id="alerta">
+  <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
+  <strong> <i class="icon-remove"></i> ¡Atencion! </strong> <span id="mensaje"></span><br>
+</div>
+
+<div id="load">
+<h3 class="center" id="loadText">Buscado Poliza...</h3>
+<div class="progress progress-striped active" id="loadBar">
+  <div class="progress-bar progress-bar-success" style="width: 100%;">
+  </div>
+</div></div>			
+			
+			
+		</div>
+	</div>
+
+
+</div>
+
+<script>
+	$('#load').hide();
+	$('#alerta').hide();
+	$("#buscar").on( "click", function() {
+			if($("#aviso").val()!=""){
+				$('#alerta').hide();
+				
+				$('#load').show();
+				var aviso = $("#aviso").val();
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: '?do=polizas.busquedaEspecial&aviso='+ aviso ,
+						success: function(data) {
+						if(data["respuesta"] == "SUCCESS") {
+							$('#loadText').html(data["m"]);
+							setTimeout(function(){
+								window.location.href = "?do=polizas.ver&idPoliza="+data["id"]+"&vig="+data["id"];
+							}, 1000);
+						}else{
+							$('#load').hide();
+							$('#mensaje').html(data["m"]);
+							$('#alerta').show();
+						}
+					}
+				});
+			}
+	});
+</script>
