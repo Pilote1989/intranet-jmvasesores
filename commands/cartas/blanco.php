@@ -10,6 +10,15 @@ class blanco extends sessionCommand{
 			$this->addBlock("poliza");
 			$this->addVar("fecha", strftime("%A %d de %B del %Y"));
 			$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
+			$cobro = Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
+			$simbolo="US$ ";
+			if($cobro->getMoneda()=="Dolares"){
+				$simbolo="US$ ";
+			}elseif($cobro->getMoneda()=="Soles"){
+				$simbolo="S/. ";
+			}elseif($poliza->getMoneda()=="Euros"){
+				$simbolo="&euro; ";
+			}
 			$distritos = array(
 				"99" => "Sin Definir",
 				"98" => "Provincia",
@@ -57,6 +66,14 @@ class blanco extends sessionCommand{
 				"42" => "Villa El Salvador",
 				"35" => "Villa María del Triunfo"
 			);
+			$this->addVar("inicio", $poliza->getInicioVigencia("DATE"));
+			$this->addVar("pol", $poliza->getNumeroPoliza());
+			$this->addVar("fin	", $poliza->getFinVigencia("DATE"));
+			$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
+			$this->addVar("cia", $compania->getSigla());
+			$this->addVar("moneda", $simbolo);
+			$this->addVar("monto", number_format($cobro->getTotalFactura(),2));
+			$this->addVar("aviso", $cobro->getAvisoDeCobranza());
 			$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
 			$this->addVar("numPoliza", $poliza->getNumeroPoliza());
 			$this->addVar("siglas", $compania->getSigla());
@@ -67,6 +84,7 @@ class blanco extends sessionCommand{
 			}else{
 				$this->addVar("direccion", $cliente->getDireccion());
 			}
+			
 			$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
 			$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
 			$this->addVar("ramo", $ramo->getNombre());
