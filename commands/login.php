@@ -13,6 +13,9 @@ class login extends BaseCommand{
 			}else if($this->request->error == 2){
 				$this->addBlock("error");
 				$this->addVar("errorLogin", "Ingrese sus datos");
+			}else if($this->request->error == 3){
+				$this->addBlock("error");
+				$this->addVar("errorLogin", "Ingrese al sistema");
 			}
 		}else{
 			$this->addEmptyVar("errorLogin");

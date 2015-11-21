@@ -24,8 +24,8 @@ abstract class SessionCommand extends BaseCommand{
 		if($user=Fabrica::getFromSession("visitante")){
 			return $user;
 		}
-                //header("Location: ./admin");
-		return false;
+        header("Location: ./?do=login&error=3");
+		//return false;
 	}
 	public function checkAccess($permiso=null,$noKill=null){
 		$fc=FrontController::instance();
