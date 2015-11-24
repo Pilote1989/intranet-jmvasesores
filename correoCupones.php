@@ -56,7 +56,7 @@ while($row = mysql_fetch_array($result)) {
 	</ul>
 	<p>Asimismo,   le(s) recordamos que es importante que este(n) al dia en sus pagos,   para asi evitar la suspension de la cobertura de seguro y poder ser   atendido(s) a cabalidad en caso de ocurrir algun siniestro y/o requerir atencion de parte de vuestra aseguradora, respecto al pago del cupon que   se indica, le informamos que el pago lo puede(n) efectuar por medio de las Web de todos los bancos afiliados o si prefiere(n) efectuando el   pago directamente en cualquiera de las oficinas de la aseguradora.</p>
 	<p>Cabe mencionar que este correo tiene caracter estrictamente informativo sobre el cupon que esta por vencer y no es un recordatorio de  los pagos que a la fecha estan vencidos y que pudiera tener pendientes de pago con vuestra aseguradora.</p>
-	<p>Asimismo en caso de ya haber efectuado el pago del documento indicado, agradeceremos se sirvan no tomar la presente comunicacion.</p>
+	<p>Asimismo en caso de ya haber efectuado el pago del documento indicado, o haber autorizado el pago de su seguro por medio del débito bancario agradeceremos se sirvan no tomar en cuenta la presente comunicacion.</p>
 	<p>Muy Cordialmente.</p>
 	<p><strong></strong><strong><em>Julio Martinez Vargas Caro</em></strong><br />
 	<strong><em>SERVICIO AUTOMATICO DE COBRANZAS</em></strong><br />
