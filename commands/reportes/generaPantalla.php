@@ -129,17 +129,17 @@ class generaPantalla extends sessionCommand{
 			$pnEuros = 0;
 			foreach($listaPolizas as $poliza){
 				//$actual = Fabrica::getFromDB("Poliza", $poliza["idPersona"]);	
-				if($poliza["moneda"]="Dolares"){
+				if($poliza["moneda"]=="Dolares"){
 					$totalDolares += $poliza["totalFactura"];
 					$comDolares += $poliza["comision"];
 					$pnDolares += $poliza["primaNeta"];
 					$polizas[$i]["moneda"] = "DOL";
-				}else if($poliza["moneda"]="Soles"){
+				}else if($poliza["moneda"]=="Soles"){
 					$totalSoles += $poliza["totalFactura"];
 					$comSoles += $poliza["comision"];
 					$pnSoles += $poliza["primaNeta"];
 					$polizas[$i]["moneda"] = "SOL";
-				}else if($poliza["moneda"]="Euros"){
+				}else if($poliza["moneda"]=="Euros"){
 					$totalEuros += $poliza["totalFactura"];
 					$comEuros += $poliza["comision"];
 					$pnEuros += $poliza["primaNeta"];
