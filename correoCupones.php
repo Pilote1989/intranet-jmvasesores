@@ -15,7 +15,9 @@ $result = mysql_query("
 		AND cm.idCompania = p.idCompania
 		AND DATE(c.fechaVencimiento) = ADDDATE(DATE(NOW()), 4)
 ");
+$r=0;
 while($row = mysql_fetch_array($result)) {
+	$r++;
 	$mail = new PHPMailer();
 	//$mail->IsSMTP();
 	$mail->Mailer 		= "smtp";
@@ -43,6 +45,17 @@ while($row = mysql_fetch_array($result)) {
 	}else if($row["moneda"]=="Euros"){
 		$simbolo = "&euro; ";
 	} 
+	$temp.="
+	<tr>
+		<td>Asegurado: " . $row["cliente"] . "</td>
+		<td>Poliza: " . $row["numeroPoliza"] . "</td>
+		<td>Ramo: " . $row["ramo"] . "</td>
+		<td>Cia de Seguros: " . $row["compania"] . "</td>
+		<td>Numero de Cupon: " . $row["numeroCupon"] . "</td>
+		<td>Vencimiento: " . $row["fechaVenc"] . "</td>
+		<td>Importe a Pagar:" . $simbolo . "" . number_format($row["monto"],2) . "</>
+	</tr>";
+	
 	$html = "
 	<p>Estimado Cliente :</p>
 	<p>Dentro de cuatro dias vence una de las cuotas que comprenden el cronograma de pagos de vuestra poliza de seguro, cuyos datos se detallan a   continuacion:</p>
@@ -70,9 +83,6 @@ while($row = mysql_fetch_array($result)) {
 	$mail->Body     =  $html;
 	$mail->CharSet = "UTF-8";
 	//$mail->Send();
-	
-	
-	
 		if(!$mail->Send())
 		{
 		   echo "Error sending: " . $mail->ErrorInfo . " : ". $row["correo"];
@@ -81,8 +91,6 @@ while($row = mysql_fetch_array($result)) {
 		{
 		   echo "Letter is sent";
 		}	
-	
-	
 }
 
 if(date('d')=='25'){
@@ -104,9 +112,7 @@ if(date('d')=='25'){
 		r.nombre = 'Seguro Complementario de Salud' 
 	)
 	");
-
 	while($row = mysql_fetch_array($result)) {
-
 		$mail = new PHPMailer();
 		//$mail->IsSMTP();
 		$mail->Mailer 		= "smtp";
@@ -166,4 +172,46 @@ if(date('d')=='25'){
 
 }
 mysql_free_result($result);
+
+	$mail = new PHPMailer();
+	//$mail->IsSMTP();
+	$mail->Mailer 		= "smtp";
+	$mail->Host     	= "smtpout.secureserver.net";
+	$mail->SMTPAuth		= true;
+	$mail->Port			= 80;
+	$mail->Username 	= "no-responder@jmvasesores.com";
+	$mail->Password 	= "123abc123"; // SMTP password
+	$mail->From     	= "no-responder@jmvasesores.com";
+	$mail->FromName 	= "JMV Seguros - Sistema de Cobranzas";	
+	$mail->AddAddress("jmartinez@jmvasesores.com");
+	$mail->AddCC("no-responder@jmvasesores.com");
+	$mail->AddCC("operaciones@jmvasesores.com");
+	
+	$mail->AddReplyTo("jmartinez@jmvasesores.com","Reporte");
+	$mail->WordWrap = 50;                              // set word wrap
+	$mail->IsHTML(true);                               // send as HTML
+	$mail->Subject  =  "Reporte de Correo"; 
+	$html = "<p>Buenos dias:</p>";
+	if($r>0){
+		$html .= "<p>El dia de hoy se han enviado los siguientes recordatorios de cupones por vencer:</p>";
+		$html .= "<table>" . $temp . "<table>";
+	}else{
+		$html .= "<p>El dia de hoy no se ha enviado ningun recordatorio de cupones pendientes</p>";
+	}
+	$html .= "
+	<p><strong></strong><strong><em>SERVICIO AUTOMATICO DE COBRANZAS</em></strong><br />
+	<strong><em>Asesor Corredor de Seguros</em></strong><br />
+	<strong><em>REG SBS N-3340</em></strong><br />
+	<strong><em>Telfono 992710108</em></strong><br />
+	<strong><em>Web : www.jmvasesores.com</em></strong></p>
+	";
+	echo $html . "<br />";
+	$mail->Body     =  $html;
+	$mail->CharSet = "UTF-8";
+	//$mail->Send();
+	if(!$mail->Send()){
+	   echo "Error sending: " . $mail->ErrorInfo . ".";
+	}else{
+		echo "Letter is sent";
+	}
 ?>
