@@ -30,6 +30,7 @@ while($row = mysql_fetch_array($result)) {
 	$mail->AddBCC("jmartinez@jmvasesores.com");
 	$mail->AddBCC("josecarlos89@gmail.com");			
 	//$mail->AddCC($row["correoAlternativo"]);
+	$mail->AddBCC("no-responder@jmvasesores.com");		
 	$mail->AddAddress($row["correo"]);               // optional name
 	$mail->AddReplyTo("jmartinez@jmvasesores.com","Recordatorio");
 	$mail->WordWrap = 50;                              // set word wrap
@@ -109,15 +110,16 @@ if(date('d')=='25'){
 		$mail = new PHPMailer();
 		//$mail->IsSMTP();
 		$mail->Mailer 		= "smtp";
-		$mail->Host     	= "smtpout.secureserver.net";
+		$mail->Host     	= "smtp.gmail.com";
 		$mail->SMTPAuth		= true;
 		$mail->Port			= 80;
 		$mail->Username 	= "no-responder@jmvasesores.com";
-		$mail->Password 	= "123abc123"; // SMTP password
+		$mail->Password 	= "62827Peru"; // SMTP password
 		$mail->From     	= "no-responder@jmvasesores.com";
 		$mail->FromName 	= "JMV Seguros - Sistema de Recordatorios";
 		$mail->AddBCC("jmartinez@jmvasesores.com");
 		$mail->AddBCC("josecarlos89@gmail.com");
+		$mail->AddBCC("no-responder@jmvasesores.com");		
 		//$mail->AddCC($row["correoAlternativo"]);
 		$mail->AddAddress($row["correo"]);               // optional name
 		$mail->AddReplyTo("jmartinez@jmvasesores.com","Recordatorio");
