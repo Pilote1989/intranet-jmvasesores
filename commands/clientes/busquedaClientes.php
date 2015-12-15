@@ -36,6 +36,8 @@ class busquedaClientes extends SessionCommand{
 			$where[]="c.doc LIKE '%".$this->request->doc."%'";
 		}
 		
+		$where[]="c.estado = '1'";
+		
 		$pPaginador = "";
 		
 		if(sizeof($where)){

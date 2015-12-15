@@ -56,7 +56,7 @@ class editarDatosBasicos extends sessionCommand{
 			else
 				$this->addEmptyVar("recorda");
 			$this->addVar("cliente",$poliza->getIdCliente());
-			$clientes=Fabrica::getAllFromDB("Cliente",array(),"nombre ASC");	
+			$clientes=Fabrica::getAllFromDB("Cliente", array("estado = '1'"),"nombre ASC");	
 			$selectCliente = '<option value=""></option>';
 			foreach($clientes as $cliente){
 				if($poliza->getIdCliente()!=$cliente->getId()){
@@ -140,7 +140,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addEmptyVar("documento");
 			$this->addEmptyVar("cobranza");
 			$this->addEmptyVar("renovacion");
-			$clientes=Fabrica::getAllFromDB("Cliente",array(),"nombre ASC");	
+			$clientes=Fabrica::getAllFromDB("Cliente", array("estado = '1'"),"nombre ASC");	
 			$selectCliente = '<option value=""></option>';
 			foreach($clientes as $cliente){
 				$selectCliente=$selectCliente.'<option value="'.$cliente->getId().'" x-asesor="'.$cliente->getIdPersona().'">'.$cliente->getNombre().'</option>';

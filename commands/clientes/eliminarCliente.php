@@ -14,7 +14,7 @@ class eliminarCliente extends sessionCommand{
 				$cliente=Fabrica::getFromDB("Cliente",$this->request->idCliente);
 				$cliente->setEstado('0');
 				$cliente->storeIntoDB();
-				$fc->redirect("?do=clientes.verCliente");				
+				$fc->redirect("?do=clientes.verClientes");				
 				//echo "2";
 			}
 		}else{
