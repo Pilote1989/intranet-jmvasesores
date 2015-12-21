@@ -36,6 +36,7 @@ class menuAdministracion extends SessionCommand{
 		$this->addEmptyVar("solicitudes");
 		$this->addEmptyVar("solicitudes.crearSolicitud");
 		$this->addEmptyVar("solicitudes.verSolicitudes");
+		$this->addEmptyVar("admin.changelog");
 		if($this->request->doFalso == "personas.verPortada"){
 			$this->addVar("inicio", "class='active'");
 		}elseif($this->request->doFalso == "solicitudes.crearSolicitud"){
@@ -120,6 +121,9 @@ class menuAdministracion extends SessionCommand{
 			$this->addVar("liquidaciones.crear", "class='open'");
 			$this->addVar("liquidaciones.submenu", "style='display: block;'");
 			$this->addVar("liquidaciones.editarDatosBasicos", "class='active'");
+		}elseif($this->request->doFalso == "admin.changelog"){
+			$this->addVar("administracion", "class='active open'");
+			$this->addVar("admin.changelog", "class='active'");
 		}
 		
 		

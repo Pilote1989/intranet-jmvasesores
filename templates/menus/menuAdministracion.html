@@ -15,6 +15,9 @@
       <li {personas.verPersonas}> <a href="?do=personas.verPersonas"> <i class="icon-double-angle-right"></i> Ver Personas </a> </li>
       <block end="admin"/>
       <li {personas.cambiarClave}><a href="?do=personas.cambiarClave&mail={mail}&seed={seed}&admin=1"> <i class="icon-double-angle-right"></i> Cambiar mi clave</a></li>
+      <block start="admin"/>
+      <li {admin.changelog}><a href="?do=admin.changelog"> <i class="icon-double-angle-right"></i> Registro de Cambios</a></li>
+      <block end="admin"/>
     </ul>
   </li>
   <block start="vendedor"/>
