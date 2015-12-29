@@ -127,6 +127,9 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "reportes.generaSBS"){
 			$this->addVar("contabilidad", "class='active open'");
 			$this->addVar("reportes.generaSBS", "class='active'");
+		}elseif($this->request->doFalso == "contabilidad.estadisticas"){
+			$this->addVar("contabilidad", "class='active open'");
+			$this->addVar("contabilidad.estadisticas", "class='active'");
 		}
 		
 		

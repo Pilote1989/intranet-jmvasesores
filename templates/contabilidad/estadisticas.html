@@ -1,0 +1,110 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawMultSeries);
+
+function drawMultSeries() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Mes');
+    data.addColumn('number', 'Prima Neta');
+    data.addColumn('number', 'Comision');
+
+    data.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.primaDolares}, {data.comisionDolares}],
+      <loop end="data"/>
+    ]);
+
+    var options = {
+        vAxis: {
+          title: 'US$',
+        },
+        'title': 'Primas y Comisiones - Dolares',
+        'legend': 'bottom',
+        height: '400',
+        
+    };
+    
+    var chart = new google.visualization.ColumnChart(
+    document.getElementById('dolares'));
+    chart.draw(data, options);
+    
+    
+    /////    
+    
+    var data2 = new google.visualization.DataTable();
+    data2.addColumn('string', 'Mes');
+    data2.addColumn('number', 'Prima Neta');
+    data2.addColumn('number', 'Comision');
+
+    data2.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.primaSoles}, {data.comisionSoles}],
+      <loop end="data"/>
+    ]);
+
+    var options2 = {
+        vAxis: {
+          title: 'US$',
+        },
+        'title': 'Primas y Comisiones - Soles',
+        'legend': 'bottom',
+        height: '400',
+        
+    };
+    
+    var chart2 = new google.visualization.ColumnChart(
+    document.getElementById('soles'));
+    chart2.draw(data2, options2);
+    
+    
+}
+</script>
+<div class="page-header">
+  <h1> Estadisticas de Produccion </h1>
+</div>	
+<div class="widget-box">
+  <div class="widget-header">
+    <h4>Busqueda</h4>
+    <div class="widget-toolbar">
+      <a href="#" data-action="collapse"> <i class="icon-chevron-up"></i> </a>
+    </div>
+  </div>
+  <div class="widget-body">
+    <div class="widget-main no-padding">
+      <form class="form-horizontal" role="form" id="principal" name="principal">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+          <div class="form-group">
+            <label for="reporte" class="col-sm-3 control-label no-padding-right">Año</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <select class="col-sm-12" name="reporte" id="reporte">
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-actions center">
+          <button id="busca" type="button" class="btn btn-sm btn-success"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+	<div id="dolares" style="width: 100%">
+	</div>
+	<div id="soles" style="width: 100%">
+	</div>
+</div>
+<script>
+$('#reporte').val({anio});
+$(document).ready(function(){
+	$('#busca').click(function(){
+		window.location.href = "?do=contabilidad.estadisticas&anio=" + $('#reporte').val();
+	});
+});
+</script>
