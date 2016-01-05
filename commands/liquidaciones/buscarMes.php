@@ -70,7 +70,23 @@ class buscarMes extends sessionCommand{
 							$totalEuros += $liquidacion->getTotalFactura();					
 						}
 					}else{
-						$lista[$i]["moneda"] = "Sin definir";
+							$lista[$i]["moneda"] = $liquidacion->getMoneda();
+							if($lista[$i]["moneda"] == "Soles"){
+								$comisionSoles += $liquidacion->getSubTotal();
+								$igvSoles += $liquidacion->getIgv();
+								$totalSoles += $liquidacion->getTotalFactura();
+							}elseif($lista[$i]["moneda"] == "Dolares"){
+								$comisionDolares += $liquidacion->getSubTotal();
+								$igvDolares += $liquidacion->getIgv();
+								$totalDolares += $liquidacion->getTotalFactura();
+							}elseif($lista[$i]["moneda"] == "Euros"){
+								$comisionEuros += $liquidacion->getSubTotal();
+								$igvEuros += $liquidacion->getIgv();
+								$totalEuros += $liquidacion->getTotalFactura();					
+							}else{
+								$lista[$i]["moneda"] = "Sin definir";
+							}
+						///falta sumar
 					}
 					$j = 0;
 					foreach($cobros as $cobro){
