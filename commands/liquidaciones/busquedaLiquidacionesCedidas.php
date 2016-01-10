@@ -84,6 +84,7 @@ class busquedaLiquidacionesCedidas extends SessionCommand{
 			$cedidas[$i]["idLista"] = ++$i;
 			$cedidas[$i]["idCedida"] = $cedida["idCedida"];
 			$cedidas[$i]["factura"] = $cedida["factura"];
+			$cedidas[$i]["obs"] = $cedida["observaciones"];
 			$cedidas[$i]["persona"] = $cedida["nombres"] . " " . $cedida["apellidoPaterno"] .  " " . $cedida["apellidoMaterno"];
 			$cedidas[$i]["fechaFactura"] = date("d/m/Y",strtotime($cedida["fechaFactura"]));
 		}
