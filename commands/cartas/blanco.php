@@ -78,11 +78,20 @@ class blanco extends sessionCommand{
 			$this->addVar("numPoliza", $poliza->getNumeroPoliza());
 			$this->addVar("siglas", $compania->getSigla());
 			$cliente = Fabrica::getFromDB("Cliente", $poliza->getIdCliente());
+			$this->addVar("convenio", $cobro->getAvisoDeCobranza());
 			$this->addVar("nombre", $cliente->getNombre());
 			if($cliente->getDireccion() == ""){
 				$this->addVar("direccion", "[direccion]");
 			}else{
 				$this->addVar("direccion", $cliente->getDireccion());
+			}
+			$cupones = Fabrica::getAllFromDB("Cupon", array("idPoliza = " . $poliza->getId()), "fechaVencimiento ASC");
+			$this->addVar("cuotas", count($cupones));
+			if(count($cupones)>0){
+				$pieces = explode("-", $cupones[0]->getFechaVencimiento());
+				$this->addVar("ultimo", $pieces[2] . "/" . $pieces[1] . "/" . $pieces[0]);
+				$this->addVar("primero", $simbolo . " " . number_format($cupones[0]->getMonto(),2));
+				
 			}
 			
 			$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
