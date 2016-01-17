@@ -47,11 +47,11 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group has-info">
+                          <div class="form-group">
                             <label for="fecha" class="col-sm-3 control-label no-padding-right">Fecha</label>
                             <div class="col-sm-9">
                               <div class="clearfix">
-                                <input value="{fechaFactura}" class="col-sm-12 col-xs-12 date-picker valid" name="fecha" type="text" id="fecha" data-date-format="dd/mm/yyyy">
+                                <input value="{fechaFactura}" class="col-sm-12 col-xs-12 date-picker" name="fecha" type="text" id="fecha" data-date-format="dd/mm/yyyy">
                               </div>
                             </div>
                           </div>
@@ -108,15 +108,18 @@
         </fieldset>
         <div class="form-actions center">
           <button class="btn btn-sm btn-success" type="button" id="terminar" style="display: inline-block;"> <i class="icon-arrow-right icon-on-right bigger-110"></i> Guardar </button>
+          <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 <script>
+  $('#loading').hide();
 	$('#principal2').validate({
 		errorElement: 'div',
 		errorClass: 'help-block',
+		onfocusout: false,
 		focusInvalid: false,
 		rules: {
 			factura: {
@@ -124,6 +127,28 @@
 			},
 			fecha: {
 				required: true,
+				remote: {
+					url: "?do=contabilidad.revisarMes",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#terminar').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#terminar').show();
+          },
+					data: {
+						mes: function() {
+						  var d =  $( "#fecha" ).val().split("/");
+							return d["1"];
+						},
+						anio: function() {
+						  var d =  $( "#fecha" ).val().split("/");
+							return d["2"];
+						}
+					}
+				}
 			},
 		},
 
@@ -133,6 +158,7 @@
 			},
 			fecha: {
 				required: "Ingrese la fecha de la factura",
+				remote: "El mes se encuentra cerrado",
 			},
 		},
 
@@ -147,9 +173,8 @@
 		success: function (e) {
 			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
 			$(e).remove();
-			
 		},
-
+		
 		errorPlacement: function (error, element) {
 			if(element.is(':checkbox') || element.is(':radio')) {
 				var controls = element.closest('div[class*="col-"]');
@@ -166,17 +191,22 @@
 		},
 	});
 
-$('.date-picker').mask("99/99/9999");
-$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
-				$(this).prev().focus();
-			});
+$('#fecha').mask("99/99/9999");
+$('#fecha').datepicker({
+  autoclose:true,
+});
 
+$(document).on('change', '#fecha', function() {
+  //$(this).closest('.form-group').removeClass('has-error');
+  //$(this).closest('.help-block').hide();
+  $("#principal2").validate().element("#fecha");
+});
+
+	
+			
 $("#terminar").click(function() {
 	$('select').removeAttr('disabled');	 
-	if($("#principal2").valid()){
-		$("#principal2").submit();
-	}
-
+	$("#principal2").submit();
 });
 
 $('#subTotal').keyup(function(){
@@ -184,4 +214,5 @@ $('#subTotal').keyup(function(){
 	$('#igv').val((temp19 * 0.18).toFixed(2));
 	$('#totalFac').val((temp19 * 1.18).toFixed(2));
 });
+
 </script>

@@ -130,7 +130,11 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "contabilidad.estadisticas"){
 			$this->addVar("contabilidad", "class='active open'");
 			$this->addVar("contabilidad.estadisticas", "class='active'");
+		}elseif($this->request->doFalso == "contabilidad.meses"){
+			$this->addVar("contabilidad", "class='active open'");
+			$this->addVar("contabilidad.meses", "class='active'");
 		}
+		
 		
 		
 		

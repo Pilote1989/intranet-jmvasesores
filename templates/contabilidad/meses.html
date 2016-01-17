@@ -1,0 +1,158 @@
+<style type="text/css">
+	.test {
+		color: black;
+		text-align: center;
+	}
+</style>
+<div class="page-header">
+	<label class="pull-left inline">
+		<button id="bBack" class="btn btn-info btn-sm radius-4 no-border" style="border-radius: 5px !important;">
+			<i id="back" class="icon-check bigger-140  icon-only"></i>
+		</button>
+	</label>
+	<h1 style="margin-left: 50px;">Meses Contables <span id="mesTot"><small><i class="icon-double-angle-right"></i></small> <span id="mesTag"></span></span> </h1>
+</div>
+<div class="col-sm-12">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2" id="mainMes">
+			
+		</div>
+	</div>
+</div>
+
+<div id="load" style="display: none;">
+	<h3 class="center">Cargando Mes...</h3>
+	<div class="progress progress-striped active">
+		<div class="progress-bar progress-bar-success" style="width: 100%;">
+		</div>
+	</div>
+</div>
+<div id="reporte">
+</div>
+
+<div id="dialog-message">
+	<div class="alert alert-info bigger-110" id="mensajeTask">
+	</div>
+	<div class="space-6">
+	</div>
+	<p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+</div>
+
+<script type="text/javascript">
+    $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+        _title: function(title) {
+            if (!this.options.title ) {
+                title.html("&#160;");
+            } else {
+                title.html(this.options.title);
+            }
+        }
+    }));
+	$('#load').hide();
+	var tab = "";
+	var month = "";
+	$('#mesTot').hide();
+	$( "#mainMes" ).on( "click", ".link", function(e) {
+		tab = $(this).parent().parent().attr("id");
+		e.preventDefault();
+		month = $(this).attr('x-link');
+		$.ajax({
+			'url': '?do=contabilidad.buscaMes&id=' + $(this).attr('x-link'),
+			'type': 'POST',
+			'beforeSend': function() {
+				$('#tabs').hide();
+				$('#load').show();
+			},
+			'success': function(server_response) {
+				$('#load').hide();
+				$("#reporte").html(server_response);
+				$("#reporte").show();
+			}
+		});
+	});
+	
+	/*$( "#mainMes" ).on( "click", ".cerrarMes", function(e) {
+		alert("as");
+	});*/
+	loadMain();
+	function loadMain(){
+		$.ajax({
+			'url': '?do=contabilidad.vistaMeses',
+			'type': 'POST',
+			'beforeSend': function() {
+				$('#tabs').hide();
+				$('#load').show();
+				$("#reporte").hide();
+			},
+			'success': function(server_response) {
+				$('#load').hide();
+				$('#tabs').show();
+				$("#mainMes").html(server_response);
+			}
+		});
+	}
+	
+	$("#dialog-message").dialog({
+		resizable: false,
+		modal: true,
+		title_html: true,
+		title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> ¡Atencion!</h4></div>",
+		autoOpen: false,
+		buttons: [{
+			html: "<i class='icon-trash bigger-110'></i>&nbsp; Aceptar",
+			"class": "btn btn-danger btn-xs",
+			click: function() {
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: "?do=contabilidad.toggleMes&id=" + $(this).data('mes'),
+					success: function() {
+						/*$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');*/
+						$.ajax({
+							'url': '?do=contabilidad.buscaMes&id=' + month,
+							'type': 'POST',
+							'beforeSend': function() {
+								$('#reporte').hide();
+								$('#load').show();
+							},
+							'success': function(server_response) {
+								$('#load').hide();
+								$("#reporte").html(server_response);
+								$("#reporte").show();
+							}
+						});						
+					}
+				});
+				$(this).dialog("close");
+			}
+		}, {
+			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			"class": "btn btn-xs",
+			click: function() {
+				$(this).dialog("close");
+				
+			}
+		}]
+	});
+
+	$( "#reporte" ).on( "click", ".cerrarMes", function() {
+    	event.preventDefault();
+    	var tarea = $(this).attr("x-task");
+    	var idToggle= $(this).attr("id");
+    	if(tarea=="Abierto"){
+    		$("#mensajeTask").html("¿Desea cerrar el Mes?");
+    	}else if(tarea=="Cerrado"){
+    		$("#mensajeTask").html("¿Desea abrir el Mes?");
+    	}
+		$( "#dialog-message" ).dialog({
+			autoOpen: false,
+			  /*close : function(){
+				alert("reloadMes");
+				//$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+				//$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+			  }  */	
+		});
+        $( "#dialog-message" ).data('mes', idToggle).dialog("open");
+    });	
+</script>

@@ -215,6 +215,7 @@
           <button class="btn btn-sm btn-success" type="button" id="terminar">
             <i class="icon-arrow-right icon-on-right bigger-110"></i> Guardar
           </button>
+          <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
         </div>
       </form>
     </div>
@@ -233,6 +234,28 @@
 			},
 			fecha: {
 				required: true,
+				remote: {
+					url: "?do=contabilidad.revisarMes",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#terminar').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#terminar').show();
+          },
+					data: {
+						mes: function() {
+						  var d =  $( "#fecha" ).val().split("/");
+							return d["1"];
+						},
+						anio: function() {
+						  var d =  $( "#fecha" ).val().split("/");
+							return d["2"];
+						}
+					}
+				}
 			},
 		},
 
@@ -242,11 +265,13 @@
 			},
 			fecha: {
 				required: "Ingrese la fecha de la factura",
+				remote: "El mes se encuentra cerrado",
 			},
 		},
 
 		invalidHandler: function (event, validator) { //display error alert on form submit   
 			$('.alert-danger', $('.login-form')).show();
+			$('select').attr('disabled','disabled');
 		},
 
 		highlight: function (e) {
@@ -278,6 +303,7 @@
 var seleccionados = [{ids}];
 var seleccionadosTipos = [{tipos}];
 
+$('#loading').hide();
 $("#paso2").hide();
 $("#anterior").hide();
 $("#terminar").hide();
@@ -330,17 +356,21 @@ $("#siguiente").click(function() {
 	}
 });
 
-$('.date-picker').mask("99/99/9999");
-$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
-				$(this).prev().focus();
-			});
+$('#fecha').mask("99/99/9999");
+$('#fecha').datepicker({
+  autoclose:true,
+});
+
+$(document).on('change', '#fecha', function() {
+  //$(this).closest('.form-group').removeClass('has-error');
+  //$(this).closest('.help-block').hide();
+  $("#principal2").validate().element("#fecha");
+});
 
 
 $("#terminar").click(function() {
-	$('select').removeAttr('disabled');	 
-	if($("#principal2").valid()){
-		$("#principal2").submit();
-	}
+	$('select').removeAttr('disabled');
+	$("#principal2").submit();
 });
 $("#busAsegurado").click(function() {
 	$("#asegurado").empty();
