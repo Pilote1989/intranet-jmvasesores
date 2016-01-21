@@ -215,6 +215,9 @@
 					<button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2">
 						Agregar Renovacion <i class="icon-arrow-right icon-on-right bigger-110"></i>
 					</button>
+					<button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;">
+						 <img src="assets/img/loading.gif"/> Validando... 
+					</button>
 				</div>
 			</form>
 		</div>
@@ -239,7 +242,7 @@
 		jQuery("#idPersona").val({idPersona}).change();
     });
 	
-				
+    $('#loading').hide();	
 	jQuery("#idPersona").change(function () {
 		if($("#idPersona").val() != "1"){
 			jQuery("#divComisionVendedor").show('slow');
@@ -334,6 +337,27 @@
 			fechaFin: {
 				required: true,
 			},
+			cobranza: {
+				required: true,
+				remote: {
+					url: "?do=polizas.revisarAvisoDeCobranza",
+					type: "post",
+					beforeSend: function(e){
+						$('#loading').show();
+						$('#enviarPrincipal2').hide();
+					},
+					complete: function(e, valid){
+						$('#loading').hide();
+						$('#enviarPrincipal2').show();
+					},
+					data: {
+						aviso: function() {
+						  var d =  $("#cobranza").val();
+							return d;
+						}
+					}
+				} 
+			}
 		},
 
 		messages: {
@@ -345,6 +369,10 @@
 			},
 			fechaFin: {
 				required: "Escoja la fecha de fin",
+			},
+			cobranza: {
+				required: "Ingrese el Aviso de Cobranza",
+				remote: "El aviso de cobranza ya existe",
 			},
 		},
 

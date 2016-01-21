@@ -300,6 +300,7 @@
         <block end="idPoliza"/>
         <div class="form-actions center">
           <button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2"> {editar} <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
         </div>
       </form>
     </div>
@@ -311,6 +312,7 @@
 		no_results_text: "No se hay ningun registro con esos datos.",
 		width: "100%"
 	}); 
+    $('#loading').hide();
     jQuery(document).ready(function() {
 		jQuery('#pdf').ace_file_input({
 			no_file:'Escoja ...',
@@ -324,18 +326,13 @@
 			//onchange:''
 			//
 		}); 		
-		
-//        jQuery("#nuevo").hide();
-//        jQuery("#antiguo").hide();
-//		jQuery("#new").val({nuevoCliente});
-		//jQuery("#idCliente").val({cliente});
 		if($("#idPersona").val() == "1"){
 			jQuery("#divComisionVendedor").hide();	
 		}
 		
 		jQuery("#idCliente").change(function () {
 			$('#idPersona').val($("#idCliente option:selected").attr('x-asesor')).change();
-		})
+		});
 				
 		jQuery("#idPersona").change(function () {
 			if($("#idPersona").val() != "1"){
@@ -348,7 +345,7 @@
 			var comC = (parseFloat(com)*parseFloat(comCP)/100).toFixed(2);
 			$("#comisionVendedorP").val(comCP);
 			$("#comisionVendedor").val(comC);
-		})
+		});
 		jQuery("#idCompania").val({idCompania});
 		jQuery("#idRamo").val({idRamo});
 		jQuery("#idPersona").val({idPersona});
@@ -463,6 +460,27 @@
 			fechaFin: {
 				required: true,
 			},
+			cobranza: {
+				required: true,
+				remote: {
+					url: "?do=polizas.revisarAvisoDeCobranza",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#enviarPrincipal2').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#enviarPrincipal2').show();
+          },
+					data: {
+						aviso: function() {
+						  var d =  $("#cobranza").val();
+							return d;
+						}
+					}
+				} 
+			}
 		},
 
 		messages: {
@@ -486,6 +504,10 @@
 			},
 			fechaFin: {
 				required: "Escoja la fecha de fin",
+			},
+			cobranza: {
+				required: "Ingrese el Aviso de Cobranza",
+				remote: "El aviso de cobranza ya existe",
 			},
 		},
 

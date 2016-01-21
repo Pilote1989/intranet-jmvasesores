@@ -158,10 +158,12 @@
     <button class="btn btn-sm btn-info" type="button" id="siguiente" name="siguiente"> Facturacion <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
     <button class="btn btn-sm btn-info" type="button" id="anterior" name="anterior"> <i class="icon-arrow-left icon-on-right bigger-110"></i> Anterior </button>
     <button class="btn btn-sm btn-success" type="button" id="enviarEndoso" name="enviarEndoso"> Enviar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+    <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
   </div>
 </form>
 <block end="bloqueEditarEndoso"/>
 <script>
+  $('#loading').hide();
 
 	if($("#idPersona").val() == "1"){
 		jQuery("#divComisionVendedor").hide();	
@@ -183,7 +185,7 @@
 	$('#enviarEndoso').hide();
 	
 	$('#siguiente').click(function() {
-		if($('#documento').valid() && $('#inicioVigencia').valid()){
+		if($('#documento').valid() && $('#inicioVigencia').valid() && $('#cobranza').valid()){
 			$('#contenedor1').hide();
 			$('#contenedor2').show();
 			$('#siguiente').hide();
@@ -218,6 +220,27 @@
 			intereses: {
 				required: true,
 			},
+			cobranza: {
+				required: true,
+				remote: {
+					url: "?do=polizas.revisarAvisoDeCobranza",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#siguiente').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#siguiente').show();
+          },
+					data: {
+						aviso: function() {
+						  var d =  $("#cobranza").val();
+							return d;
+						}
+					}
+				} 
+			}
 		},
 
 		messages: {
@@ -232,6 +255,10 @@
 			},
 			intereses: {
 				required: "Ingrese los intereses",
+			},
+			cobranza: {
+				required: "Ingrese el Aviso de Cobranza",
+				remote: "El aviso de cobranza ya existe",
 			},
 		},
 
