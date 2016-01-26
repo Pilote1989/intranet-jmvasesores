@@ -12,6 +12,13 @@ class revisarAvisoDeCobranza extends sessionCommand{
 			$cobro=Fabrica::getAllFromDB("Cobro",array("avisoDeCobranza LIKE'" . $this->request->aviso . "'"));
 			if(count($cobro)>0){
 				$valid = false;
+				if($this->request->poliza){
+					$poliza=Fabrica::getFromDB("Poliza",$this->request->poliza);
+					$cobroPol=Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
+					if($cobroPol->getAvisoDeCobranza() == $cobro[0]->getAvisoDeCobranza()){
+						$valid = true;
+					}
+				}
 			}else{
 				$valid = true;
 			}		

@@ -12,6 +12,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("editar","Editar Datos Básicos");
 			$this->addBlock("idPoliza");
 			$this->addVar("numeroPoliza",$poliza->getNumeroPoliza());
+			$this->addVar("cobro",$poliza->getIdCobro());
 			$this->addVar("fechaInicio",$poliza->getInicioVigencia("DATE"));
 			$this->addVar("fechaFin",$poliza->getFinVigencia("DATE"));
 			$this->addVar("observaciones",$poliza->getObservaciones());
@@ -83,6 +84,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("companias",$selectCompania);
 			
 			
+			$this->addBlock("revisaAviso");
 					
 			$this->addVar("idPersona",$poliza->getIdPersona());
 			$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
