@@ -166,9 +166,9 @@ class cedidasPendientes extends sessionCommand{
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td colspan="2" align="center">Total Dolares</td>
-				    <td align="center">' . $totalDolares . '</td>
-				    <td align="center">' . $comDolares . '</td>
-				    <td align="center">' . $comVenDolares . '</td>
+				    <td align="center">' . number_format($totalDolares,2) . '</td>
+				    <td align="center">' . number_format($comDolares,2) . '</td>
+				    <td align="center">' . number_format($comVenDolares,2) . '</td>
 					</tr>';
 					$lista[$i]["usd"] = $temp;
 				}
@@ -179,9 +179,9 @@ class cedidasPendientes extends sessionCommand{
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td colspan="2" align="center">Total Soles</td>
-				    <td align="center">' . $totalSoles . '</td>
-				    <td align="center">' . $comSoles . '</td>
-				    <td align="center">' . $comVenSoles . '</td>
+				    <td align="center">' . number_format($totalSoles,2) . '</td>
+				    <td align="center">' . number_format($comSoles,2) . '</td>
+				    <td align="center">' . number_format($comVenSoles,2) . '</td>
 					</tr>';
 					$lista[$i]["sol"] = $temp;
 				}
@@ -192,9 +192,9 @@ class cedidasPendientes extends sessionCommand{
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td colspan="2" align="center">Total Euros</td>
-				    <td align="center">' . $totalEuros . '</td>
-				    <td align="center">' . $comEuros . '</td>
-				    <td align="center">' . $comVenEuros . '</td>
+				    <td align="center">' . number_format($totalEuros,2) . '</td>
+				    <td align="center">' . number_format($comEuros,2) . '</td>
+				    <td align="center">' . number_format($comVenEuros,2) . '</td>
 					</tr>';
 					$lista[$i]["eur"] = $temp;
 				}

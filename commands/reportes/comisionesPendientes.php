@@ -123,10 +123,10 @@ class comisionesPendientes extends sessionCommand{
 					$lista[$i]["cobro"][$j]["com"]=$cobro["comp"];
 					$lista[$i]["cobro"][$j]["inicioVigencia"]=$cobro["inicioVigencia"];
 					$lista[$i]["cobro"][$j]["finVigencia"]=$cobro["finVigencia"];
-					$lista[$i]["cobro"][$j]["totalFactura"]=$cobro["totalFactura"];
-					$lista[$i]["cobro"][$j]["primaNeta"]=$cobro["primaNeta"];
+					$lista[$i]["cobro"][$j]["totalFactura"]=number_format($cobro["totalFactura"],2);
+					$lista[$i]["cobro"][$j]["primaNeta"]=number_format($cobro["primaNeta"],2);
 					$lista[$i]["cobro"][$j]["comisionP"]=$cobro["comisionP"];
-					$lista[$i]["cobro"][$j]["comision"]=$cobro["comision"];
+					$lista[$i]["cobro"][$j]["comision"]=number_format($cobro["comision"],2);
 					$vendedor = Fabrica::getFromDB("Persona",$cobro["vendedor"]);
 					$lista[$i]["cobro"][$j]["vendedor"]=$vendedor->getNombres().' '.$vendedor->getApellidoPaterno().' '.$vendedor->getApellidoMaterno();
 					if($cobro["vendedor"]=="1"){
@@ -134,7 +134,7 @@ class comisionesPendientes extends sessionCommand{
 						$lista[$i]["cobro"][$j]["comisionCedida"]="";
 					}else{
 						$lista[$i]["cobro"][$j]["comisionCedidaP"]=$cobro["comisionCedidaP"]."%";
-						$lista[$i]["cobro"][$j]["comisionCedida"]=$cobro["comisionCedida"];						
+						$lista[$i]["cobro"][$j]["comisionCedida"]=number_format($cobro["comisionCedida"],2);						
 					}
 					if($cobro["moneda"]=="Dolares"){
 						$lista[$i]["cobro"][$j]["moneda"]="USD";
@@ -171,10 +171,10 @@ class comisionesPendientes extends sessionCommand{
 				    <td colspan="5">&nbsp;</td>
 				    <td colspan="2" align="center">Total Dolares</td>
 				    <td>&nbsp;</td>
-				    <td align="center">' . $totalDolares . '</td>
-				    <td align="center">' . $comDolares . '</td>
+				    <td align="center">' . number_format($totalDolares,2) . '</td>
+				    <td align="center">' . number_format($comDolares,2) . '</td>
 				    <td>&nbsp;</td>
-				    <td align="center">' . $comVenDolares . '</td>
+				    <td align="center">' . number_format($comVenDolares,2) . '</td>
 					</tr>';
 					$lista[$i]["usd"] = $temp;
 				}
@@ -184,10 +184,10 @@ class comisionesPendientes extends sessionCommand{
 				    <td colspan="5">&nbsp;</td>
 				    <td colspan="2" align="center">Total Soles</td>
 				    <td>&nbsp;</td>
-				    <td align="center">' . $totalSoles . '</td>
-				    <td align="center">' . $comSoles . '</td>
+				    <td align="center">' . number_format($totalSoles,2) . '</td>
+				    <td align="center">' . number_format($comSoles,2) . '</td>
 				    <td>&nbsp;</td>
-				    <td align="center">' . $comVenSoles . '</td>
+				    <td align="center">' . number_format($comVenSoles,2) . '</td>
 					</tr>';
 					$lista[$i]["sol"] = $temp;
 				}
@@ -197,10 +197,10 @@ class comisionesPendientes extends sessionCommand{
 				    <td colspan="5">&nbsp;</td>
 				    <td colspan="2" align="center">Total Euros</td>
 				    <td>&nbsp;</td>
-				    <td align="center">' . $totalEuros . '</td>
-				    <td align="center">' . $comEuros . '</td>
+				    <td align="center">' . number_format($totalEuros,2) . '</td>
+				    <td align="center">' . number_format($comEuros,2) . '</td>
 				    <td>&nbsp;</td>
-				    <td align="center">' . $comVenEuros . '</td>
+				    <td align="center">' . number_format($comVenEuros,2) . '</td>
 					</tr>';
 					$lista[$i]["eur"] = $temp;
 				}
@@ -215,15 +215,15 @@ class comisionesPendientes extends sessionCommand{
 				$granComVenEuros += $comVenEuros;
 			}
 			
-			$this->addVar("granTotalSoles",$granTotalSoles);
-			$this->addVar("granTotalDolares",$granTotalDolares);
-			$this->addVar("granTotalEuros",$granTotalEuros);
-			$this->addVar("granComSoles",$granComSoles);
-			$this->addVar("granComDolares",$granComDolares);
-			$this->addVar("granComEuros",$granComEuros);
-			$this->addVar("granComVenSoles",$granComVenSoles);
-			$this->addVar("granComVenDolares",$granComVenDolares);
-			$this->addVar("granComVenEuros",$granComVenEuros);
+			$this->addVar("granTotalSoles",number_format($granTotalSoles,2));
+			$this->addVar("granTotalDolares",number_format($granTotalDolares,2));
+			$this->addVar("granTotalEuros",number_format($granTotalEuros,2));
+			$this->addVar("granComSoles",number_format($granComSoles,2));
+			$this->addVar("granComDolares",number_format($granComDolares,2));
+			$this->addVar("granComEuros",number_format($granComEuros,2));
+			$this->addVar("granComVenSoles",number_format($granComVenSoles,2));
+			$this->addVar("granComVenDolares",number_format($granComVenDolares,2));
+			$this->addVar("granComVenEuros",number_format($granComVenEuros,2));
 				
 			$this->addLoop("clientes", $lista);
 		if($this->request->vista=="1"){
