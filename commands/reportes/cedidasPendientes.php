@@ -122,6 +122,7 @@ class cedidasPendientes extends sessionCommand{
 					$lista[$i]["cobro"][$j]["idLista"]=++$j;
 					$lista[$i]["cobro"][$j]["aviso"]=$cobro["aviso"];
 					$lista[$i]["cobro"][$j]["poliza"]=$cobro["poliza"];
+					$lista[$i]["cobro"][$j]["cliente"]=$cobro["cliente"];
 					$lista[$i]["cobro"][$j]["idPoliza"]=$cobro["idPoliza"];
 					$lista[$i]["cobro"][$j]["ramo"]=$cobro["ramo"];
 					$lista[$i]["cobro"][$j]["com"]=$cobro["comp"];
@@ -165,6 +166,7 @@ class cedidasPendientes extends sessionCommand{
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
 				    <td colspan="2" align="center">Total Dolares</td>
 				    <td align="center">' . number_format($totalDolares,2) . '</td>
 				    <td align="center">' . number_format($comDolares,2) . '</td>
@@ -178,6 +180,7 @@ class cedidasPendientes extends sessionCommand{
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
 				    <td colspan="2" align="center">Total Soles</td>
 				    <td align="center">' . number_format($totalSoles,2) . '</td>
 				    <td align="center">' . number_format($comSoles,2) . '</td>
@@ -188,6 +191,7 @@ class cedidasPendientes extends sessionCommand{
 				if($checkEuros){
 					$temp='
 					<tr>
+				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>
 				    <td>&nbsp;</td>

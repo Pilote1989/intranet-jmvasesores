@@ -34,6 +34,7 @@
 			<tr>
 				<!--Asegurado, Aviso de Cobranza, Póliza, Cia, Ramo, Prima, Comisión, Porc%, Comisión Cedida -->
 				<th align="center">Aviso</th>
+				<th align="center">Cliente</th>
 				<th align="center">Poliza</th>
 				<th align="center">Cia</th>
 				<th align="center">Ramo</th>
@@ -46,11 +47,12 @@
 <tbody>
 	<loop start="personas"/>
 	<tr style="border-right: white 2px solid;border-left: white 2px solid;">
-    <td colspan="8"><span><b>{personas.persona}</b></span></td>
+    <td colspan="9"><span><b>{personas.persona}</b></span></td>
 	</tr>
 	    <loop start="personas.cobro"/>
 			<tr class="st">
 				<td align="center">{personas.cobro.aviso}</td>
+				<td align="center">{personas.cobro.cliente}</td>
 				<td align="center">{personas.cobro.poliza}</td>
 				<td align="center">{personas.cobro.com}</td>
 				<td align="center">{personas.cobro.ramo}</td>
@@ -71,6 +73,7 @@
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
+	   <td>&nbsp;</td>
 	   <td colspan="2" align="center">Total Dolares</td>
 	   <td align="center">{granTotalDolares}</td>
 	   <td align="center">{granComDolares}</td>
@@ -80,12 +83,14 @@
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
+	   <td>&nbsp;</td>
 	   <td colspan="2" align="center">Total Soles</td>
 	   <td align="center">{granTotalSoles}</td>
 	   <td align="center">{granComSoles}</td>
 	   <td align="center">{granComVenSoles}</td>
 	</tr>
 	<tr>
+	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
 	   <td>&nbsp;</td>
