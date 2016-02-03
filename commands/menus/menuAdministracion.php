@@ -110,7 +110,19 @@ class menuAdministracion extends SessionCommand{
 			$this->addVar("reportes.comisionesPendientes", "class='active'");
 		}elseif($this->request->doFalso == "liquidaciones.verCedidas"){
 			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.cedidas", "class='active'");
+			$this->addVar("liquidaciones.cedidas", "class='open'");
+			$this->addVar("liquidaciones.cedidasSub", "style='display: block;'");
+			$this->addVar("liquidaciones.verCedidas", "class='active'");
+		}elseif($this->request->doFalso == "reportes.cedidasPendientes"){
+			$this->addVar("liquidaciones", "class='active open'");
+			$this->addVar("liquidaciones.cedidas", "class='open'");
+			$this->addVar("liquidaciones.cedidasSub", "style='display: block;'");
+			$this->addVar("reportes.cedidasPendientes", "class='active'");
+		}elseif($this->request->doFalso == "liquidaciones.editarCedida"){
+			$this->addVar("liquidaciones", "class='active open'");
+			$this->addVar("liquidaciones.cedidas", "class='open'");
+			$this->addVar("liquidaciones.cedidasSub", "style='display: block;'");
+			$this->addVar("liquidaciones.editarCedida", "class='active'");
 		}elseif($this->request->doFalso == "liquidaciones.crearBono"){
 			$this->addVar("liquidaciones", "class='active open'");
 			$this->addVar("liquidaciones.crear", "class='open'");
