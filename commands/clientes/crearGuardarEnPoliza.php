@@ -58,6 +58,7 @@ class crearGuardarEnPoliza extends sessionCommand{
 		}
 		
 		$tipoDoc = array(
+			"SD" => "SD - Sin Documento",
 			"DNI" => "DNI - Documento Nacional de Identidad",
 			"RUC" => "RUC - Registro Unico de Contribuyente",
 			"TEMP" => "TEMP- Temporal",
@@ -65,7 +66,18 @@ class crearGuardarEnPoliza extends sessionCommand{
 		);         
 		$selectDoc = "";
 		foreach($tipoDoc as $id => $dis){
-			$selectDoc .= "<option value='" . $id . "'>" . $dis . "</option>";
+			if($id == "DNI"){
+				if($this->request->nodoc != "1"){
+					$selectDoc .= "<option value='" . $id . "' selected='selected'>" . $dis . "</option>";
+				}else{
+					$selectDoc .= "<option value='" . $id . "'>" . $dis . "</option>";
+				}
+			}else{
+				$selectDoc .= "<option value='" . $id . "'>" . $dis . "</option>";
+			}
+		}
+		if($this->request->nodoc == "1"){
+			$this->addBlock("noDoc");
 		}
 
 		$this->addVar("tipoDoc", $selectDoc);

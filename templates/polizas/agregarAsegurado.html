@@ -54,7 +54,9 @@
   </div>
 </div>
 <div class="form-actions center" style="margin:0px;">
-  <button class="btn btn-sm btn-success" type="button" id="buscarClientes" name="buscarClientes"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>		
+    <button class="btn btn-sm" type="button" id="sinDoc" name="sinDoc"> Sin Documento <i class="icon-plus icon-on-right bigger-110"></i> </button>&nbsp;&nbsp;&nbsp;&nbsp;
+     
+    <button class="btn btn-sm btn-success" type="button" id="buscarClientes" name="buscarClientes"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>		
 </div>
 </div>
 <div id="resultados"></div>
@@ -105,5 +107,18 @@ $('#resultados').on( 'click', 'button.agregaAsegurado', function (e) {
 			}
 		}
 	});
+});
+
+$("#sinDoc").click(function() {
+	$("#buscarAsegurado").hide();
+	$("#resultados").show();
+	$("#resultados").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+	$.ajax({
+		type: "POST",
+		url: '?do=clientes.crearGuardarEnPoliza&idPoliza={idPoliza}&nodoc=1',
+		success: function(data) {
+			$("#resultados").html(data);
+		}
+	});					
 });
 </script>

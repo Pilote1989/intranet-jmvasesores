@@ -11,16 +11,16 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="tipoDoc" class="col-sm-3 control-label no-padding-right">Tipo de Documento </label>
+            <label for="tipoDocu" class="col-sm-3 control-label no-padding-right">Tipo de Documento </label>
             <div class="col-sm-9">
             <div class="clearfix">
-                  <select name="tipoDoc" class="col-sm-12 col-xs-12 form-control" id="tipoDoc" >
+                  <select name="tipoDocu" class="col-sm-12 col-xs-12 form-control" id="tipoDocu" >
                   {tipoDoc}    
                   </select>
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" id="divNumeroDoc">
             <label for="doc" class="col-sm-3 control-label no-padding-right">Documento </label>
             <div class="col-sm-9">
               <div class="clearfix">
@@ -58,7 +58,7 @@
       </form>
     </div>
 <script>
-$("#dialog-general").dialog("option", "position", {my: "center", at: "center", of: window});
+	$("#dialog-general").dialog("option", "position", {my: "center", at: "center", of: window});
  	$('#principal19').validate({
 		onfocusout: false,
 		onkeyup: false,
@@ -76,7 +76,7 @@ $("#dialog-general").dialog("option", "position", {my: "center", at: "center", o
 					type: "post",
 					data: {
 						tipoDoc: function() {
-							return $( "#tipoDoc" ).val();
+							return $( "#tipoDocu" ).val();
 						},
 						id: function() {
 							return $( "#idCliente" ).val();
@@ -127,9 +127,7 @@ $("#dialog-general").dialog("option", "position", {my: "center", at: "center", o
 	});
 
 	$('#enviaPrincipal').click(function() {
-		//alert($("#principal").valid());
 		if($("#principal19").valid()){
-			//$("#principal19").submit();
 			//por ajax
 			$.ajax({
 				type: "POST",
@@ -146,8 +144,19 @@ $("#dialog-general").dialog("option", "position", {my: "center", at: "center", o
 			});	
 		}
 	});
-	$("#tipoDoc").change(function() {
+	
+	<block start="noDoc"/>
+			$("#divNumeroDoc").hide();
+	<block end="noDoc"/>
+	
+	$("#tipoDocu").change(function() {
 		$("#doc").removeData("previousValue");
+		if($("#tipoDocu").val()=="SD"){
+			$("#divNumeroDoc").hide();
+		}else{
+			$("#divNumeroDoc").show();
+		}
+		
 	});
 	
 </script>
