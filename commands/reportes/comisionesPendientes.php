@@ -12,6 +12,7 @@ class comisionesPendientes extends sessionCommand{
 		WHERE rtf.idCobro = c.idCobro
 		AND  rtf.idCliente = cli.idCliente
 		AND c.idLiquidacion IS NULL 
+		AND rtf.anulada = 0 
 		GROUP BY rtf.idCliente
 		ORDER By nombre
 		";
@@ -83,6 +84,7 @@ class comisionesPendientes extends sessionCommand{
 				WHERE rtf.idCobro = c.idCobro
 				AND  rtf.idCliente = cli.idCliente
 				AND  rtf.idRamo = r.idRamo
+				AND rtf.anulada = 0
 				AND  rtf.idCompania = com.idCompania
 				AND c.idLiquidacion IS NULL 
 				AND cli.idCliente = '" . $cliente["idCli"] . "'
