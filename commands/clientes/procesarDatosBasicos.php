@@ -25,6 +25,18 @@ class procesarDatosBasicos extends sessionCommand{
 		$cliente->setDoc($this->request->doc);
 		$cliente->setTipoDoc($this->request->tipoDoc);
 		$cliente->setIdPersona($this->request->asesor);
+		if($this->request->nac!=""){
+			$cliente->setAniversario($this->request->nac,"DATE");	
+		}
+		$cliente->setGerente($this->request->ggeneral);
+		if($this->request->nacGG!=""){
+			$cliente->setFechaGerente($this->request->nacGG,"DATE");	
+		}
+		$cliente->setEncargado($this->request->encargado);
+		if($this->request->nacEncargado!=""){
+			$cliente->setFechaEncargado($this->request->nacEncargado,"DATE");	
+		}
+		
 		$cliente->setFechaDeCreacion(date('Y',time()) . "/" . date('m',time()). "/" . date('d',time()));
 		
 		$cliente->storeIntoDB();

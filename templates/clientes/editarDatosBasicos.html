@@ -52,6 +52,15 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="nac" class="col-sm-3 control-label no-padding-right"> Nacimiento / Aniversario </label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input type="text" name="nac" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="nac" value="{nac}">
+                <span class="input-group-addon"> <i class="icon-calendar"></i> </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="direccion" class="col-sm-3 control-label no-padding-right">Direccion </label>
             <div class="col-sm-9">
               <input name="direccion" type="text"  id="direccion" value="{direccion}" onKeyPress="return disableEnterKey(event)" placeholder="Direccion" class="col-sm-12">
@@ -89,6 +98,42 @@
               </select>
             </div>
           </div>
+          <div id="empresa">
+            <div class="form-group">
+              <label for="ggeneral" class="col-sm-3 control-label no-padding-right">Gerente General</label>
+              <div class="col-sm-9">
+                <input name="ggeneral" type="text"  id="ggeneral" value="{ggeneral}" onKeyPress="return disableEnterKey(event)" class="col-sm-12">
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="nacGG" class="col-sm-3 control-label no-padding-right"> Nacimiento Gerente General </label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <input type="text" name="nacGG" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="nacGG" value="{nacGG}">
+                  <span class="input-group-addon"> <i class="icon-calendar"></i> </span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="encargado" class="col-sm-3 control-label no-padding-right">Encargado de Seguros</label>
+              <div class="col-sm-9">
+                <input name="encargado" type="text"  id="encargado" value="{encargado}" onKeyPress="return disableEnterKey(event)" class="col-sm-12">
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="nacEncargado" class="col-sm-3 control-label no-padding-right"> Nacimiento del Encargado </label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <input type="text" name="nacEncargado" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="nacEncargado" value="{nacEncargado}">
+                  <span class="input-group-addon"> <i class="icon-calendar"></i> </span>
+                </div>
+              </div>
+            </div>   
+          </div>
+          
         </fieldset>
         <input type="hidden" name="idCliente" value="{idCliente}" id="idCliente">
         <div class="form-actions center">
@@ -100,6 +145,13 @@
 </div>
 <block end="bloqueEditarClientes"/>
 <script>
+  <block start="noEmpresa"/>
+  $('#empresa').hide();
+  <block end="noEmpresa"/>
+  jQuery('.date-picker').mask("99/99/9999");
+	jQuery('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
  	$('#principal').validate({
 		onfocusout: false,
 		onkeyup: false,
@@ -175,6 +227,11 @@
 	});
 	$("#tipoDoc").change(function() {
 		$("#doc").removeData("previousValue");
+		if($(this).val()=="RUC"){
+		  $('#empresa').show();
+		}else{
+		  $('#empresa').hide();
+		}
 	});
 	
 </script>

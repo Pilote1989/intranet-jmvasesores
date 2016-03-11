@@ -21,6 +21,11 @@ class editarDatosBasicos extends sessionCommand{
 			$doc = $cliente->getTipoDoc();
 			$distrito = $cliente->getDistrito();
 			$asesorCliente = $cliente->getIdPersona();
+			$this->addVar("nac", $cliente->getAniversario("DATE"));
+			$this->addVar("ggeneral", $cliente->getGerente());
+			$this->addVar("nacGG", $cliente->getFechaGerente("DATE"));
+			$this->addVar("encargado", $cliente->getEncargado());
+			$this->addVar("nacEncargado", $cliente->getFechaEncargado("DATE"));
 		}else{
 			$this->addBlock("creando");
 			$this->addBlock("bloqueEditarClientes");
@@ -31,6 +36,11 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addEmptyVar("direccion");
 			$this->addEmptyVar("correo");
 			$this->addEmptyVar("correo2");
+			$this->addEmptyVar("nac");
+			$this->addEmptyVar("ggeneral");
+			$this->addEmptyVar("nacGG");
+			$this->addEmptyVar("encargado");
+			$this->addEmptyVar("nacEncargado");
 		}
 		$distritos = array(
 			"99" => "Sin Definir",
@@ -95,12 +105,19 @@ class editarDatosBasicos extends sessionCommand{
 			"CEX" => "CEX - Carnet de Extranjeria",
 		);         
 		$selectDoc = "";
+		$empresa = false;
 		foreach($tipoDoc as $id => $dis){
 			if($id == $doc){
 				$selectDoc .= "<option value='" . $id . "' selected='selected'>" . $dis . "</option>";
+				if($id=="RUC"){
+					$empresa=true;
+				}
 			}else{
 				$selectDoc .= "<option value='" . $id . "'>" . $dis . "</option>";
 			}
+		}
+		if(!$empresa){
+			$this->addBlock("noEmpresa");
 		}
 		
 		$asesores = Fabrica::getAllFromDB("Persona",array());

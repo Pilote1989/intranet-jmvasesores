@@ -53,10 +53,8 @@ class verDatosBasicos extends sessionCommand{
 				"35" => "Villa María del Triunfo"
 			);
 			if($this->request->m){
-				if($this->request->m){
-					$this->addBlock("mensaje");	
-					$this->addVar("m", "No se puede eliminar a un cliente que tiene polizas");			
-				}
+				$this->addBlock("mensaje");	
+				$this->addVar("m", "No se puede eliminar a un cliente que tiene polizas");	
 			}
 			$cliente = Fabrica::getFromDB("Cliente",$this->request->idCliente);
 			$this->addVar("idCliente", $this->request->idCliente);
@@ -65,6 +63,15 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("correo", $cliente->getCorreo());
 			$this->addVar("doc", $cliente->getDoc());
 			$this->addVar("tipoDoc", $cliente->getTipoDoc());
+			$this->addVar("aniversario", $cliente->getAniversario('DATE'));
+			if($cliente->getTipoDoc()=="RUC"){
+				$this->addBlock("cia");
+				$this->addVar("ggeneral", $cliente->getGerente());
+				$this->addVar("cumpleGGeneral", $cliente->getFechaGerente('DATE'));
+				$this->addVar("encargado", $cliente->getEncargado());
+				$this->addVar("cumpleEncargado", $cliente->getFechaEncargado('DATE'));
+				
+			}
 			$this->addVar("correo2", $cliente->getCorreoAlternativo());
 			$this->addVar("nombreFicha", "Ficha Cliente");
 			$this->addVar("idPoliza", $this->request->idPoliza);
