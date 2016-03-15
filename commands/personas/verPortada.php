@@ -12,7 +12,7 @@ class verPortada extends sessionCommand{
 		}
 		if($this->checkAccess("crearUsuario", true)){
 			
-			$sMes = [
+			$sMes = array(
 			    1 => "ENE",
 			    2 => "FEB",
 			    3 => "MAR",
@@ -25,8 +25,8 @@ class verPortada extends sessionCommand{
 			    10 => "OCT",
 			    11 => "NOV",
 			    12 => "DIC",
-			];
-			$tMes = [
+			);
+			$tMes = array(
 			    1 => "Enero",
 			    2 => "Febrero",
 			    3 => "Marzo",
@@ -39,7 +39,7 @@ class verPortada extends sessionCommand{
 			    10 => "Octubre",
 			    11 => "Noviembre",
 			    12 => "Diciembre",
-			];			
+			);			
 			$this->addBlock("admin");
 			$porLiquidar = "X";
 			$porVencer = "X";
