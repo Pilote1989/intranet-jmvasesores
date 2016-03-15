@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class verPortada extends sessionCommand{
 	function execute(){
 		$fc=FrontController::instance();
@@ -11,6 +11,35 @@ class verPortada extends sessionCommand{
 			$fc->redirect("?do=home");
 		}
 		if($this->checkAccess("crearUsuario", true)){
+			
+			$sMes = [
+			    1 => "ENE",
+			    2 => "FEB",
+			    3 => "MAR",
+			    4 => "ABR",
+			    5 => "MAY",
+			    6 => "JUN",
+			    7 => "JUL",
+			    8 => "AGO",
+			    9 => "SET",
+			    10 => "OCT",
+			    11 => "NOV",
+			    12 => "DIC",
+			];
+			$tMes = [
+			    1 => "Enero",
+			    2 => "Febrero",
+			    3 => "Marzo",
+			    4 => "Abril",
+			    5 => "Mayo",
+			    6 => "Junio",
+			    7 => "Julio",
+			    8 => "Agosto",
+			    9 => "Setiembre",
+			    10 => "Octubre",
+			    11 => "Noviembre",
+			    12 => "Diciembre",
+			];			
 			$this->addBlock("admin");
 			$porLiquidar = "X";
 			$porVencer = "X";
@@ -58,6 +87,159 @@ class verPortada extends sessionCommand{
 			$this->addVar("porLiquidar", $porLiquidar);
 			$this->addVar("porVencer", $porVencer);
 			$this->addVar("recordatoriosPorEnviar", $recordatoriosPorEnviar);
+			
+			$tempMes = 10;
+			$tempAnio = 2016;
+			
+			$sqlCompania = "
+				SELECT  SQL_CALC_FOUND_ROWS `compania` , TRUNCATE( SUM(  `comision` ) , 2 ) AS valor
+				FROM  `reporteComisiones` 
+				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) ) 
+				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) ) 
+				GROUP BY  `compania` 	
+				ORDER BY SUM(  `comision` ) DESC		
+			";
+			
+			$sqlRamo = "
+				SELECT  SQL_CALC_FOUND_ROWS `ramo` , TRUNCATE( SUM(  `comision` ) , 2 ) AS valor
+				FROM  `reporteComisiones` 
+				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) ) 
+				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) ) 
+				GROUP BY  `ramo`
+				ORDER BY SUM(  `comision` ) DESC
+			";
+			
+			$sqlMes = "
+				SELECT SQL_CALC_FOUND_ROWS 
+					YEAR(  `fechaFactura` ) AS anio, 
+					MONTH(  `fechaFactura` ) AS mes, 
+					TRUNCATE(SUM(  `comision` ) ,2) AS com, 
+					TRUNCATE(SUM( `primaNeta` ) ,2) AS pri
+				FROM  `reporteComisiones` 
+				WHERE  `fechaFactura` >= DATE_FORMAT( CURDATE( ) ,  '%Y-%m-01' ) - INTERVAL 3 MONTH 
+				GROUP BY year(  `fechaFactura` ), MONTH(  `fechaFactura` ) 
+				ORDER BY year(  `fechaFactura` ), MONTH(  `fechaFactura` ) 
+			";
+			
+			
+			$query=utf8_decode($sqlCompania);		
+			$link=&$this->fc->getLink();
+			
+			if($result=$link->query($query)){
+				$countQuery="SELECT FOUND_ROWS() as total";
+			
+				if($countResult=$link->query($countQuery)){
+					$row=$countResult->fetch_assoc();
+					$num_rows=$row['total'];
+				}else{
+					printf("Error: %s\n", $dbLink->error);
+					return null;
+				}
+				
+				$lista=array();
+				$this->fc->import("lib.Paginador");
+				
+				while($row=$result->fetch_assoc()){
+					$lista[]=$row;
+				}
+				
+			}else{
+				printf("Error: %s\n", $link->error);
+				return null;
+			}
+			
+			$i=0;
+			$companias = array();
+			foreach($lista as $item){
+				if($item["valor"]>0){
+					$companias[$i]["sigla"] = $item["compania"];
+					$companias[$i]["valor"] = $item["valor"];
+					$i++;			
+				}
+			}
+			$this->addLoop("companias",$companias);
+			
+			//////////////////////////////////////////
+			$query=utf8_decode($sqlRamo);		
+			$link=&$this->fc->getLink();
+			
+			if($result=$link->query($query)){
+				$countQuery="SELECT FOUND_ROWS() as total";
+			
+				if($countResult=$link->query($countQuery)){
+					$row=$countResult->fetch_assoc();
+					$num_rows=$row['total'];
+				}else{
+					printf("Error: %s\n", $dbLink->error);
+					return null;
+				}
+				
+				$lista=array();
+				$this->fc->import("lib.Paginador");
+				
+				while($row=$result->fetch_assoc()){
+					$lista[]=$row;
+				}
+				
+			}else{
+				printf("Error: %s\n", $link->error);
+				return null;
+			}
+			
+			$i=0;
+			$ramos = array();
+			foreach($lista as $item){
+				if($item["valor"]>0){
+					$ramos[$i]["sigla"] = $item["ramo"];
+					$ramos[$i]["valor"] = $item["valor"];
+					$i++;				
+				}
+			}
+			$this->addLoop("ramos",$ramos);
+			
+			//////////////////////////////////////////
+			$query=utf8_decode($sqlMes);		
+			$link=&$this->fc->getLink();
+			
+			if($result=$link->query($query)){
+				$countQuery="SELECT FOUND_ROWS() as total";
+			
+				if($countResult=$link->query($countQuery)){
+					$row=$countResult->fetch_assoc();
+					$num_rows=$row['total'];
+				}else{
+					printf("Error: %s\n", $dbLink->error);
+					return null;
+				}
+				
+				$lista=array();
+				$this->fc->import("lib.Paginador");
+				while($row=$result->fetch_assoc()){
+					$lista[]=$row;
+				}
+			}else{
+				printf("Error: %s\n", $link->error);
+				return null;
+			}
+			
+			$i=0;
+			//print_r($lista);
+			$tempMes = "";
+			$meses = array();
+			foreach($lista as $item){
+				if($i==0){
+					$this->addVar("mesInicio",$tMes[$item["mes"]]);
+				}
+				$meses[$i]["mes"] = $sMes[$item["mes"]];
+				$tempMes = $item["mes"];
+				$meses[$i]["com"] = $item["com"];
+				$meses[$i]["pri"] = $item["pri"];
+				$i++;
+			}
+			$this->addVar("mesFin",$tMes[$tempMes]);
+			
+			$this->addLoop("meses",$meses);
+			
 			
 		}
 		// Nombre
