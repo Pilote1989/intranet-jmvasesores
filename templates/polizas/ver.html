@@ -24,7 +24,7 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="row">
-      <div class="col-sm-2 center">
+      <div class="col-sm-2 center hidden-xs">
         <span title="{compania}" class=" tool btn btn-app btn-primary no-hover"> <i class="icon-legal bigger-230"></i> <span class="line-height-1 smaller-90"> {sigC} </span> </span>
         <div class="hr hr12 dotted">
         </div>
@@ -37,7 +37,7 @@
       </div>
       <div class="col-sm-10">
         <div class="tabbable">
-          <ul id="myTab" class="nav nav-tabs">
+          <ul id="myTab" class="nav nav-tabs responsive-tabs">
             <li class="{bas}" id="{bas}"> <a href="#tab-1" x-link="/?do=polizas.verDatosBasicos&idPoliza={idPoliza}" data-toggle="tab"> <i class="green icon-home bigger-120"></i> Datos Basicos </a> </li>
             <li class="{mov}" id="{mov}"> <a href="#tab-4" x-link="/?do=polizas.verDatosParticulares&idPoliza={idPoliza}" data-toggle="tab"> <i class="red icon-rss bigger-120"></i> Datos Particulares </a> </li>
             <li> <a href="#tab-5" x-link="/?do=polizas.verEndosos&idPoliza={idPoliza}" data-toggle="tab"> <i class="blue icon-money bigger-120"></i> Endosos <span class="badge badge-info">{endosos}</span> </a> </li>
@@ -87,7 +87,7 @@
 
 $(document).ready(function(){
 	$($('#myTab li#active a').attr('href')).load($('#myTab li#active a').attr('x-link'));
-	$('#myTab li a').click(function(){
+	$('#myTab li a, .accordion-link').click(function(){
 		var currentTab = $(this).attr('href');
 		$(currentTab).load($(this).attr('x-link'));
 	});
@@ -109,5 +109,8 @@ $(document).ready(function(){
 						class_name: 'gritter-error'
 					});
 <block end="ee"/>
+$('.responsive-tabs').responsiveTabs({
+  accordionOn: ['xs'] // xs, sm, md, lg
+});
 
 </script>
