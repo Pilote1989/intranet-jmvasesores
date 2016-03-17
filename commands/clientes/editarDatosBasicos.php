@@ -49,8 +49,11 @@ class editarDatosBasicos extends sessionCommand{
 			"2" => "Ancón",
 			"3" => "Ate",
 			"4" => "Barranco", 
+			"44" => "Bellavista", 
 			"5" => "Breña",
+			"45" => "Callao", 
 			"6" => "Carabayllo",
+			"46" => "Carmen de La Legua-Reynoso", 
 			"7" => "Chaclacayo",
 			"8" => "Chorrillos",
 			"40" => "Cieneguilla",
@@ -59,6 +62,8 @@ class editarDatosBasicos extends sessionCommand{
 			"28" => "Independencia",
 			"11" => "Jesús María",
 			"12" => "La Molina",
+			"47" => "La Perla", 
+			"48" => "La Punta", 
 			"13" => "La Victoria",
 			"14" => "Lince",
 			"39" => "Los Olivos",
@@ -86,6 +91,7 @@ class editarDatosBasicos extends sessionCommand{
 			"38" => "Santa Rosa",
 			"33" => "Santiago de Surco",
 			"34" => "Surquillo",
+			"49" => "Ventanilla",
 			"42" => "Villa El Salvador",
 			"35" => "Villa María del Triunfo"
 		);
