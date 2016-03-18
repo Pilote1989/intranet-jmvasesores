@@ -25,7 +25,7 @@ class verDatosBasicos extends sessionCommand{
 			$comision = $this->subval_sort($comision,'ramo');
 			//print_r($comision);
 			$this->addLoop("comision", $comision);
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->addBlock("bloqueEditarCompanias");
 			$this->processTemplate("companias/verDatosBasicos.html");
 		}

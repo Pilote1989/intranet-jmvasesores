@@ -1,7 +1,8 @@
 <div class="widget-box">
 	<div class="widget-header">
-		<h4>Filtros de Busqueda</h4>
-		<div class="widget-toolbar"> <a data-action="collapse" href="#"> <i class="icon-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="icon-remove"></i> </a> </div>
+		<h4 class="widget-title">Filtros de Busqueda</h4>
+		<div class="widget-toolbar"> 
+		<a data-action="collapse" href="#"> <i class="ace-icon fa fa-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="ace-icon fa fa-remove"></i> </a> </div>
 	</div>
 	<div class="widget-body">
 		<div class="widget-main no-padding">
@@ -28,7 +29,7 @@
 					<div class="form-group">
 						<label for="limite" class="col-sm-3 control-label no-padding-right"> Tipo </label>
 						<div class="col-sm-9">
-							<select id="tipo" name="tipo" onKeyPress="return disableEnterKey(event)">
+							<select class="col-sm-12 col-xs-12"  id="tipo" name="tipo" onKeyPress="return disableEnterKey(event)">
 								<option value="Transporte" selected>Transporte</option>
 							</select>
 						</div>
@@ -36,7 +37,7 @@
 					<div class="form-group">
 						<label for="limite" class="col-sm-3 control-label no-padding-right"> Limite </label>
 						<div class="col-sm-9">
-							<select id="limite" name="limite" onKeyPress="return disableEnterKey(event)">
+							<select class="col-sm-12 col-xs-12" id="limite" name="limite" onKeyPress="return disableEnterKey(event)">
 								<option value="10">10</option>
 								<option value="20">20</option>
 								<option value="30">30</option>
@@ -54,10 +55,10 @@
 				<input name="busqueda" type="hidden" id="busqueda" value="1" />
 				<div class="form-actions center">
 					<button class="btn btn-sm btn-success" type="button" onClick="cargarFormulario('principal','?do=solicitudes.busquedaSolicitudes&pagina=1','divBusquedaSolicitudes');">
-						Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+						Buscar <i class="ace-icon fa fa-arrow-right fa fa-on-right bigger-110"></i>
 					</button>
 					<button class="btn btn-sm btn-danger" type="button" id="limpiar" onClick="window.location='?do=solicitudes.verSolicitudes&limpiar=1'" value="Limpiar Filtros">
-						Limpiar Filtros <i class="icon-trash icon-on-right bigger-110"></i>
+						Limpiar Filtros <i class="ace-icon fa fa-trash fa fa-on-right bigger-110"></i>
 					</button>
 				</div>
 			</form>

@@ -17,7 +17,7 @@ class ver extends sessionCommand{
 			if(count($polizas)=="0"){
 				$this->addBlock("elimina");
 			}
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->addBlock("admin");
 			$this->processTemplate("clientes/ver.html");
 		}

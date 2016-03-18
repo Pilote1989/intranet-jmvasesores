@@ -6,7 +6,7 @@
 				<th align="center">Numero de Cupon</th>
 				<th align="center">Monto</th>
 				<th align="center">Fecha Vencimiento</th>
-				<th colspan="2" align="center">Detalles</th>
+				<th align="center">Detalles</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,8 +16,12 @@
 				<td align="center">{cupones.numeroCupon}</td>
 				<td style="text-align:center;">{cupones.monto} </td>
 				<td style="text-align:center;">{cupones.fechaVencimiento} </td>
-				<td style="text-align:center;"><a id="abrir_{cupones.idLista}" style="cursor:pointer"><img src="../images/icons/Edit.png" /></a></td>
-				<td style="text-align:center;"><a href="?do=polizas.eliminarCupon&idCupon={cupones.idCupon}"><img src="../images/icons/Close.png" /></a></td>
+				<td style="text-align:center;">
+					<div class="action-buttons">
+            			<a id="abrir_{cupones.idLista}" style="cursor:pointer"><i class="ace-icon fa fa-edit bigger-130"></i></a>
+            			<a href="?do=polizas.eliminarCupon&idCupon={cupones.idCupon}"><i class="ace-icon fa fa-trash bigger-130"></i></a>
+					</div>					
+				</td>
 			</tr>
 			<tr style="background-color:#FFF" id="editar_{cupones.idLista}">
 				<td colspan="6"><div style="width:90%">
@@ -32,8 +36,8 @@
 											<div class="form-group">
 												<label for="vencimiento_{cupones.idCupon}" class="col-sm-3 control-label no-padding-right"> Fecha de Vencimiento </label>
 												<div class="col-sm-9">
-													<input name="vencimiento_{cupones.idCupon}" type="text" data-date-format="dd/mm/yyyy" readonly="readonly" class="date-picker col-sm-11" id="vencimiento_{cupones.idCupon}" value="{cupones.fechaVencimiento}">
-													<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div>
+													<input name="vencimiento_{cupones.idCupon}" type="text" data-date-format="dd/mm/yyyy" readonly="readonly" class="col-sm-12 form-control date-picker" id="vencimiento_{cupones.idCupon}" value="{cupones.fechaVencimiento}" onKeyPress="return disableEnterKey(event)">
+												</div>
 											</div>
 											<div class="form-group">
 												<label for="numeroCupon_{cupones.idCupon}" class="col-sm-3 control-label no-padding-right"> Numero de Cupon </label>
@@ -52,7 +56,7 @@
 										</fieldset>
 										<div class="form-actions center">
 											<button class="btn btn-sm btn-success" type="button" onClick="submit();">
-												Agregar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+												Editar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
 											</button>
 										</div>
 									</form>
@@ -71,10 +75,10 @@
 <hr />
 <div class="center">
 	<button class="btn btn-xs btn-primary" id="botonAgregar">
-		<i class="icon-comment bigger-120"></i>Agregar Nuevo Cupon
+		<i class="ace-icon fa fa-comment bigger-120"></i>Agregar Nuevo Cupon
 	</button>
 	<button class="btn btn-xs btn-info" id="botonAgregarVarios">
-		<i class="icon-comments bigger-120"></i>Agregar Varios Cupones
+		<i class="ace-icon fa fa-comments bigger-120"></i>Agregar Varios Cupones
 	</button>
 </div>
 <hr />
@@ -155,7 +159,7 @@
 						<label for="vencimiento" class="col-sm-3 control-label no-padding-right"> Fecha de Vencimiento </label>
 						<div class="col-sm-9">
 							<input type="text" name="vencimiento" data-date-format="dd/mm/yyyy" readonly="readonly" class="date-picker col-sm-11 col-xs-10" id="vencimiento">
-							<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div>
+							<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span> </div>
 					</div>
 					<div class="form-group">
 						<label for="numeroCupon" class="col-sm-3 control-label no-padding-right"> Numero de Cupon </label>
@@ -173,7 +177,7 @@
 				</fieldset>
 				<div class="form-actions center">
 					<button class="btn btn-sm btn-success" type="button" onClick="submit();">
-						Agregar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+						Agregar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
 					</button>
 				</div>
 			</form>
@@ -198,7 +202,7 @@
 						<label for="primerVencimiento" class="col-sm-3 control-label no-padding-right"> Primer Vencimiento </label>
 						<div class="col-sm-9">
 							<input type="text" name="primerVencimiento" data-date-format="dd/mm/yyyy" readonly="readonly" class="date-picker col-sm-11 col-xs-10" id="primerVencimiento">
-							<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div>
+							<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span> </div>
 					</div>
 					<div class="form-group">
 						<label for="montoC" class="col-sm-3 control-label no-padding-right"> Monto </label>
@@ -215,7 +219,7 @@
 					<input name="idPoliza" type="hidden" id="idPoliza" value="{idPoliza}">
 					<div class="center">
 						<button id="agregarCupones" type="button" class="btn btn-xs btn-info">
-							<i class="icon-comment icon-on-right bigger-110"></i> Agregar Cupones
+							<i class="ace-icon fa fa-comment fa-on-right bigger-110"></i> Agregar Cupones
 						</button>
 					</div>
 				</fieldset>
@@ -236,7 +240,7 @@
 					<br />
 				<div class="form-actions center">
 					<button class="btn btn-sm btn-success" type="button" onClick="submit();">
-						Enviar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+						Enviar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
 					</button>
 				</div>
 			</form>

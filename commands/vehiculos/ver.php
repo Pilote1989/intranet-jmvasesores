@@ -86,7 +86,7 @@ class ver extends sessionCommand{
 			$this->addLoop("polizas",$polizas);			
 
 			
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("vehiculos/ver.html");
 		}
 	}

@@ -1,9 +1,9 @@
 <div class="page-header">
-  <h1> Recordatorios <small> <i class="icon-double-angle-right"></i> Sistema de Cupones </small> </h1>
+  <h1> Recordatorios <small> <i class="ace-icon fa fa-angle-double-right"></i> Sistema de Cupones </small> </h1>
 </div>
 <div class="widget-box">
   <div class="widget-header">
-    <h4>Filtros de Busqueda</h4>
+    <h4 class="widget-title">Filtros de Busqueda</h4>
   </div>
   <div class="widget-body">
     <div class="widget-main no-padding">
@@ -15,7 +15,7 @@
             <div class="col-sm-9">
               <input class="form-control" type="text" name="rango" id="rango" value="{rango}"/>
               <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
+                <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-remove"></i> </button>
                 <strong>¡Atencion!</strong> Solo se muestra los cupones con un maximo de 14 dias de antiguedad. <br>
               </div>
             </div>
@@ -50,8 +50,8 @@
         </fieldset>
         <input name="busqueda" type="hidden" id="busqueda" value="1" />
         <div class="form-actions center">
-          <button class="btn btn-sm btn-success" type="button" onClick="cargarFormulario('principal','?do=admin.busquedaCupones&pagina=1','divBusquedaRecordatorios');"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
-          <button class="btn btn-sm btn-danger" type="button" id="limpiar" onClick="window.location='?do=admin.recordatorios&limpiar=1'" value="Limpiar Filtros"> Limpiar Filtros <i class="icon-trash icon-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-success" type="button" onClick="cargarFormulario('principal','?do=admin.busquedaCupones&pagina=1','divBusquedaRecordatorios');"> Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-danger" type="button" id="limpiar" onClick="window.location='?do=admin.recordatorios&limpiar=1'" value="Limpiar Filtros"> Limpiar Filtros <i class="ace-icon fa fa-trash fa-on-right bigger-110"></i> </button>
         </div>
       </form>
     </div>

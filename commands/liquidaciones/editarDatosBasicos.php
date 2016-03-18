@@ -39,7 +39,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("companiaNombre",$compania->getNombre());
 			
 
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("liquidaciones/editarDatosBasicos.html");
 
 		}else{
@@ -51,7 +51,7 @@ class editarDatosBasicos extends sessionCommand{
 				$selectCompania=$selectCompania.'\n<option value="'.$compania->getId().'" >'.$compania->getNombre().'</option>';
 			}
 			$this->addVar("companias",$selectCompania);
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("liquidaciones/crear.html");
 		}
 		

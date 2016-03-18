@@ -73,7 +73,7 @@ class crearPoliza extends sessionCommand{
 			$this->addVar("personas",$selectPersona);
 			
 			
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("polizas/crearPoliza.html");
 	}
 }

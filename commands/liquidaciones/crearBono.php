@@ -56,7 +56,7 @@ class crearBono extends sessionCommand{
 		}
 
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("liquidaciones/crearBono.html");
 	}
 }

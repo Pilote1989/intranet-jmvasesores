@@ -21,7 +21,7 @@ class generar extends sessionCommand{
 		}
 		$this->addVar("companias",$selectCompania);
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		
 		$this->processTemplate("reportes/generar.html");
 	}

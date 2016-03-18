@@ -48,7 +48,7 @@ class meses extends sessionCommand{
 		//print_r($lista);
 		$this->addLoop("meses", $lista);*/
     	
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("contabilidad/meses.html");
 	}
 }

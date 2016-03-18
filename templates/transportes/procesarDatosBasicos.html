@@ -1,6 +1,12 @@
 <div class="page-header">
-	<h1> Solicitud <small> <i class="icon-double-angle-right"> Declaracion de Transportes</i> </small> </h1>
+	<h1> Solicitud <small> <i class="ace-icon fa fa-angle-double-right"></i> Declaracion de Transportes</small> </h1>
 </div>
+<style type="text/css">
+.profile-info-name{
+	width: 250px;
+	
+}
+</style>
 <div class="row">
 	<form action="" method="post" name="principal" id="principal">
 		<div class="col-xs-12">
@@ -133,11 +139,11 @@
 				<div class="clearfix form-actions">
 					<div class="center">
 						<button id="corregir" name="corregir" type="button" class="btn btn-info" onClick="document.forms.principal.action='?do=transportes.editarDatosBasicos';submit();">
-							<i class="icon-ok bigger-110"></i> Corregir Errores
+							<i class="ace-icon fa fa-ace fa fa-check bigger-110"></i> Corregir Errores
 						</button>
 						&nbsp; &nbsp; &nbsp;
 						<button id="enviar" name="enviar" type="button" class="btn" onClick="document.forms.principal.action='?do=transportes.procesarDatosBasicos';submit();">
-							<i class="icon-undo bigger-110"></i> Enviar
+							<i class="ace-icon fa fa-ace fa fa-undo bigger-110"></i> Enviar
 						</button>
 					</div>
 				</div>

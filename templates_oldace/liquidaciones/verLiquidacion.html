@@ -1,0 +1,198 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="widget-box transparent invoice-box">
+      <div class="widget-header widget-header-large">
+        <h3 class="grey lighter pull-left position-relative"> <i class="icon-leaf green"></i>Factura JMV Asesores</h3>
+        <div class="widget-toolbar no-border invoice-info">
+          <span class="invoice-info-label">Factura:</span> <span class="red">#{numeroFactura}</span> <br />
+          <span class="invoice-info-label">Fecha:</span> <span class="blue">{fechaFactura}</span>
+        </div>
+        <div class="widget-toolbar hidden-480">
+          <a href="?do=liquidaciones.editarDatosBasicos&idLiquidacion={idLiquidacion}"> <i class="icon-edit"></i> </a>
+        </div>
+      </div>
+      <div class="widget-body">
+        <div class="widget-main padding-24">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-xs-12 label label-lg label-info arrowed-in arrowed-right">
+                  <b>Compañia : {cia}</b>
+                </div>
+              </div>
+            </div>
+            <!-- /span --><!-- /span -->
+            
+          </div>
+          <!-- row -->
+          
+          <block start="vacio"/>
+          <div class="space">
+          </div>
+          <div class="row">
+            <div class="alert alert-block alert-warning">
+              <p> <strong> <i class="icon-ok"></i> ¡Atencion! </strong> Esta liquidacion no está liquidando ninguna comision, ¿Desea eliminarla? </p>
+              <p>
+                <button class="btn btn-sm btn-warning" id="eliminaComision">Eliminar</button>
+              </p>
+            </div>
+          </div>
+          <block end="vacio"/>
+          <div class="space">
+          </div>
+          <div>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th class="center"></th>
+                  <th class="center">#</th>
+                  <th>Tipo</th>
+                  <th>Cliente</th>
+                  <th>Aviso</th>
+                  <th>Poliza</th>
+                  <th>Prima Neta</th>
+                  <th>Comision (%)</th>
+                  <th>Comision</th>
+                </tr>
+              </thead>
+              <tbody>
+                <loop start="cobros"/>
+                <tr>
+                  <td class="center"><div class="btn-group">
+                      <button id="eliminar" x-id="{cobros.id}" data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-light"> <span class="icon-caret-down icon-only"></span> </button>
+                      <ul class="dropdown-menu">
+                        <li> <a href="?do=polizas.ver&idPoliza={cobros.poliza}&vig={cobros.poliza}"><i class="icon-zoom-in bigger-110 blue"></i> Ver Poliza </a></li>
+                        <li> <a href="#" x-id="{cobros.id}" class="confirma"><i class="icon-remove bigger-110 red"></i> Eliminar </a></li>
+                      </ul>
+                    </div></td>
+                  <td class="center">{cobros.id}</td>
+                  <td class="center">{cobros.tipo}</td>
+                  <td class="center">{cobros.cliente}</td>
+                  <td class="center">{cobros.avisoDeCobranza}</td>
+                  <td class="center">{cobros.numPoliza}</td>
+                  <td class="center">{cobros.primaNeta}</td>
+                  <td class="center">{cobros.comisionP}</td>
+                  <td class="center">{cobros.comision}</td>
+                </tr>
+                <loop end="cobros"/>
+              </tbody>
+            </table>
+          </div>
+          <div class="hr hr8 hr-double hr-dotted">
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <h5>Observaciones :</h5>
+              <br />
+              {observaciones}
+            </div>
+            <div class="col-sm-5">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5>Sub Total:</h5>
+                </div>
+                <div class="col-sm-6">
+                  <h5><span class="red pull-right">{subtotal}</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5>IGV:</h5>
+                </div>
+                <div class="col-sm-6">
+                  <h5><span class="red pull-right">{igv}</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5>Total:</h5>
+                </div>
+                <div class="col-sm-6">
+                  <h5><span class="red pull-right">{totalFactura}</span></h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div id="dialog-message">
+    <div class="alert alert-info bigger-110">
+      Se eliminará la liquidacion permanentemente.
+    </div>
+    <div class="space-6">
+    </div>
+    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  </div>
+<script>
+
+$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+	_title: function(title) {
+		if (!this.options.title ) {
+			title.html("&#160;");
+		} else {
+			title.html(this.options.title);
+		}
+	}
+}));
+
+$(".confirma").on("click", function(e) {
+	e.preventDefault();
+	var temp = $(this).attr("x-id");
+	bootbox.confirm("¿Esta seguro que desea eliminar esta comision?", function(result) {
+		if(result) {
+			window.location.replace("/?do=liquidaciones.eliminar&idCobro=" + temp);
+		}
+	});
+});
+
+$( "#dialog-message" ).dialog({
+	resizable: false,
+	modal: true,
+	title_html: true,
+	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+	autoOpen: false,
+	buttons: [
+		{
+			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			"class" : "btn btn-danger btn-xs",
+			click: function() {
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: '?do=liquidaciones.eliminarLiquidacion&idLiquidacion={idLiquidacion}',
+					success: function() {
+						window.location.href = "?do=liquidaciones.verLiquidaciones";
+					}
+				});
+				$( this ).dialog( "close" );
+			}
+		}
+		,
+		{
+			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			"class" : "btn btn-xs",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]			
+});	
+
+$( "#eliminaComision" ).on('click', function(e) {
+	event.preventDefault();
+	$( "#dialog-message" ).dialog({
+		autoOpen: false,
+		  close : function(){
+			$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+			$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza=446');
+		  }  	
+	});
+	$( "#dialog-message" ).data('link', $(this).attr("x-link")).dialog("open");
+});
+</script> 

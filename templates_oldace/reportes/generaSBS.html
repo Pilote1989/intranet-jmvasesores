@@ -1,0 +1,72 @@
+<div class="widget-box">
+  <div class="widget-header">
+    <h4>Filtros de Reporte</h4>
+    <div class="widget-toolbar"> <a data-action="collapse" href="#"> <i class="icon-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="icon-remove"></i> </a> </div>
+  </div>
+  <div class="widget-body">
+    <div class="widget-main no-padding">
+      <form class="form-horizontal" role="form" id="principal" name="principal" action="?do=reportes.genera" method="post">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="inicioVigencia">Fecha de Factura</label>
+            <div class="col-sm-9">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-calendar bigger-110"></i>
+								</span>
+								<input class="form-control date-pick" type="text" name="periodo" id="periodo" />
+							</div>
+						</div>            
+          </div>
+        </fieldset>
+        <input name="busqueda" type="hidden" id="busqueda" value="1" />
+        <div class="form-actions center">
+          <button class="btn btn-sm btn-success" id="enviarFormulario" type="button" onClick="enviaForm()"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="alert alert-danger" id="alerta">
+  <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
+  <strong> <i class="icon-remove"></i> ¡Atencion! </strong> Debe seleccionar al menos un filtro. <br>
+</div>
+<div id="load">
+<h3 class="center">Cargando Reporte...</h3>
+<div class="progress progress-striped active" >
+  <div class="progress-bar progress-bar-success" style="width: 100%;">
+  </div>
+</div></div>
+<div id="reporte">
+</div>
+<script>
+$('input.date-pick').daterangepicker({format: 'DD/MM/YYYY'}).prev().on(ace.click_event, function(){
+	$(this).next().focus();
+});
+$('#load').hide();
+$('#alerta').hide();
+function enviaForm(){
+	if($('#periodo').val()!=""){
+	  $("#reporte").hide();
+		$('#load').show();
+		$('#alerta').hide();
+		//alert($('#inicioVigencia').val() + " - " +  $('#finVigencia').val());
+		/*$( "#reporte" ).load( "?do=reportes.generaPantalla&vista=1&ase=" + $('#idAsegurado').val() + "&com=" +  $('#idCompania').val() + "&ram=" +  $('#idRamo').val() + "&i=" +  $('#inicioVigencia').data('date') + "&f=" +  $('#finVigencia').data('date'), function(){
+			$('#load').hide();
+		});*/
+    $.ajax({
+        'url': '?do=reportes.sbs&vista=1',
+        'type': 'POST',
+        'data': $('#principal').serialize(),
+        'success': function(server_response){
+          $("#reporte").html(server_response);
+          $("#reporte").show();
+          $('#load').hide();
+        }
+    });
+	}else{
+		$('#alerta').show();
+	}
+}
+</script>

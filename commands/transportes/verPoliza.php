@@ -62,11 +62,11 @@ class verPoliza extends sessionCommand{
 			}
 		}
 		if(!$this->request->html){
-			$this->addLayout("admin");
+			$this->addLayout("ace");
+			$this->processTemplate("transportes/verPoliza.html");
 		}else{
-			$this->addBlock("html");
+			$this->processTemplate("transportes/verPolizaHTML.html");
 		}
-		$this->processTemplate("transportes/verPoliza.html");
 	}
 }
 ?>

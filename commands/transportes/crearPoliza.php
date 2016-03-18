@@ -31,7 +31,7 @@ class crearPoliza extends sessionCommand{
 		$this->addEmptyVar("sobreseguro");
 		$this->addEmptyVar("observaciones");
 		$this->addVar("nombre", $usuario->getNombres()." ".$usuario->getApellidoPaterno());
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("transportes/crearPoliza.html");
 	}
 }

@@ -1,0 +1,329 @@
+<div class="page-header">
+  <h1> Crear Nueva Poliza </h1>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="principal2" id="principal2" action="?do=polizas.procesarDatosBasicos" role="form">
+      <fieldset>
+        <div id="pasoClienteDiv">
+          <h4 class="header blue smaller" style="margin-top:0px"> <i class="icon-group"></i> Paso 1 - Cliente </h4>
+          <div class="form-group">
+            <label for="idCliente" class="col-sm-3 control-label no-padding-right">Cliente </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <!--<input class="col-sm-12 col-xs-12" name="busClientes" type="text"  id="busClientes" placeholder="Ingrese al menos 3 letras.">-->
+                <select name="idCliente" size="1" class="col-sm-12 col-xs-12  form-control" id="idCliente" data-placeholder="Escoja un Cliente...">
+                  {clientes}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="idPersona" class="col-sm-3 control-label no-padding-right">Vendedor </label>
+            <div class="col-sm-9">
+               <select class="col-sm-12 col-xs-12 form-control" name="idPersona" id="idPersona" >
+				              {personas}
+              </select>
+            </div>
+          </div>
+		<div id="divPreComisionVendedor">
+        <div class="form-group">
+            <label for="comiPre" class="col-sm-3 control-label no-padding-right">Comision Vendedor (%)</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input class="col-sm-12 col-xs-12" name="comiPre" type="text"  id="comiPre" placeholder="Comision del Vendedor">
+              </div>
+            </div>
+          </div>          
+        </div>
+        </div>
+        <div id="pasoPolizaDiv">
+          <h4 class="header blue smaller" style="margin-top:0px"> <i class="icon-folder-open "></i> Paso 2 - Poliza </h4>
+          <div class="form-group">
+            <label for="numeroPoliza" class="col-sm-3 control-label no-padding-right">Numero de Poliza</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input class="col-sm-12 col-xs-12" name="numeroPoliza" type="text"  id="numeroPoliza" value="{numeroPoliza}"  placeholder="Numero de Poliza">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="pasoFacturacionDiv">
+          <h4 class="header blue smaller" style="margin-top:0px"> <i class="icon-money"></i> Paso 3 - Facturacion </h4>
+        </div>
+      </fieldset>
+      <block start="idPoliza"/>
+      <input type="hidden" name="idPoliza" value="{idPoliza}">
+      <block end="idPoliza"/>
+      <div class="form-actions center">
+        <button class="btn btn-sm btn-info" type="button" id="pasoCliente"> Cliente <i class="bigger-110"></i> </button>
+        <button class="btn btn-sm" type="button" id="pasoRetroCliente"> <i class="icon-arrow-left bigger-110"></i> Cliente </button>
+        <button class="btn btn-sm btn-info" type="button" id="pasoPoliza"> Poliza <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+        <button class="btn btn-sm" type="button" id="pasoRetroPoliza"> <i class="icon-arrow-left bigger-110"></i> Poliza </button>
+        <button class="btn btn-sm btn-info" type="button" id="pasoFacturacion"> Facturacion <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+        <button class="btn btn-sm btn-success" type="button" id="pasoTerminar"> Terminar <i class="icon-ok bigger-110"></i> </button>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+		$("#pasoCliente").hide();
+		$("#pasoFacturacion").hide();
+		$("#pasoTerminar").hide();
+		$("#pasoRetroCliente").hide();
+		$("#pasoRetroPoliza").hide();
+		$("#pasoClienteDiv").show();
+		$("#pasoPolizaDiv").hide();
+		$("#pasoFacturacionDiv").hide();
+		
+		$('#pasoPolizaDiv input').addClass('ig');
+		$('#pasoPolizaDiv select').addClass('ig');
+		$('#pasoFacturacionDiv input').addClass('ig');;
+		$('#pasoFacturacionDiv select').addClass('ig');
+
+		 
+		$("#pasoPoliza").click(function() {
+			if($("#principal2").valid({ignore:".ig"})){
+				$("#pasoPoliza").hide();
+				$("#pasoRetroCliente").show();
+				$("#pasoFacturacion").show();
+				$("#pasoClienteDiv").hide();
+				$("#pasoPolizaDiv").show();
+				$("#pasoFacturacionDiv").hide();
+			}
+		})
+		$("#pasoFacturacion").click(function() {
+			$("#pasoFacturacion").hide();
+			$("#pasoRetroCliente").hide();
+			$("#pasoRetroPoliza").show();
+			$("#pasoTerminar").show();
+			$("#pasoClienteDiv").hide();
+			$("#pasoPolizaDiv").hide();
+			$("#pasoFacturacionDiv").show();
+		})
+		$("#pasoRetroPoliza").click(function() {
+			$("#pasoRetroPoliza").hide();
+			$("#pasoTerminar").hide();
+			$("#pasoRetroCliente").show();
+			$("#pasoFacturacion").show();
+			$("#pasoClienteDiv").hide();
+			$("#pasoPolizaDiv").show();
+			$("#pasoFacturacionDiv").hide();
+		})
+		$("#pasoRetroCliente").click(function() {
+			$("#pasoCliente").hide();
+			$("#pasoFacturacion").hide();
+			$("#pasoRetroCliente").hide();
+			$("#pasoPoliza").show();
+			$("#pasoClienteDiv").show();
+			$("#pasoPolizaDiv").hide();
+			$("#pasoFacturacionDiv").hide();
+		})
+		/*
+		$(function() {
+        	$('#idCliente').filterByText($('#busClientes'), true);
+		});*/  
+				
+		jQuery("#idCliente").change(function () {
+			$('#idPersona').val($("#idCliente option:selected").attr('x-asesor')).change();
+		})
+			
+		jQuery("#idPersona").change(function () {
+			$('#comiPre').val($("#idPersona option:selected").attr('x-comision')).change();
+			if($("#idPersona").val() != "1"){
+				jQuery("#divComisionVendedor").show('slow');
+				jQuery("#divPreComisionVendedor").show('slow');
+			}else{
+				jQuery("#divPreComisionVendedor").hide('slow');
+				jQuery("#divComisionVendedor").hide('slow');
+			}
+		})
+		
+		if($("#idPersona").val() == "1"){
+				jQuery("#divPreComisionVendedor").hide('slow');
+			jQuery("#divComisionVendedor").hide();	
+		}		
+		
+		jQuery('#pdf').ace_file_input({
+			no_file:'Escoja ...',
+			btn_choose:'Subir',
+			btn_change:'Cambiar',
+			droppable:false,
+			onchange:null,
+			thumbnail:false, //| true | large
+			whitelist:'pdf',
+			blacklist:'exe|php',
+			//onchange:''
+			//
+		}); 		
+
+		jQuery("#idCompania").val({idCompania});
+		jQuery("#idRamo").val({idRamo});
+		jQuery("#idPersona").val({idPersona});
+		jQuery("#moneda").val("{moneda}");
+//		if(jQuery('#new').val() == 1){
+//			jQuery("#antiguo").hide("slow");
+//			jQuery("#nuevo").show("slow");	
+//		}else if(jQuery('#new').val() == 0){
+//			jQuery("#nuevo").hide("slow");
+//			jQuery("#antiguo").show("slow");	
+//		}
+    });
+	jQuery('.date-picker').mask("99/99/9999");
+	jQuery('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+	jQuery("#new").change(function () {
+		if(jQuery('#new').val() == 1){
+			jQuery("#antiguo").hide("slow");
+			jQuery("#nuevo").show("slow");	
+		}else if(jQuery('#new').val() == 0){
+			jQuery("#nuevo").hide("slow");
+			jQuery("#antiguo").show("slow");	
+		}
+	});
+	jQuery("#prima").keyup(function () {
+		jQuery("#derecho").val((parseFloat(jQuery("#prima").val())*0.03).toFixed(2));
+		jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val())*1.03).toFixed(2));		
+		var pri = jQuery("#prima").val();
+		var derecho = jQuery("#derecho").val();
+		var intereses = jQuery("#intereses").val();
+		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
+		var total = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*1.18).toFixed(2);
+		jQuery("#igv").val(igv);
+		jQuery("#total").val(total);	
+		var prim = jQuery("#prima").val();
+		var por = jQuery("#comisionP").val();
+		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
+		if(isNaN(com)){
+			jQuery("#comision").val(0.00);	
+		}else{
+			jQuery("#comision").val(com);
+		}
+	});
+	
+	jQuery("#derecho").keyup(function () {		
+		var pri = jQuery("#prima").val();
+		var derecho = jQuery("#derecho").val();
+		var intereses = jQuery("#intereses").val();
+		jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val()) + parseFloat(jQuery("#derecho").val())).toFixed(2));		
+		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
+		var total = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*1.18).toFixed(2);
+		jQuery("#igv").val(igv);
+		jQuery("#total").val(total);
+		var prim = jQuery("#prima").val();
+		var por = jQuery("#comisionP").val();
+		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
+		if(isNaN(com)){
+			jQuery("#comision").val(0.00);	
+		}else{
+			jQuery("#comision").val(com);
+		}	
+				
+	});
+	
+	jQuery("#intereses").keyup(function () {	
+		var pri = jQuery("#prima").val();
+		var derecho = jQuery("#derecho").val();
+		var intereses = jQuery("#intereses").val();
+		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
+		var total = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*1.18).toFixed(2);
+		jQuery("#igv").val(igv);
+		jQuery("#total").val(total);		
+	});
+	
+	jQuery("#comisionP").keyup(function () {	
+		var prim = jQuery("#prima").val();
+		var por = jQuery("#comisionP").val();
+		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
+		jQuery("#comision").val(com);		
+	});
+	
+	$('#principal2').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			idCliente: {
+				required: true,
+			},
+			numeroPoliza: {
+				required: true,
+			},
+			idCompania: {
+				required: true,
+			},
+			idRamo: {
+				required: true,
+			},
+			moneda: {
+				required: true,
+			},
+			fechaInicio: {
+				required: true,
+			},
+			fechaFin: {
+				required: true,
+			},
+		},
+
+		messages: {
+			idCliente: {
+				required: "Seleccione el Cliente",
+			},
+			numeroPoliza: {
+				required: "Ingrese el Numero de Poliza",
+			},
+			idCompania: {
+				required: "Seleccione la Compania",
+			},
+			idRamo: {
+				required: "Seleccione el Ramo",
+			},
+			moneda: {
+				required: "Seleccione la Moneda",
+			},
+			fechaInicio: {
+				required: "Escoja la fecha de inicio",
+			},
+			fechaFin: {
+				required: "Escoja la fecha de fin",
+			},
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	$('#enviarPrincipal2').click(function() {
+		if($("#principal2").valid()){
+			$("#principal2").submit();
+		}
+	})
+    </script> 

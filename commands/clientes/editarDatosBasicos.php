@@ -140,7 +140,7 @@ class editarDatosBasicos extends sessionCommand{
 		$this->addVar("tipoDoc", $selectDoc);
 		$this->addVar("distritos", $selectDistritos);
 		$this->addVar("asesores", $selectAsesores);
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 
 		$this->processTemplate("clientes/editarDatosBasicos.html");
 	}

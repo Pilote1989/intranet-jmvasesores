@@ -39,7 +39,7 @@ class cambiarClave extends sessionCommand{
 				$this->addVar("errorUsuario", "Intente Nuevamente");
 			}
 			$this->addBlock("admin");
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("personas/cambiarClave.html");
 		}else{
 			$fc->redirect("?do=login");

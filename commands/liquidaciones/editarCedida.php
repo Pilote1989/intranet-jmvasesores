@@ -33,7 +33,7 @@ class editarCedida extends sessionCommand{
 			
 			$this->addVar("persona",$cedida->getIdPersona());
 			$this->addVar("personaNombre",$persona->getNombres() . " " . $persona->getApellidoPaterno() . " " . $persona->getApellidoMaterno());
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("liquidaciones/editarCedida.html");
 
 		}else{
@@ -50,7 +50,7 @@ class editarCedida extends sessionCommand{
 			}
 			$this->addVar("vendedores",$selectPersona);
 
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("liquidaciones/crearCedida.html");
 		}
 		

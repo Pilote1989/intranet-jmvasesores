@@ -134,7 +134,7 @@
           </div>
           <block start="bloqueado"/>
           <div class="alert alert-block alert-warning">
-            <i class="icon-ok warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision que ya ha sido liquidada.
+            <i class="ace-icon fa fa-check warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision que ya ha sido liquidada.
           </div>
           <block end="bloqueado"/>
           <div class="form-group">
@@ -205,7 +205,7 @@
 
           <block start="bloqueadoVendedor"/>
           <div class="alert alert-block alert-warning">
-            <i class="icon-ok warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision cedida que ya ha sido pagada.
+            <i class="ace-icon fa fa-check warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision cedida que ya ha sido pagada.
           </div>
           <block end="bloqueadoVendedor"/>          
           
@@ -241,7 +241,7 @@
             <div class="col-sm-9">
               <div class="input-group">
                 <input type="text" name="fechaInicio" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="fechaInicio" value="{fechaInicio}">
-                <span class="input-group-addon"> <i class="icon-calendar"></i> </span>
+                <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
               </div>
             </div>
           </div>
@@ -250,14 +250,19 @@
             <div class="col-sm-9">
               <div class="input-group">
                 <input type="text" name="fechaFin" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="fechaFin" value="{fechaFin}">
-                <span class="input-group-addon"> <i class="icon-calendar"></i> </span>
+                <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
               </div>
             </div>
           </div>
           <div class="form-group">
             <label for="recordatorio" class="col-sm-3 control-label no-padding-right"> Recordatorio SCTR </label>
-            <div class="col-sm-9">
-              <input name="recordatorio" type="checkbox" value="1" id="contratante" {recorda}/>
+            <div class="col-sm-9 ">
+                <div class="checkbox">
+									<label>
+										<input name="recordatorio" type="checkbox" value="1"  id="contratante" class="ace" {recorda}>
+										<span class="lbl"> &nbsp;</span>
+									</label>
+								</div>
             </div>
           </div>
           <div class="form-group">
@@ -278,10 +283,10 @@
             </div>
             <div class="col-sm-9">
               <div class="alert alert-block alert-warning">
-                <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
-                <p> <strong> <i class="icon-warning-sign"></i> ¡Atenci&oacute;n!</strong><br />
+                <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
+                <p> <strong> <i class="ace-icon fa fa-exclamation-triangle"></i> ¡Atenci&oacute;n!</strong><br />
                   Ya existe un archivo PDF, si escoje un PDF si sube un nuevo archivo el anterior sera eliminado. </p>
-                <p> <a class="btn btn-sm btn-warning" id="descargarPdf" target="_blank" href="uploads/{pdf}"> Dercargar Archivo <i class="icon-arrow-right icon-on-right bigger-110"></i> </a> </p>
+                <p> <a class="btn btn-sm btn-warning" id="descargarPdf" target="_blank" href="uploads/{pdf}"> Dercargar Archivo <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </a> </p>
               </div>
             </div>
           </div>
@@ -299,7 +304,7 @@
         <input type="hidden" name="idPoliza" value="{idPoliza}">
         <block end="idPoliza"/>
         <div class="form-actions center">
-          <button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2"> {editar} <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2"> {editar} <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
           <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
         </div>
       </form>

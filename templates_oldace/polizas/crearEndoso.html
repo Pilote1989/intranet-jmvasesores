@@ -1,0 +1,349 @@
+<block start="bloqueEditarEndoso"/>
+<form class="form-horizontal"enctype="multipart/form-data" method="POST" name="editarEndoso" id="editarEndoso" action="?do=polizas.procesarEndoso" role="form">
+  <!-- <legend>Form</legend> -->
+  <fieldset>
+    <div id="contenedor1">
+      <div class="form-group">
+        <label for="documento" class="col-sm-3 control-label no-padding-right">Numero de Documento</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="documento" type="text"  id="documento" value="{documento}" onKeyPress="return disableEnterKey(event)" placeholder="Numero de Documento" class="col-sm-12">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="detalle" class="col-sm-3 control-label no-padding-right">Detalle</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <textarea name="detalle" class="col-sm-12" id="detalle" placeholder="Detalle" onkeypress="return disableEnterKey(event)">{detalle}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inicioVigencia" class="col-sm-3 control-label no-padding-right">Inicio de Vigencia</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="inicioVigencia" data-date-format="dd/mm/yyyy" type="text"  id="inicioVigencia" value="{inicioVigencia}" onKeyPress="return disableEnterKey(event)" placeholder="Inicio de Vigencia" class="col-sm-12 form-control date-picker">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="finVigencia" class="col-sm-3 control-label no-padding-right">Fin de Vigencia</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="finVigencia" data-date-format="dd/mm/yyyy" type="text"  id="finVigencia" value="{finVigencia}" onKeyPress="return disableEnterKey(event)" placeholder="Fin de Vigencia" class="col-sm-12 form-control date-picker">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cobranza" class="col-sm-3 control-label no-padding-right">Aviso de Cobranza</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="cobranza" type="text"  id="cobranza" value="{cobranza}" onKeyPress="return disableEnterKey(event)" placeholder="Aviso de Cobranza" class="col-sm-12">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="contenedor2">
+      <block start="bloqueado"/>
+      <div class="alert alert-block alert-warning">
+        <i class="icon-ok warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision que ya ha sido liquidada.
+      </div>
+      <block end="bloqueado"/>
+      <div class="form-group">
+        <label for="primaNeta" class="col-sm-3 control-label no-padding-right">Prima Neta</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="primaNeta" type="text"  id="primaNeta" value="{primaNeta}" onKeyPress="return disableEnterKey(event)" placeholder="Prima Neta" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="derechoEmision" class="col-sm-3 control-label no-padding-right">Derecho de Emision</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="derechoEmision" type="text"  id="derechoEmision" value="{derechoEmision}" onKeyPress="return disableEnterKey(event)" placeholder="Derecho de Emision" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="primaComercial" class="col-sm-3 control-label no-padding-right">Prima Comercial</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="primaComercial" type="text"  id="primaComercial" value="{primaComercial}" onKeyPress="return disableEnterKey(event)" placeholder="Prima Comercial" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="igv" class="col-sm-3 control-label no-padding-right">IGV</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="igv" type="text"  id="igv" value="{igv}" onKeyPress="return disableEnterKey(event)" placeholder="IGV" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="intereses" class="col-sm-3 control-label no-padding-right">Intereses</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="intereses" type="text"  id="intereses" value="{intereses}" onKeyPress="return disableEnterKey(event)" placeholder="Intereses" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="totalFactura" class="col-sm-3 control-label no-padding-right">Total Factura</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="totalFactura" type="text"  id="totalFactura" value="{totalFactura}" onKeyPress="return disableEnterKey(event)" placeholder="Total Factura" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comisionP" class="col-sm-3 control-label no-padding-right">Comision (%)</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="comisionP" type="text"  id="comisionP" value="{comisionP}" onKeyPress="return disableEnterKey(event)" placeholder="Comision (%)" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comision" class="col-sm-3 control-label no-padding-right">Comision</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="comision" type="text"  id="comision" value="{comision}" onKeyPress="return disableEnterKey(event)" placeholder="Comision" class="col-sm-12" {readonly}>
+          </div>
+        </div>
+      </div>
+      
+          <block start="bloqueadoVendedor"/>
+          <div class="alert alert-block alert-warning">
+            <i class="icon-ok warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision cedida que ya ha sido pagada.
+          </div>
+          <block end="bloqueadoVendedor"/>  
+      <div class="form-group">
+        <label for="idPersona" class="col-sm-3 control-label no-padding-right">Asesor </label>
+        <div class="col-sm-9">
+          <select class="col-sm-12 col-xs-12 form-control" name="idPersona" id="idPersona" {readonlyVendedor}>
+				              {personas}
+          </select>
+        </div>
+      </div>
+      
+      <div id="divComisionVendedor">
+      <div class="form-group ">
+        <label for="comisionVendedorP" class="col-sm-3 control-label no-padding-right">Comision Vendedor (%)</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="comisionVendedorP" type="text"  id="comisionVendedorP" value="{comisionVendedorP}" onKeyPress="return disableEnterKey(event)" placeholder="Comision Vendedor (%)" class="col-sm-12" {readonlyVendedor}>
+          </div>
+        </div>
+      </div>
+      <div class="form-group ">
+        <label for="comisionVendedor" class="col-sm-3 control-label no-padding-right">Comision Vendedor</label>
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <input name="comisionVendedor" type="text"  id="comisionVendedor" value="{comisionVendedor}" onKeyPress="return disableEnterKey(event)" placeholder="Comision Vendedor" class="col-sm-12" {readonlyVendedor}>
+          </div>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+    <input type="hidden" name="idPoliza" id="idPoliza" value="{idPoliza}">
+    <block start="bloqueIdEndoso"/>
+    <input type="hidden" name="idEndoso" id="idEndoso" value="{idEndoso}">
+    <block end="bloqueIdEndoso"/>
+  </fieldset>
+  <div class="form-actions center" style=" margin-bottom:0px">
+    <button class="btn btn-sm btn-info" type="button" id="siguiente" name="siguiente"> Facturacion <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+    <button class="btn btn-sm btn-info" type="button" id="anterior" name="anterior"> <i class="icon-arrow-left icon-on-right bigger-110"></i> Anterior </button>
+    <button class="btn btn-sm btn-success" type="button" id="enviarEndoso" name="enviarEndoso"> Enviar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+    <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
+  </div>
+</form>
+<block end="bloqueEditarEndoso"/>
+<script>
+  $('#loading').hide();
+
+	if($("#idPersona").val() == "1"){
+		jQuery("#divComisionVendedor").hide();	
+	}
+	
+	$("#idPersona").change(function () {
+		if($("#idPersona").val() != "1"){
+			jQuery("#divComisionVendedor").show('slow');
+			jQuery("#comisionVendedorP").val($("#idPersona option:selected").attr('x-com'));
+			$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
+		}else{
+			jQuery("#divComisionVendedor").hide('slow');
+		}
+	})
+
+ 	$('#contenedor2').hide();
+	$('#anterior').hide();
+	$('#enviarEndoso').hide();
+	$('#enviarEndoso').hide();
+	
+	$('#siguiente').click(function() {
+		if($('#documento').valid() && $('#inicioVigencia').valid() && $('#cobranza').valid()){
+			$('#contenedor1').hide();
+			$('#contenedor2').show();
+			$('#siguiente').hide();
+			$('#anterior').show();
+			$('#enviarEndoso').show();
+			$("#dialogoEndosos").dialog("option", "position", {my: "center", at: "center", of: window});
+		}
+	});
+	$('#anterior').click(function() {
+	 	$('#contenedor1').show();
+	 	$('#contenedor2').hide();
+		$('#siguiente').show();
+		$('#anterior').hide();
+		$('#enviarEndoso').hide();
+		$("#dialogoEndosos").dialog("option", "position", {my: "center", at: "center", of: window});
+	});
+	
+ 	$('#editarEndoso').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			documento: {
+				required: true,
+			},
+			inicioVigencia: {
+				required: true,
+			},
+			primaNeta: {
+				required: true,
+			},
+			intereses: {
+				required: true,
+			},
+			cobranza: {
+				required: true,
+				remote: {
+					url: "?do=polizas.revisarAvisoDeCobranza",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#siguiente').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#siguiente').show();
+          },
+					data: {
+						aviso: function() {
+						  var d =  $("#cobranza").val();
+							return d;
+						}
+					}
+				} 
+			}
+		},
+
+		messages: {
+			documento: {
+				required: "Ingrese el Numero de Documento",
+			},
+			inicioVigencia: {
+				required: "Escoja la fecha de inicio",
+			},
+			primaNeta: {
+				required: "Ingrese la Prima Neta",
+			},
+			intereses: {
+				required: "Ingrese los intereses",
+			},
+			cobranza: {
+				required: "Ingrese el Aviso de Cobranza",
+				remote: "El aviso de cobranza ya existe",
+			},
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	
+	$('.date-picker').mask("99/99/9999");
+	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+	$('#enviarEndoso').click(function() {
+		if($("#editarEndoso").valid()){
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: '?do=polizas.guardarEndoso',
+				data: $("#editarEndoso").serialize(),
+				success: function(data) {
+					if(data["respuesta"]=="SUCCESS"){
+						$("#tab-5").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-5").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');	
+						$( "#dialogoEndosos" ).dialog("close");
+					}
+				}
+			});	
+		}
+	})
+	$('#primaNeta').keyup(function (){
+		$('#comision').val( Math.round(($('#primaNeta').val() * $('#comisionP').val()))/100);		
+		$('#derechoEmision').val( Math.round($('#primaNeta').val() * 0.03 * 100 ) /100 );
+		$('#primaComercial').val( Math.round(( parseFloat($('#primaNeta').val()) + parseFloat($('#derechoEmision').val()))*100 ) /100 );
+		$('#igv').val( Math.round($('#primaComercial').val() * 0.18 * 100)/100 );
+		$('#totalFactura').val( Math.round((parseFloat($('#igv').val()) + parseFloat($('#intereses').val()) + parseFloat($('#primaComercial').val()))*100) / 100 );
+		$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
+	});
+	$('#derechoEmision').keyup(function (){
+		$('#primaComercial').val( Math.round(( parseFloat($('#primaNeta').val()) + parseFloat($('#derechoEmision').val()))*100 ) /100 );
+		$('#igv').val( Math.round($('#primaComercial').val() * 0.18 * 100)/100 );
+		$('#totalFactura').val( Math.round((parseFloat($('#igv').val()) + parseFloat($('#intereses').val()) + parseFloat($('#primaComercial').val()))*100) / 100 );
+	});
+	$('#intereses').keyup(function (){
+		$('#primaComercial').val( Math.round(( parseFloat($('#primaNeta').val()) + parseFloat($('#derechoEmision').val()))*100 ) /100 );
+		$('#igv').val( Math.round($('#primaComercial').val() * 0.18 * 100)/100 );
+		$('#totalFactura').val( Math.round((parseFloat($('#igv').val()) + parseFloat($('#intereses').val()) + parseFloat($('#primaComercial').val()))*100) / 100 );
+	});
+	
+	$('#comisionP').keyup(function (){
+		$('#comision').val( Math.round(($('#primaNeta').val() * $('#comisionP').val()))/100);
+		$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
+	});
+
+	
+	$("#comisionVendedorP").keyup(function () {	
+		$("#comisionVendedor").val((parseFloat($("#comisionVendedorP").val())*parseFloat($("#comision").val())/100).toFixed(2));
+	});
+
+	
+
+	
+ 
+</script>

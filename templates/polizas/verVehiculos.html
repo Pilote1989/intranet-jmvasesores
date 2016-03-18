@@ -1,7 +1,7 @@
 <block start="Anulada"/>
     <div class="alert alert-danger">
         <button data-dismiss="alert" class="close" type="button">
-            <i class="icon-remove"></i>
+            <i class="ace-icon fa fa-remove"></i>
         </button>
         La poliza se encuentra anulada. <br>
     </div>
@@ -10,7 +10,7 @@
     <block start="vehiculos"/>
         <div class="center">
           <button id="agregaVehiculo" class="btn btn-xs btn-primary">
-            <i class="icon-comment bigger-120"></i>Agregar Vehiculo
+            <i class="ace-icon fa fa-comment bigger-120"></i>Agregar Vehiculo
           </button>
         </div>
         
@@ -41,8 +41,8 @@
                 <td align="center"> {vehiculos.marca} - {vehiculos.modelo} </td>
                 <td align="center"> {vehiculos.color} </td>
                 <td align="center"><div class="action-buttons">
-                    <a class="blue abreLink" x-link="/?do=vehiculos.crear&idVehiculo={vehiculos.idVehiculo}&idPol={idPoliza}" href="#"> <i class="icon-edit bigger-130"></i> </a> 
-                    <a class="blue elimina" x-link="/?do=vehiculos.eliminarVehiculo&idVehiculo={vehiculos.idVehiculo}&idPol={idPoliza}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+                    <a class="blue abreLink" x-link="/?do=vehiculos.crear&idVehiculo={vehiculos.idVehiculo}&idPol={idPoliza}" href="#"> <i class="ace-icon fa fa-edit bigger-130"></i> </a> 
+                    <a class="blue elimina" x-link="/?do=vehiculos.eliminarVehiculo&idVehiculo={vehiculos.idVehiculo}&idPol={idPoliza}" href="#"> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
                   </div></td>
               </tr>
               <loop end="vehiculos"/>
@@ -55,7 +55,7 @@
           </div>
           <div class="space-6">
           </div>
-          <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+          <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
         </div>
         <block end="bloqueResultados"/>
         <block start="bloqueNoResultados"/>
@@ -86,11 +86,11 @@
                     resizable: false,
                     modal: true,
                     title_html: true,
-                    title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+                    title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
                     autoOpen: false,
                     buttons: [
                         {
-                            html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+                            html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
                             "class" : "btn btn-danger btn-xs",
                             click: function() {
                                 $.ajax({
@@ -107,7 +107,7 @@
                         }
                         ,
                         {
-                            html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+                            html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
                             "class" : "btn btn-xs",
                             click: function() {
                                 $( this ).dialog( "close" );
@@ -121,7 +121,7 @@
 						url: $(this).attr('x-link'),
 						success: function(responseText){
 							$('#dialog-general').html(responseText);					
-							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Vehiculo</h4></div>");
+							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-dashboard blue'></i>Agregar Vehiculo</h4></div>");
 							$( "#dialog-general" ).dialog("open");
 						},
 						error: function(responseText){
@@ -134,7 +134,7 @@
 						url: '/?do=polizas.agregarVehiculo&idPoliza={idPoliza}',
 						success: function(responseText){
 							$('#dialog-general').html(responseText);					
-							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Vehiculo</h4></div>");
+							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-dashboard blue'></i>Agregar Vehiculo</h4></div>");
 							$( "#dialog-general" ).dialog("open");
 						},
 						error: function(responseText){

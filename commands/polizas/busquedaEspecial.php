@@ -38,7 +38,7 @@ class busquedaEspecial extends sessionCommand{
 			}
 			echo json_encode($response);
 		}else{
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("polizas/busquedaEspecial.html");
 		}
 	}

@@ -3,7 +3,7 @@
 <h3 class="header smaller lighter blue" style="margin-top:0px;">Endosos
   <div class="btn-group pull-right">
     <button class="btn btn-xs btn-primary" id="botonAgregarEndoso">
-      <i class="icon-plus-sign bigger-120"></i>&nbsp;&nbsp;Agregar Endoso
+      <i class="ace-icon fa fa-plus-circle bigger-120"></i>&nbsp;&nbsp;Agregar Endoso
     </button>
   </div>
 </h3>
@@ -31,7 +31,7 @@
         <td align="center">{endosos.comision}</td>
         <td align="center">{endosos.estadoCobranza}</td>
         <td align="center"><div class="action-buttons">
-            <a class="blue abreLink" x-tittle="Ver Endoso" x-link="?do=polizas.verEndoso&idEndoso={endosos.idEndoso}" href="#"> <i class="icon-money bigger-130"></i> </a> <a class="blue abreLink" x-tittle="Editar Endoso" x-link="?do=polizas.crearEndoso&idEndoso={endosos.idEndoso}&idPoliza={idPoliza}" href="#"> <i class="icon-edit bigger-130"></i> </a> <a class="blue eliminarEndoso" x-link="?do=polizas.eliminarEndoso&idEndoso={endosos.idEndoso}" href="#" {endosos.verEliminar}> <i class="icon-trash bigger-130"></i> </a>
+            <a class="blue abreLink" x-tittle="Ver Endoso" x-link="?do=polizas.verEndoso&idEndoso={endosos.idEndoso}" href="#"> <i class="ace-icon fa fa-money bigger-130"></i> </a> <a class="blue abreLink" x-tittle="Editar Endoso" x-link="?do=polizas.crearEndoso&idEndoso={endosos.idEndoso}&idPoliza={idPoliza}" href="#"> <i class="ace-icon fa fa-edit bigger-130"></i> </a> <a class="blue eliminarEndoso" x-link="?do=polizas.eliminarEndoso&idEndoso={endosos.idEndoso}" href="#" {endosos.verEliminar}> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
           </td>
       </tr>
       <loop end="endosos"/>
@@ -50,7 +50,7 @@
     </div>
     <div class="space-6">
     </div>
-    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+    <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
   </div>
 </div>
 <script>
@@ -78,7 +78,7 @@ $( "#botonAgregarEndoso" ).click(function(){
 		url: '/?do=polizas.crearEndoso&idPoliza={idPoliza}',
 		success: function(responseText){
 			$('#dialogoEndosos').html(responseText);
-			$('#dialogoEndosos').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-plus-sign blue'></i> Crear Endoso</h4></div>");
+			$('#dialogoEndosos').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-sign blue'></i> Crear Endoso</h4></div>");
 			$('#dialogoEndosos').dialog("open");
 		},
 		error: function(responseText){
@@ -95,11 +95,11 @@ $( "#dialog-message-endosos" ).dialog({
 	resizable: false,
 	modal: true,
 	title_html: true,
-	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
 	autoOpen: false,
 	buttons: [
 		{
-			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
 			"class" : "btn btn-danger btn-xs",
 			click: function() {
 				$.ajax({
@@ -116,7 +116,7 @@ $( "#dialog-message-endosos" ).dialog({
 		}
 		,
 		{
-			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
 			"class" : "btn btn-xs",
 			click: function() {
 				$( this ).dialog( "close" );
@@ -127,7 +127,7 @@ $( "#dialog-message-endosos" ).dialog({
 
 $('.abreLink').click( function() {
 	//verVehiculo					
-	$('#dialogoEndosos').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>" + $(this).attr('x-tittle') + "</h4></div>");
+	$('#dialogoEndosos').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-dashboard blue'></i>" + $(this).attr('x-tittle') + "</h4></div>");
 	$.ajax({
 		url: $(this).attr('x-link'),
 		success: function(responseText){

@@ -26,7 +26,7 @@ class editarDatosParticulares extends sessionCommand{
 			$fc->redirect("?do=personas.verPortada");
 		}
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 
 		//if($this->request->idPoliza){
 		//	$this->addLayout("ficha");

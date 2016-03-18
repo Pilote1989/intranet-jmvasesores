@@ -49,7 +49,7 @@ class verCedida extends sessionCommand{
 		$this->addVar("igv", number_format($cedida->getIgv(),2));
 		$this->addVar("totalFactura", number_format($cedida->getTotalFactura(),2));
 		$this->addLoop("cobros",$listaCobros);
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("liquidaciones/verCedida.html");
 	}
 }

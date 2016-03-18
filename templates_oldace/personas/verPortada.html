@@ -1,0 +1,196 @@
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawMultSeries);
+    function drawMultSeries() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Mes');
+          data.addColumn('number', 'Comisiones');
+    
+          data.addRows([
+            <loop start="meses"/>
+            ["{meses.mes}", {meses.com}],
+            <loop end="meses"/>
+          ]);
+    
+          var options = {
+            'chartArea': {'width': '80%', 'height': '70%'},
+            'legend':'none',
+            'height':300,
+            vAxis: {minValue: 0}
+          };
+    
+          var chart = new google.visualization.ColumnChart(
+            document.getElementById('chart_div'));
+    
+          chart.draw(data, options);
+        }
+    google.charts.setOnLoadCallback(drawChart);
+    //COMPANIA
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Compania', 'Comision'],
+            <loop start="companias"/>
+            ['{companias.sigla}', {companias.valor}],
+            <loop end="companias"/>
+          ]);
+  
+          var options = {
+            'chartArea': {'width': '100%', 'height': '90%'},
+            'legend':'none',
+            'height':300,
+            pieSliceText: 'label',
+            sliceVisibilityThreshold: .04,
+            pieResidueSliceLabel: 'Otros'
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('chart_1'));
+          chart.draw(data, options);
+    }     
+    google.charts.setOnLoadCallback(drawChart2);
+    //RAMO
+    function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+            ['Compania', 'Ramo'],
+            <loop start="ramos"/>
+            ['{ramos.sigla}', {ramos.valor}],
+            <loop end="ramos"/>
+          ]);
+  
+          var options = {
+            'chartArea': {'width': '100%', 'height': '90%'},
+            'legend':'none',
+            'height':300,
+            pieSliceText: 'label',
+            sliceVisibilityThreshold: .04,
+            pieResidueSliceLabel: 'Otros'
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('chart_2'));
+          chart.draw(data, options);
+    }   
+  </script>
+<div class="page-header">
+  <h1> Portada <small> <i class="icon-double-angle-right"></i> Intranet Clientes JMV (v2.0) </small> </h1>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <block start="admin"/>
+      <div class="col-xs-12 col-lg-6">
+        <div class="widget-box transparent">
+          <div class="widget-header widget-header-flat">
+            <h4 class="lighter">
+              <i class="icon-bullhorn blue"></i>
+                Notificaciones
+            </h4>
+            <div class="widget-toolbar">
+              <a href="#" data-action="collapse">
+                <i class="icon-chevron-up"></i>
+              </a>
+            </div>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <div class="space"></div>
+              <div class="well well-sm">
+                <h5 class="red"><i class="icon-comments"></i> Comisiones por Liquidar
+                  <button class="link btn btn-xs btn-danger pull-right" x-link="?do=reportes.comisionesPendientes"> <span class="bigger-110">Ver</span> <i class="icon-arrow-right icon-on-right"></i> </button>
+                </h5> 
+                Hay <strong>{porLiquidar}</strong> comisiones pendientes de liquidar.
+              </div>
+              <div class="well well-sm">
+                <h5 class="green"><i class="icon-comments"></i> Polizas por Vencer
+                  <button class="btn btn-xs btn-success pull-right"> <span class="bigger-110">Ver</span> <i class="icon-arrow-right icon-on-right"></i> </button>
+                </h5>
+                Hay <strong>{porVencer}</strong> p&oacute;lizas que vencen esta semana.
+              </div>
+              <div class="well well-sm">
+                <h5 class="blue"><i class="icon-comments"></i> Recordatorios por Enviar
+                  <button class="link btn btn-xs btn-info pull-right" x-link="?do=admin.recordatorios"> <span class="bigger-110">Ver</span> <i class="icon-arrow-right icon-on-right"></i> </button>
+                </h5>
+                Mañana se enviaran <strong>{recordatoriosPorEnviar}</strong> recordatorios de cupones pendientes.
+              </div>              
+            </div>
+            <!-- /widget-main -->
+          </div>
+          <!-- /widget-body -->
+        </div>
+      </div>
+      <div class="col-xs-12 col-lg-6">
+        <div class="widget-box transparent">
+          <div class="widget-header widget-header-flat">
+            <h4 class="lighter">
+              <i class="icon-bar-chart blue"></i>
+                Comisiones : {mesInicio} - {mesFin}
+            </h4>
+            <div class="widget-toolbar">
+              <a href="#" data-action="collapse">
+                <i class="icon-chevron-up"></i>
+              </a>
+            </div>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <div id="chart_div"></div>
+            </div>
+            <!-- /widget-main -->
+          </div>
+          <!-- /widget-body -->
+        </div>
+      </div>
+      <block end="admin"/>
+    </div>
+    <div class="hr hr10 hr-dotted"></div>
+    <div class="row">
+      <div class="col-xs-12 col-lg-6">
+        <div class="widget-box transparent">
+          <div class="widget-header widget-header-flat">
+            <h4 class="lighter">
+              <i class="icon-globe blue"></i>
+                Produccion por Compañia
+            </h4>
+            <div class="widget-toolbar">
+              <a href="#" data-action="collapse">
+                <i class="icon-chevron-up"></i>
+              </a>
+            </div>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <div id="chart_1"></div>
+            </div>
+            <!-- /widget-main -->
+          </div>
+          <!-- /widget-body -->
+        </div>
+      </div>
+      <div class="col-xs-12 col-lg-6">
+        <div class="widget-box transparent">
+          <div class="widget-header widget-header-flat">
+            <h4 class="lighter">
+              <i class="icon-cogs blue"></i>
+                Produccion por Ramo
+            </h4>
+            <div class="widget-toolbar">
+              <a href="#" data-action="collapse">
+                <i class="icon-chevron-up"></i>
+              </a>
+            </div>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <div id="chart_2"></div>
+            </div>
+            <!-- /widget-main -->
+          </div>
+          <!-- /widget-body -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <script>
+  $( ".link" ).click(function() {
+  	location.replace($(this).attr("x-link"));
+  });
+  </script>

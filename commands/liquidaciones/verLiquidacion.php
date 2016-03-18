@@ -11,7 +11,7 @@ class verLiquidacion extends sessionCommand{
 			$seleccionados_tipo[] = '"'.$cobro->tipo().'"';
 			//echo $cobro->tipo() . " - " . $cobro->getId(). "<br />";
 		}
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("liquidaciones/verLiquidacion.html");
 	}
 }

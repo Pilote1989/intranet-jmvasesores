@@ -31,7 +31,7 @@ class verClientes extends sessionCommand{
 		else{
 			$this->addEmptyVar("limite");
 		}
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("clientes/verClientes.html");
 	}
 }

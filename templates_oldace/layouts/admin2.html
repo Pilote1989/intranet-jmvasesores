@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+		 
+<html lang="es">
+
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>eBase - JMVSeguros</title>
+
+		<base href="{fc.rootURL}">
+
+		<link rel="stylesheet" type="text/css" href="styles/main.css">
+		<link rel="stylesheet" type="text/css" href="styles/alertStyle.css">
+
+		<!-- Ajax -->
+		<script type="text/javascript" src="jScripts/ajax_core.js"></script>
+		<script type="text/javascript" src="jScripts/ajform.js"></script>
+		<!--Fin Ajax-->
+		
+		<script type="text/javascript" src="jScripts/menu.js"></script>
+		<script type="text/javascript" src="jScripts/layout.js"></script>
+        <script type="text/javascript" src="jScripts/tiny_mce/tiny_mce.js"></script>
+
+		
+		<!-- Calendario Antiguo -->
+		<link rel="stylesheet" type="text/css" media="all" href="jScripts/calendar/skins/aqua/theme.css"/> 
+		<script type="text/javascript" src="jScripts/calendar/calendar.js"></script>
+		<script type="text/javascript" src="jScripts/calendar/lang/calendar-es.js"></script>
+		<script type="text/javascript" src="jScripts/calendar/calendar-setup.js"></script>
+        <!-- Fin Calendario Antiguo -->
+		
+		<!--JQuery -->
+        <script type="text/javascript" src="jScripts/jquery.min.js"></script>
+
+		<!-- Calendario Nuevo -->
+		<link type="text/css" href="styles/theme/ui.all.css" rel="stylesheet" />
+		<script type="text/javascript" src="jScripts/jQueryCalendar/ui.core.js"></script>
+		<script type="text/javascript" src="jScripts/jQueryCalendar/ui.datepicker.js"></script>
+		
+		<script type="text/javascript" src="jScripts/jQueryCalendar/ui.draggable.js"></script>
+		<script type="text/javascript" src="jScripts/jQueryCalendar/ui.resizable.js"></script>
+		<script type="text/javascript" src="jScripts/jQueryCalendar/ui.dialog.js"></script>
+		<!--Fin Calendario Nuevo-->
+                    
+		<!-- Thick Box -->
+		<script type='text/javascript' src='jScripts/thickbox.js'></script>
+		<link rel='stylesheet' href='styles/thickbox.css' type='text/css' media='screen' />
+		<!-- / Thick Box -->
+         
+
+		<script type="text/javascript" src="jScripts/accordion.js"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="styles/metas.css"/> 
+<!--		
+		<script type="text/javascript" src="jScripts/dialog/jquery.min.js"></script>
+		<script type="text/javascript" src="jScripts/dialog/jqdialog.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="jScripts/dialog/jqdialog.css"/>
+-->	
+        <script type="text/javascript" src="jScripts/jquery.qtip.js"></script>
+		<script type="text/javascript" src="jScripts/main.js"></script>
+        
+        <!-- formularios -->
+        <link rel="stylesheet" href="styles/forms.css" type="text/css" media="screen" />
+                
+        <!-- Formcheck2 / Moo.Floor.ch -->
+        <!-- http://moo.floor.ch/?p=18 -->
+        <script type="text/javascript" src="jScripts/mootools.js"></script>
+        <script type="text/javascript" src="jScripts/formcheck.js"></script>
+        <script type="text/javascript">
+            window.addEvent('domready', function(){check = new FormCheck('principal', {
+                display : {
+                    fadeDuration : 500,
+                    errorsLocation : 1,
+                    indicateErrors : 1,
+                    showErrors : 1
+                }
+            })});
+        </script>
+
+	
+        <link rel="shortcut icon" href="favicon.ico">
+	</head>
+	<body>
+		<style>
+			/*Para achicar el DatePicker y Dialog*/
+			.ui-datepicker
+			{
+			font-size:11px;
+			}
+			.ui-dialog
+			{
+			font-size:11px;
+			}
+		</style>
+		<script type="text/javascript">
+			var intLogin = 0;
+			
+			//Init del Calendario
+			$(document).ready(function(){
+				$(".datepicker").datepicker({ 
+					dateFormat: 'dd/mm/yy', 
+					changeYear: true,
+					dayNamesMin: ['D', 'L', 'Ma', 'Mi', 'J', 'V', 'S'],
+					monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+					firstDay: 1,
+					yearRange: '1900:2100'
+				});
+			});
+			
+			//Init del Pop-Up para seleccionarUsuario
+			$.ui.dialog.defaults.bgiframe = true;
+			$(function() {
+				$("#selectorDeUsuarios").dialog({ autoOpen: false });
+			});
+			
+			$.maxZIndex = $.fn.maxZIndex = function(opt) {
+				/// <summary>
+				/// Returns the max zOrder in the document (no parameter)
+				/// Sets max zOrder by passing a non-zero number
+				/// which gets added to the highest zOrder.
+				/// </summary>    
+				/// <param name="opt" type="object">
+				/// inc: increment value, 
+				/// group: selector for zIndex elements to find max for
+				/// </param>
+				/// <returns type="jQuery" />
+				var def = { inc: 10, group: "*" };
+				$.extend(def, opt);
+				var zmax = 0;
+				$(def.group).each(function() {
+					var cur = parseInt($(this).css('z-index'));
+					zmax = cur > zmax ? cur : zmax;
+				});
+				if (!this.jquery)
+					return zmax;
+			
+				return this.each(function() {
+					zmax += def.inc;
+					$(this).css("z-index", zmax);
+				});
+			}
+			
+			function comprobarSesion(){
+				ajaxManager('load_page','?do=personas.comprobarSesion', "divAutentificar");
+				return false;
+			}
+			
+			intLogin = setInterval("comprobarSesion()",600000);
+		</script>
+		<plug command="generic.popUpUsuario"/>
+        <table width="950" height="700" align="center" style="border:1px solid #DDDDDD; margin-left:auto; margin-right:auto; margin-top:0; padding-top:0; background:#FFFFFF;" cellspacing="0" cellpadding="0">
+        	<tr>
+            	<td style="font-family:Arial, Helvetica, sans-serif; height: 40px !important;" valign="top" >
+                	<div style="background:#365d86 url('../images/header.png') no-repeat; height:40px; padding: 0px;">
+                        <plug command="menus.menuAdministracion"/>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+            	<td valign="top" bgcolor="#FFFFFF" width="100%" align="left" style="padding-left:10px;padding-right:10px;padding-bottom:10px; height: 100%;">
+     			   <MainCommand/>
+                </td>
+            </tr>
+        	<tr>
+            	<td height="30">
+                	<div style="background:url('../images/footer.gif'); height:30px; width:950px;">&nbsp;</div>
+                </td>
+            </tr>
+        </table>
+        <div id="divAutentificar" style="display:none">
+        </div>
+	</body>
+</html>
+<!--fin layout public.html-->

@@ -26,7 +26,7 @@ class historico extends sessionCommand{
 
 		$this->addLoop("reportes",$reportes);
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		
 		$this->processTemplate("reportes/historico.html");
 	}

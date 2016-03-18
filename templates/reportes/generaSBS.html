@@ -1,7 +1,7 @@
 <div class="widget-box">
   <div class="widget-header">
-    <h4>Filtros de Reporte</h4>
-    <div class="widget-toolbar"> <a data-action="collapse" href="#"> <i class="icon-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="icon-remove"></i> </a> </div>
+    <h4 class="widget-title">Filtros de Reporte</h4>
+    <div class="widget-toolbar"> <a data-action="collapse" href="#"> <i class="ace-icon fa fa-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="ace-icon fa fa-remove"></i> </a> </div>
   </div>
   <div class="widget-body">
     <div class="widget-main no-padding">
@@ -13,7 +13,7 @@
             <div class="col-sm-9">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<i class="icon-calendar bigger-110"></i>
+									<i class="ace-icon fa fa-calendar bigger-110"></i>
 								</span>
 								<input class="form-control date-pick" type="text" name="periodo" id="periodo" />
 							</div>
@@ -22,15 +22,15 @@
         </fieldset>
         <input name="busqueda" type="hidden" id="busqueda" value="1" />
         <div class="form-actions center">
-          <button class="btn btn-sm btn-success" id="enviarFormulario" type="button" onClick="enviaForm()"> Buscar <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-success" id="enviarFormulario" type="button" onClick="enviaForm()"> Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 <div class="alert alert-danger" id="alerta">
-  <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
-  <strong> <i class="icon-remove"></i> ¡Atencion! </strong> Debe seleccionar al menos un filtro. <br>
+  <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-remove"></i> </button>
+  <strong> <i class="ace-icon fa fa-remove"></i> ¡Atencion! </strong> Debe seleccionar al menos un filtro. <br>
 </div>
 <div id="load">
 <h3 class="center">Cargando Reporte...</h3>
@@ -41,7 +41,43 @@
 <div id="reporte">
 </div>
 <script>
-$('input.date-pick').daterangepicker({format: 'DD/MM/YYYY'}).prev().on(ace.click_event, function(){
+$('input.date-pick').daterangepicker({
+			'applyClass' : 'btn-sm btn-success',
+			'cancelClass' : 'btn-sm btn-default',
+      "locale": {
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Aplicar",
+        "cancelLabel": "Cancelar",
+        "fromLabel": "De",
+        "toLabel": "Hasta",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": [
+            "D",
+            "L",
+            "M",
+            "M",
+            "J",
+            "V",
+            "S"
+        ],
+        "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Setiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ],
+        "firstDay": 1
+    },
+}).prev().on(ace.click_event, function(){
 	$(this).next().focus();
 });
 $('#load').hide();

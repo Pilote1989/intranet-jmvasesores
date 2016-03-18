@@ -46,10 +46,9 @@
 						<label for="fechaSalida" class="col-sm-3 control-label no-padding-right">Fecha de Salida</label>
 						<div class="col-sm-9"><div class="input-group">
 							<input type="text" name="fechaSalida" value="{fechaSalida}" data-date-format="dd/mm/yyyy" readonly class="form-control date-picker" id="fechaSalida">
-							<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div>
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span> </div>
                             </div>
 					</div>
-                    
 					<div class="form-group">
 						<label for="paisOrigen" class="col-sm-3 control-label no-padding-right">Pais de Origen</label>
 						<div class="col-sm-9"> <div class="clearfix">
@@ -68,7 +67,7 @@
 						<label for="fechaLlegada" class="col-sm-3 control-label no-padding-right">Fecha de Llegada</label>
 						<div class="col-sm-9"><div class="input-group">
 							<input type="text" name="fechaLlegada" value="{fechaLlegada}" data-date-format="dd/mm/yyyy" readonly class="form-control date-picker" id="fechaLlegada">
-							<span class="input-group-addon"> <i class="icon-calendar"></i> </span> </div></div>
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span> </div></div>
 					</div>
 					<div class="form-group">
 						<label for="medioTransporte" class="col-sm-3 control-label no-padding-right">Medio de Transporte</label>
@@ -154,7 +153,7 @@
 				</fieldset>
 				<div class="form-actions center">
 					<button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2">
-						Enviar <i class="icon-arrow-right icon-on-right bigger-110"></i>
+						Enviar <i class="fa fa-arrow-right fa fa-on-right bigger-110"></i>
 					</button>
 				</div>
 			</form>
@@ -164,11 +163,12 @@
 <script type="text/javascript">
 	var numero = ( parseInt(document.principal2.fob.value) + parseInt(document.principal2.flete.value) + parseInt(document.principal2.aduana.value) ) * 1.1;
 	document.principal2.sumaAsegurada.value = numero.toFixed(2);
-	$(".cam").change(function () {
+	$(".cam").keypress(function () {
 		var numero = ( parseInt(document.principal2.fob.value) + parseInt(document.principal2.flete.value) + parseInt(document.principal2.aduana.value) ) * 1.1;
 		document.principal2.sumaAsegurada.value = numero.toFixed(2);
 	}); 
-	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+	
+	$('.date-picker').datepicker({autoclose:true,todayHighlight: true}).next().on(ace.click_event, function(){
 		$(this).prev().focus();
 	});
 				

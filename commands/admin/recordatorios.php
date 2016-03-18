@@ -56,7 +56,7 @@ class recordatorios extends sessionCommand{
 		// Nombre
 		$this->addBlock("bloqueNombre");
 		//$this->addVar("nombreUsuario", $usuario->getNombres());
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("admin/recordatorios.html");
 	}
 }

@@ -1,0 +1,146 @@
+<h3 class="row header smaller lighter blue">
+	<span class="col-xs-6"> Resultados de Búsqueda </span><!-- /span --> 
+	<span class="col-xs-6"> 
+		<span class="pull-right inline">
+			<span class="btn-toolbar inline middle no-margin"> 
+				<span class="btn-group no-margin" data-toggle="buttons" id="accordion-style">
+											<div class="btn-group">
+												<button class="btn btn-xs btn-info">Herramientas</button>
+
+												<button data-toggle="dropdown" class="btn btn-xs btn-info dropdown-toggle">
+													<span class="icon-caret-down icon-only"></span>
+												</button>
+
+												<ul class="dropdown-menu pull-right">
+													<li>
+														<a href="#" id="imprimir">Imprimir</a>
+													</li>
+
+													<li>
+														<a href="#" id="exportar">Exportar</a>
+													</li>
+												</ul>
+											</div>
+				</span>
+			</span> 
+		</span> 
+	</span><!-- /span --> 
+</h3>
+
+<div class="table-responsive">
+	<table id="sample-table-2" class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<block start="asegurado"/>
+			<tr>
+				<td colspan="4" align="center"><b>Cliente:</b></td>
+				<td colspan="9" align="center"><b>{aseTexto}</b></td>
+			<tr>
+			<block end="asegurado"/>
+			<block start="ramo"/>
+			<tr>
+				<td colspan="4" align="center"><b>Ramo:</b></td>
+				<td colspan="9" align="center"><b>{ramTexto}</b></td>
+			<tr>
+			<block end="ramo"/>
+			<block start="com"/>
+			<tr>
+				<td colspan="4" align="center"><b>Compania:</b></td>
+				<td colspan="9" align="center"><b>{comTexto}</b></td>
+			<tr>
+			<block end="com"/>
+			<block start="inicio"/>
+			<tr>
+				<td colspan="4" align="center"><b>Inicio de Vigencia:</b></td>
+				<td colspan="10" align="center"><b>{inicio}<input type="hidden" name="inicioVigencia" id="inicioVigencia" value="{inicio}"/></b></td>
+			<tr>
+			<block end="inicio"/>
+			<block start="fin"/>
+			<tr>
+				<td colspan="4" align="center"><b>Fin de Vigencia:</b></td>
+				<td colspan="10" align="center"><b>{fin}<input type="hidden" name="finVigencia" id="finVigencia" value="{fin}"/></b></td>
+			<tr>
+			<block end="fin"/>
+			<tr>
+				<th align="center">Aviso</th>
+				<th align="center">Ramo</th>
+				<th align="center">Cia</th>
+				<th align="center">Vigencia</th>
+				<th align="center">Poliza</th>
+				<th align="center">M</th>
+				<th align="center">TD</th>
+				<th align="center">P. Neta</th>
+				<th align="center">Total Fac.</th>
+				<th align="center">% COM</th>
+				<th align="center">COM</th>
+				<th align="center">Estado</th>
+			</tr>
+		</thead>
+		<tbody>
+			<loop start="polizas"/>
+			<tr>
+				<td align="center" valign="center">	{polizas.avisoDeCobranza}</td>
+				<td align="center" valign="center"> {polizas.siglaRamo}</td>
+				<td align="center" valign="center"> {polizas.siglaCompania} </td>
+				<td align="center" valign="center"> {polizas.inicioVigencia} - {polizas.finVigencia} </td>
+				<td align="center" valign="center"> <a href="?do=polizas.ver&idPoliza={polizas.idPoliza}&vig={polizas.idPoliza}">{polizas.numeroPoliza}</a> </td>
+				<td align="center" valign="center"> {polizas.moneda} </td>
+				<td align="center" valign="center"> {polizas.tipo} </td>
+				<td align="center" valign="center"> {polizas.primaNeta} </td>
+				<td align="center" valign="center"> {polizas.totalFactura} </td>
+				<td align="center" valign="center"> {polizas.comisionP} </td>
+				<td align="center" valign="center"> {polizas.comision} </td>
+				<td align="center" valign="center"> {polizas.liq} </td>
+			</tr>      
+			<loop end="polizas"/>
+			<tr>
+				<td align="center" valign="center" colspan="7"><strong>Total Dolares</strong></td>
+				<td align="center" valign="center">{pnDolares}</td>
+				<td align="center" valign="center">{totalDolares} </td>
+			  <td align="center" valign="center">&nbsp;</td>
+				<td align="center" valign="center">{comDolares}</td>
+			  <td align="center" valign="center">&nbsp; </td>
+			</tr>
+                  
+			<tr>
+				<td align="center" valign="center" colspan="7"><strong>Total Soles</strong></td>
+				<td align="center" valign="center">{pnSoles}</td>
+				<td align="center" valign="center">{totalSoles} </td>
+				<td align="center" valign="center">&nbsp;</td>
+				<td align="center" valign="center">{comSoles}</td>
+				<td align="center" valign="center">&nbsp; </td>
+			</tr>
+			<tr>
+				<td align="center" valign="center" colspan="7"><strong>Total Euros</strong></td>
+				<td align="center" valign="center">{pnEuros}</td>
+				<td align="center" valign="center">{totalEuros} </td>
+				<td align="center" valign="center">&nbsp;</td>
+				<td align="center" valign="center">{comEuros}</td>
+				<td align="center" valign="center">&nbsp; </td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<style>
+.table tbody>tr>td{
+	padding:auto 2px !important;
+	vertical-align:middle !important;
+	
+}
+</style>
+<script src="/assets/js/jquery.btechco.excelexport.js"></script>
+<script src="/assets/js/jquery.base64.js"></script>
+<script>
+var child;
+jQuery('#imprimir').click( function(event) {
+	child = window.open("/?do=reportes.generaPantalla&vista=0&ase={ase}&com={com}&ram={ram}", "nueva", "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=840");
+	event.preventDefault();
+});
+jQuery('#exportar').click( function(event) {
+	$("#sample-table-2").btechco_excelexport({
+                containerid: "sample-table-2"
+               , datatype: $datatype.Table
+            });
+	event.preventDefault();
+});
+	
+</script>

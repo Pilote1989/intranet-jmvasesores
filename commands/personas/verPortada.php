@@ -245,7 +245,7 @@ class verPortada extends sessionCommand{
 		// Nombre
 		$this->addBlock("bloqueNombre");
 		//$this->addVar("nombreUsuario", $usuario->getNombres());
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("personas/verPortada.html");
 	}
 }

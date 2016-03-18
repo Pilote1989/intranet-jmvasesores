@@ -2,13 +2,13 @@
   <div class="col-sm-10 col-sm-offset-1">
     <div class="widget-box transparent invoice-box">
       <div class="widget-header widget-header-large">
-        <h3 class="grey lighter pull-left position-relative"> <i class="icon-leaf green"></i>Factura - {per}</h3>
+        <h3 class="grey lighter pull-left position-relative"> <i class="ace-icon fa fa-leaf green"></i>Factura - {per}</h3>
         <div class="widget-toolbar no-border invoice-info">
           <span class="invoice-info-label">Factura:</span> <span class="red">#{numeroFactura}</span> <br />
           <span class="invoice-info-label">Fecha:</span> <span class="blue">{fechaFactura}</span>
         </div>
         <div class="widget-toolbar hidden-480">
-          <a href="?do=liquidaciones.editarCedida&idCedida={idCedida}"> <i class="icon-edit"></i> </a>
+          <a href="?do=liquidaciones.editarCedida&idCedida={idCedida}"> <i class="ace-icon fa fa-edit"></i> </a>
         </div>
       </div>
       <div class="widget-body">
@@ -30,7 +30,7 @@
           </div>
           <div class="row">
             <div class="alert alert-block alert-warning">
-              <p> <strong> <i class="icon-ok"></i> ¡Atencion! </strong> Esta liquidacion no está liquidando ninguna comision, ¿Desea eliminarla? </p>
+              <p> <strong> <i class="ace-icon fa fa-check"></i> ¡Atencion! </strong> Esta liquidacion no está liquidando ninguna comision, ¿Desea eliminarla? </p>
               <p>
                 <button class="btn btn-sm btn-warning" id="eliminaComision">Eliminar</button>
               </p>
@@ -59,13 +59,13 @@
                 <tr>
                   <td class="center"><div class="btn-group">
                       <button id="eliminar" x-id="{cobros.id}" data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-light">
-                        <span class="icon-caret-down icon-only"></span>
+                        <span class="ace-icon fa fa-caret-down ace-icon fa fa-only"></span>
                       </button>
                       <ul class="dropdown-menu">
                         <li> 
-                        <a href="?do=polizas.ver&idPoliza={cobros.poliza}"><i class="icon-zoom-in bigger-110 blue"></i> Ver Poliza </a></li>
+                        <a href="?do=polizas.ver&idPoliza={cobros.poliza}"><i class="ace-icon fa fa-search-plus bigger-110 blue"></i> Ver Poliza </a></li>
                         <li> 
-                        <a href="#" x-id="{cobros.id}" class="confirma"><i class="icon-remove bigger-110 red"></i> Eliminar </a></li>
+                        <a href="#" x-id="{cobros.id}" class="confirma"><i class="ace-icon fa fa-remove bigger-110 red"></i> Eliminar </a></li>
                       </ul>
                     </div></td>
                   <td class="center">{cobros.tipo}</td>
@@ -130,7 +130,7 @@
     </div>
     <div class="space-6">
     </div>
-    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+    <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
   </div>
 <script>
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
@@ -156,11 +156,11 @@ $( "#dialog-message" ).dialog({
 	resizable: false,
 	modal: true,
 	title_html: true,
-	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
 	autoOpen: false,
 	buttons: [
 		{
-			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
 			"class" : "btn btn-danger btn-xs",
 			click: function() {
 				$.ajax({
@@ -176,7 +176,7 @@ $( "#dialog-message" ).dialog({
 		}
 		,
 		{
-			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
 			"class" : "btn btn-xs",
 			click: function() {
 				$( this ).dialog( "close" );

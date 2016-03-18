@@ -114,7 +114,7 @@ class ver extends sessionCommand{
 			if($this->request->m=="ee"){
 				$this->addBlock("ee");
 			}
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("polizas/ver.html");
 		}
 	}

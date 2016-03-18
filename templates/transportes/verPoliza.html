@@ -1,105 +1,130 @@
-<h2>Declaracion de Transportes</h2>
-<table class="tablaResultados"<block start="html"/> cellpadding="4" cellspacing="0"  border="1" align="center" <block end="html"/>>
-  <tr class="titulo">
-    <td align="center" width="50%">Campo</td>
-    <td align="center">Valor</td>
-  </tr>
-  <tr>
-    <td align="center">Contratante</td>
-    <td align="center">{contratante}</td>
-  </tr>
-  <tr>
-    <td align="center">Direccion</td>
-    <td align="center">{direccion}</td>
-  </tr>
-  <tr>
-    <td align="center">RUC</td>
-    <td align="center">{ruc}</td>
-  </tr>
-  <tr>
-    <td align="center">Tipo de Mercaderia</td>
-    <td align="center">{tipoDeMercaderia}</td>
-  </tr>
-  <tr>
-    <td align="center">Descripcion de la Mercaderia </td>
-    <td align="center">{descripcionMercaderia}</td>
-  </tr>
-  <tr>
-    <td align="center">Lugar de Origen</td>
-    <td align="center">{lugarOrigen}</td>
-  </tr>
-  <tr>
-    <td align="center">Fecha de Salida</td>
-    <td align="center">{fechaSalida}</td>
-  </tr>
-  <tr>
-    <td align="center">Pais de Origen</td>
-    <td align="center">{paisOrigen}</td>
-  </tr>
-  <tr>
-    <td align="center">Lugar de Destino</td>
-    <td align="center">{lugarDestino}</td>
-  </tr>
-  <tr>
-    <td align="center">Fecha de Llegada</td>
-    <td align="center">{fechaLlegada}</td>
-  </tr>
-  <tr>
-    <td align="center">Medio de Transporte</td>
-    <td align="center">{medioTransporte}</td>
-  </tr>
-  <tr>
-    <td align="center">Proovedor</td>
-    <td align="center">{proovedor}</td>
-  </tr>
-  <tr>
-    <td align="center">Nombre del Buque</td>
-    <td align="center">{nombreBuque}</td>
-  </tr>
-  <tr>
-    <td align="center">Trasbordo</td>
-    <td align="center">{trasbordo}</td>
-  </tr>
-  <tr>
-    <td align="center">Tipo de Contenedor</td>
-    <td align="center">{tipoContenedor}</td>
-  </tr>
-  <tr>
-    <td align="center">Tipo Embalaje</td>
-    <td align="center">{tipoEmbalaje}</td>
-  </tr>
-  <tr>
-    <td align="center">Valor FOB</td>
-    <td align="center">      {valorFob}</td>
-  </tr>
-  <tr>
-    <td align="center">Valor del Flete</td>
-    <td align="center">      {valorFlete}</td>
-  </tr>
-  <tr>
-    <td align="center">Derechos de Aduana</td>
-    <td align="center">      {aduana}</td>
-  </tr>
-  <tr>
-    <td align="center">Sobreseguro</td>
-    <td align="center">{sobreseguro}</td>
-  </tr>
-  <tr>
-    <td align="center">Observaciones</td>
-    <td align="center">{observaciones}</td>
-  </tr>
-</table>
-<block start="html"/>
-			<table border="0" style="border:1px solid #999999;font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;" width="950" align="center">
-				<tr>
-					<td>
-						Atentamente
-						<br>
-						<br>
-						Sistema de Solicitudes
-						<br>
-						http://clientes.jmvseguros.com/
-					</td>
-				</tr>
-			</table>
-<block end="html"/>
+<div class="page-header">
+	<h1> Solicitud <small> <i class="ace-icon fa fa-angle-double-right"></i> Declaracion de Transportes</small> </h1>
+</div>
+<style type="text/css">
+.profile-info-name{
+	width: 250px;
+	
+}
+</style>
+<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="profile-user-info profile-user-info-striped">
+					<input name="confirmed" type="hidden" id="confirmed" value="1">
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Contratante </div>
+						<div class="profile-info-value">
+							{contratante}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Direccion </div>
+						<div class="profile-info-value">
+							{direccion}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> RUC </div>
+						<div class="profile-info-value">
+							{ruc}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Tipo de Mercaderia </div>
+						<div class="profile-info-value">
+							{tipoDeMercaderia}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Descripcion de la Mercaderia </div>
+						<div class="profile-info-value">
+							{descripcionMercaderia}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Lugar de Origen </div>
+						<div class="profile-info-value">
+							{lugarOrigen}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Fecha de Salida </div>
+						<div class="profile-info-value">
+							{fechaSalida}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Pais de Origen </div>
+						<div class="profile-info-value">
+							{paisOrigen}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Lugar de Destino </div>
+						<div class="profile-info-value">
+							{lugarDestino}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Fecha de Llegada </div>
+						<div class="profile-info-value">
+							<input name="fechaLlegada" type="hidden" id="fechaLlegada" value="{fechaLlegada}" />
+							{fechaLlegada}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Medio de Transporte </div>
+						<div class="profile-info-value">
+							<input name="medioTransporte" type="hidden" id="medioTransporte" value="{medioTransporte}" />
+							{medioTransporte}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Proovedor </div>
+						<div class="profile-info-value">
+							<input name="proovedor" type="hidden" id="proovedor" value="{proovedor}" />
+							{proovedor}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Nombre del Buque </div>
+						<div class="profile-info-value">
+							<input name="nombreBuque" type="hidden" id="nombreBuque2" value="{nombreBuque}" />
+							{nombreBuque}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Trasbordo </div>
+						<div class="profile-info-value">
+							<input name="trasbordo" type="hidden" id="trasbordo" value="{trasbordo}" />
+							{trasbordo}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Tipo de Contenedor </div>
+						<div class="profile-info-value">
+							<input name="tipoContenedor" type="hidden" id="nombreBuque" value="{tipoContenedor}" />
+							{tipoContenedor}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Tipo de Embalaje </div>
+						<div class="profile-info-value">
+							<input name="tipoEmbalaje" type="hidden" id="tipoEmbalaje" value="{tipoEmbalaje}" />
+							{tipoEmbalaje}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Valor FOB </div>
+						<div class="profile-info-value">
+							<input name="fob" type="hidden" id="fob" value="{valorFob}" />
+							{valorFob}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Valor del Flete </div>
+						<div class="profile-info-value">
+							<input name="flete" type="hidden" id="flete" value="{valorFlete}"/>
+							{valorFlete}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Sobreseguro </div>
+						<div class="profile-info-value">
+							<input name="sobreseguro" type="hidden" id="sobreseguro" value="{sobreseguro}" />
+							{sobreseguro}&nbsp; </div>
+					</div>
+					<div class="profile-info-row">
+						<div class="profile-info-name"> Observaciones </div>
+						<div class="profile-info-value">
+							<input name="observaciones" type="hidden" id="observaciones" value="{observaciones}" />
+							{observaciones}&nbsp; </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

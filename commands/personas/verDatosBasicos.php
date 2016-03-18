@@ -15,11 +15,11 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("usuario", $persona->getUserName());
 			$this->addVar("comision", $persona->getComision());
 			if($persona->getHabilitado() == "1"){
-				$this->addVar("estado", '<i class="icon-circle light-green middle"></i> Habilitado');
+				$this->addVar("estado", '<i class="ace-icon fa fa-circle light-green middle"></i> Habilitado');
 			}else{
-				$this->addVar("estado", '<i class="icon-circle red middle"></i> Deshabilitado');
+				$this->addVar("estado", '<i class="ace-icon fa fa-circle red middle"></i> Deshabilitado');
 			}
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("personas/verDatosBasicos.html");
 		}
 	}

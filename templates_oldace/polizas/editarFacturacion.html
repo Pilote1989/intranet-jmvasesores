@@ -1,0 +1,171 @@
+<block start="bloqueEditarFacturacion"/>
+
+<form class="form-horizontal"enctype="multipart/form-data" method="POST" name="editarFacturacion" id="editarFacturacion" action="?do=polizas.procesarFacturacion" role="form">
+  <!-- <legend>Form</legend> -->
+  <fieldset>
+    <div class="form-group">
+      <label for="cobranza" class="col-sm-3 control-label no-padding-right">Aviso de Cobranza</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="cobranza" type="text"  id="cobranza" value="{cobranza}" onKeyPress="return disableEnterKey(event)" placeholder="Aviso de Cobranza" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="primaNeta" class="col-sm-3 control-label no-padding-right">Prima Neta</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="primaNeta" type="text"  id="primaNeta" value="{primaNeta}" onKeyPress="return disableEnterKey(event)" placeholder="Prima Neta" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="derechoEmision" class="col-sm-3 control-label no-padding-right">Derecho de Emision</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="derechoEmision" type="text"  id="derechoEmision" value="{derechoEmision}" onKeyPress="return disableEnterKey(event)" placeholder="Derecho de Emision" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="primaComercial" class="col-sm-3 control-label no-padding-right">Prima Comercial</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="primaComercial" type="text"  id="primaComercial" value="{primaComercial}" onKeyPress="return disableEnterKey(event)" placeholder="Prima Comercial" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="igv" class="col-sm-3 control-label no-padding-right">IGV</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="igv" type="text"  id="igv" value="{igv}" onKeyPress="return disableEnterKey(event)" placeholder="IGV" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="intereses" class="col-sm-3 control-label no-padding-right">Intereses</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="intereses" type="text"  id="intereses" value="{intereses}" onKeyPress="return disableEnterKey(event)" placeholder="Intereses" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="totalFactura" class="col-sm-3 control-label no-padding-right">Total Factura</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="totalFactura" type="text"  id="totalFactura" value="{totalFactura}" onKeyPress="return disableEnterKey(event)" placeholder="Total Factura" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="comisionP" class="col-sm-3 control-label no-padding-right">Comision (%)</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="comisionP" type="text"  id="comisionP" value="{comisionP}" onKeyPress="return disableEnterKey(event)" placeholder="Comision (%)" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="comision" class="col-sm-3 control-label no-padding-right">Comision</label>
+      <div class="col-sm-9">
+        <div class="clearfix">
+          <input name="comision" type="text"  id="comisionP" value="{comision}" onKeyPress="return disableEnterKey(event)" placeholder="Comision" class="col-sm-12">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="idPoliza" id="idPoliza" value="{idPoliza}">
+    <block start="bloqueIdEndoso"/>
+    
+    <input type="hidden" name="idEndoso" id="idEndoso" value="{idEndoso}">
+    <block end="bloqueIdEndoso"/>
+    
+  </fieldset>
+  <div class="form-actions center" style=" margin-bottom:0px">
+    <button class="btn btn-sm btn-success" type="button" id="enviarFacturacion" name="enviarFacturacion">
+      Editar Facturacion <i class="icon-arrow-right icon-on-right bigger-110"></i>
+    </button>
+  </div>
+</form>
+<block end="bloqueEditarFacturacion"/>
+
+<script>
+	
+ 	$('#editarFacturacion').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			cobranza: {
+				required: true,
+			},
+			primaNeta: {
+				required: true,
+			},
+			intereses: {
+				required: true,
+			},
+		},
+
+		messages: {
+			cobranza: {
+				required: "Ingrese el Aviso de Cobranza",
+			},
+			primaNeta: {
+				required: "Ingrese la Prima Neta",
+			},
+			intereses: {
+				required: "Ingrese los intereses",
+			},
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	
+	$('#enviarFacturacion').click(function() {
+		if($("#enviarFacturacion").valid()){
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: '?do=polizas.procesarFacturacion',
+				data: $("#editarFacturacion").serialize(),
+				success: function(data) {
+					if(data["respuesta"]=="SUCCESS"){
+						$("#tab-5").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-5").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');	
+						$( "#dialogoEndosos" ).dialog("close");
+					}
+				}
+			});	
+		}
+	})
+ 
+</script>

@@ -46,7 +46,7 @@ class agregarRenovacion extends sessionCommand{
 			
 			
 		}
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("polizas/agregarRenovacion.html");
 	}
 }

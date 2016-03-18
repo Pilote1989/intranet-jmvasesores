@@ -233,7 +233,7 @@ class comisionesPendientes extends sessionCommand{
 			$this->processTemplate("reportes/comisionesPendientes2.html");
 		
 		}else{
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("reportes/comisionesPendientes.html");
 		}
 	}

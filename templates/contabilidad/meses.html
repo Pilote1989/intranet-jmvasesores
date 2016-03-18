@@ -7,10 +7,10 @@
 <div class="page-header">
 	<label class="pull-left inline">
 		<button id="bBack" class="btn btn-info btn-sm radius-4 no-border" style="border-radius: 5px !important;">
-			<i id="back" class="icon-check bigger-140  icon-only"></i>
+			<i id="back" class="ace-icon fa fa-check-square-o bigger-140  ace-icon fa fa-only"></i>
 		</button>
 	</label>
-	<h1 style="margin-left: 50px;">Meses Contables <span id="mesTot"><small><i class="icon-double-angle-right"></i></small> <span id="mesTag"></span></span> </h1>
+	<h1 style="margin-left: 50px;">Meses Contables <span id="mesTot"><small><i class="ace-icon fa fa-angle-double-right"></i></small> <span id="mesTag"></span></span> </h1>
 </div>
 <div class="col-sm-12">
 	<div class="row">
@@ -35,7 +35,7 @@
 	</div>
 	<div class="space-6">
 	</div>
-	<p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+	<p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i> ¿Esta seguro? </p>
 </div>
 
 <script type="text/javascript">
@@ -96,10 +96,10 @@
 		resizable: false,
 		modal: true,
 		title_html: true,
-		title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> ¡Atencion!</h4></div>",
+		title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> ¡Atencion!</h4></div>",
 		autoOpen: false,
 		buttons: [{
-			html: "<i class='icon-trash bigger-110'></i>&nbsp; Aceptar",
+			html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Aceptar",
 			"class": "btn btn-danger btn-xs",
 			click: function() {
 				$.ajax({
@@ -127,7 +127,7 @@
 				$(this).dialog("close");
 			}
 		}, {
-			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp;Cancelar",
 			"class": "btn btn-xs",
 			click: function() {
 				$(this).dialog("close");

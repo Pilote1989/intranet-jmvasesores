@@ -4,7 +4,7 @@ class generaSBS extends sessionCommand{
 		$fc=FrontController::instance();
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("reportes/generaSBS.html");
 	}
 }

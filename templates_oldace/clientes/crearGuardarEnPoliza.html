@@ -1,0 +1,162 @@
+    <div class="widget-main no-padding">
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="principal19" id="principal19" action="?do=clientes.procesarDatosBasicos" role="form">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+          <div class="form-group">
+            <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre del Cliente </label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="nombre" type="text"  id="nombre" value="" onKeyPress="return disableEnterKey(event)" placeholder="Nombre" class="col-sm-12">
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tipoDocu" class="col-sm-3 control-label no-padding-right">Tipo de Documento </label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+                  <select name="tipoDocu" class="col-sm-12 col-xs-12 form-control" id="tipoDocu" >
+                  {tipoDoc}    
+                  </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" id="divNumeroDoc">
+            <label for="doc" class="col-sm-3 control-label no-padding-right">Documento </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+              <input name="doc" type="text" class="col-sm-12"  id="doc" placeholder="Documento" onKeyPress="return disableEnterKey(event)">
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="direccion" class="col-sm-3 control-label no-padding-right">Direccion </label>
+            <div class="col-sm-9">
+              <input name="direccion" type="text"  id="direccion" onKeyPress="return disableEnterKey(event)" placeholder="Direccion" class="col-sm-12">
+            </div>
+          </div>          
+          <div class="form-group">
+            <label for="distrito" class="col-sm-3 control-label no-padding-right">Distrito </label>
+            <div class="col-sm-9">
+              <select  class="col-sm-12 col-xs-12 form-control" name="distrito" id="distrito" >
+                
+                {distritos}
+              
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="correo" class="col-sm-3 control-label no-padding-right">Correo</label>
+            <div class="col-sm-9">
+              <input name="correo" type="text"  id="correo" onKeyPress="return disableEnterKey(event)" placeholder="ejemplo@ejemplo.com" class="col-sm-12">
+            </div>
+          </div>
+        </fieldset>
+        <input type="hidden" name="idPoliza" value="{idPoliza}" id="idPoliza">
+        <div class="form-actions center">
+          <button class="btn btn-sm btn-success" type="button" id="enviaPrincipal"> Crear Asegurado y Agregar a Poliza <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+        </div>
+      </form>
+    </div>
+<script>
+	$("#dialog-general").dialog("option", "position", {my: "center", at: "center", of: window});
+ 	$('#principal19').validate({
+		onfocusout: false,
+		onkeyup: false,
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			nombre: {
+				required: true,
+			},
+			doc: {
+				required: true,
+				remote: {
+					url: "?do=clientes.check",
+					type: "post",
+					data: {
+						tipoDoc: function() {
+							return $( "#tipoDocu" ).val();
+						},
+						id: function() {
+							return $( "#idCliente" ).val();
+						}
+					}
+				}
+			},
+		},
+		messages: {
+			nombre: {
+				required: "Ingrese el Nombre",
+			},
+			doc: {
+				required: "Ingrese el Numero de Documento",
+				remote: "Ya existe un cliente con ese documento",
+			},
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else 
+				error.insertAfter(element.parent());
+		},
+	});
+
+	$('#enviaPrincipal').click(function() {
+		if($("#principal19").valid()){
+			//por ajax
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: '?do=clientes.procesarCrearGuardarEnPoliza',
+				data: $("#principal19").serialize(),
+				success: function(data) {
+					if (data["respuesta"] == "SUCCESS") {
+						$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+						$("#dialog-general").dialog("close");
+					}
+				}
+			});	
+		}
+	});
+	
+	<block start="noDoc"/>
+			$("#divNumeroDoc").hide();
+	<block end="noDoc"/>
+	
+	$("#tipoDocu").change(function() {
+		$("#doc").removeData("previousValue");
+		if($("#tipoDocu").val()=="SD"){
+			$("#divNumeroDoc").hide();
+		}else{
+			$("#divNumeroDoc").show();
+		}
+		
+	});
+	
+</script>

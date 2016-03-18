@@ -93,7 +93,7 @@ class verDatosBasicos extends sessionCommand{
 			$polizas = Fabrica::getAllFromDB("Poliza",array("idCliente = '" . $this->request->idCliente . "'", "estado = '1'"));
 			$this->addVar("polizas", count($polizas));
 			
-			//$this->addLayout("admin");
+			//$this->addLayout("ace");
 			$this->addBlock("bloqueEditarClientes");
 			$this->processTemplate("clientes/verDatosBasicos.html");
 		}

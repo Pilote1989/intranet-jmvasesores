@@ -1,0 +1,267 @@
+<block start="bloqueEditarPolizas"/>
+<div class="widget-box">
+  <div class="widget-header">
+    <h4>{editar}</h4>
+  </div>
+  <div class="widget-body">
+    <div class="widget-main no-padding">
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="principal2" id="principal2" action="?do=polizas.procesarDatosBasicos" role="form">
+        <fieldset>
+		<div id="pasoClienteDiv">
+        </div>
+		<div id="pasoPolizaDiv">
+        </div>
+		<div id="pasoFacturacionDiv">
+        </div>
+        </fieldset>
+        <block start="idPoliza"/>
+        <input type="hidden" name="idPoliza" value="{idPoliza}">
+        <block end="idPoliza"/>
+        <div class="form-actions center">
+          <button class="btn btn-sm btn-info" type="button" id="pasoCliente"> Cliente <i class="bigger-110"></i> </button>
+          <button class="btn btn-sm" type="button" id="pasoRetroCliente"> <i class="icon-arrow-left bigger-110"></i> Cliente </button>
+          <button class="btn btn-sm btn-info" type="button" id="pasoPoliza"> Poliza <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm" type="button" id="pasoRetroPoliza"> <i class="icon-arrow-left bigger-110"></i> Poliza </button>
+          <button class="btn btn-sm btn-info" type="button" id="pasoFacturacion"> Facturacion <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-success" type="button" id="pasoTerminar"> Terminar <i class="icon-ok bigger-110"></i> </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<block end="bloqueEditarPolizas"/>
+<script type="text/javascript">
+	$(".chosen-select").chosen({
+		no_results_text: "No se hay ningun registro con esos datos.",
+		width: "100%"
+	}); 
+    jQuery(document).ready(function() {
+		$("#pasoCliente").hide();
+		$("#pasoFacturacion").hide();
+		$("#pasoTerminar").hide();
+		$("#pasoRetroCliente").hide();
+		$("#pasoRetroPoliza").hide();
+		 
+		$("#pasoPoliza").click(function() {
+			$("#pasoPoliza").hide();
+			$("#pasoRetroCliente").show();
+			$("#pasoFacturacion").show();
+		})
+		$("#pasoFacturacion").click(function() {
+			$("#pasoFacturacion").hide();
+			$("#pasoRetroCliente").hide();
+			$("#pasoRetroPoliza").show();
+			$("#pasoTerminar").show();
+		})
+		$("#pasoRetroPoliza").click(function() {
+			$("#pasoRetroPoliza").hide();
+			$("#pasoTerminar").hide();
+			$("#pasoRetroCliente").show();
+			$("#pasoFacturacion").show();
+		})
+		$("#pasoRetroCliente").click(function() {
+			$("#pasoCliente").hide();
+			$("#pasoFacturacion").hide();
+			$("#pasoRetroCliente").hide();
+			$("#pasoPoliza").show();
+		})
+		
+		
+		jQuery('#pdf').ace_file_input({
+			no_file:'Escoja ...',
+			btn_choose:'Subir',
+			btn_change:'Cambiar',
+			droppable:false,
+			onchange:null,
+			thumbnail:false, //| true | large
+			whitelist:'pdf',
+			blacklist:'exe|php',
+			//onchange:''
+			//
+		}); 		
+		
+//        jQuery("#nuevo").hide();
+//        jQuery("#antiguo").hide();
+//		jQuery("#new").val({nuevoCliente});
+		//jQuery("#idCliente").val({cliente});
+		if($("#idPersona").val() == "1"){
+			jQuery("#divComisionVendedor").hide();	
+		}
+		
+		
+		jQuery("#idPersona").change(function () {
+			if($("#idPersona").val() != "1"){
+				jQuery("#divComisionVendedor").show('slow');
+			}else{
+				jQuery("#divComisionVendedor").hide('slow');
+			}
+		})
+		jQuery("#idCompania").val({idCompania});
+		jQuery("#idRamo").val({idRamo});
+		jQuery("#idPersona").val({idPersona});
+		jQuery("#moneda").val("{moneda}");
+//		if(jQuery('#new').val() == 1){
+//			jQuery("#antiguo").hide("slow");
+//			jQuery("#nuevo").show("slow");	
+//		}else if(jQuery('#new').val() == 0){
+//			jQuery("#nuevo").hide("slow");
+//			jQuery("#antiguo").show("slow");	
+//		}
+    });
+	jQuery('.date-picker').mask("99/99/9999");
+	jQuery('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+	jQuery("#new").change(function () {
+		if(jQuery('#new').val() == 1){
+			jQuery("#antiguo").hide("slow");
+			jQuery("#nuevo").show("slow");	
+		}else if(jQuery('#new').val() == 0){
+			jQuery("#nuevo").hide("slow");
+			jQuery("#antiguo").show("slow");	
+		}
+	});
+	jQuery("#prima").keyup(function () {
+		jQuery("#derecho").val((parseFloat(jQuery("#prima").val())*0.03).toFixed(2));
+		jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val())*1.03).toFixed(2));		
+		var pri = jQuery("#prima").val();
+		var derecho = jQuery("#derecho").val();
+		var intereses = jQuery("#intereses").val();
+		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
+		var total = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*1.18).toFixed(2);
+		jQuery("#igv").val(igv);
+		jQuery("#total").val(total);	
+		var prim = jQuery("#prima").val();
+		var por = jQuery("#comisionP").val();
+		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
+		if(isNaN(com)){
+			jQuery("#comision").val(0.00);	
+		}else{
+			jQuery("#comision").val(com);
+		}
+	});
+	
+	jQuery("#derecho").keyup(function () {		
+		var pri = jQuery("#prima").val();
+		var derecho = jQuery("#derecho").val();
+		var intereses = jQuery("#intereses").val();
+		jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val()) + parseFloat(jQuery("#derecho").val())).toFixed(2));		
+		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
+		var total = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*1.18).toFixed(2);
+		jQuery("#igv").val(igv);
+		jQuery("#total").val(total);
+		var prim = jQuery("#prima").val();
+		var por = jQuery("#comisionP").val();
+		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
+		if(isNaN(com)){
+			jQuery("#comision").val(0.00);	
+		}else{
+			jQuery("#comision").val(com);
+		}	
+				
+	});
+	
+	jQuery("#intereses").keyup(function () {	
+		var pri = jQuery("#prima").val();
+		var derecho = jQuery("#derecho").val();
+		var intereses = jQuery("#intereses").val();
+		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
+		var total = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*1.18).toFixed(2);
+		jQuery("#igv").val(igv);
+		jQuery("#total").val(total);		
+	});
+	
+	jQuery("#comisionP").keyup(function () {	
+		var prim = jQuery("#prima").val();
+		var por = jQuery("#comisionP").val();
+		var com = (parseFloat(prim)*parseFloat(por)/100).toFixed(2);
+		jQuery("#comision").val(com);		
+	});
+	
+	$('#principal2').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			idCliente: {
+				required: true,
+			},
+			numeroPoliza: {
+				required: true,
+			},
+			idCompania: {
+				required: true,
+			},
+			idRamo: {
+				required: true,
+			},
+			moneda: {
+				required: true,
+			},
+			fechaInicio: {
+				required: true,
+			},
+			fechaFin: {
+				required: true,
+			},
+		},
+
+		messages: {
+			idCliente: {
+				required: "Seleccione el Cliente",
+			},
+			numeroPoliza: {
+				required: "Ingrese el Numero de Poliza",
+			},
+			idCompania: {
+				required: "Seleccione la Compania",
+			},
+			idRamo: {
+				required: "Seleccione el Ramo",
+			},
+			moneda: {
+				required: "Seleccione la Moneda",
+			},
+			fechaInicio: {
+				required: "Escoja la fecha de inicio",
+			},
+			fechaFin: {
+				required: "Escoja la fecha de fin",
+			},
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	$('#enviarPrincipal2').click(function() {
+		if($("#principal2").valid()){
+			$("#principal2").submit();
+		}
+	})
+    </script> 

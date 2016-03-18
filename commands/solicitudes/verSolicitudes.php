@@ -67,7 +67,7 @@ class verSolicitudes extends sessionCommand{
 			$this->addBlock("noFiltroUsuario");
 		}
 		$this->addVar("nombre", $usuario->getNombres()." ".$usuario->getApellidoPaterno());
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("solicitudes/verSolicitudes.html");
 	}
 }

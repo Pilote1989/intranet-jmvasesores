@@ -60,8 +60,8 @@ class Paginador{
 	
 	
 	static function crearHtmlAjax2($paginaActual,$numeroFilas,$uriPagina,$divPagina, $limite){
-		// Se comentó la siguiente línea ya que se agregó el parámetro $limite a 
-		// la función para controlar el limite de resultados
+		// Se comentï¿½ la siguiente lï¿½nea ya que se agregï¿½ el parï¿½metro $limite a 
+		// la funciï¿½n para controlar el limite de resultados
         //$paginas=(int)$numeroFilas/self::LIMITE_POR_PAGINA;
 		$paginas=(int)$numeroFilas/$limite;
 		
@@ -122,8 +122,8 @@ class Paginador{
 	
 static function crearHtmlAjax($paginaActual,$numeroFilas,$uriPagina,$divPagina, $limite){
 	/*
-		// Se comentó la siguiente línea ya que se agregó el parámetro $limite a 
-		// la función para controlar el limite de resultados
+		// Se comentï¿½ la siguiente lï¿½nea ya que se agregï¿½ el parï¿½metro $limite a 
+		// la funciï¿½n para controlar el limite de resultados
         //$paginas=(int)$numeroFilas/self::LIMITE_POR_PAGINA;
 		$paginas=(int)$numeroFilas/$limite;
 		
@@ -194,12 +194,12 @@ static function crearHtmlAjax($paginaActual,$numeroFilas,$uriPagina,$divPagina, 
 		// -> Imprimir limite inferior
 		if($paginaActual > $margen+1){
 			$contenidoHtml=$contenidoHtml.'
-			<li> <a onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina=1\',\''.$divPagina.'\')"> <i class="icon-double-angle-left"></i> </a> </li>
+			<li> <a href="javascript:;" onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina=1\',\''.$divPagina.'\')"> <i class="ace-icon fa fa-angle-double-left"></i> </a> </li>
 			';
 
 		}else {
 			$contenidoHtml=$contenidoHtml.'
-			<li class="disabled"> <a> <i class="icon-double-angle-left"></i> </a> </li>
+			<li class="disabled"> <a href="javascript:;"> <i class="ace-icon fa fa-angle-double-left"></i> </a> </li>
 			';
 			
 		}
@@ -229,20 +229,20 @@ static function crearHtmlAjax($paginaActual,$numeroFilas,$uriPagina,$divPagina, 
 		// -> Imprimir las paginas
         for($i=$inferior;$i<=$superior;$i++){
 			if($paginaActual==$i){
-				$contenidoHtml=$contenidoHtml.'<li class="active"> <a>' . $i . '</a> </li>';
+				$contenidoHtml=$contenidoHtml.'<li class="active"> <a href="javascript:;">' . $i . '</a> </li>';
 			}
 			else{
 				$contenidoHtml=$contenidoHtml.'
-				<li> <a onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$i.'\',\''.$divPagina.'\')">' . $i . '</a> </li>';
+				<li> <a href="javascript:;" onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$i.'\',\''.$divPagina.'\')">' . $i . '</a> </li>';
 			}
         }
 		// -> Imprimir limite superior
 		if($paginaActual < $paginas-$margen){
 			$contenidoHtml=$contenidoHtml.'
-			<li> <a onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$paginas.'\',\''.$divPagina.'\')"> <i class="icon-double-angle-right"></i> </a> </li>';
+			<li> <a href="javascript:;" onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$paginas.'\',\''.$divPagina.'\')"> <i class="ace-icon fa fa-angle-double-right"></i> </a> </li>';
 		}else{
 			$contenidoHtml=$contenidoHtml.'
-			<li class="disabled"> <a> <i class="icon-double-angle-right"></i> </a> </li>';
+			<li class="disabled"> <a href="javascript:;"> <i class="ace-icon fa fa-angle-double-right"></i> </a> </li>';
 			
 		}
 		$contenidoHtml=$contenidoHtml.'</ul>';
@@ -270,12 +270,12 @@ static function crearHtmlAjax($paginaActual,$numeroFilas,$uriPagina,$divPagina, 
 		// -> Imprimir limite inferior
 		if($paginaActual > $margen+1){
 			$contenidoHtml=$contenidoHtml.'
-			<li> <a onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina=1\',\''.$divPagina.'\')"> <i class="icon-double-angle-left"></i> </a> </li>
+			<li> <a href="javascript:;" onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina=1\',\''.$divPagina.'\')"> <i class="ace-icon fa fa-angle-double-left"></i> </a> </li>
 			';
 
 		}else {
 			$contenidoHtml=$contenidoHtml.'
-			<li class="disabled"> <a> <i class="icon-double-angle-left"></i> </a> </li>
+			<li class="disabled"> <a href="javascript:;"> <i class="ace-icon fa fa-angle-double-left"></i> </a> </li>
 			';
 			
 		}
@@ -305,20 +305,20 @@ static function crearHtmlAjax($paginaActual,$numeroFilas,$uriPagina,$divPagina, 
 		// -> Imprimir las paginas
         for($i=$inferior;$i<=$superior;$i++){
 			if($paginaActual==$i){
-				$contenidoHtml=$contenidoHtml.'<li class="active"> <a>' . $i . '</a> </li>';
+				$contenidoHtml=$contenidoHtml.'<li class="active"> <a href="javascript:;">' . $i . '</a> </li>';
 			}
 			else{
 				$contenidoHtml=$contenidoHtml.'
-				<li> <a onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$i.'\',\''.$divPagina.'\')">' . $i . '</a> </li>';
+				<li> <a href="javascript:;" onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$i.'\',\''.$divPagina.'\')">' . $i . '</a> </li>';
 			}
         }
 		// -> Imprimir limite superior
 		if($paginaActual < $paginas-$margen){
 			$contenidoHtml=$contenidoHtml.'
-			<li> <a onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$paginas.'\',\''.$divPagina.'\')"> <i class="icon-double-angle-right"></i> </a> </li>';
+			<li> <a href="javascript:;" onclick="cargarFormulario(\'formulario\',\''.$uriPagina.'&pagina='.$paginas.'\',\''.$divPagina.'\')"> <i class="ace-icon fa fa-angle-double-right"></i> </a> </li>';
 		}else{
 			$contenidoHtml=$contenidoHtml.'
-			<li class="disabled"> <a> <i class="icon-double-angle-right"></i> </a> </li>';
+			<li class="disabled"> <a href="javascript:;"> <i class="ace-icon fa fa-angle-double-right"></i> </a> </li>';
 			
 		}
 		$contenidoHtml=$contenidoHtml.'</ul>';
@@ -340,8 +340,8 @@ static function crearHtmlAjax($paginaActual,$numeroFilas,$uriPagina,$divPagina, 
 	
 	
 	static function getMinimo($paginaActual, $limite){
-		// Se comentó la siguiente línea ya que se agregó el parámetro $limite a 
-		// la función para controlar el limite de resultados
+		// Se comentï¿½ la siguiente lï¿½nea ya que se agregï¿½ el parï¿½metro $limite a 
+		// la funciï¿½n para controlar el limite de resultados
 		//return(($paginaActual-1)*self::LIMITE_POR_PAGINA);
 		return(($paginaActual-1)*$limite);
 	}

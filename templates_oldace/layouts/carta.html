@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>eBase - JMVSeguros - Crear Carta</title>
+<!-- basic styles -->
+
+        <!-- basic styles -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+        <!-- page specific plugin styles -->
+        <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.full.min.css" />
+        <link rel="stylesheet" href="assets/css/datepicker.css" />
+		<link rel="stylesheet" href="assets/css/daterangepicker.css" />
+        <link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
+        <!-- fonts -->
+        <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+		<link rel="stylesheet" href="assets/css/chosen.css" />
+        <!-- ace styles -->
+        <link rel="stylesheet" href="assets/css/ace.min.css" />
+        <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+        <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+        <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+        <script src="assets/js/ace-extra.min.js"></script>
+        <style>
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+}
+</style>
+        <!-- Ajax -->
+        <script type="text/javascript" src="jScripts/ajax_core.js"></script>
+        <script type="text/javascript" src="jScripts/ajform.js"></script>
+
+        <!--Fin Ajax-->
+
+</head>
+<body>
+<!-- basic scripts --> 
+<!--[if !IE]> -->
+                <script type="text/javascript">
+                    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+                </script>
+                <!-- <![endif]--> 
+<!--[if IE]>
+                <script type="text/javascript">
+                 window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+                </script>
+                <![endif]--> 
+<script type="text/javascript">
+                    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+                </script> 
+<script src="assets/js/bootstrap.min.js"></script> 
+<script src="assets/js/typeahead-bs2.min.js"></script> 
+
+<!-- page specific plugin scripts --> 
+<script src="assets/js/jquery-ui-1.10.3.full.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script> 
+<script src="assets/js/jquery.dataTables.bootstrap.js"></script> 
+<script src="assets/js/fuelux/fuelux.wizard.min.js"></script> 
+<script src="assets/js/additional-methods.min.js"></script> 
+<script src="assets/js/bootbox.min.js"></script> 
+<script src="assets/js/jquery.maskedinput.min.js"></script> 
+<script src="assets/js/select2.min.js"></script> 
+<script src="assets/js/date-time/bootstrap-datepicker.min.js"></script> 
+<script src="assets/js/chosen.jquery.min.js"></script> 
+<script src="assets/js/jquery.validate.min.js"></script> 
+<script src="assets/js/date-time/moment.min.js"></script>
+<script src="assets/js/date-time/daterangepicker.min.js"></script>
+
+<!-- ace scripts --> 
+
+<script src="assets/js/ace-elements.min.js"></script> 
+<script src="assets/js/ace.min.js"></script>
+<script type="text/javascript" src="tinymce/js/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    height: 450,
+	language : 'es',
+    plugins: [
+        "advlist autolink lists preview",
+        "visualblocks code fullscreen",
+        "table contextmenu paste"
+    ],
+    toolbar: "insertfile undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+    setup: function(editor) {
+        editor.on('change', function(e) {
+			$('#sinGuardar').show();
+			$('#guardada').hide();
+        });
+    }
+});
+</script>
+<div id="dialog-message" align="center">
+	<p> Guardando </p>
+	<div class="progress progress-striped active">
+		<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+	</div>
+</div>
+<div class="main-container">
+<div class="page-content">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <h3 class="header blue lighter"> Crear Carta <span id="guardada" class="label label-success pull-right" style="display:none;">Guardada</span> <span id="sinGuardar" class="label label-warning pull-right" style="display:none;">Sin Guardar</span><span id="nueva" class="label label-danger pull-right">Nueva</span></h3>
+      </h3>
+    </div>
+  </div>
+  <form method="post" id="principal" name="principal" action="/?do=cartas.procesarCarta">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1" style="height:610px">
+        <div class="form-group">
+          <textarea id="texto" name="texto">
+			<MainCommand/>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="detalle" class="col-sm-3 control-label no-padding-right">Detalle de la Carta </label>
+          <div class="col-sm-9">
+            <input name="detalle" class="col-sm-12 col-xs-12" type="text" id="detalle" placeholder="Detalle">
+          </div>
+        </div>
+      </div>
+    </div>
+    <block start="poliza"/>
+    <input type="hidden" id="idPoliza" name="idPoliza" value="{idPoliza}" />
+    <block end="poliza"/>
+    <div class="clearfix form-actions">
+      <div class="col-md-offset-3 col-md-9 center">
+        <button id="envio" name="envio" class="btn btn-info" type="button">
+          <i class="icon-ok bigger-110"></i> Guardar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+$( "#dialog-message" ).dialog({
+	autoOpen: false,
+	modal: true
+});	
+jQuery(function($) {
+	$('#envio').on('click', function() {
+		$( "#dialog-message" ).dialog("open");
+		$(".ui-dialog-titlebar-close").hide();
+		tinyMCE.triggerSave();
+		
+		$.ajax({
+			type: "POST",
+		    dataType: "json",
+			url: '?do=cartas.guardar',
+			data: $("#principal").serialize(),
+			success: function(data) {
+				if(data["respuesta"]=="OLD"){
+					//OK no hago nada	
+					$( "#dialog-message" ).dialog("close");
+					$('#sinGuardar').hide();
+					$('#guardada').show();
+					$('#nueva').hide();
+				}else{
+					//Carta Nueva, tengo que recargar la pagina
+					window.location.replace("/?do=cartas.editar&idCarta=" + data["ids"]);
+				}
+			}
+		});
+	});
+	$('#detalle').on('keypress', function() {
+		$('#sinGuardar').show();
+		$('#guardada').hide();
+	});
+});
+</script>
+</body>
+</html>

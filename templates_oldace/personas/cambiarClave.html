@@ -1,0 +1,51 @@
+<div id="divErrores2" style="padding-left:20px"> {errorUsuario} </div>
+<block start="mostrarForm"/>
+<div class="widget-box">
+  <div class="widget-header">
+    <h4>Cambiar Contraseña</h4>
+  </div>
+  <div class="widget-body">
+    <div class="widget-main no-padding">
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="principal2" id="principal2" action="?do=polizas.procesarDatosBasicos" role="form">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+          <div class="form-group">
+            <label for="numeroPoliza" class="col-sm-3 control-label no-padding-right">Correo Electronico</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input class="col-sm-12 col-xs-12" name="mail" type="text"  id="mail" value="{mail}"  placeholder="Password" readonly="readonly">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password_2" class="col-sm-3 control-label no-padding-right">Nueva Contraseña</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input class="col-sm-12 col-xs-12" name="password_2" type="text"  id="password_2"  placeholder="Contraseña">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cobranza" class="col-sm-3 control-label no-padding-right">Confirmar Contraseña</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input class="col-sm-12 col-xs-12" name="cobranza" type="text"  id="cobranza" placeholder="Confirmar Contraseña">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div id="divErrores" style="padding-left:20px"> {errorLogin} </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-actions center"><block start="admin"/>
+              <input type="hidden" name="admin" value="1">
+              <block end="admin"/>
+          <button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2"> Cambiar Clave <i class="icon-arrow-right icon-on-right bigger-110"></i> </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<block end="mostrarForm"/>

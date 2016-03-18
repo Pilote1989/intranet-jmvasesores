@@ -54,7 +54,7 @@ class verPersonas extends sessionCommand{
 			$this->addEmptyVar("correo");
 		}
 		//print_r($_SESSION);
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("personas/verPersonas.html");
 	}
 }

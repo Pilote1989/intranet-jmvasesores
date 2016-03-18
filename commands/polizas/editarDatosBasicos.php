@@ -178,7 +178,7 @@ class editarDatosBasicos extends sessionCommand{
 			
 		}
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 
 		//if($this->request->idPoliza){
 		//	$this->addLayout("ficha");

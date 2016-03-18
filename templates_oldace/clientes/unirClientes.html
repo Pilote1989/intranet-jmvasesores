@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h1> Herramienta <small> <i class="icon-double-angle-right"></i>&nbsp;&nbsp;Unir Clientes</small>
+  </h1>
+</div>
+<div class="row">
+	<div class="col-sm-offset-2 col-sm-8">
+		<div class="row">
+			<div class="col-sm-12">
+			<select id="primerCliente" class="chosen-select">
+				{selectCliente}
+			</select>
+			</div>
+		</div>
+		<div class="space"></div>
+		<div class="row">
+			<div class="col-sm-12">
+			<select id="segundoCliente" class="chosen-select">
+				{selectCliente}
+			</select>
+			</div>
+		</div>
+		<div class="row">
+		    <div class="clearfix form-actions">
+				<div class="center">
+					<button class="btn btn-info" type="button" id="primerPaso">
+						<i class="icon-ok bigger-110"></i>
+						Siguiente
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(".chosen-select").chosen({
+		no_results_text: "No se hay ningun registro con esos datos.",
+		placeholder_text_single: "Seleccione un Cliente",
+		width: "100%"
+	});
+	$("#primerPaso").on( "click", function() {
+		if($('#primerCliente').val()=="" && $('#segundoCliente').val()==""){
+			alert("1");
+		}
+		
+	});
+</script>

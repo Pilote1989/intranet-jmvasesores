@@ -29,7 +29,7 @@ class pantalla extends sessionCommand{
 		$this->addVar("clientes",$selectCliente);		
 		
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		
 		$this->processTemplate("reportes/pantalla.html");
 	}

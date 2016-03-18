@@ -138,7 +138,7 @@ class genera extends sessionCommand{
 
 		//$this->addVar("query",$query);
 		//$this->addLoop("polizas",$polizas);
-		//$this->addLayout("admin");
+		//$this->addLayout("ace");
 		//$this->processTemplate("reportes/genera.html");
 		$fc->redirect("?do=reportes.generar");
 	}

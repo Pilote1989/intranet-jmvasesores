@@ -1,7 +1,7 @@
 <block start="Anulada"/>
     <div class="alert alert-danger">
         <button data-dismiss="alert" class="close" type="button">
-            <i class="icon-remove"></i>
+            <i class="ace-icon fa fa-remove"></i>
         </button>
         La poliza se encuentra anulada. <br>
     </div>
@@ -10,7 +10,7 @@
 <h3 class="header smaller lighter blue" style="margin-top:0px;">Asegurados
   <div class="btn-group pull-right">
     <button id="agregaAsegurado" class="btn btn-xs btn-primary">
-            <i class="icon-plus-sign bigger-120"></i>Agregar Asegurado
+            <i class="ace-icon fa fa-plus-sign bigger-120"></i>Agregar Asegurado
           </button>
   </div>
 </h3>
@@ -37,7 +37,7 @@
                 <td align="center"> {asegurados.nacimiento} </td>
                 <td align="center"> {asegurados.edad} </td>
                 <td align="center"><div class="action-buttons">
-                    <a class="blue elimina" x-link="/?do=polizas.eliminarAsegurado&id={asegurados.id}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+                    <a class="blue elimina" x-link="/?do=polizas.eliminarAsegurado&id={asegurados.id}" href="#"> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
                   </div></td>
               </tr>
               <loop end="asegurados"/>
@@ -50,7 +50,7 @@
           </div>
           <div class="space-6">
           </div>
-          <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+          <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
         </div>
         <block end="bloqueResultados"/>
         <block start="bloqueNoResultados"/>
@@ -81,11 +81,11 @@
                     resizable: false,
                     modal: true,
                     title_html: true,
-                    title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar el Asegurado?</h4></div>",
+                    title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Asegurado?</h4></div>",
                     autoOpen: false,
                     buttons: [
                         {
-                            html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+                            html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
                             "class" : "btn btn-danger btn-xs",
                             click: function() {
                                 $.ajax({
@@ -102,7 +102,7 @@
                         }
                         ,
                         {
-                            html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+                            html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
                             "class" : "btn btn-xs",
                             click: function() {
                                 $( this ).dialog( "close" );
@@ -116,7 +116,7 @@
 						url: $(this).attr('x-link'),
 						success: function(responseText){
 							$('#dialog-general').html(responseText);					
-							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Asegurado</h4></div>");
+							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-dashboard blue'></i>Agregar Asegurado</h4></div>");
 							$( "#dialog-general" ).dialog("open");
 						},
 						error: function(responseText){
@@ -129,7 +129,7 @@
 						url: '/?do=polizas.agregarAsegurado&idPoliza={idPoliza}',
 						success: function(responseText){
 							$('#dialog-general').html(responseText);					
-							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='icon-dashboard blue'></i>Agregar Asegurado</h4></div>");
+							$('#dialog-general').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-dashboard blue'></i>Agregar Asegurado</h4></div>");
 							$( "#dialog-general" ).dialog("open");
 						},
 						error: function(responseText){

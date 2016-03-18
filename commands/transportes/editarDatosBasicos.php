@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class editarDatosBasicos extends sessionCommand{
 	function execute(){
 		$fc=FrontController::instance();
@@ -82,7 +82,7 @@ class editarDatosBasicos extends sessionCommand{
 		}
 		$this->addVar("nombre", $usuario->getNombres()." ".$usuario->getApellidoPaterno());
 		if(!$this->request->html){
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 		}
 		$this->processTemplate("transportes/editarDatosBasicos.html");
 	}

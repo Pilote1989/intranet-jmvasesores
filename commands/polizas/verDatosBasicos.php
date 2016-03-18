@@ -37,10 +37,10 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("colorEstado", $poliza->estadoColor());
 			$this->addVar("estado", $poliza->estado());
 			if($cobro->getIdLiquidacion() == ""){
-				$this->addVar("estadoCobranza", '<i class="icon-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
+				$this->addVar("estadoCobranza", '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
 			}else{
 				$liquidacion = Fabrica::getFromDB("Liquidacion", $cobro->getIdLiquidacion());
-				$this->addVar("estadoCobranza", '<i class="icon-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada - Factura : ' . $liquidacion->getFactura() . '</a>');
+				$this->addVar("estadoCobranza", '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada - Factura : ' . $liquidacion->getFactura() . '</a>');
 			}
 			$this->addVar("cobranza", $cobro->getAvisoDeCobranza());
 			$this->addVar("documento", $poliza->getDocumento());
@@ -55,10 +55,10 @@ class verDatosBasicos extends sessionCommand{
     		    $this->addBlock("datosComision");
             }
 			if($cobro->getIdCedida() == ""){
-				$this->addVar("estadoComisionCedida", '<i class="icon-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
+				$this->addVar("estadoComisionCedida", '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
 			}else{
 				$cedida = Fabrica::getFromDB("Cedida", $cobro->getIdCedida());
-				$this->addVar("estadoComisionCedida", '<i class="icon-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.verCedida&idCedida=' . $cobro->getIdCedida() . '">Liquidada - Factura : ' . $cedida->getFactura() . '</a>');
+				$this->addVar("estadoComisionCedida", '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.verCedida&idCedida=' . $cobro->getIdCedida() . '">Liquidada - Factura : ' . $cedida->getFactura() . '</a>');
 			}
 			$persona = Fabrica::getFromDB("Persona", $cobro->getIdPersona());
 			$this->addVar("asesor", $persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno());
@@ -98,7 +98,7 @@ class verDatosBasicos extends sessionCommand{
 					$listaVigencias[$i]["idLista"] = $i + 1;
 				}else{
 					$listaVigencias[$i]["idLista"] = $i + 1;
-					$listaVigencias[$i]["idLista"] = "<i class='icon-arrow-right icon-on-right'></i> ". $listaVigencias[$i]["idLista"];					
+					$listaVigencias[$i]["idLista"] = "<i class='ace-icon fa fa-arrow-right icon-on-right'></i> ". $listaVigencias[$i]["idLista"];					
 				}
 					$listaVigencias[$i]["estado"] = $vigencia->estadoLabel() . "";
 				$listaVigencias[$i]["idVigencia"] = $vigencia->getId();

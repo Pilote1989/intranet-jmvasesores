@@ -12,18 +12,18 @@ class inscribirUsuario extends sessionCommand{
 				$personas = Fabrica::getAllFromDB("Persona", array("userName = '" . $this->request->usuario ."'"));
 				if(sizeof($personas)==1){
 					$this->addBlock("usuario");
-					$this->addLayout("admin");
+					$this->addLayout("ace");
 					$this->processTemplate("personas/inscribirUsuario.html");
 				}else{
 					$personas = Fabrica::getAllFromDB("Persona", array("mail = '" . $this->request->correo ."'"));
 					if(sizeof($personas)==1){
 						$this->addBlock("correo");
-						$this->addLayout("admin");
+						$this->addLayout("ace");
 						$this->processTemplate("personas/inscribirUsuario.html");
 					}elseif($this->request->clave != $this->request->repetirClave){
 						echo $this->request->clave . " - " . $this->request->repetirClave;
 						$this->addBlock("clave");
-						$this->addLayout("admin");
+						$this->addLayout("ace");
 						$this->processTemplate("personas/inscribirUsuario.html");
 					}else{
 						//creo el usuario
@@ -44,7 +44,7 @@ class inscribirUsuario extends sessionCommand{
 					}				
 				}
 			}else{
-					$this->addLayout("admin");
+					$this->addLayout("ace");
 					$this->processTemplate("personas/inscribirUsuario.html");	
 			}
 		}else{

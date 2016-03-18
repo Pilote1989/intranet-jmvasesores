@@ -1,0 +1,146 @@
+
+<h3 class="row header smaller lighter blue">
+	<span class="col-xs-6"> Reporte SBS </span> 
+	<span class="col-xs-6"> 
+		<span class="pull-right inline">
+			<span class="btn-toolbar inline middle no-margin"> 
+				<span class="btn-group no-margin" data-toggle="buttons" id="accordion-style">
+					<div class="btn-group">
+						<button class="btn btn-xs btn-info">Herramientas</button>
+						<button data-toggle="dropdown" class="btn btn-xs btn-info dropdown-toggle">
+							<span class="icon-caret-down icon-only"></span>
+						</button>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="#" id="exportar">Exportar</a>
+							</li>
+						</ul>
+					</div>					
+				</span>
+			</span> 
+		</span> 
+	</span><!-- /span --> 
+</h3>
+<div class="table-responsive" style="overflow-x: scroll;overflow-y: scroll;height: 500px;">
+	<style type = "text/css" scoped>
+.odd
+{ background-color: #f9f9f9; }
+
+.even
+{ background-color: #ffffff; }
+</style>
+
+	<table id="sample-table-2" class="table table-bordered table-hover table-condensed">
+		<thead>
+			<tr>
+				<th align="center">Aviso</th>
+				<th align="center">Cliente</th>
+				<th align="center">Poliza</th>
+				<th align="center">Prima Neta</th>
+				<th align="center">Por. Com.</th>
+				<th align="center">Com.</th>
+				<th align="center">Fecha Factura</th>
+				<th align="center">RAM</th>
+				<th align="center">CIA</th>
+				<th align="center">M</th>
+				<th align="center">Num. Factura</th>
+				<th align="center">Prima Bruta</th>
+				<th align="center">Inicio</th>
+				<th align="center">Termino</th>
+				<th align="center">DOC</th>
+			</tr>
+		</thead>
+		<tbody>
+			<loop start="comisiones"/>
+			<tr style="border-right: white 2px solid;border-left: white 2px solid;">
+		    <td colspan="15"><span><b>{comisiones.compania}</b></span></td>
+			</tr>
+			    <loop start="comisiones.cobro"/>
+					<tr class="st">
+						<td align="center">{comisiones.cobro.avisoDeCobranza}</td>
+						<td align="center">{comisiones.cobro.nombre}</td>
+						<td align="center">{comisiones.cobro.numeroPoliza}</td>
+						<td align="center">{comisiones.cobro.primaNeta}</td>
+						<td align="center">{comisiones.cobro.comisionP}</td>
+						<td align="center">{comisiones.cobro.comision}</td>
+						<td align="center">{comisiones.cobro.fechaFactura}</td>
+						<td align="center">{comisiones.cobro.ramo}</td>
+						<td align="center">{comisiones.cobro.compania}</td>
+						<td align="center">{comisiones.cobro.moneda}</td>
+						<td align="center">{comisiones.cobro.factura}</td>
+						<td align="center">{comisiones.cobro.totalFactura}</td>
+						<td align="center">{comisiones.cobro.inicioVigencia}</td>
+						<td align="center">{comisiones.cobro.finVigencia}</td>
+						<td align="center">{comisiones.cobro.doc}</td>
+					</tr>
+		          <loop end="comisiones.cobro"/>
+			<loop end="comisiones"/>
+		</tbody>
+	</table>
+</div>
+<div class="space"></div>
+<table id="sample-table-2" class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th align="center" class="col-sm-6 text-center">Compañia</th>
+			<th align="center" class="col-sm-2 text-center">Comisiones Soles</th>
+			<th align="center" class="col-sm-2 text-center">Comisiones Dolares</th>
+			<th align="center" class="col-sm-2 text-center">Comisiones Euros</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<loop start="tablaTotal"/>
+		<tr>
+			<td>{tablaTotal.idLista}</td>
+			<td class="text-right">{tablaTotal.solesC}</td>
+			<td class="text-right">{tablaTotal.dolaresC}</td>
+			<td class="text-right">{tablaTotal.eurosC}</td>
+		</tr>
+		<loop end="tablaTotal"/>
+	</tbody>	
+</table>
+<div class="space"></div>
+<table id="sample-table-2" class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th align="center" class="col-sm-6 text-center">Compañia</th>
+			<th align="center" class="col-sm-2 text-center">Primas Soles</th>
+			<th align="center" class="col-sm-2 text-center">Primas Dolares</th>
+			<th align="center" class="col-sm-2 text-center">Primas Euros</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<loop start="tablaTotal"/>
+		<tr>
+			<td>{tablaTotal.idLista}</td>
+			<td class="text-right">{tablaTotal.solesP}</td>
+			<td class="text-right">{tablaTotal.dolaresP}</td>
+			<td class="text-right">{tablaTotal.eurosP}</td>
+		</tr>
+		<loop end="tablaTotal"/>
+	</tbody>	
+</table>
+
+<script src="/assets/js/jquery.btechco.excelexport.js"></script>
+<script src="/assets/js/jquery.base64.js"></script>
+<script>
+jQuery('#exportar').click( function(event) {
+	$("#sample-table-2").btechco_excelexport({
+                containerid: "sample-table-2"
+               , datatype: $datatype.Table
+            });
+	event.preventDefault();
+});
+
+// Find all objects to highlight.
+$(".st").each(function(index) {
+    // For each one, peek at the previous object.
+    var objPrev = $(this).prev('.st');
+    if( objPrev.hasClass('odd') ) {
+        $(this).addClass('even');
+    } else {
+        $(this).addClass('odd');
+    }    
+});
+	
+</script>

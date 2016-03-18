@@ -43,7 +43,7 @@ class changelog extends sessionCommand{
     
 		$this->addVar("tabla",$tabla);
     
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("admin/changelog.html");
 	}
 }

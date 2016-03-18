@@ -46,7 +46,7 @@ class ver extends sessionCommand{
 		$this->addVar("igv", number_format(($fac*0.18),2));
 		$this->addVar("totalFactura", number_format(($fac*1.18),2));
 		$this->addLoop("cobros",$listaCobros);
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		if($liquidacion->getBono()=="1"){
 			$this->addVar("subtotal", number_format($liquidacion->getSubTotal(),2));
 			$this->addVar("moneda", $liquidacion->getMoneda());

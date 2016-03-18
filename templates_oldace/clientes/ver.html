@@ -1,0 +1,68 @@
+<div class="page-header">
+  <h1> Cliente <small> <i class="icon-double-angle-right"></i>&nbsp;&nbsp;{nombre}</small>
+    <block start="admin"/>
+    
+    <div class="btn-group pull-right">
+      <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown">
+        <i class="icon-cogs bigger-120"></i> Opciones <span class="icon-caret-down icon-on-right"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-info pull-right">
+        <li> <a href="?do=clientes.editarDatosBasicos&idCliente={idCliente}">Editar Datos Basicos</a> </li>
+        <block start="elimina"/>
+        <li> <a href="?do=clientes.eliminarCliente&idCliente={idCliente}" id="elimina">Eliminar Cliente</a> </li>
+        <block end="elimina"/>
+      </ul>
+    </div>
+    <block end="admin"/>
+    
+  </h1>
+</div>
+<!-- /.page-header -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-sm-2 center">
+        <span class="btn btn-app btn-primary no-hover"> <span class="line-height-1 bigger-230"> {polizas} </span> <br>
+        <span class="line-height-1 smaller-90"> Polizas </span> </span>
+        <div class="hr hr12 dotted">
+        </div>
+      </div>
+      <div class="col-sm-10">
+        <div class="tabbable">
+          <ul id="myTab" class="nav nav-tabs">
+            <li class="active" id="active"> <a href="#tab-1" x-link="/?do=clientes.verDatosBasicos&idCliente={idCliente}" data-toggle="tab"> <i class="green icon-home bigger-120"></i> Datos Basicos </a> </li>
+            <li> <a href="#tab-2" x-link="/?do=reportes.generaPantalla&vista=1&ase={idCliente}&com=&ram=&vista=2" data-toggle="tab"><i class="pink icon-inbox bigger-120"></i> Polizas </a> </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-1">
+              <div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
+                <div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;">
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-2">
+              <div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
+                <div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+$(document).ready(function(){
+	$($('#myTab li#active a').attr('href')).load($('#myTab li#active a').attr('x-link'));
+	$('#myTab li a').click(function(){
+		var currentTab = $(this).attr('href');
+		$(currentTab).load($(this).attr('x-link'));
+	});
+	$( ".tool" ).tooltip();
+	$('#elimina').click(function(){
+		return confirm("¿Estas seguro que deseas eliminar el cliente?");
+	});
+});
+</script>

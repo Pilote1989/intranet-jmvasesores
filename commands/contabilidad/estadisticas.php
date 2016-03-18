@@ -127,7 +127,7 @@ class estadisticas extends sessionCommand{
     	
 		$this->addLoop("data",$data);
     	
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("contabilidad/estadisticas.html");
 	}
 }

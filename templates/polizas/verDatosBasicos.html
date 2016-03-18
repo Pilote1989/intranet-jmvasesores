@@ -1,7 +1,13 @@
+<style type="text/css">
+.profile-info-name{
+	width: 150px;
+	
+}
+</style>
 <block start="Anulada"/>
 <div class="alert alert-danger">
 	<button data-dismiss="alert" class="close" type="button">
-		<i class="icon-remove"></i>
+		<i class="ace-icon fa fa-remove"></i>
 	</button>
 	La poliza se encuentra anulada. <br>
 </div>
@@ -10,7 +16,7 @@
 <!--
 <div class="alert alert-info">
 	<button data-dismiss="alert" class="close" type="button">
-		<i class="icon-remove"></i>
+		<i class="ace-icon fa fa-remove"></i>
 	</button>
 	Mostrando la vigencia: {fechaInicio} - {fechaFin} <br>
 </div>-->
@@ -18,7 +24,7 @@
 <div class="profile-user-info profile-user-info-striped">
 	<div class="profile-info-row">
 		<div class="profile-info-name"> Estado </div>
-		<div class="profile-info-value"> <i class="icon-circle {colorEstado}"></i>&nbsp;&nbsp;&nbsp;{estado}&nbsp; </div>
+		<div class="profile-info-value"> <i class="ace-icon fa fa-circle {colorEstado}"></i>&nbsp;&nbsp;&nbsp;{estado}&nbsp; </div>
 	</div>
 	<div class="profile-info-row">
 		<div class="profile-info-name"> Nombre </div>
@@ -44,7 +50,7 @@
 		<div class="profile-info-name"> Poliza en PDF </div>
 		<div class="profile-info-value">
 			<block start="siPDF"/>
-			<a href="uploads/{pdf}" target="_blank"><i class="icon-save"></i> Descargar</a>
+			<a href="uploads/{pdf}" target="_blank"><i class="ace-icon fa fa-save"></i> Descargar</a>
 			<block end="siPDF"/>
 			<block start="noPDF"/>
 			No hay archivo
@@ -149,7 +155,7 @@
 				<td align="center">{vigencias.finVigencia}</td>
 				<td align="center">{vigencias.estado}</td>
 				<td align="center">{vigencias.prima}</td>
-				<td align="center"><div class="action-buttons"> <a class="blue" href="?do=polizas.ver&idPoliza={matriz}&vig={vigencias.idVigencia}"> <i class="icon-zoom-in bigger-130"></i> </a> </div></td>
+				<td align="center"><div class="action-buttons"> <a class="blue" href="?do=polizas.ver&idPoliza={matriz}&vig={vigencias.idVigencia}"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> </div></td>
 			</tr>
 			<loop end="vigencias"/>
 		</tbody>

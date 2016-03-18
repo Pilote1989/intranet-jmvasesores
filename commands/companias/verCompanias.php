@@ -23,7 +23,7 @@ class verCompanias extends sessionCommand{
 		else{
 			$this->addEmptyVar("limite");
 		}
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("companias/verCompanias.html");
 	}
 }

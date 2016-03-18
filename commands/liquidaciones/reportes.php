@@ -12,7 +12,7 @@ class reportes extends sessionCommand{
 		}
 		$this->addVar("selectAsesores",$selectPersona);		
 		
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("liquidaciones/reportes.html");
 	}
 }

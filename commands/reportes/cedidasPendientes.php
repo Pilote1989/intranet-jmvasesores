@@ -229,7 +229,7 @@ class cedidasPendientes extends sessionCommand{
 			$this->processTemplate("reportes/cedidasPendientes2.html");
 		
 		}else{
-			$this->addLayout("admin");
+			$this->addLayout("ace");
 			$this->processTemplate("reportes/cedidasPendientes.html");
 		}
 	}

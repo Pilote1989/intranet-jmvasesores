@@ -1,7 +1,7 @@
 <h3 class="header smaller lighter blue" style="margin-top:0px;">Correspondencia
   <div class="btn-group pull-right">
     <button class="btn btn-xs btn-primary" id="btnMsg">
-      <i class="icon-plus-sign bigger-120"></i>&nbsp;&nbsp;Agregar Correspondencia
+      <i class="ace-icon fa fa-plus-circle bigger-120"></i>&nbsp;&nbsp;Agregar Correspondencia
     </button>
   </div>
 </h3>
@@ -23,9 +23,9 @@
         <td align="center"> {cartas.detalle} </td>
         <td align="center"> {cartas.fecha} </td>
         <td align="center"><div class="action-buttons">
-            <a class="blue abreLink" x-link="/?do=cartas.editar&idCarta={cartas.idCarta}" href="#"> <i class="icon-zoom-in bigger-130"></i> </a> 
-            <a class="blue abreLink" x-link="/?do=cartas.procesarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-print bigger-130"></i> </a> 
-            <a class="blue elimina" x-link="/?do=cartas.eliminarCarta&idCarta={cartas.idCarta}" href="#"> <i class="icon-trash bigger-130"></i> </a>
+            <a class="blue abreLink" x-link="/?do=cartas.editar&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> 
+            <a class="blue abreLink" x-link="/?do=cartas.procesarCarta&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-print bigger-130"></i> </a> 
+            <a class="blue elimina" x-link="/?do=cartas.eliminarCarta&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
           </div></td>
       </tr>
       <loop end="cartas"/>
@@ -38,7 +38,7 @@
   </div>
   <div class="space-6">
   </div>
-  <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
 </div>
 <block end="bloqueResultados"/>
 <block start="bloqueNoResultados"/>
@@ -60,12 +60,12 @@ No hay cartas para esta p&oacute;liza.
 			resizable: false,
 			modal: true,
 			title_html: true,
-			title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar la carta?</h4></div>",
+			title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar la carta?</h4></div>",
 			autoOpen: false,
 			modal: true,
 			buttons: [
 				{
-					html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+					html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
 					"class" : "btn btn-danger btn-xs",
 					click: function() {
 						$.ajax({
@@ -83,7 +83,7 @@ No hay cartas para esta p&oacute;liza.
 				}
 				,
 				{
-					html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+					html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
 					"class" : "btn btn-xs",
 					click: function() {
 						$( this ).dialog( "close" );

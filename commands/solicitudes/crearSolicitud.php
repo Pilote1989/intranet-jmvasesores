@@ -20,7 +20,7 @@ class crearSolicitud extends sessionCommand{
 		//}
 		// Nombre
 		$this->addVar("nombre", $usuario->getNombres()." ".$usuario->getApellidoPaterno());
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("solicitudes/crearSolicitud.html");
 	}
 }

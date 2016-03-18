@@ -1,0 +1,25 @@
+{paginas}
+<div class="table-responsive">
+	<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th align="center"> Contratante </th>
+				<th align="center"> Tipo</th>
+				<th align="center"> Fecha Pedido</th>
+				<th align="center"> Estado</th>
+				<th>Opc.</th>
+			</tr>
+		</thead>
+		<tbody>
+			<loop start="solicitudes"/>
+			<tr>
+				<td align="center"> {solicitudes.contratante} </td>
+				<td align="center"> {solicitudes.tipo} </td>
+				<td align="center"> {solicitudes.fechaPedido} </td>
+				<td align="center"> {solicitudes.estado} </td>
+				<td><div class="action-buttons"> <a class="blue" href="{solicitudes.link}"> <i class="icon-zoom-in bigger-130"></i> </a> </div></td>
+			</tr>
+			<loop end="solicitudes"/>
+		</tbody>
+	</table>
+</div>

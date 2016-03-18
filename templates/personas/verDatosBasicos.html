@@ -1,7 +1,13 @@
+<style type="text/css">
+.profile-info-name{
+	width: 250px;
+	
+}
+</style>
 <div class="page-header">
-  <h1> Ver Persona <small> <i class="icon-double-angle-right"></i> {nombre} </small>
+  <h1> Ver Persona <small> <i class="ace-icon fa fa-angle-double-right"></i> {nombre} </small>
     <div class="btn-group pull-right">
-      <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown"> <i class="icon-cogs bigger-120"></i> Opciones <span class="icon-caret-down icon-on-right"></span> </button>
+      <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown"> <i class="ace-icon fa fa-cogs bigger-120"></i> Opciones <span class="ace-icon fa fa-caret-down fa-on-right"></span> </button>
       <ul class="dropdown-menu dropdown-info pull-right">
         <li> <a href="/?do=personas.editarDatosBasicos&amp;idPersona={idPersona}">Editar Persona</a> </li>
         <li> <a class="x-ajax" href="#" x-link="/?do=personas.resetearClave&amp;idPersona={idPersona}">Resetear Clave</a> </li>
@@ -15,7 +21,7 @@
   <div class="col-sm-12">
     <div class="tabbable">
       <ul id="myTab" class="nav nav-tabs">
-        <li class="active"> <a href="#home" data-toggle="tab"> <i class="green icon-home bigger-110"></i> Datos Basicos </a> </li>
+        <li class="active"> <a href="#home" data-toggle="tab"> <i class="green ace-icon fa fa-home bigger-110"></i> Datos Basicos </a> </li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="home">

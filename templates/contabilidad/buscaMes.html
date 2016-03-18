@@ -11,7 +11,7 @@
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active">
                         <a data-toggle="tab" href="#home">
-                            <i class="green icon-home bigger-110"></i> Datos Basicos
+                            <i class="green ace-icon fa fa-home bigger-110"></i> Datos Basicos
                         </a>
                     </li>
                     <span class="pull-right inline">
@@ -22,7 +22,7 @@
 											    
 											    <button data-toggle="dropdown" class="btn btn-xs btn-info dropdown-toggle">
 													Opciones
-													<span class="icon-caret-down icon-on-right"></span>
+													<span class="ace-icon fa fa-caret-down fa-on-right"></span>
                     </button>
 
                     <ul class="dropdown-menu dropdown-default pull-right">
@@ -44,7 +44,7 @@
                                 Estado
                             </div>
                             <div class="profile-info-value">
-                                <i class="icon-circle {color}"></i>&nbsp;{estado}&nbsp;
+                                <i class="ace-icon fa fa-circle {color}"></i>&nbsp;{estado}&nbsp;
                             </div>
                         </div>
                         <div class="profile-info-row">
@@ -94,16 +94,16 @@
     $('#load').hide();
     $('#mesTag').text("{mes} {anio}");
     $('#mesTot').show();
-    $('#back').removeClass("icon-check");
+    $('#back').removeClass("fa-check-square-o");
     $('#bBack').removeClass("btn-info");
-    $('#back').addClass("icon-arrow-left");
+    $('#back').addClass("fa-arrow-left");
     $('#bBack').addClass("btn-success");
     $('#bBack').on("click", function(e) {
         e.preventDefault();
         loadMain();
-        $('#back').addClass("icon-check");
+        $('#back').addClass("fa-check-square-o");
         $('#bBack').addClass("btn-info");
-        $('#back').removeClass("icon-arrow-left");
+        $('#back').removeClass("fa-arrow-left");
         $('#bBack').removeClass("btn-success");
         $('#mesTot').hide();
         $('#bBack').trigger('blur');

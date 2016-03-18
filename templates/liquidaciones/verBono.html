@@ -2,7 +2,7 @@
   <div class="col-sm-10 col-sm-offset-1">
     <div class="widget-box transparent invoice-box">
       <div class="widget-header widget-header-large">
-        <h3 class="grey lighter pull-left position-relative"> <i class="icon-leaf green"></i>Factura JMV Asesores - Bono</h3>
+        <h3 class="grey lighter pull-left position-relative"> <i class="ace-icon fa fa-leaf green"></i>Factura JMV Asesores - Bono</h3>
         <div class="widget-toolbar no-border invoice-info">
           <span class="invoice-info-label">Factura:</span> <span class="red">#{numeroFactura}</span> <br />
           <span class="invoice-info-label">Fecha:</span> <span class="blue">{fechaFactura}</span>
@@ -11,14 +11,14 @@
             <div class="btn-group ">
 							<button class="btn btn-xs btn-info">Opciones</button>
 							<button data-toggle="dropdown" class="btn btn-xs btn-info  dropdown-toggle">
-								<span class="icon-caret-down icon-only"></span>
+								<span class="ace-icon fa fa-caret-down ace-icon fa fa-only"></span>
 							</button>
 								<ul class="dropdown-menu dropdown-info">
 									<li>
-										<a href="?do=liquidaciones.crearBono&idLiquidacion={idLiquidacion}"><i class="icon-edit"></i> Editar Liquidacion</a>
+										<a href="?do=liquidaciones.crearBono&idLiquidacion={idLiquidacion}"><i class="ace-icon fa fa-edit"></i> Editar Liquidacion</a>
 									</li>
 									<li>
-										<a href="#" id="eliminaLiquidacion"><i class="icon-trash red"></i> Eliminar Liquidacion</a>
+										<a href="#" id="eliminaLiquidacion"><i class="ace-icon fa fa-trash red"></i> Eliminar Liquidacion</a>
 									</li>
 								</ul>
 						</div>          
@@ -113,7 +113,7 @@
     </div>
     <div class="space-6">
     </div>
-    <p class="bigger-110 bolder center grey"> <i class="icon-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+    <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
   </div>
 <script>
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
@@ -149,11 +149,11 @@ $( "#dialog-message" ).dialog({
 	resizable: false,
 	modal: true,
 	title_html: true,
-	title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>¿Desea eliminar la Liquidacion?</h4></div>",
+	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar la Liquidacion?</h4></div>",
 	autoOpen: false,
 	buttons: [
 		{
-			html: "<i class='icon-trash bigger-110'></i>&nbsp; Eliminar",
+			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
 			"class" : "btn btn-danger btn-xs",
 			click: function() {
 				$.ajax({
@@ -169,7 +169,7 @@ $( "#dialog-message" ).dialog({
 		}
 		,
 		{
-			html: "<i class='icon-remove bigger-110'></i>&nbsp;Cancelar",
+			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
 			"class" : "btn btn-xs",
 			click: function() {
 				$( this ).dialog( "close" );

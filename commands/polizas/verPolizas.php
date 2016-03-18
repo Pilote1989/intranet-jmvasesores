@@ -60,7 +60,7 @@ class verPolizas extends sessionCommand{
 			$this->addEmptyVar("limite");
 		}
 		//print_r($_SESSION);
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("polizas/verPolizas.html");
 	}
 }

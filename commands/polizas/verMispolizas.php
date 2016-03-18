@@ -58,7 +58,7 @@ class verMispolizas extends sessionCommand{
 		else{
 			$this->addEmptyVar("limite");
 		}
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("polizas/verPolizas.html");
 	}
 }

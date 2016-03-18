@@ -55,7 +55,7 @@ class editarDatosBasicos extends sessionCommand{
 			
 			
 		}
-		$this->addLayout("admin");
+		$this->addLayout("ace");
 		$this->processTemplate("companias/editarDatosBasicos.html");
 	}
 	function subval_sort($a,$subkey) {
