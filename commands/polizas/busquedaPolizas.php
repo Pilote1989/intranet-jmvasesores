@@ -28,12 +28,16 @@ class busquedaPolizas extends SessionCommand{
 		if($this->request->idRamo){
 			$_SESSION["busquedaPolizas"]["ramo"]=$this->request->idRamo;
 			$where[]="Poliza.idRamo = '".$this->request->idRamo."'";
+		}else{
+			$_SESSION["busquedaPolizas"]["ramo"]="";
 		}
 		
 		
 		if($this->request->contratante){
 			$_SESSION["busquedaPolizas"]["contratante"]=$this->request->contratante;
 			$where[]="c.nombre LIKE '%".$this->request->contratante."%'";
+		}else{
+			$_SESSION["busquedaPolizas"]["contratante"]="";
 		}
 		
 		$pPaginador = "";
