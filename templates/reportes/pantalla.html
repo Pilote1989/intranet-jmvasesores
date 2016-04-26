@@ -80,6 +80,7 @@
 </div>
 <script>
 $('input.date-pick').daterangepicker({
+      'autoUpdateInput' : false,
 			'applyClass' : 'btn-sm btn-success',
 			'cancelClass' : 'btn-sm btn-default',
       "locale": {
@@ -119,6 +120,13 @@ $('input.date-pick').daterangepicker({
 	$(this).next().focus();
 });
 
+$('input.date-pick').on('apply.daterangepicker', function(ev, picker) {
+  $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+  });
+
+$('input.date-pick').on('cancel.daterangepicker', function(ev, picker) {
+  $(this).val('');
+});
 
 $('#load').hide();
 $('#alerta').hide();
@@ -142,10 +150,6 @@ function enviaForm(){
 	if($('#ase').val()!="" || $('#com').val()!="" || $('#ram').val()!=""){
 		$('#load').show();
 		$('#alerta').hide();
-		//alert($('#inicioVigencia').val() + " - " +  $('#finVigencia').val());
-		/*$( "#reporte" ).load( "?do=reportes.generaPantalla&vista=1&ase=" + $('#idAsegurado').val() + "&com=" +  $('#idCompania').val() + "&ram=" +  $('#idRamo').val() + "&i=" +  $('#inicioVigencia').data('date') + "&f=" +  $('#finVigencia').data('date'), function(){
-			$('#load').hide();
-		});*/
     $.ajax({
         'url': '?do=reportes.generaPantalla&vista=1',
         'type': 'POST',
