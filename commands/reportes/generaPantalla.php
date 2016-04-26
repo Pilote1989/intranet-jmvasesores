@@ -36,6 +36,10 @@ class generaPantalla extends sessionCommand{
 				$this->addEmptyVar("com");
 			}
 			
+			if($this->request->vigentes=="on"){
+				$where[]="rtf.inicioVigencia <= NOW()";
+				$where[]="rtf.finVigencia >= NOW()";
+			}
 			
 			if($this->request->inicioVigencia){
 				$inicioVigencia = explode(" - ", $this->request->inicioVigencia);
