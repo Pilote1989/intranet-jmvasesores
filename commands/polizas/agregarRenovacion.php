@@ -20,6 +20,7 @@ class agregarRenovacion extends sessionCommand{
 			$this->addVar("cliente", $cliente->getNombre());
 			$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
 			$this->addVar("idRamo", $ramo->getNombre());
+			$this->addVar("ram", $poliza->getIdRamo());
 			$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
 			$this->addVar("idCompania", $compania->getNombre());
 			$this->addVar("idPersona",$cliente->getIdPersona());

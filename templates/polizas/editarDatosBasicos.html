@@ -44,25 +44,7 @@
             <div class="col-sm-9">
               <div class="clearfix">
                 <select class="col-sm-12 col-xs-12 form-control" name="idCompania" id="idCompania" >
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-									
-              {companias}
-							
-								
-                
-                
-                
-                
-                
-                
-                
+                  {companias}
                 </select>
               </div>
             </div>
@@ -72,25 +54,7 @@
             <div class="col-sm-9">
               <div class="clearfix">
                 <select class="col-sm-12 col-xs-12 form-control" name="idRamo" id="idRamo" >
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-									
-              {ramos}
-							
-								
-                
-                
-                
-                
-                
-                
-                
+                  {ramos}
                 </select>
               </div>
             </div>
@@ -313,6 +277,7 @@
 </div>
 <block end="bloqueEditarPolizas"/>
 <script type="text/javascript">
+  var noDerecho = ["8", "17"];
 	$(".chosen-select").chosen({
 		no_results_text: "No se hay ningun registro con esos datos.",
 		width: "100%"
@@ -377,9 +342,15 @@
 		}
 	});
 	jQuery("#prima").keyup(function () {
-		jQuery("#derecho").val((parseFloat(jQuery("#prima").val())*0.03).toFixed(2));
-		jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val())*1.03).toFixed(2));		
-		var pri = jQuery("#prima").val();
+	  //alert(noDerecho.indexOf(jQuery("#idRamo").val()) + " - " + jQuery("#idRamo").val());
+	  if(noDerecho.indexOf(jQuery("#idRamo").val())=="-1"){
+	    jQuery("#derecho").val((parseFloat(jQuery("#prima").val())*0.03).toFixed(2));
+	    jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val())*1.03).toFixed(2));		
+		}else{
+	    jQuery("#derecho").val(0.00);
+	    jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val())*1).toFixed(2));		
+		}
+	  var pri = jQuery("#prima").val();
 		var derecho = jQuery("#derecho").val();
 		var intereses = jQuery("#intereses").val();
 		var igv = ((parseFloat(pri)+parseFloat(derecho)+parseFloat(intereses))*0.18).toFixed(2);
