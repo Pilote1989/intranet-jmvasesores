@@ -91,17 +91,30 @@ class verPortada extends sessionCommand{
 			$tempMes = 10;
 			$tempAnio = 2016;
 			
+			$url = "http://www.google.com/finance/converter?a=1&from=USD&to=PEN"; 
+			$request = curl_init(); 
+			$timeOut = 0; 
+			curl_setopt ($request, CURLOPT_URL, $url); 
+			curl_setopt ($request, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt ($request, CURLOPT_USERAGENT,"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)"); 
+			curl_setopt ($request, CURLOPT_CONNECTTIMEOUT, $timeOut); 
+			$response = curl_exec($request); 
+			curl_close($request); 
+			$regularExpression     = '#\<span class=bld\>(.+?)\<\/span\>#s';
+			preg_match($regularExpression, $response, $finalData);
+			$exchangeRate = substr($finalData[0],16,6);
+			
 			$sqlCompania = "
-				SELECT  SQL_CALC_FOUND_ROWS `compania` , TRUNCATE( SUM(  `comision` ) , 2 ) AS valor
+				SELECT SQL_CALC_FOUND_ROWS  `compania` , moneda, TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `comision` / " . $exchangeRate . ", `comision` ) ) , 2 ) AS valor
 				FROM  `reporteComisiones` 
-				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) ) 
-				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) ) 
-				GROUP BY  `compania` 	
-				ORDER BY SUM(  `comision` ) DESC		
+				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) )
+				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) )
+				GROUP BY  `compania` 
+				ORDER BY SUM(  `comision` ) DESC 		
 			";
 			
 			$sqlRamo = "
-				SELECT  SQL_CALC_FOUND_ROWS `ramo` , TRUNCATE( SUM(  `comision` ) , 2 ) AS valor
+				SELECT  SQL_CALC_FOUND_ROWS `ramo` , TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `comision` / " . $exchangeRate . ", `comision` ) ) , 2 ) AS valor
 				FROM  `reporteComisiones` 
 				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) ) 
 				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) ) 
@@ -113,21 +126,19 @@ class verPortada extends sessionCommand{
 				SELECT SQL_CALC_FOUND_ROWS 
 					YEAR(  `fechaFactura` ) AS anio, 
 					MONTH(  `fechaFactura` ) AS mes, 
-					TRUNCATE(SUM(  `comision` ) ,2) AS com, 
-					TRUNCATE(SUM( `primaNeta` ) ,2) AS pri
+					TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `comision` / " . $exchangeRate . ", `comision` ) ) , 2 ) AS com, 
+					TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `primaNeta` / " . $exchangeRate . ", `primaNeta` ) ) , 2 ) AS pri
 				FROM  `reporteComisiones` 
 				WHERE  `fechaFactura` >= DATE_FORMAT( CURDATE( ) ,  '%Y-%m-01' ) - INTERVAL 3 MONTH 
 				GROUP BY year(  `fechaFactura` ), MONTH(  `fechaFactura` ) 
 				ORDER BY year(  `fechaFactura` ), MONTH(  `fechaFactura` ) 
 			";
 			
-			
 			$query=utf8_decode($sqlCompania);		
 			$link=&$this->fc->getLink();
 			
 			if($result=$link->query($query)){
 				$countQuery="SELECT FOUND_ROWS() as total";
-			
 				if($countResult=$link->query($countQuery)){
 					$row=$countResult->fetch_assoc();
 					$num_rows=$row['total'];
