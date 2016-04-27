@@ -110,7 +110,7 @@ class verPortada extends sessionCommand{
 				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) )
 				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) )
 				GROUP BY  `compania` 
-				ORDER BY SUM(  `comision` ) DESC 		
+				ORDER BY valor DESC 		
 			";
 			
 			$sqlRamo = "
@@ -119,7 +119,7 @@ class verPortada extends sessionCommand{
 				WHERE MONTH(  `fechaFactura` ) = MONTH( NOW( ) ) 
 				AND YEAR(  `fechaFactura` ) = YEAR( NOW( ) ) 
 				GROUP BY  `ramo`
-				ORDER BY SUM(  `comision` ) DESC
+				ORDER BY valor DESC
 			";
 			
 			$sqlMes = "
