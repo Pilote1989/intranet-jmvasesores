@@ -253,6 +253,11 @@ class verPortada extends sessionCommand{
 			
 			
 		}
+		$mesCheck = Fabrica::getAllFromDB("Mes", array("mes = '" . date('n') . "'","anio = '" . date('Y') . "'"));	
+		if(count($mesCheck) == 0){
+			$this->addBlock("crearMes");
+		}
+		
 		// Nombre
 		$this->addBlock("bloqueNombre");
 		//$this->addVar("nombreUsuario", $usuario->getNombres());

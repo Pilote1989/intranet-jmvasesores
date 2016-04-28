@@ -193,4 +193,39 @@
   $( ".link" ).click(function() {
   	location.replace($(this).attr("x-link"));
   });
+  <block start="crearMes"/>
+  var alerta = $.gritter.add({
+		title: '¡Atencion!',
+		text: 'El mes de actual aun no ha sido abierto, no se podran crear facturas. <p><button id="crearMes" class="btn btn-warning btn-sm" x-link="/?do=contabilidad.crearMes">Crear Mes</button> <button class="btn btn-sm" href="/?do=contabilidad.meses">No Crear</button></p>',
+		image: 'assets/avatars/user.jpg',
+		sticky: true,
+		time: '',
+		class_name: 'gritter-warning gritter-light',
+  });
+  $("#crearMes").on('click',function(){
+    $("#crearMes").removeClass("btn-warning");
+    $("#crearMes").addClass("disabled");
+    $("#crearMes").html('<img src="assets/img/loading.gif"/> Creando');
+    $.ajax({
+      url: $(this).attr('x-link'),
+      success: function(responseText){
+        $.gritter.remove(alerta, {
+          fade: true,
+          speed: 'slow'
+        });
+        $.gritter.add({
+        		title: '¡Exito!',
+        		text: 'El mes se ha creado satisfactoriamente',
+        		image: 'assets/avatars/user.jpg',
+        		sticky: false,
+        		time: '3000',
+        		class_name: 'gritter-success gritter-light',
+        });        
+      },
+      error: function(responseText){
+      }
+	  });
+  });
+  
+  <block end="crearMes"/>
   </script>
