@@ -9,6 +9,12 @@ class crearEndoso extends sessionCommand{
 		$fc->import("lib.Cobro");
 		if($this->request->idPoliza){
 			$this->addBlock("bloqueEditarEndoso");
+			$poliza = Fabrica::getFromDB("Poliza", $this->request->idPoliza);
+			$noDerecho = array("8","17");
+			if(!in_array($poliza->getIdRamo(),$noDerecho)){
+				$this->addBlock("derecho");
+				//echo "Si tiene Derecho de Emision";
+			}
 			$this->addVar("idPoliza", $this->request->idPoliza);
 			if($this->request->idEndoso){
 				//Si mando idEndoso, estoy editando

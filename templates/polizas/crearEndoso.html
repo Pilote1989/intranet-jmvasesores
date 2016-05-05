@@ -315,7 +315,9 @@
 	})
 	$('#primaNeta').keyup(function (){
 		$('#comision').val( Math.round(($('#primaNeta').val() * $('#comisionP').val()))/100);		
+		<block start="derecho"/>
 		$('#derechoEmision').val( Math.round($('#primaNeta').val() * 0.03 * 100 ) /100 );
+		<block end="derecho"/>
 		$('#primaComercial').val( Math.round(( parseFloat($('#primaNeta').val()) + parseFloat($('#derechoEmision').val()))*100 ) /100 );
 		$('#igv').val( Math.round($('#primaComercial').val() * 0.18 * 100)/100 );
 		$('#totalFactura').val( Math.round((parseFloat($('#igv').val()) + parseFloat($('#intereses').val()) + parseFloat($('#primaComercial').val()))*100) / 100 );
