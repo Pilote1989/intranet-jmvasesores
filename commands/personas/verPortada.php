@@ -104,6 +104,7 @@ class verPortada extends sessionCommand{
 			preg_match($regularExpression, $response, $finalData);
 			$exchangeRate = substr($finalData[0],16,6);
 			
+			$this->addVar("tc",$exchangeRate);
 			$sqlCompania = "
 				SELECT SQL_CALC_FOUND_ROWS  `compania` , moneda, TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `comision` / " . $exchangeRate . ", `comision` ) ) , 2 ) AS valor
 				FROM  `reporteComisiones` 
