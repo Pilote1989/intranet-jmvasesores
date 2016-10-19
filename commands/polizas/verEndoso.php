@@ -32,20 +32,20 @@ class verEndoso extends sessionCommand{
 			$this->addVar("asesor", $persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno());
 
 			if($cobro->getIdLiquidacion() == ""){
-				$this->addVar("estadoCobranza", '<i class="icon-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
+				$this->addVar("estadoCobranza", '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
 			}else{
 				$liquidacion = Fabrica::getFromDB("Liquidacion", $cobro->getIdLiquidacion());
-				$this->addVar("estadoCobranza", '<i class="icon-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada - Factura : ' . $liquidacion->getFactura() . '</a>');
+				$this->addVar("estadoCobranza", '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada - Factura : ' . $liquidacion->getFactura() . '</a>');
 			}
 			
 			if($cobro->getIdPersona()!=1){
     		    $this->addBlock("datosComision");
             }
 			if($cobro->getIdCedida() == ""){
-				$this->addVar("estadoComisionCedida", '<i class="icon-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
+				$this->addVar("estadoComisionCedida", '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
 			}else{
 				$cedida = Fabrica::getFromDB("Cedida", $cobro->getIdCedida());
-				$this->addVar("estadoComisionCedida", '<i class="icon-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.verCedida&idCedida=' . $cobro->getIdCedida() . '">Liquidada - Factura : ' . $cedida->getFactura() . '</a>');
+				$this->addVar("estadoComisionCedida", '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.verCedida&idCedida=' . $cobro->getIdCedida() . '">Liquidada - Factura : ' . $cedida->getFactura() . '</a>');
 			}			
 			
 			

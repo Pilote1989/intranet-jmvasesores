@@ -33,9 +33,9 @@ class crear extends sessionCommand{
 					$listaEndosos[$i]["idEndoso"] = $endoso->getId();
 					
 					if($cobro->getIdLiquidacion() == ""){
-						$listaEndosos[$i]["estadoCobranza"] = '<i class="icon-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente';
+						$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente';
 					}else{
-						$listaEndosos[$i]["estadoCobranza"] = '<i class="icon-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada</a>';
+						$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada</a>';
 					}
 					$i++;
 				}

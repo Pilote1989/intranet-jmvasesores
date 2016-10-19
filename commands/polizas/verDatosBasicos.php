@@ -98,7 +98,7 @@ class verDatosBasicos extends sessionCommand{
 					$listaVigencias[$i]["idLista"] = $i + 1;
 				}else{
 					$listaVigencias[$i]["idLista"] = $i + 1;
-					$listaVigencias[$i]["idLista"] = "<i class='ace-icon fa fa-arrow-right icon-on-right'></i> ". $listaVigencias[$i]["idLista"];					
+					$listaVigencias[$i]["idLista"] = "<i class='ace-icon fa fa-arrow-right ace-icon fa fa-on-right'></i> ". $listaVigencias[$i]["idLista"];					
 				}
 					$listaVigencias[$i]["estado"] = $vigencia->estadoLabel() . "";
 				$listaVigencias[$i]["idVigencia"] = $vigencia->getId();

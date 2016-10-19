@@ -9,16 +9,16 @@ class resetearClave extends sessionCommand{
 			$persona->storeIntoDB();
 			print json_encode('
 			<div class="alert alert-success">
-			  <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
-			  <p> <strong> <i class="icon-ok"></i> ¡Exito! </strong> La clave ha sido reseteada. </p>
+			  <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-remove"></i> </button>
+			  <p> <strong> <i class="ace-icon fa fa-ok"></i> ¡Exito! </strong> La clave ha sido reseteada. </p>
 			</div>
 			');
 			//$fc->redirect("?do=personas.verDatosBasicos&idPersona=".$this->request->idPersona."&cc=1");
 		}else{
 			print json_encode('
 			<div class="alert alert-danger">
-			  <button type="button" class="close" data-dismiss="alert"> <i class="icon-remove"></i> </button>
-			  <p> <strong> <i class="icon-ok"></i> ¡Error! </strong> No se ha podido resetear la clave. </p>
+			  <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-remove"></i> </button>
+			  <p> <strong> <i class="ace-icon fa fa-ok"></i> ¡Error! </strong> No se ha podido resetear la clave. </p>
 			</div>
 			');
 			//$fc->redirect("?do=personas.verPortada");

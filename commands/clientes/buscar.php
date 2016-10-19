@@ -82,7 +82,7 @@ class buscar extends sessionCommand{
 			if(in_array($cliente["idCliente"],$cli)){
 				$clientes[$i]["estado"] = '<button class="btn btn-minier btn-inverse disabled">En Poliza</button>';
 			}else{
-				$clientes[$i]["estado"] = '<button class="btn btn-minier btn-success agregaAsegurado" x-pol="'.$this->request->idPoliza.'" x-link="'.$cliente["idCliente"].'">Agregar<i class="icon-arrow-right icon-on-right"></i></button>';
+				$clientes[$i]["estado"] = '<button class="btn btn-minier btn-success agregaAsegurado" x-pol="'.$this->request->idPoliza.'" x-link="'.$cliente["idCliente"].'">Agregar<i class="ace-icon fa fa-arrow-right ace-icon fa fa-on-right"></i></button>';
 			}
 						
 			$i++;				
