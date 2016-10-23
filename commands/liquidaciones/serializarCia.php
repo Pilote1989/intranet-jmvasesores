@@ -21,6 +21,8 @@ class serializarCia extends SessionCommand{
 			WHERE
 				e.idCobro = c.idCobro
 			AND
+				e.anulada = "0"
+			AND
 				p.idCliente = cli.idCliente
 			AND
 				e.idPoliza = p.idPoliza
@@ -75,6 +77,8 @@ class serializarCia extends SessionCommand{
 				jmvclientes.Cliente cli
 			WHERE
 				p.idCobro = c.idCobro
+			AND
+				p.anulada = "0"
 			AND
 				p.idCliente = cli.idCliente
 			AND

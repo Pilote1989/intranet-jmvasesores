@@ -31,7 +31,10 @@
         <td align="center">{endosos.comision}</td>
         <td align="center">{endosos.estadoCobranza}</td>
         <td align="center"><div class="action-buttons">
-            <a class="blue abreLink" x-tittle="Ver Endoso" x-link="?do=polizas.verEndoso&idEndoso={endosos.idEndoso}" href="#"> <i class="ace-icon fa fa-money bigger-130"></i> </a> <a class="blue abreLink" x-tittle="Editar Endoso" x-link="?do=polizas.crearEndoso&idEndoso={endosos.idEndoso}&idPoliza={idPoliza}" href="#"> <i class="ace-icon fa fa-edit bigger-130"></i> </a> <a class="blue eliminarEndoso" x-link="?do=polizas.eliminarEndoso&idEndoso={endosos.idEndoso}" href="#" {endosos.verEliminar}> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
+            <a class="blue abreLink" x-tittle="Ver Endoso" x-link="?do=polizas.verEndoso&idEndoso={endosos.idEndoso}" href="#"> <i class="ace-icon fa fa-money bigger-130"></i> </a>
+            {endosos.anula}
+            <a class="blue abreLink" x-tittle="Editar Endoso" x-link="?do=polizas.crearEndoso&idEndoso={endosos.idEndoso}&idPoliza={idPoliza}" href="#"> <i class="ace-icon fa fa-edit bigger-130"></i> </a>
+            <a class="blue eliminarEndoso" x-link="?do=polizas.eliminarEndoso&idEndoso={endosos.idEndoso}" href="#" {endosos.verEliminar}> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
           </td>
       </tr>
       <loop end="endosos"/>
@@ -43,10 +46,19 @@
   
   <p> No se encontraron endosos en la Poliza. </p>
   <block end="bloqueNoResultados"/>
-  
+
   <div id="dialog-message-endosos">
     <div class="alert alert-info bigger-110">
       El endoso se eliminara permanentemente, no sera posible recuperarlo.
+    </div>
+    <div class="space-6">
+    </div>
+    <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  </div>
+  
+  <div id="dialog-message-anulacion">
+    <div class="alert alert-info bigger-110">
+      ¿Esta seguro que desea anular/rehabilitar el endoso?
     </div>
     <div class="space-6">
     </div>
@@ -95,11 +107,49 @@ $( "#dialog-message-endosos" ).dialog({
 	resizable: false,
 	modal: true,
 	title_html: true,
-	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Endoso?</h4></div>",
 	autoOpen: false,
 	buttons: [
 		{
 			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
+			"class" : "btn btn-danger btn-xs",
+			click: function() {
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: $(this).data('link'),
+					success: function() {
+						$("#tab-5").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-5").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
+					}
+				});
+				$( this ).dialog( "close" );
+			}
+		}
+		,
+		{
+			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
+			"class" : "btn btn-xs",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]			
+});	
+
+$('.anulaEndoso').click( function() {
+	event.preventDefault();
+	$( "#dialog-message-anulacion" ).data('link', $(this).attr("x-link")).dialog("open");
+});	
+$( "#dialog-message-anulacion" ).dialog({
+	resizable: false,
+	modal: true,
+	title_html: true,
+	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>Confirmar</h4></div>",
+	autoOpen: false,
+	buttons: [
+		{
+			html: "<i class='ace-icon fa fa-bullhorn bigger-110'></i>&nbsp; Confirmar",
 			"class" : "btn btn-danger btn-xs",
 			click: function() {
 				$.ajax({

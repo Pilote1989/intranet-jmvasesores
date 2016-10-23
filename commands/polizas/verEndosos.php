@@ -58,18 +58,27 @@ class verEndosos extends sessionCommand{
 				$listaEndosos[$i]["comision"] = number_format($cobro->getComision(),2);;
 				$listaEndosos[$i]["idEndoso"] = $endoso->getId();
 				if($cobro->getIdLiquidacion()!="" || $cobro->getIdCedida()!=""){
-					//NO puedo eliminarlo					
+					//NO puedo eliminarlo ni anularlo					
 					$listaEndosos[$i]["verEliminar"] = "style='display:none'";
-				}else{				
-					//SI puedo eliminarlo
-					$listaEndosos[$i]["verEliminar"] = "";
-				}
-				if($cobro->getIdLiquidacion() == ""){
-					$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente';
-				}else{
+					$listaEndosos[$i]["anula"] = "";
 					$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada</a>';
+				}else{				
+					//SI puedo eliminarlo o anularlo
+					$listaEndosos[$i]["verEliminar"] = "";
+					if($endoso->getAnulada() == "1"){
+						$listaEndosos[$i]["anula"] = '<a class="blue anulaEndoso" x-task="Rehabilitar" x-link="?do=polizas.anularEndoso&idEndoso=' . $listaEndosos[$i]["idEndoso"] . '" href="#"> <i class="ace-icon fa fa-arrow-circle-o-up bigger-130"></i> </a>';
+						$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle"></i>&nbsp;&nbsp;&nbsp;Anulado';
+						//$listaEndosos[$i]["estadoEndoso"] = "arrow-circle-o-up";
+					}else{
+						$listaEndosos[$i]["anula"] = '<a class="blue anulaEndoso" x-task="Anular" x-link="?do=polizas.anularEndoso&idEndoso=' . $listaEndosos[$i]["idEndoso"] . '" href="#"> <i class="ace-icon fa fa-arrow-circle-o-down bigger-130"></i> </a>';
+						//$listaEndosos[$i]["estadoEndoso"] = "arrow-circle-o-down";
+						if($cobro->getIdLiquidacion() == ""){
+							$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente';
+						}else{
+							$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle green"></i>&nbsp;&nbsp;&nbsp;<a href="?do=liquidaciones.ver&idLiquidacion=' . $cobro->getIdLiquidacion() . '">Liquidada</a>';
+						}					
+					}					
 				}
-				
 				//echo $cupon->getId();
 				$i++;
 			}
