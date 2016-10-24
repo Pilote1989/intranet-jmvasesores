@@ -13382,6 +13382,16 @@ li.item-default {
   padding: 6px 4px 6px 6px;
   border-top: 1px dotted #D5E4F1;
 }
+.profile-info-value  a{
+  text-decoration:none;
+  border-bottom: 1px dashed #BBB;
+  color: #393939;
+}
+.profile-info-value  a:hover{
+  text-decoration:none;
+  border-bottom: dashed 1px #0088cc;
+  color: #0088cc;
+}
 .profile-info-value > span + span:before {
   /* for a list of values (such as location city & country) put a comma between them */
   display: inline;

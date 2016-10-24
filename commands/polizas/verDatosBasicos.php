@@ -25,6 +25,7 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("fechaFin", $poliza->getFinVigencia("DATE"));
 			$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
 			$this->addVar("compania", $compania->getNombre());
+			$this->addVar("idCliente", $poliza->getIdCliente());
 			$cliente = Fabrica::getFromDB("Cliente", $poliza->getIdCliente());
 			$this->addVar("nombre", $cliente->getNombre());
 			$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
