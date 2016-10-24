@@ -75,6 +75,7 @@ class despachoEndoso extends sessionCommand{
 				$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
 				$this->addVar("cia", $compania->getSigla());
 				$cliente = Fabrica::getFromDB("Cliente", $poliza->getIdCliente());
+				$this->addVar("encargadoSeguros", $cliente->getEncargado());
 				$this->addVar("nombre", $cliente->getNombre());
 				if($cliente->getDireccion() == ""){
 					$this->addVar("direccion", "[direccion]");

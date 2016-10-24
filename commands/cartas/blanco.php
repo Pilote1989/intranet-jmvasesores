@@ -78,6 +78,7 @@ class blanco extends sessionCommand{
 			$this->addVar("numPoliza", $poliza->getNumeroPoliza());
 			$this->addVar("siglas", $compania->getSigla());
 			$cliente = Fabrica::getFromDB("Cliente", $poliza->getIdCliente());
+			$this->addVar("encargadoSeguros", $cliente->getEncargado());
 			$this->addVar("convenio", $cobro->getAvisoDeCobranza());
 			$this->addVar("nombre", $cliente->getNombre());
 			if($cliente->getDireccion() == ""){
