@@ -30,7 +30,7 @@ class buscarMes extends sessionCommand{
 			
 			}else if($this->request->reporte=="2"){
 				//comisiones recibidas
-				$liquidaciones = Fabrica::getAllFromDB("Liquidacion",array("MONTH(fechaFactura) = '" . $this->request->mes . "'", "YEAR(fechaFactura) = '" . $this->request->anio . "'"));
+				$liquidaciones = Fabrica::getAllFromDB("Liquidacion",array("MONTH(fechaFactura) = '" . $this->request->mes . "'", "YEAR(fechaFactura) = '" . $this->request->anio . "'"),"Factura","",false);
 				$i=0;
 				$lista = array();
 				$comisionSoles = 0;
