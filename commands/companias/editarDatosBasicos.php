@@ -16,19 +16,18 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("correo",$compania->getCorreo());
 			$this->addVar("correo2", $compania->getCorreoAlternativo());
 			$ramos = Fabrica::getAllFromDB("Ramo", array());
-			foreach($ramos as $ramo){				
-				$listaRamos[$i]["idRamo"] = $ramo->getId();
-				$listaRamos[$i]["nombre"] = $ramo->getNombre();
-				//el valor es lo unico diferente
-				
+			foreach($ramos as $ramo){
 				$comisionTemp = Fabrica::getAllFromDB("Comision", 
 					array(
 						"idCompania = " . $this->request->idCompania,
 						"idRamo = " . $ramo->getId(),
 					)
-				);	
-				$listaRamos[$i]["valor"] = $comisionTemp[0]->getComision();
-				//echo $cupon->getId();
+				);				
+				if($comisionTemp[0]){
+					$listaRamos[$i]["idRamo"] = $ramo->getId();
+					$listaRamos[$i]["nombre"] = $ramo->getNombre();
+					$listaRamos[$i]["valor"] = $comisionTemp[0]->getComision();
+				}
 				$i++;				
 			}
 			$listaRamos = $this->subval_sort($listaRamos,'nombre');
