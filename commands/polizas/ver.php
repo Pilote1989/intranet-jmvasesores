@@ -38,8 +38,13 @@ class ver extends sessionCommand{
 				}
 			}
 			$poliza = Fabrica::getFromDB("Poliza",$seleccionada);
+			$cobro = Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
 			if($poliza->getTipo()!="POL"){
 				$this->addBlock("eliminaRenovacion");
+			}else{
+				if($poliza->renovaciones() == "0" && $cobro->getIdLiquidacion() == ""){
+					$this->addBlock("eliminarPoliza");
+				}
 			}
 			$inicio =  $poliza->getInicioVigencia("DATE");
 			$fin =  $poliza->getFinVigencia("DATE");			

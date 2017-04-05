@@ -1,6 +1,10 @@
 <?php
 class Poliza extends DBObject{
 	var $tableName="Poliza";
+	function renovaciones(){
+		$vigencias = Fabrica::getAllFromDB("Poliza", array("numeroPoliza = '" . $this->getNumeroPoliza() . "'","estado = '1'"), "inicioVigencia DESC");			
+		return count($vigencias) - 1;
+	}
 	function estado(){
 		//revisar si esta anulada!!
 		$todays_date = date("Y-m-d"); 
