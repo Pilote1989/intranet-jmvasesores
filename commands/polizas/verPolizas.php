@@ -31,7 +31,7 @@ class verPolizas extends sessionCommand{
 		$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
 		$selectPersona = '<option value=""></option>';
 		foreach($personas as $persona){
-			$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" >'.$persona->getNombres().'</option>';
+			$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" >'.$persona->getNombres(). ' ' . $persona->getApellidoPaterno() . ' ' . $persona->getApellidoMaterno() . '</option>';
 		}
 		$this->addVar("vendedores",$selectPersona);
 
