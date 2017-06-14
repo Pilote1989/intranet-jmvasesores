@@ -32,6 +32,19 @@ class busquedaPolizas extends SessionCommand{
 			$_SESSION["busquedaPolizas"]["ramo"]="";
 		}
 		
+		if($this->request->idCompania){
+			$_SESSION["busquedaPolizas"]["compania"]=$this->request->idCompania;
+			$where[]="Poliza.idCompania = '".$this->request->idCompania."'";
+		}else{
+			$_SESSION["busquedaPolizas"]["compania"]="";
+		}
+		
+		if($this->request->idVendedor){
+			$_SESSION["busquedaPolizas"]["vendedor"]=$this->request->idVendedor;
+			$where[]="Poliza.idPersona = '".$this->request->idVendedor."'";
+		}else{
+			$_SESSION["busquedaPolizas"]["vendedor"]="";
+		}
 		
 		if($this->request->contratante){
 			$_SESSION["busquedaPolizas"]["contratante"]=$this->request->contratante;

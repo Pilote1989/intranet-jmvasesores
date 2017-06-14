@@ -20,13 +20,23 @@
             <label for="idRamo" class="col-sm-3 control-label no-padding-right"> Ramo </label>
             <div class="col-sm-9">
               <select name="idRamo" class="col-sm-12" id="idRamo" onKeyPress="return disableEnterKey(event)">
-                
-								
-								
-						{ramos}
-							
-							
-							
+                {ramos}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="idCompania" class="col-sm-3 control-label no-padding-right"> Compañia </label>
+            <div class="col-sm-9">
+              <select name="idCompania" class="col-sm-12" id="idCompania" onKeyPress="return disableEnterKey(event)">
+                {companias}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="idVendedor" class="col-sm-3 control-label no-padding-right"> Vendedor </label>
+            <div class="col-sm-9">
+              <select name="idVendedor" class="col-sm-12" id="idVendedor" onKeyPress="return disableEnterKey(event)">
+                {vendedores}
               </select>
             </div>
           </div>
@@ -100,6 +110,9 @@
   <!-- /.col -->
 </div>
 <script>
+$('#idRamo').val({ramo});
+$('#idCompania').val({compania});
+$('#idVendedor').val({vendedor});
 	cargarFormulario('principal','?do=polizas.busquedaPolizas','divBusquedaPolizas');
 	$( "#target" ).click(function() {
 		window.location.href = "/?do=polizas.reportePolizas";
