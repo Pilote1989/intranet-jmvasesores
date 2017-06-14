@@ -1,9 +1,10 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawMultSeries);
 
-function drawMultSeries() {
+function dataCreate() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Mes');
     data.addColumn('number', 'Prima Neta');
@@ -14,12 +15,100 @@ function drawMultSeries() {
       ["{data.mes}", {data.primaDolares}, {data.comisionDolares}],
       <loop end="data"/>
     ]);
+    
+    var dataP = new google.visualization.DataTable();
+    dataP.addColumn('string', 'Mes');
+    dataP.addColumn('number', 'Prima Neta');
+
+    dataP.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.primaDolares}],
+      <loop end="data"/>
+    ]);
+    
+    var dataC = new google.visualization.DataTable();
+    dataC.addColumn('string', 'Mes');
+    dataC.addColumn('number', 'Comision');
+
+    dataC.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.comisionDolares}],
+      <loop end="data"/>
+    ]);
+    
+    var data2 = new google.visualization.DataTable();
+    data2.addColumn('string', 'Mes');
+    data2.addColumn('number', 'Prima Neta');
+    data2.addColumn('number', 'Comision');
+    
+    data2.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.primaSoles}, {data.comisionSoles}],
+      <loop end="data"/>
+    ]);
+    
+    
+    var data2P = new google.visualization.DataTable();
+    data2P.addColumn('string', 'Mes');
+    data2P.addColumn('number', 'Prima Neta');
+    
+    data2P.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.primaSoles}],
+      <loop end="data"/>
+    ]);    
+    
+    
+
+    var data2C = new google.visualization.DataTable();
+    data2C.addColumn('string', 'Mes');
+    data2C.addColumn('number', 'Comision');
+    
+    data2C.addRows([   
+      <loop start="data"/>
+      ["{data.mes}", {data.comisionSoles}],
+      <loop end="data"/>
+    ]);
+
+
+    return [data,data2,dataP,data2P,dataC,data2C];
+}
+
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+    .substr(1)
+        .split("&")
+        .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
+}
+
+function drawMultSeries() {
+    var resultData = dataCreate();
+    var temp = "";
+
+    if(findGetParameter("t")==3){
+      //comisiones
+      var data = resultData[4];
+      temp = "Comisiones";
+    }else if(findGetParameter("t")==2){
+      //primas
+      var data = resultData[2];
+      temp = "Primas";
+    }else{
+      var data = resultData[0];
+      temp = "Primas y Comisiones";
+    }
 
     var options = {
         vAxis: {
           title: 'US$',
         },
-        'title': 'Primas y Comisiones - Dolares',
+        'title': temp + ' - Dolares',
         'legend': 'bottom',
         height: '400',
         
@@ -27,27 +116,27 @@ function drawMultSeries() {
     
     var chart = new google.visualization.ColumnChart(
     document.getElementById('dolares'));
+    //chart.setColumns([0,2]);
     chart.draw(data, options);
-    
-    
     /////    
     
-    var data2 = new google.visualization.DataTable();
-    data2.addColumn('string', 'Mes');
-    data2.addColumn('number', 'Prima Neta');
-    data2.addColumn('number', 'Comision');
-
-    data2.addRows([   
-      <loop start="data"/>
-      ["{data.mes}", {data.primaSoles}, {data.comisionSoles}],
-      <loop end="data"/>
-    ]);
+    //var data2 = resultData[1];
+    
+    if(findGetParameter("t")==3){
+      //comisiones
+      var data2 = resultData[5];
+    }else if(findGetParameter("t")==2){
+      //primas
+      var data2 = resultData[3];
+    }else{
+      var data2 = resultData[1];
+    }    
 
     var options2 = {
         vAxis: {
           title: 'US$',
         },
-        'title': 'Primas y Comisiones - Soles',
+        'title': temp + ' - Soles',
         'legend': 'bottom',
         height: '400',
         
@@ -80,9 +169,37 @@ function drawMultSeries() {
             <div class="col-sm-9">
               <div class="clearfix">
                 <select class="col-sm-12" name="reporte" id="reporte">
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
+                <loop start="anios"/>
+                <option value="{anios.id}">{anios.id}</option>
+                <loop end="anios"/>
                 </select>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+					  <label for="reporte" class="col-sm-3 control-label no-padding-right">Año</label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                				<div class="radio">
+													<label>
+													  <input id="pyc" name="t" type="radio" class="ace" {pyc} value="1">
+														<span class="lbl"> Primas y Comisiones</span>
+													</label>
+												</div>                              
+                				<div class="radio">
+													<label>
+														<input id="p" name="t" type="radio" class="ace" {p} value="2">
+														<span class="lbl"> Solo Primas</span>
+													</label>
+												</div>
+
+												<div class="radio">
+													<label>
+														<input id="c" name="t" type="radio" class="ace" {c} value="3">
+														<span class="lbl"> Solo Comisiones</span>
+													</label>
+												</div>
               </div>
             </div>
           </div>
@@ -104,7 +221,7 @@ function drawMultSeries() {
 $('#reporte').val({anio});
 $(document).ready(function(){
 	$('#busca').click(function(){
-		window.location.href = "?do=contabilidad.estadisticas&anio=" + $('#reporte').val();
+		window.location.href = "?do=contabilidad.estadisticas&anio=" + $('#reporte').val() + "&t=" + $('input[name=t]:checked', '#principal').val();
 	});
 });
 </script>

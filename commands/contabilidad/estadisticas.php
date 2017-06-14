@@ -124,9 +124,40 @@ class estadisticas extends sessionCommand{
 			$data[$i]["comisionSoles"] = $resultado["comisionSoles"];
 			$i++;
     	}
+    	if($this->request->t){
+			if($this->request->t == "2"){
+				$this->addVar("p","checked");
+				$this->addEmptyVar("c");
+				$this->addEmptyVar("pyc");
+				$this->addBlock("p");
+			}elseif($this->request->t == "3"){
+				$this->addVar("c","checked");
+				$this->addEmptyVar("p");
+				$this->addEmptyVar("pyc");
+				$this->addBlock("c");
+			}else{
+				$this->addVar("pyc","checked");
+				$this->addEmptyVar("p");
+				$this->addEmptyVar("c");
+				$this->addBlock("pyc");
+			}
+		}else{
+			$this->addVar("pyc","checked");
+			$this->addEmptyVar("p");
+			$this->addEmptyVar("c");
+			$this->addBlock("pyc");
+		}
+    	
     	
 		$this->addLoop("data",$data);
-    	
+		$i=0;
+		for($anio=(date("Y")); 2013<=$anio; $anio--) {
+			$anios[$i]["id"] = $anio;
+			$i++;
+		}
+		$this->addLoop("anios",$anios);
+		
+    	//print_r($data);
 		$this->addLayout("ace");
 		$this->processTemplate("contabilidad/estadisticas.html");
 	}
