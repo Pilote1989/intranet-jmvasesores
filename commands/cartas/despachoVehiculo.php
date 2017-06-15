@@ -104,6 +104,9 @@ class despachoVehiculo extends sessionCommand{
 					$this->addVar("modelo", "Sin Definir");
 					$this->addVar("marca", "Sin Definir");
 				}
+				if($vehiculos->getGps()=="1"){
+					$this->addBlock("GPS");
+				}
 				$this->addVar("placa", $vehiculos->getPlaca());				
 			}
 			$cupones = Fabrica::getAllFromDB("Cupon", array("idPoliza = " . $poliza->getId()), "fechaVencimiento ASC");
