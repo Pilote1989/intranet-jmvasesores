@@ -19,10 +19,19 @@ class reportePolizas extends SessionCommand{
 		if($_SESSION["busquedaPolizas"]["ramo"]!=""){
 			$where[]="Poliza.idRamo = '".$_SESSION["busquedaPolizas"]["ramo"]."'";
 		}
+		
+		if($_SESSION["busquedaPolizas"]["compania"]!=""){
+			$where[]="Poliza.idCompania = '".$_SESSION["busquedaPolizas"]["compania"]."'";
+		}
+		
+		if($_SESSION["busquedaPolizas"]["vendedor"]!=""){
+			$where[]="Poliza.idPersona = '".$_SESSION["busquedaPolizas"]["vendedor"]."'";
+		}
+		
 		if($_SESSION["busquedaPolizas"]["contratante"]!=""){
 			$where[]="c.nombre LIKE '%".$_SESSION["busquedaPolizas"]["contratante"]."%'";
 		}
-		
+			
 		$where[]="Poliza.idCliente = c.idCliente";
 		$where[]="r.idRamo = Poliza.idRamo";
 		$where[]="cia.idCompania = Poliza.idCompania";
