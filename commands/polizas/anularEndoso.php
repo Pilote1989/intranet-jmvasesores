@@ -6,6 +6,7 @@ class anularEndoso extends sessionCommand{
 		$fc->import("lib.Endoso");
 		if($this->request->idEndoso){
 			$endoso = Fabrica::getFromDB("Endoso",$this->request->idEndoso);
+			$endoso->setMotivoAnulacion($this->request->motivo);
 			if($endoso->getAnulada()=="1"){
 				$endoso->setAnulada("0");
 			}else{

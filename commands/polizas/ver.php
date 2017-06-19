@@ -79,6 +79,12 @@ class ver extends sessionCommand{
 			//$this->addVar("idPoliza",$this->request->idPoliza);
 			//$cupones = Fabrica::getAllFromDB("Cupon", array("idPoliza = " . $poliza->getId()));
 			//nuevo con cigencias
+			if($poliza->getAnulada()=="1"){
+				$this->addBlock("rehabilitaPoliza");
+			}else{
+				$this->addBlock("anulaPoliza");
+			}
+			
 			$this->addVar("idPoliza",$seleccionada);
 			$endosos = Fabrica::getAllFromDB("Endoso", array("idPoliza = " . $seleccionada));
 			$this->addVar("endosos", count($endosos));

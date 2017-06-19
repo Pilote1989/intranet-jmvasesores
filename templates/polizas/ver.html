@@ -10,7 +10,12 @@
         <li> <a href="/?do=polizas.editarDatosBasicos&idPoliza={idPoliza}">Editar Datos Basicos</a> </li>
         <li> <a href="/?do=polizas.editarDatosParticulares&idPoliza={idPoliza}">Editar Datos Particulares</a> </li>
         <li> <a href="/?do=polizas.agregarRenovacion&idPoliza={matriz}">Agregar Renovacion</a> </li>
-        <li> <a href="/?do=polizas.anularRenovacion&idPoliza={idPoliza}" id="anula">Anular Renovacion</a> </li>
+        <block start="anulaPoliza"/>
+        <li> <a href="#" id="anula">Anular Renovacion</a> </li>
+        <block end="anulaPoliza"/>
+        <block start="rehabilitaPoliza"/>
+        <li> <a href="#" id="rehabilita">Rehabilitar Renovacion</a> </li>
+        <block end="rehabilitaPoliza"/>
         <block start="eliminaRenovacion"/>
         <li> <a href="/?do=polizas.eliminarRenovacion&idPoliza={idPoliza}" id="elimina">Eliminar Renovacion</a> </li>
         <block end="eliminaRenovacion"/>
@@ -89,6 +94,23 @@
 <script>
 
 $(document).ready(function(){
+  $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+    _title: function(title) {
+      if (!this.options.title ) {
+        title.html("&#160;");
+      } else {
+        title.html(this.options.title);
+      }
+    }
+  }));  
+  $( "#dialog-ver" ).dialog({
+    resizable: false,
+    modal: true,
+    title_html: true,
+    autoOpen: false,
+    maxWidth:700,
+    width: 700,
+  }); 
 	$($('#myTab li#active a').attr('href')).load($('#myTab li#active a').attr('x-link'));
 	$('#myTab li a, .accordion-link').click(function(){
 		var currentTab = $(this).attr('href');
@@ -98,9 +120,56 @@ $(document).ready(function(){
 	$('#elimina').click(function(){
 		return confirm("¿Estas seguro que deseas eliminar la poliza?");
 	});
-	$('#anula').click(function(){
-		return confirm("¿Estas seguro que deseas anular la poliza?");
-	});
+  <block start="anulaPoliza"/>
+  $('#anula').click( function() {
+	  $.ajax({
+    	url: '/?do=polizas.anularRenovacion&idPoliza={idPoliza}',
+	  	success: function(responseText){
+	  		$('#dialog-ver').html(responseText);					
+	  		$('#dialog-ver').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-dashboard blue'></i> Confirmar Anulacion </h4></div>");
+	  		$( "#dialog-ver" ).dialog("open");
+	  		},
+	  	error: function(responseText){
+	  	}
+	  });
+    event.preventDefault();
+  });
+  <block end="anulaPoliza"/>
+  <block start="rehabilitaPoliza"/>
+  //para rehabilitar la poliza
+  			$("#rehabilita").on(ace.click_event, function() {
+					bootbox.dialog({
+						message: "<span class='bigger-110'>¿Desea rehabilitar la p&oacute;liza?</span>",
+						buttons:
+						{
+							"danger" :
+							{
+								"label" : "<i class='ace-icon fa fa-times'></i> No",
+								"className" : "btn-sm btn-danger",
+								"callback": function() {
+									//Example.show("uh oh, look out!");
+								}
+							},
+							"success" :
+							 {
+								"label" : "<i class='ace-icon fa fa-check'></i> Si",
+								"className" : "btn-sm btn-success",
+								"callback": function() {
+									$.ajax({
+                  	url: '/?do=polizas.rehabilitaRenovacion&idPoliza={idPoliza}',
+              	  	success: function(responseText){
+              	  		  location.reload(false);
+              	  		},
+              	  	error: function(responseText){
+              	  	}
+              	  });
+								}
+							}
+						}
+					});
+        event.preventDefault();
+				});
+  <block end="rehabilitaPoliza"/>
 });
 
 <block start="ee"/>
@@ -115,5 +184,5 @@ $(document).ready(function(){
 $('.responsive-tabs').responsiveTabs({
   accordionOn: ['xs'] // xs, sm, md, lg
 });
-
 </script>
+<div id="dialog-ver"></div>

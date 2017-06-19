@@ -11,6 +11,11 @@ class verEndoso extends sessionCommand{
 			$endoso = Fabrica::getFromDB("Endoso",$this->request->idEndoso);				
 			$this->addVar("accion", "Editar Endoso");
 			$this->addBlock("bloqueIdEndoso");
+			if($endoso->getAnulada()=="1"){
+				$this->addBlock("anulado");	
+				$this->addVar("motivoAnulacion", $endoso->getMotivoAnulacion());
+			}
+			$this->addBlock("bloqueIdEndoso");
 			$this->addVar("idEndoso", $this->request->idEndoso);
 			$this->addVar("documento", $endoso->getDocumento());
 			$this->addVar("detalle", $endoso->getDetalle());

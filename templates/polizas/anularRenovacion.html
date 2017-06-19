@@ -1,0 +1,51 @@
+<div id="dialog-cont">
+									<div class="col-sm-12">
+										<div class="widget-box">
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<form name="anulaReno" id="anulaReno" role="form">
+														<!-- <legend>Form</legend> -->
+														<fieldset>
+															<div>
+																<textarea class="form-control" id="motivo" name="motivo" placeholder="Motivo de Anulacion"></textarea>
+																<input type="hidden" name="idPoliza" value="{idPoliza}"/>
+															</div>
+														</fieldset>
+														<div class="form-actions center">
+															<button type="button" class="btn btn-sm btn-danger" id="cancelaAnulacion">
+																Cancelar
+																<i class="ace-icon fa fa-times icon-on-right bigger-110"></i>
+															</button>
+															<button type="button" class="btn btn-sm btn-success" id="confirmaAnulacion">
+																Anular
+																<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+															</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+</div>																		
+<script type="text/javascript">
+$('#confirmaAnulacion').click(function() {
+	//var mot = $('#motivo').val();
+	var mot = $("#anulaReno").serialize();
+	$("#dialog-cont").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+	$.ajax({
+		type: "POST",
+		data: mot,
+		dataType: "json",
+		url: '?do=polizas.procesarAnulacion',
+		success: function(data) {
+			if (data["respuesta"] == "SUCCESS") {
+				location.reload();
+			}
+		}
+	});
+});
+
+$('#cancelaAnulacion').on('click', function() {
+	$( "#dialog-ver" ).dialog("close");
+});
+</script>

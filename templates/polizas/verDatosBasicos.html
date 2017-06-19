@@ -26,6 +26,12 @@
 		<div class="profile-info-name"> Estado </div>
 		<div class="profile-info-value"> <i class="ace-icon fa fa-circle {colorEstado}"></i>&nbsp;&nbsp;&nbsp;{estado}&nbsp; </div>
 	</div>
+	<block start="anulada"/>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Motivo de Anulacion </div>
+		<div class="profile-info-value"> {motivo}&nbsp; </div>
+	</div>
+	<block end="anulada"/>
 	<div class="profile-info-row">
 		<div class="profile-info-name"> Nombre </div>
 		<div class="profile-info-value"> <a href="?do=clientes.ver&idCliente={idCliente}">{nombre}</a>&nbsp; </div>

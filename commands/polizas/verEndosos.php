@@ -66,11 +66,11 @@ class verEndosos extends sessionCommand{
 					//SI puedo eliminarlo o anularlo
 					$listaEndosos[$i]["verEliminar"] = "";
 					if($endoso->getAnulada() == "1"){
-						$listaEndosos[$i]["anula"] = '<a class="blue anulaEndoso" x-task="Rehabilitar" x-link="?do=polizas.anularEndoso&idEndoso=' . $listaEndosos[$i]["idEndoso"] . '" href="#"> <i class="ace-icon fa fa-arrow-circle-o-up bigger-130"></i> </a>';
+						$listaEndosos[$i]["anula"] = '<a class="blue rehabilitaEndoso" x-id="' . $listaEndosos[$i]["idEndoso"] . '" href="#"> <i class="ace-icon fa fa-arrow-circle-o-up bigger-130"></i> </a>';
 						$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle"></i>&nbsp;&nbsp;&nbsp;Anulado';
 						//$listaEndosos[$i]["estadoEndoso"] = "arrow-circle-o-up";
 					}else{
-						$listaEndosos[$i]["anula"] = '<a class="blue anulaEndoso" x-task="Anular" x-link="?do=polizas.anularEndoso&idEndoso=' . $listaEndosos[$i]["idEndoso"] . '" href="#"> <i class="ace-icon fa fa-arrow-circle-o-down bigger-130"></i> </a>';
+						$listaEndosos[$i]["anula"] = '<a class="blue anulaEndoso" x-id="' . $listaEndosos[$i]["idEndoso"] . '" href="#"> <i class="ace-icon fa fa-arrow-circle-o-down bigger-130"></i> </a>';
 						//$listaEndosos[$i]["estadoEndoso"] = "arrow-circle-o-down";
 						if($cobro->getIdLiquidacion() == ""){
 							$listaEndosos[$i]["estadoCobranza"] = '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente';

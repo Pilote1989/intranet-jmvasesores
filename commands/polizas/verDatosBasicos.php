@@ -37,6 +37,10 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("pdf", $poliza->getPdf());
 			$this->addVar("colorEstado", $poliza->estadoColor());
 			$this->addVar("estado", $poliza->estado());
+			if($poliza->getAnulada()=="1"){
+				$this->addBlock("anulada");
+				$this->addVar("motivo", $poliza->getMotivoAnulacion());
+			}
 			if($cobro->getIdLiquidacion() == ""){
 				$this->addVar("estadoCobranza", '<i class="ace-icon fa fa-circle red"></i>&nbsp;&nbsp;&nbsp;Pendiente');
 			}else{
