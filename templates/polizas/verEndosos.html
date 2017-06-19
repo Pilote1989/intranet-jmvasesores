@@ -73,6 +73,9 @@ $( "#dialogoEndosos" ).dialog({
 	autoOpen: false,
 	maxWidth: 680,
 	width: 680,
+	open: function() {
+  	$(this).css("maxHeight", 600);
+  }
 });
 
 $( "#botonAgregarEndoso" ).click(function(){
