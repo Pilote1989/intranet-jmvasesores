@@ -26,47 +26,72 @@ class Error{
 		echo '
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>eBase - JMVSeguros</title>
-<base href="http://intranet.jmvasesores.com/">
-<meta name="description" content="overview &amp; stats" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- basic styles -->
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-<!--[if IE 7]>
-				  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-				<![endif]-->
-<!-- page specific plugin styles -->
-<link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.full.min.css" />
-<link rel="stylesheet" href="assets/css/datepicker.css" />
-<link rel="stylesheet" href="assets/css/daterangepicker.css" />
-<link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
-<!-- fonts -->
-<link rel="stylesheet" href="assets/css/ace-fonts.css" />
-<link rel="stylesheet" href="assets/css/chosen.css" />
-<!-- ace styles -->
-<link rel="stylesheet" href="assets/css/ace.min.css" />
-<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-<link rel="stylesheet" href="assets/css/animate.css" />
-<!--[if lte IE 8]>
-				  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-				<![endif]-->
-<script src="assets/js/ace-extra.min.js"></script>
-<style>
-html {
-	overflow: -moz-scrollbars-vertical;
-	overflow: scroll;
-}
-</style>
-<!-- Ajax -->
-<script type="text/javascript" src="jScripts/ajax_core.js"></script>
-<script type="text/javascript" src="jScripts/ajform.js"></script>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+        <title>eBase - JMV Asesores</title>
+        <base href="http://intranetjmvasesores-pilote1989.c9.io:80/">
 
-<!--Fin Ajax-->
-</head>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta http-equiv="Cache-control" content="public">
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="ace-1.3.5/css/bootstrap.css" />
+		<link rel="stylesheet" href="ace-1.3.5/css/font-awesome.css" />
+
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="ace-1.3.5/css/jquery-ui.css" />
+        <link rel="stylesheet" href="ace-1.3.5/css/bootstrap-datetimepicker.css" />
+        <link rel="stylesheet" href="ace-1.3.5/css/bootstrap-datepicker3.css" />
+        <link rel="stylesheet" href="ace-1.3.5/css/daterangepicker.css" />
+        <link rel="stylesheet" href="ace-1.3.5/css/ui.jqgrid.css" />
+		<link rel="stylesheet" href="ace-1.3.5/css/jquery.gritter.css" />
+
+
+		
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="ace-1.3.5/css/ace-fonts.css" />
+		<link rel="stylesheet" href="ace-1.3.5/css/chosen.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="ace-1.3.5/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+        <link rel="stylesheet" href="ace-1.3.5/css/ace-rtl.css" />
+		<link rel="stylesheet" href="ace-1.3.5/css/ace-skins.css" />
+        <link rel="stylesheet" href="ace-1.3.5/css/animate.css" />
+        <link rel="stylesheet" href="ace-1.3.5/css/bootstrap-responsive-tabs.css" />
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="ace-1.3.5/css/ace-part2.css" class="ace-main-stylesheet" />
+		<![endif]-->
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="ace-1.3.5/css/ace-ie.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="ace-1.3.5/js/ace-extra.js"></script>
+		<style>
+		html {
+			overflow: -moz-scrollbars-vertical;
+			overflow: scroll;
+		}
+		</style>		
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="ace-1.3.5/js/html5shiv.js"></script>
+		<script src="ace-1.3.5/js/respond.js"></script>
+		<![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <!-- Ajax -->
+        <script type="text/javascript" src="jScripts/ajax_core.js"></script>
+        <script type="text/javascript" src="jScripts/ajform.js"></script>
+        
+        <!--Fin Ajax-->
+	</head>
 <body>
 <!-- basic scripts --> 
 <!--[if !IE]> -->
@@ -124,7 +149,7 @@ html {
           
           <div class="error-container">
             <div class="well">
-              <h1 class="grey lighter smaller"> <span class="blue bigger-125"> <i class="icon-sitemap"></i> 404 </span> Pagina No Encontrada </h1>
+              <h1 class="grey lighter smaller"> <span class="blue bigger-125"> <i class="ace-icon fa fa-sitemap"></i> 404 </span> Pagina No Encontrada </h1>
               <hr>
               <h3 class="lighter smaller">¡Buscamos por todo el sitio pero no la encontramos!</h3>
               <div>
@@ -132,16 +157,16 @@ html {
                 </div>
                 <h4 class="smaller">Intente lo siguiente:</h4>
                 <ul class="list-unstyled spaced inline bigger-110 margin-15">
-                  <li> <i class="icon-hand-right blue"></i> Revise la direccion. </li>
-                  <li> <i class="icon-hand-right blue"></i> Regrese a la pagina anterior. </li>
-                  <li> <i class="icon-hand-right blue"></i> Avisele al programador. </li>
+                  <li> <i class="ace-icon fa fa-hand-o-right blue"></i> Revise la direccion. </li>
+                  <li> <i class="ace-icon fa fa-hand-o-right blue"></i> Regrese a la pagina anterior. </li>
+                  <li> <i class="ace-icon fa fa-hand-o-right blue"></i> Avisele al programador. </li>
                 </ul>
               </div>
               <hr>
               <div class="space">
               </div>
               <div class="center">
-                <a href="javascript:history.back()" class="btn btn-grey"> <i class="icon-arrow-left"></i> Regresar </a>
+                <a href="javascript:history.back()" class="btn btn-grey"> <i class="ace-icon fa fa-arrow-left"></i> Regresar </a>
               </div>
             </div>
           </div>
@@ -151,7 +176,7 @@ html {
       </div>
     </div>
   </div>
-  <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="icon-double-angle-up icon-only bigger-110"></i> </a>
+  <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="ace-icon fa fa-double-angle-up ace-icon fa fa-only bigger-110"></i> </a>
 </div>
 </body>
 </html>		
