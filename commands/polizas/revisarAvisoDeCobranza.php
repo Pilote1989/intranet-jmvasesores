@@ -9,7 +9,7 @@ class revisarAvisoDeCobranza extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$valid = false;
 		if($this->request->aviso){
-			$cobro=Fabrica::getAllFromDB("Cobro",array("avisoDeCobranza LIKE'" . $this->request->aviso . "'"));
+			$cobro=Fabrica::getAllFromDB("Cobro",array("avisoDeCobranza LIKE '" . $this->request->aviso . "'"));
 			if(count($cobro)>0){
 				$valid = false;
 				if($this->request->poliza){
