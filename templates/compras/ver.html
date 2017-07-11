@@ -1,0 +1,103 @@
+<div class="widget-box">
+  <div class="widget-header">
+    <h4 class="widget-title">Filtros de Busqueda</h4>
+    <div class="widget-toolbar">
+      <a data-action="collapse" href="#"> <i class="ace-icon fa fa-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="ace-icon fa fa-remove"></i> </a>
+    </div>
+  </div>
+  <div class="widget-body">
+    <div class="widget-main no-padding">
+      <form class="form-horizontal" role="form" id="principal" name="principal">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+          <div class="form-group">
+            <label for="vendedor" class="col-sm-3 control-label no-padding-right"> Vendedor </label>
+            <div class="col-sm-9">
+              <input name="vendedor" type="text" class="col-sm-12" id="vendedor" value="{vendedor}" onKeyPress="return disableEnterKey(event)" placeholder="Vendedor">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tipo" class="col-sm-3 control-label no-padding-right"> Tipo </label>
+            <div class="col-sm-9">
+              <select name="tipo" class="col-sm-12" id="tipo" onKeyPress="return disableEnterKey(event)">
+                <option></option>
+                <option>Alimentacion</option>
+                <option>Transporte</option>
+                <option>Gasolina</option>
+                <option>Utiles de Oficina</option>
+                <option>Otros</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="moneda" class="col-sm-3 control-label no-padding-right"> Moneda </label>
+            <div class="col-sm-9">
+              <select name="moneda" class="col-sm-12" id="moneda" onKeyPress="return disableEnterKey(event)">
+                <option></option>
+                <option>Soles</option>
+                <option>Dolares</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <input name="busqueda" type="hidden" id="busqueda" value="1" />
+        <div class="form-actions center">
+          <button class="btn btn-sm btn-success" type="button" onClick="cargarFormulario('principal','?do=compras.busqueda&pagina=1','divBusqueda');"> Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-danger" type="button" id="limpiar" onClick="window.location='?do=compras.ver&limpiar=1'" value="Limpiar Filtros"> Limpiar Filtros <i class="ace-icon fa fa-trash fa-on-right bigger-110"></i> </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+	var parentAccordion=new TINY.accordion.slider("parentAccordion");
+	parentAccordion.init("accFiltro","h4",0,0);
+</script> 
+<script>
+
+	function disableEnterKey(e){
+		var key;
+		if(window.event)
+		key = window.event.keyCode;     //IE
+		else
+		key = e.which;     //firefox
+		
+		if(key == 13)
+		return false;
+		else
+		return true;
+	}	
+	function limpiarExportar(divC){
+		var el;
+		el= document.getElementById(divC);
+		el.innerHTML = "";
+	}
+</script>
+<h3 class="row header smaller lighter blue"> <span class="col-xs-6"> Resultados de Búsqueda </span><!-- /span --> 
+  <span class="col-xs-6"> <span class="pull-right inline"> <span class="btn-toolbar inline middle no-margin"> <span class="btn-group no-margin" data-toggle="buttons" id="accordion-style">
+  <button id="target" class="btn btn-xs btn-info"><i class="ace-icon fa fa-table"></i> Exportar </button>
+  </span> </span> </span> </span><!-- /span --> 
+</h3>
+<div class="row">
+  <div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="divBusqueda" style="height:430px">
+        </div>
+      </div>
+    </div>
+    <!-- PAGE CONTENT ENDS -->
+  </div>
+  <!-- /.col -->
+</div>
+<script>
+$('#idRamo').val({ramo});
+$('#idCompania').val({compania});
+$('#idVendedor').val({vendedor});
+	cargarFormulario('principal','?do=compras.busqueda','divBusqueda');
+	$( "#target" ).click(function() {
+		window.location.href = "/?do=polizas.reportePolizas";
+	});
+
+</script> 

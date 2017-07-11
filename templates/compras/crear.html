@@ -1,0 +1,333 @@
+     <div class="widget-main no-padding">
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="crearCobro" id="crearCobro" action="?do=compras.procesarCompra" role="form">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+        	<block start="creacionCliente"/>
+          <div class="form-group">
+            <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre del Proveedor </label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="nombre" type="text"  id="nombre" value="{nombre}" onKeyPress="return disableEnterKey(event)" placeholder="Nombre" class="col-sm-12">
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="doc" class="col-sm-3 control-label no-padding-right">RUC </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+              	<input name="doc" type="text" class="col-sm-12"  id="doc" value="{ruc}" placeholder="XXXXXXXXXXX" onKeyPress="return disableEnterKey(event)">
+            	</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="direccion" class="col-sm-3 control-label no-padding-right">Direccion </label>
+            <div class="col-sm-9">
+              <input name="direccion" type="text"  id="direccion" onKeyPress="return disableEnterKey(event)" placeholder="Direccion" class="col-sm-12">
+            </div>
+          </div>          
+          <div class="form-group">
+            <label for="distrito" class="col-sm-3 control-label no-padding-right">Distrito </label>
+            <div class="col-sm-9">
+              <select  class="col-sm-12 col-xs-12 form-control" name="distrito" id="distrito" >
+                {distritos}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="correo" class="col-sm-3 control-label no-padding-right">Correo</label>
+            <div class="col-sm-9">
+              <input name="correo" type="text"  id="correo" onKeyPress="return disableEnterKey(event)" placeholder="ejemplo@ejemplo.com" class="col-sm-12">
+            </div>
+          </div>
+					<hr>
+          <block end="creacionCliente"/>
+          <block start="dataCliente"/>
+						<div class="page-header">
+							<h1 class="grey lighter">
+								<i class="ace-icon fa fa-shopping-cart green"></i>
+								{ruc}
+								<input name="doc" type="hidden" id="doc" value="{ruc}">
+          			<i class="ace-icon fa fa-angle-double-right"></i>
+								{nombre}
+							</h1>
+						</div>
+          <block end="dataCliente"/>
+          <div class="form-group">
+            <label for="numeroDoc" class="col-sm-3 control-label no-padding-right">Numero de Documento</label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="numeroDoc" type="text"  id="numeroDoc" onKeyPress="return disableEnterKey(event)" placeholder="Numero de Documento" class="col-sm-12">
+            </div>
+            </div>            
+          </div>
+          <div class="form-group">
+            <label for="fecha" class="col-sm-3 control-label no-padding-right"> Fecha </label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input type="text" name="fecha" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="fecha">
+                <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
+              </div>
+            </div>
+          </div>          
+					<div class="form-group">
+            <label for="tipo" class="col-sm-3 control-label no-padding-right"> Tipo </label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <select name="tipo" class="col-sm-12" id="tipo" onkeypress="return disableEnterKey(event)">
+                <option></option>
+                <option>Alimentacion</option>
+                <option>Transporte</option>
+                <option>Gasolina</option>
+                <option>Utiles de Oficina</option>
+                <option>Otros</option>
+              </select>
+            </div>
+            </div>
+          </div>          
+          <div class="form-group">
+            <label for="concepto" class="col-sm-3 control-label no-padding-right">Concepto</label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="concepto" type="text"  id="concepto" onKeyPress="return disableEnterKey(event)" placeholder="Concepto" class="col-sm-12">
+            </div>
+						</div>
+          </div>       
+					<div class="form-group">
+            <label for="moneda" class="col-sm-3 control-label no-padding-right"> Moneda </label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <select name="moneda" class="col-sm-12" id="moneda" onkeypress="return disableEnterKey(event)">
+                <option>Soles</option>
+                <option>Dolares</option>
+                <option>Euros</option>
+              </select>
+            </div>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label for="subtotal" class="col-sm-3 control-label no-padding-right">Subtotal</label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="subtotal" type="text"  id="subtotal" onKeyPress="return disableEnterKey(event)" placeholder="0.00" class="col-sm-12">
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="igv" class="col-sm-3 control-label no-padding-right">IGV</label>
+            <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="igv" type="text"  id="igv" onKeyPress="return disableEnterKey(event)" placeholder="0.00" class="col-sm-12">
+						</div>
+								<div class="alert alert-warning" id="alertaIGV">
+									<button type="button" class="close" data-dismiss="alert">
+										<i class="ace-icon fa fa-times"></i>
+									</button>
+									<p>
+										<strong>¡Alerta! </strong>
+											El IGV no es el recomendado. 
+										<button class="btn btn-sm btn-warning" id="corrigeIGV" type="button">Corregir</button>
+										<button class="btn btn-sm" id="ignorarAlerta" type="button">Ignorar Alerta</button>
+									</p>
+								</div>						
+						</div>
+          </div>
+          <div class="form-group">
+            <label for="total" class="col-sm-3 control-label no-padding-right">Total</label>
+            <div class="col-sm-9">
+            <div class="clearfix">            	
+              <input name="total" type="text"  id="total" onKeyPress="return disableEnterKey(event)" placeholder="0.00" class="col-sm-12">
+            </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-actions center">
+          <input type="hidden" name="idCliente" value="{idCliente}"/>
+          <button class="btn btn-sm btn-success" type="button" id="enviaCobro"> Crear <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
+        </div>
+      </form>
+    </div>
+<script>
+	$('#loading').hide();
+	$('#alertaIGV').hide();
+	$('#ignorarAlerta').on('click', function(){
+		$('#alertaIGV').hide();
+	});
+	$('#corrigeIGV').on('click', function(){
+		if(!isNaN($('#subtotal').val())){
+			$('#igv').val(($('#subtotal').val() * 0.18).toFixed(2));
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val())).toFixed(2));
+			$('#alertaIGV').hide();
+		}else{
+			alert('El subtotal debe ser un numero.');
+		}
+	});
+	$('#subtotal').on('keyup', function(){
+		if(!isNaN($('#subtotal').val())){
+			$('#igv').val(($('#subtotal').val() * 0.18).toFixed(2));
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val())).toFixed(2));
+			$('#alertaIGV').hide();
+		}
+	});
+	$('#igv').on('keyup', function(){
+		var igvExacto = ($('#subtotal').val() * 0.18).toFixed(2);
+		var igv = $('#igv').val(); 
+		if(igvExacto - igv != 0 ){
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val())).toFixed(2));
+			$('#alertaIGV').show();
+		}
+	});
+	$('.date-picker').mask("99/99/9999");
+	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+ 	$('#crearCobro').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			nombre: {
+				required: true,
+			},
+			doc: {
+				required: true,
+				minlength: 11,
+				remote: {
+					url: "?do=clientes.checkNuevoRuc",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#enviaCobro').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#enviaCobro').show();
+          },
+					data: {
+						tipoDoc: 'RUC',
+						id: function() {
+							return $( "#doc" ).val();
+						}
+					}
+				}
+			},
+			numeroDoc: {
+				required: true,
+				remote: {
+					url: "?do=compras.revisarDocumento",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#enviaCobro').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#enviaCobro').show();
+          },
+					data: {
+						ruc: function() {
+							return $( "#doc" ).val();
+						},
+						documento: function() {
+							return $( "#numeroDoc" ).val();
+						}
+					}
+				}
+			},
+			fecha: {
+				required: true,
+			},
+			tipo: {
+				required: true,
+			},
+			subtotal: {
+				required: true,
+				number: true,
+			},
+			igv: {
+				required: true,
+				number: true,
+			},
+			total: {
+				required: true,
+				number: true,
+			},
+		},
+		messages: {
+			nombre: {
+				required: "Ingrese el Nombre",
+			},
+			doc: {
+				required: "Ingrese el Numero de Documento",
+				minlength: jQuery.validator.format("Ingrese por lo menos {0} caracteres"),
+				remote: "Ya existe un tercero con ese RUC",
+			},
+			numeroDoc: {
+				required: 'Ingrese el Numero de Documento',
+				remote: 'El proveedor ya tiene una compra con este numero de Factura'
+			},
+			fecha: {
+				required: 'Ingrese la Fecha',
+			},
+			tipo: {
+				required: 'Ingrese el Tipo',
+			},
+			subtotal: {
+				required: 'Ingrese el Subtotal',
+				number: 'Debe ingresar un numero'
+			},
+			igv: {
+				required: 'Ingrese el IGV',
+				number: 'Debe ingresar un numero'
+			},
+			total: {
+				required: 'Ingrese el Total',
+				number: 'Debe ingresar un numero'
+			},
+		},
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+		},
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else 
+				error.insertAfter(element.parent());
+		},
+	});
+	$('#enviaCobro').click(function() {
+		if($("#crearCobro").valid()){
+			$("#crearCobro").submit();
+			/*
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: '?do=clientes.procesarCrearGuardarEnPoliza',
+				data: $("#crearCobro").serialize(),
+				success: function(data) {
+					if (data["respuesta"] == "SUCCESS") {
+						$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+						$("#dialog-general").dialog("close");
+					}
+				}
+			});	*/
+		}
+	});
+</script>

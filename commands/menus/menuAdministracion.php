@@ -145,12 +145,22 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "contabilidad.meses"){
 			$this->addVar("contabilidad", "class='active open'");
 			$this->addVar("contabilidad.meses", "class='active'");
+		}elseif($this->request->doFalso == "compras.ver"){
+			$this->addVar("compras", "class='active open'");
+			$this->addVar("compras.ver", "class='active'");
+		}elseif($this->request->doFalso == "compras.verCompra"){
+			$this->addVar("compras", "class='active open'");
+			$this->addVar("compras.ver", "class='active'");
+		}elseif($this->request->doFalso == "compras.editar"){
+			$this->addVar("compras", "class='active open'");
+			$this->addVar("compras.ver", "class='active'");
+		}elseif($this->request->doFalso == "compras.agregar"){
+			$this->addVar("compras", "class='active open'");
+			$this->addVar("compras.agregar", "class='active'");
+		}elseif($this->request->doFalso == "compras.crear"){
+			$this->addVar("compras", "class='active open'");
+			$this->addVar("compras.agregar", "class='active'");
 		}
-		
-		
-		
-		
-		
 		$this->processTemplate("menus/menuAdministracion.html");
 	}
 }

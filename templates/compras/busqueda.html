@@ -1,0 +1,33 @@
+{paginas}
+<div class="table-responsive">
+	<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th align="center">Numero</th>
+				<th align="center">Vendedor</th>
+				<th align="center">Tipo</th>
+				<th align="center">Moneda</th>
+				<th align="center">Subtotal</th>
+				<th align="center">IGV</th>
+				<th align="center">Total</th>
+				<th align="center">Fecha Compra</th>
+				<th> Opc. </th>
+			</tr>
+		</thead>
+		<tbody>
+			<loop start="compras"/>
+			<tr>
+				<td align="center"> {compras.numero} </td>
+				<td align="center"> {compras.vendedor} </td>
+				<td align="center"> {compras.tipo} </td>
+				<td align="center"> {compras.moneda} </td>
+				<td align="center"> {compras.subtotal} </td>
+				<td align="center"> {compras.igv} </td>
+				<td align="center"> {compras.total} </td>
+				<td align="center"> {compras.fechaCompra} </td>
+				<td><div class="action-buttons"> <a class="blue" href="?do=compras.verCompra&idCompra={compras.idCompra}"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> </div></td>
+			</tr>
+			<loop end="compras"/>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,82 @@
+<div id="busqueda">
+  <div class="tabbable">
+    <ul class="nav nav-tabs" id="myTab">
+      <li class="active"> <a data-toggle="tab" href="#tabDocumento"> Buscar de Tercero </a> </li>
+    </ul>
+    <div class="tab-content">
+      <form class="form-horizontal" name="busquedaClientes" id="busquedaClientes" role="form">
+        <fieldset>
+          <div class="form-group">
+            <label for="ruc" class="col-sm-3 control-label no-padding-right">RUC </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input name="ruc" type="text" class="col-sm-12"  id="ruc" placeholder="XXXXXXXXXXX" onKeyPress="return disableEnterKey(event)">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input name="nombre" type="text" class="col-sm-12"  id="nombre" placeholder="Nombre" onKeyPress="return disableEnterKey(event)">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <div class="form-actions center" style="margin:0px;">
+    <button class="btn btn-sm btn-success" type="button" id="buscarClientes" name="buscarClientes"> Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
+  </div>
+</div>
+<div id="resultados">
+</div>
+<script type="text/javascript">
+$("#busquedaClientes input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+    	$('#buscarClientes').click();
+    }
+});
+/*
+$('input').keypress(function (e) {
+ var key = e.which;
+ alert (key)
+ if(key == 13)  // the enter key code
+  {
+    $('buscarClientes').click();
+    return false;  
+  }
+});  */
+$('#resultados').hide();
+$('#buscarClientes').click(function() {
+		//voy a buscar por documento
+			//$("#buscarVehiculo").hide();
+			$("#resultados").show();
+			$("#resultados").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+			$.ajax({
+				type: "POST",
+				url: '?do=compras.buscarClientes',
+				data: $("#busquedaClientes").serialize(),
+				success: function(data) {
+					$("#resultados").html(data);
+				}
+			});	
+});
+$('#resultados').on( 'click', 'button.agregaAsegurado', function (e) {
+	var idCliente = $(this).attr('x-link');
+	var idPoliza = $(this).attr('x-pol');
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: '?do=vehiculos.guardarEnPoliza&idVehiculo='+ idCliente + '&idPoliza='+ idPoliza,
+			success: function(data) {
+			if (data["respuesta"] == "SUCCESS") {
+				$("#tab-4").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+				$("#tab-4").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+				$("#dialog-general").dialog("close");
+			}
+		}
+	});
+});
+</script>

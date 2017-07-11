@@ -64,6 +64,12 @@
       <li {reportes.comisionesPendientes}><a href="?do=reportes.comisionesPendientes"> <i class="menu-icon fa fa-angle-double-right"></i> Comisiones por Cobrar</a></li>
     </ul>
   </li>
+  <li {compras}> <a class="dropdown-toggle" href="#"> <i class="menu-icon fa fa-shopping-cart"></i> <span class="menu-text"> Compras </span> <b class="arrow fa fa-angle-down"></b> </a>
+    <ul class="submenu">
+      <li {compras.agregar}> <a href="?do=compras.agregar"> <i class="menu-icon fa fa-angle-double-right"></i> Agregar Compra </a> </li>
+      <li {compras.ver}> <a href="?do=compras.ver"> <i class="menu-icon fa fa-angle-double-right"></i> Buscar Compras </a> </li>
+    </ul>
+  </li>    
   <block end="admin"/>
   <block start="admin"/>
   <li {clientes}> <a class="dropdown-toggle" href="#"> <i class="menu-icon fa fa-group"></i> <span class="menu-text"> Clientes </span> <b class="arrow fa fa-angle-down"></b> </a>
