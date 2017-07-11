@@ -9,7 +9,7 @@
         </div>
         <div class="widget-toolbar hidden-480">
           <a href="?do=compras.editar&idCompra={idCompra}"> <i class="ace-icon fa fa-edit"></i> </a>
-          <a href="?do=compras.editar&idCompra={idCompra}"> <i class="ace-icon fa fa-trash red"></i> </a>
+          <a href="#" id="eliminarCompra"> <i class="ace-icon fa fa-trash red"></i> </a>
         </div>
       </div>
       <div class="widget-body">
@@ -51,14 +51,15 @@
     </div>
   </div>
 </div>
-  <div id="dialog-message">
+  <div id="dialog-message" class="hide">
     <div class="alert alert-info bigger-110">
-      Se eliminará la liquidacion permanentemente.
+      Se eliminará la compra permanentemente.
     </div>
     <div class="space-6">
     </div>
     <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
   </div>
+  
 <script>
 
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
@@ -70,36 +71,40 @@ $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 		}
 	}
 }));
-$( "#dialog-message" ).dialog({
-	resizable: false,
-	modal: true,
-	title_html: true,
-	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
-	autoOpen: false,
-	buttons: [
-		{
-			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
-			"class" : "btn btn-danger btn-xs",
-			click: function() {
-				$.ajax({
-					type: "POST",
-					dataType: "json",
-					url: '?do=liquidaciones.eliminarLiquidacion&idLiquidacion={idLiquidacion}',
-					success: function() {
-						window.location.href = "?do=liquidaciones.verLiquidaciones";
-					}
-				});
-				$( this ).dialog( "close" );
-			}
-		}
-		,
-		{
-			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
-			"class" : "btn btn-xs",
-			click: function() {
-				$( this ).dialog( "close" );
-			}
-		}
-	]			
+
+$( "#eliminarCompra" ).on('click', function(e) {
+  e.preventDefault();
+	$( "#dialog-message" ).removeClass('hide').dialog({
+  	resizable: false,
+  	modal: true,
+  	title_html: true,
+  	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar la compra?</h4></div>",
+  	buttons: [
+  		{
+  			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
+  			"class" : "btn btn-danger btn-xs",
+  			click: function() {
+  				$.ajax({
+  					type: "POST",
+  					dataType: "json",
+  					url: '?do=compras.eliminarCompra&idCompra={idCompra}',
+  					success: function() {
+  						window.location.href = "?do=compras.ver";
+  					}
+  				});
+  				$( this ).dialog( "close" );
+  			}
+  		}
+  		,
+  		{
+  			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
+  			"class" : "btn btn-xs",
+  			click: function() {
+  				$( this ).dialog( "close" );
+  			}
+  		}
+  	]		
+	});
 });
+
 </script> 
