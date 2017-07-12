@@ -13,20 +13,34 @@ class editarDatosBasicos extends sessionCommand{
 			$seleccionados = array();
 			$seleccionados_tipo = array();
 			$tipos = array();
+			
 			$cobros = Fabrica::getAllFromDB("Cobro",array("idLiquidacion = '" . $this->request->idLiquidacion . "'"));
 			foreach($cobros as $cobro){
+				$queryCobro = "SELECT `moneda` FROM `reporteTodoF` WHERE `idCobro` = " . $cobro->getId();
+				$queryCobro=utf8_decode($queryCobro);		
+				$link=&$this->fc->getLink();
+				if($result=$link->query($queryCobro)){
+					$row=$result->fetch_assoc();
+					$monedaSQL=$row['moneda'];
+					//$this->addVar("moneda",$monedaSQL);
+				}else{
+					printf("Error: %s\n", $link->error);
+					return null;
+				}	
+				//$cobrosF = Fabrica::getFromDB("ReporteTodoF",$cobro->getMoneda());
 				$seleccionados[] = '"'.$cobro->getId().'"';
 				$seleccionados_tipo[] = '"'.$cobro->tipo().'"';
 				//echo $cobro->tipo() . " - " . $cobro->getId(). "<br />";
-				if($cobro->getMoneda()=="Dolares"){
+				//echo $monedaSQL;
+				if($monedaSQL=="Dolares"){
 					$this->addVar("moneda","1");
-				}elseif($cobro->getMoneda()=="Soles"){
+				}elseif($monedaSQL=="Soles"){
 					$this->addVar("moneda","2");
-				}elseif($cobro->getMoneda()=="Euros"){
+				}elseif($monedaSQL=="Euros"){
 					$this->addVar("moneda","3");
 				}
 			}
-			$this->addVar("mon",$cobro->getMoneda());
+			$this->addVar("mon",$monedaSQL);
 			
 			$this->addVar("ids",implode(",", $seleccionados));
 			$this->addVar("tipos",implode(",", $seleccionados_tipo));
