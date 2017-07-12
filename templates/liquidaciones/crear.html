@@ -137,6 +137,7 @@
                               <div class="col-sm-9">
                                 <div class="clearfix">
                                   <input class="col-sm-12 col-xs-12 " name="obser" type="text"  id="obser">
+                                  <input name="mon" type="hidden" id="mon">
                                 </div>
                               </div>
                             </div>
@@ -321,6 +322,7 @@ $("#siguiente").click(function() {
 		$("#anterior").show();
 		$("#terminar").show();
 		$("#siguiente").hide();
+		$('#mon').val($('#moneda option:selected').text());
 		$("#comisionesFinal").empty();	
 		var suma=0;
 		var i=0;

@@ -26,6 +26,7 @@ class editarDatosBasicos extends sessionCommand{
 					$this->addVar("moneda","3");
 				}
 			}
+			$this->addVar("mon",$cobro->getMoneda());
 			
 			$this->addVar("ids",implode(",", $seleccionados));
 			$this->addVar("tipos",implode(",", $seleccionados_tipo));
@@ -45,6 +46,7 @@ class editarDatosBasicos extends sessionCommand{
 		}else{
 			$this->addBlock("bloqueEditarLiquidacion");
 			$this->addVar("editar","Crear Liquidacion");
+			$this->addEmptyVar("mon");
 			$companias=Fabrica::getAllFromDB("Compania",array(),"nombre ASC");	
 			$selectCompania = '<option value=""></option>';
 			foreach($companias as $compania){
