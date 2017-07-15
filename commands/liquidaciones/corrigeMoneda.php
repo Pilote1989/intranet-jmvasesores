@@ -10,7 +10,18 @@ class corrigeMoneda extends sessionCommand{
 		$cSoles = 0;
 		$cEuros = 0;
 		$cNN = 0;
+		if($this->request->inicio){
+			$inicio = $this->request->inicio;	
+		}else{
+			$inicio = 0;
+		}
+		$actual = $inicio; 
 		foreach($liquidaciones as $liquidacion){
+			if($actual > $inicio + 10){
+				break;
+			}else{
+				$actual++;
+			}
 			$cDolares = 0;
 			$cSoles = 0;
 			$cEuros = 0;
