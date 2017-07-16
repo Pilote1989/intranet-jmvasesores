@@ -30,8 +30,30 @@ class buscaMes extends sessionCommand{
 			}
 			$this->addVar("idMes",$this->request->id);
 			$this->addVar("color",$mes->estadoColor());
-			$this->addVar("primaNeta",number_format($mes->getPrimaNeta(),2));
-			$this->addVar("comision",number_format($mes->getComision(),2));
+			
+			$this->addVar("primaNetaDolares",number_format($mes->getPrimaNetaDolares(),2));
+			$this->addVar("comisionDolares",number_format($mes->getComisionDolares(),2));
+			$this->addVar("igvFacturasDolares",number_format($mes->getIgvFacturasDolares(),2));
+			$this->addVar("totalFacturasDolares",number_format($mes->getTotalFacturasDolares(),2));
+			$this->addVar("comisionCedidaDolares",number_format($mes->getComisionCedidaDolares(),2));
+			$this->addVar("igvCedidasDolares",number_format($mes->getIgvCedidasDolares(),2));
+			$this->addVar("totalCedidasDolares",number_format($mes->getTotalCedidasDolares(),2));
+			$this->addVar("subtotalComprasDolares",number_format($mes->getSubtotalComprasDolares(),2));
+			$this->addVar("igvComprasDolares",number_format($mes->getIgvComprasDolares(),2));
+			$this->addVar("otrosComprasDolares",number_format($mes->getOtrosComprasDolares(),2));
+			$this->addVar("totalComprasDolares",number_format($mes->getTotalComprasDolares(),2));
+
+			$this->addVar("primaNetaSoles",number_format($mes->getPrimaNetaSoles(),2));
+			$this->addVar("comisionSoles",number_format($mes->getComisionSoles(),2));
+			$this->addVar("igvFacturasSoles",number_format($mes->getIgvFacturasSoles(),2));
+			$this->addVar("totalFacturasSoles",number_format($mes->getTotalFacturasSoles(),2));
+			$this->addVar("comisionCedidaSoles",number_format($mes->getComisionCedidaSoles(),2));
+			$this->addVar("igvCedidasSoles",number_format($mes->getIgvCedidasSoles(),2));
+			$this->addVar("totalCedidasSoles",number_format($mes->getTotalCedidasSoles(),2));
+			$this->addVar("subtotalComprasSoles",number_format($mes->getSubtotalComprasSoles(),2));
+			$this->addVar("igvComprasSoles",number_format($mes->getIgvComprasSoles(),2));
+			$this->addVar("totalComprasSoles",number_format($mes->getTotalComprasSoles(),2));			
+			
 			$this->processTemplate("contabilidad/buscaMes.html");
 		}else{
 			echo "Error";

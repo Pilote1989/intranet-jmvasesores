@@ -5,6 +5,16 @@ class verCompra extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
 		$compra = Fabrica::getFromDB("Compra",$this->request->idCompra);
+		$fecha = explode('/', $compra->getFecha("DATE"));
+		$mes = Fabrica::getAllFromDB("Mes",array("mes = ".$fecha[1],"anio = ".$fecha[2]));
+		//echo $mes[0]->getId();
+		if($mes[0]->getEstado()=="1"){
+			//mes cerrado
+			$this->addBlock("mesCerrado");
+		}else{
+			//mes abierto
+			$this->addBlock("mesAbierto");
+		}
 		if(is_null($compra)){
 			$fc->redirect("?do=compras.ver");
 		}else{

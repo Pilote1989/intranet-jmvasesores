@@ -212,6 +212,28 @@
 			},
 			fecha: {
 				required: true,
+				remote: {
+					url: "?do=contabilidad.revisarMes",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#enviaCobro').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#enviaCobro').show();
+          },
+					data: {
+						mes: function() {
+						  var d =  $( "#fecha" ).val().split("/");
+							return d["1"];
+						},
+						anio: function() {
+						  var d =  $( "#fecha" ).val().split("/");
+							return d["2"];
+						}
+					}
+				}
 			},
 			tipo: {
 				required: true,
@@ -244,6 +266,7 @@
 			},
 			fecha: {
 				required: 'Ingrese la Fecha',
+				remote: "El mes se encuentra cerrado",
 			},
 			tipo: {
 				required: 'Ingrese el Tipo',
@@ -306,4 +329,9 @@
 			});	*/
 		}
 	});
+$(document).on('change', '#fecha', function() {
+  //$(this).closest('.form-group').removeClass('has-error');
+  //$(this).closest('.help-block').hide();
+  $("#crearCobro").validate().element("#fecha");
+});
 </script>

@@ -15,79 +15,157 @@
                         </a>
                     </li>
                     <span class="pull-right inline">
-			<span class="btn-toolbar inline middle no-margin"> 
-				<span class="btn-group no-margin" data-toggle="buttons" id="accordion-style">
-											<div class="btn-group">
-											    
-											    
-											    <button data-toggle="dropdown" class="btn btn-xs btn-info dropdown-toggle">
-													Opciones
-													<span class="ace-icon fa fa-caret-down fa-on-right"></span>
-                    </button>
-
-                    <ul class="dropdown-menu dropdown-default pull-right">
-                        <li>
-                            <a href="#" class="cerrarMes" id="{idMes}" x-task="{estado}" x-but="{tarea}">{tarea} Mes</a>
-                        </li>
-                    </ul>
-            </div>
-            </span>
-            </span>
-            </span>
-            </ul>
-
-            <div class="tab-content">
-                <div id="home" class="tab-pane active">
-                    <div class="profile-user-info profile-user-info-striped">
-                        <div class="profile-info-row">
-                            <div class="profile-info-name">
-                                Estado
+                        <span class="btn-toolbar inline middle no-margin"> 
+				            <span class="btn-group no-margin" data-toggle="buttons" id="accordion-style">
+								<div class="btn-group">
+							        <button data-toggle="dropdown" class="btn btn-xs btn-info dropdown-toggle">
+										Opciones
+										<span class="ace-icon fa fa-caret-down fa-on-right"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-default pull-right">
+                                        <li>
+                                            <a href="#" class="cerrarMes" id="{idMes}" x-task="{estado}" x-but="{tarea}">{tarea} Mes</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </span>
+                    </span>
+                </ul>
+                <div class="tab-content">
+                    <div id="home" class="tab-pane active">
+                        <div class="profile-user-info profile-user-info-striped">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name" style="width:180px;">
+                                    Estado
+                                </div>
+                                <div class="profile-info-value">
+                                    <i class="ace-icon fa fa-circle {color}"></i>&nbsp;{estado}&nbsp;
+                                </div>
                             </div>
-                            <div class="profile-info-value">
-                                <i class="ace-icon fa fa-circle {color}"></i>&nbsp;{estado}&nbsp;
+                            <div class="profile-info-row">
+                                <div class="profile-info-name" style="width:150px;">
+                                    Mes
+                                </div>
+                                <div class="profile-info-value">
+                                    {mes}&nbsp;
+                                </div>
                             </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name" style="width:150px;">
+                                    Año
+                                </div>
+                                <div class="profile-info-value">
+                                    {anio}&nbsp;
+                                </div>
+                            </div> 
+                            <div class="profile-info-row">
+                                <div class="profile-info-name" style="width:150px;">
+                                    Prima Neta Dolares
+                                </div>
+                                <div class="profile-info-value">
+                                    {primaNetaDolares}&nbsp;
+                                </div>
+                            </div> 
+                            <div class="profile-info-row">
+                                <div class="profile-info-name" style="width:150px;">
+                                    Prima Neta Soles
+                                </div>
+                                <div class="profile-info-value">
+                                    {primaNetaSoles}&nbsp;
+                                </div>
+                            </div> 
                         </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name">
-                                Mes
-                            </div>
-                            <div class="profile-info-value">
-                                {mes}&nbsp;
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name">
-                                Año
-                            </div>
-                            <div class="profile-info-value">
-                                {anio}&nbsp;
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name">
-                                Prima Neta
-                            </div>
-                            <div class="profile-info-value">
-                                {primaNeta}&nbsp;
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name">
-                                Comision
-                            </div>
-                            <div class="profile-info-value">
-                                {comision}&nbsp;
-                            </div>
-                        </div>
+                        <hr />
+                        <table class="table table-striped table-bordered">
+                            <thead>    
+                                <tr>
+                                    <th class="center" width="50%">Dato</th>
+                                    <th class="center" width="25%">Dolares</th>
+                                    <th class="center" width="25%">Soles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal Facturas</td>
+                                    <td><span class="pull-right">{comisionDolares}</span></td>
+                                    <td><span class="pull-right">{comisionSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>IGV Facturas</td>
+                                    <td><span class="pull-right">{igvFacturasDolares}</span></td>
+                                    <td><span class="pull-right">{igvFacturasSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Facturas</td>
+                                    <td><span class="pull-right">{totalFacturasDolares}</span></td>
+                                    <td><span class="pull-right">{totalFacturasSoles}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>  
+                        <table class="table table-striped table-bordered">
+                            <thead>    
+                                <tr>
+                                    <th class="center" width="50%">Dato</th>
+                                    <th class="center" width="25%">Dolares</th>
+                                    <th class="center" width="25%">Soles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal Facturas Cedidas</td>
+                                    <td><span class="pull-right">{comisionCedidaDolares}</span></td>
+                                    <td><span class="pull-right">{comisionCedidaSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>IGV Facturas Cedidas</td>
+                                    <td><span class="pull-right">{igvCedidasDolares}</span></td>
+                                    <td><span class="pull-right">{igvCedidasSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Facturas Cedidas</td>
+                                    <td><span class="pull-right">{totalCedidasDolares}</span></td>
+                                    <td><span class="pull-right">{totalCedidasSoles}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>         
+                        <table class="table table-striped table-bordered">
+                            <thead>    
+                                <tr>
+                                    <th class="center" width="50%">Dato</th>
+                                    <th class="center" width="25%">Dolares</th>
+                                    <th class="center" width="25%">Soles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal Compras</td>
+                                    <td><span class="pull-right">{subtotalComprasDolares}</span></td>
+                                    <td><span class="pull-right">{subtotalComprasSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>IGV Compras</td>
+                                    <td><span class="pull-right">{igvComprasDolares}</span></td>
+                                    <td><span class="pull-right">{igvComprasSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Otros</td>
+                                    <td><span class="pull-right">{totalOtrosDolares}</span></td>
+                                    <td><span class="pull-right">{totalOtrosSoles}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Compras</td>
+                                    <td><span class="pull-right">{totalComprasDolares}</span></td>
+                                    <td><span class="pull-right">{totalComprasSoles}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>                       
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row"></div>
+    <div class="row"></div>
 </div>
 <script type="text/javascript">
     //alert("{mes}");

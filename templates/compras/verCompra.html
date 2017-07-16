@@ -8,8 +8,14 @@
           <span class="invoice-info-label">Fecha:</span> <span class="blue">{fechaFactura}</span>
         </div>
         <div class="widget-toolbar hidden-480">
+          <block start="mesCerrado"/>
+          <span title="No se puede editar, el mes esta cerrado" data-rel="tooltip"> <i class="ace-icon fa fa-edit"></i> </span>
+          <span title="No se puede eliminar, el mes esta cerrado" data-rel="tooltip"> <i class="ace-icon fa fa-trash red"></i> </span>
+          <block end="mesCerrado"/>
+          <block start="mesAbierto"/>
           <a href="?do=compras.editar&idCompra={idCompra}"> <i class="ace-icon fa fa-edit"></i> </a>
           <a href="#" id="eliminarCompra"> <i class="ace-icon fa fa-trash red"></i> </a>
+          <block end="mesAbierto"/>
         </div>
       </div>
       <div class="widget-body">
@@ -63,7 +69,8 @@
   </div>
   
 <script>
-
+$('[data-rel=tooltip]').tooltip();
+			
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 	_title: function(title) {
 		if (!this.options.title ) {
