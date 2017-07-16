@@ -7,16 +7,17 @@ class procesarCompra extends sessionCommand{
 		$fc->import("lib.Cliente");
 		
 		$new = false;
-		
+		$creando="";
 		if($this->request->idCompra){
 			$compra = Fabrica::getFromDB("Compra",$this->request->idCompra);
-			$compra->setNumeroFactura($this->request->numeroDoc);
+			//$compra->setNumeroFactura($this->request->numeroDoc);
 			$compra->setConcepto($this->request->concepto);
 			$compra->setTipo($this->request->tipo);
 			$compra->setMoneda($this->request->moneda);
 			$compra->setFecha($this->request->fecha,"DATE");
 			$compra->setSubtotal($this->request->subtotal);
 			$compra->setIgv($this->request->igv);
+			$compra->setOtros($this->request->otros);
 			$compra->setTotal($this->request->total);
 		}else{
 			$new = true;
@@ -27,11 +28,11 @@ class procesarCompra extends sessionCommand{
 			$compra->setMoneda($this->request->moneda);
 			$compra->setFecha($this->request->fecha,"DATE");
 			$compra->setSubtotal($this->request->subtotal);
+			$compra->setOtros($this->request->otros);
 			$compra->setIgv($this->request->igv);
 			$compra->setTotal($this->request->total);
+			$creando="&c=1";
 		}
-		
-		
 		if($new){
 			if($this->request->idCliente){
 				//$cliente = Fabrica::getFromDB("Cliente",$this->request->idCliente);
@@ -60,7 +61,7 @@ class procesarCompra extends sessionCommand{
 			$id=$compra->getId();
 		}
 		
-		$fc->redirect("?do=compras.verCompra&idCompra=".$id);
+		$fc->redirect("?do=compras.verCompra&idCompra=".$id.$creando);
 	}
 }
 ?>

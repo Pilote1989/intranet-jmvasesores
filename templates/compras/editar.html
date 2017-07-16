@@ -38,6 +38,7 @@
                 <option value="Transporte">Transporte</option>
                 <option value="Gasolina">Gasolina</option>
                 <option value="Utiles de Oficina">Utiles de Oficina</option>
+                <option value="Estacionamiento">Estacionamiento</option>
                 <option value="Otros">Otros</option>
               </select>
             </div>
@@ -91,6 +92,14 @@
 						</div>
           </div>
           <div class="form-group">
+            <label for="otros" class="col-sm-3 control-label no-padding-right">Otros</label>
+            <div class="col-sm-9">
+            <div class="clearfix">            	
+              <input name="otros" type="text"  id="otros" onKeyPress="return disableEnterKey(event)" placeholder="0.00" class="col-sm-12" value="{otros}">
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="total" class="col-sm-3 control-label no-padding-right">Total</label>
             <div class="col-sm-9">
             <div class="clearfix">            	
@@ -102,7 +111,7 @@
         <div class="form-actions center">
           <input type="hidden" name="idCliente" value="{idCliente}"/>
           <input type="hidden" name="idCompra" value="{idCompra}"/>
-          <button class="btn btn-sm btn-success" type="button" id="enviaCobro"> Crear <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-success" type="button" id="enviaCobro"> {comando} <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
           <button class="btn btn-sm btn-light disabled " type="button" id="loading" style="display: inline-block;"> <img src="assets/img/loading.gif"/> Validando... </button>
         </div>
       </form>
@@ -118,7 +127,7 @@
 	$('#corrigeIGV').on('click', function(){
 		if(!isNaN($('#subtotal').val())){
 			$('#igv').val(($('#subtotal').val() * 0.18).toFixed(2));
-			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val())).toFixed(2));
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val()) + parseFloat($('#otros').val())).toFixed(2));
 			$('#alertaIGV').hide();
 		}else{
 			alert('El subtotal debe ser un numero.');
@@ -127,7 +136,7 @@
 	$('#subtotal').on('keyup', function(){
 		if(!isNaN($('#subtotal').val())){
 			$('#igv').val(($('#subtotal').val() * 0.18).toFixed(2));
-			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val())).toFixed(2));
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val()) + parseFloat($('#otros').val())).toFixed(2));
 			$('#alertaIGV').hide();
 		}
 	});
@@ -135,8 +144,13 @@
 		var igvExacto = ($('#subtotal').val() * 0.18).toFixed(2);
 		var igv = $('#igv').val(); 
 		if(igvExacto - igv != 0 ){
-			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val())).toFixed(2));
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val()) + parseFloat($('#otros').val())).toFixed(2));
 			$('#alertaIGV').show();
+		}
+	});
+	$('#otros').on('keyup', function(){
+		if(!isNaN($('#otros').val())){
+			$('#total').val((parseFloat($('#subtotal').val()) + parseFloat($('#igv').val()) + parseFloat($('#otros').val())).toFixed(2));
 		}
 	});
 	$('.date-picker').mask("99/99/9999");

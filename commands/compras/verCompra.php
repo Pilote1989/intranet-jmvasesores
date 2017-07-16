@@ -21,9 +21,13 @@ class verCompra extends sessionCommand{
 			$this->addVar("moneda", $compra->getMoneda());
 			$this->addVar("subtotal", $compra->getSubtotal());
 			$this->addVar("igv", $compra->getIgv());
+			$this->addVar("otros", $compra->getOtros());
 			$this->addVar("total", $compra->getTotal());
 			$this->addVar("fechaFactura", $compra->getFecha("DATE"));
 			$this->addVar("idCompra", $compra->getId());
+			if($this->request->c=="1"){
+				$this->addBlock("c");
+			}
 			$this->addLayout("ace");
 			$this->processTemplate("compras/verCompra.html");
 		}

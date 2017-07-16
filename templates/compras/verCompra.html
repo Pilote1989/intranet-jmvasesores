@@ -31,6 +31,7 @@
               		<th align="center">Moneda</th>
             			<th align="center">Subtotal</th>
             			<th align="center">IGV</th>
+            			<th align="center">Otros</th>
             			<th align="center">Total</th>
             		</tr>
             	</thead>
@@ -39,6 +40,7 @@
             			<td align="center"> {moneda} </td>
             			<td align="center"> {subtotal} </td>
             			<td align="center"> {igv} </td>
+            			<td align="center"> {otros} </td>
             			<td align="center"> {total} </td>
             		</tr>
             	</tbody>
@@ -106,5 +108,19 @@ $( "#eliminarCompra" ).on('click', function(e) {
   	]		
 	});
 });
-
+<block start="c"/>
+  var alerta = $.gritter.add({
+		title: '¡Atencion!',
+		text: 'Al parecer esta ingresando facturas al sistema, desea ingresar otra. <p><a id="crearOtra" class="btn btn-warning btn-sm" href="/?do=compras.agregar">Si</a> <button id="gritter-remove" class="btn btn-sm">No</button></p>',
+		image: 'assets/avatars/user.jpg',
+		sticky: true,
+		time: '',
+		class_name: 'gritter-warning gritter-light',
+  });
+  $("#crearOtra").focus();
+	$("#gritter-remove").on(ace.click_event, function(){
+		$.gritter.removeAll();
+		return false;
+	});
+<block end="c"/>
 </script> 

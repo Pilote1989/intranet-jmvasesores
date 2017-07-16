@@ -31,7 +31,7 @@ class busqueda extends SessionCommand{
 		$compras=array();
 		$query="
 			SELECT SQL_CALC_FOUND_ROWS
-				DISTINCT idCompra, numeroFactura, c.nombre as vendedor, moneda, concepto, tipo, subtotal, igv, total, fecha
+				DISTINCT idCompra, numeroFactura, c.nombre as vendedor, moneda, concepto, tipo, subtotal, igv, otros, total, fecha
 			FROM Compra, Cliente c
 			".$whereCondition."
 			ORDER BY
@@ -69,6 +69,7 @@ class busqueda extends SessionCommand{
 			$compras[$i]["moneda"] = $compra["moneda"];
 			$compras[$i]["subtotal"] = $compra["subtotal"];
 			$compras[$i]["igv"] = $compra["igv"];
+			$compras[$i]["otros"] = $compra["otros"];
 			$compras[$i]["total"] = $compra["total"];
 			$compras[$i]["fechaCompra"] = date("d/m/Y",strtotime($compra["fecha"]));
 			$i++;				

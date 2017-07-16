@@ -19,11 +19,15 @@ class editar extends sessionCommand{
 			$this->addVar("moneda", $compra->getMoneda());
 			$this->addVar("subtotal", $compra->getSubtotal());
 			$this->addVar("igv", $compra->getIgv());
+			$this->addVar("otros	", $compra->getOtros());
 			$this->addVar("total", $compra->getTotal());
+			$this->addVar("comando", "Editar");
 			$this->addVar("fechaFac", $compra->getFecha("DATE"));
+			$this->addLayout("ace");
+			$this->processTemplate("compras/editar.html");
+		}else{
+			$fc->redirect("?do=compras.ver");
 		}
-		$this->addLayout("ace");
-		$this->processTemplate("compras/editar.html");
 	}
 }
 ?>
