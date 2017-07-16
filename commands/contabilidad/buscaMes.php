@@ -52,6 +52,9 @@ class buscaMes extends sessionCommand{
 			$this->addVar("totalCedidasSoles",number_format($mes->getTotalCedidasSoles(),2));
 			$this->addVar("subtotalComprasSoles",number_format($mes->getSubtotalComprasSoles(),2));
 			$this->addVar("igvComprasSoles",number_format($mes->getIgvComprasSoles(),2));
+			$this->addVar("otrosComprasSoles",number_format($mes->getOtrosComprasSoles(),2));
+			
+			
 			$this->addVar("totalComprasSoles",number_format($mes->getTotalComprasSoles(),2));			
 			
 			$this->processTemplate("contabilidad/buscaMes.html");
