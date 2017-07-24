@@ -1,0 +1,79 @@
+								<div class="category">
+									<div class="name">Polizas</div>
+									<block start="bloqueNoPolizas"/>
+									<a class="result">
+										<div class="content">
+											<div class="title">No hay polizas.</div>
+										</div>
+									</a>									
+									<block end="bloqueNoPolizas"/>
+									<block start="bloquePolizas"/>
+									<loop start="polizas"/>
+									<a class="result" href="/?do=polizas.ver&idPoliza={polizas.id}">
+										<div class="content">
+											<div class="title">{polizas.scia} - {polizas.numeroPoliza}</div>
+											<div class="description">{polizas.sramo} - {polizas.cliente}</div>
+										</div>
+									</a>
+									<loop end="polizas"/>
+									<block end="bloquePolizas"/>
+								</div>
+								<div class="category">
+									<div class="name">Vehiculos</div>
+									<block start="bloqueNoVehiculos"/>
+									<a class="result">
+										<div class="content">
+											<div class="title">No hay vehiculos.</div>
+										</div>
+									</a>									
+									<block end="bloqueNoVehiculos"/>
+									<block start="bloqueVehiculos"/>
+									<loop start="vehiculos"/>
+									<a class="result" href="/?do=vehiculos.ver&idVehiculo={vehiculos.id}">
+										<div class="content">
+											<div class="title">{vehiculos.placa}</div>
+											<div class="description">{vehiculos.marca} - {vehiculos.modelo}</div>
+										</div>
+									</a>	
+									<loop end="vehiculos"/>	
+									<block end="bloqueVehiculos"/>
+								</div>
+								<div class="category">
+									<div class="name">Clientes</div>
+									<block start="bloqueNoClientes"/>
+									<a class="result">
+										<div class="content">
+											<div class="title">No hay clientes.</div>
+										</div>
+									</a>									
+									<block end="bloqueNoClientes"/>
+									<block start="bloqueClientes"/>
+									<loop start="clientes"/>
+									<a class="result" href="/?do=clientes.ver&idCliente={clientes.id}">
+										<div class="content">
+											<div class="title">{clientes.nombre}</div>
+										</div>
+									</a>
+									<loop end="clientes"/>
+									<block end="bloqueClientes"/>
+								</div>
+								<div class="category">
+									<div class="name">Avisos</div>
+									<block start="bloqueNoAvisos"/>
+									<a class="result">
+										<div class="content">
+											<div class="title">No hay polizas.</div>
+										</div>
+									</a>									
+									<block end="bloqueNoAvisos"/>
+									<block start="bloqueAvisos"/>
+									<loop start="avisos"/>
+									<a class="result" href="/?do=polizas.ver&idPoliza={avisos.id}&vig={avisos.id}">
+										<div class="content">
+											<div class="title">{avisos.aviso} - {avisos.cliente}</div>
+											<div class="description">{avisos.scia} - {avisos.sramo} - {avisos.numeroPoliza}</div>
+										</div>
+									</a>
+									<loop end="avisos"/>
+									<block end="bloqueAvisos"/>
+								</div>
