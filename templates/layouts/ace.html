@@ -72,7 +72,7 @@
 		    	width: 350px;
 			}
 			#form-search-results {
-    			display: none;
+    			display: block;
 			    position: absolute;
 			    top: 28px;
 			    left: 0;
@@ -90,6 +90,9 @@
 			    border: 1px solid #d4d4d5;
 			    z-index: 998;			
 			    overflow:hidden;
+			    visibility: hidden;
+				opacity: 0;
+				transition: visibility 0s, opacity 0.5s linear;
         	}
         	#iconoB{
         		background-color: transparent !important;
@@ -140,10 +143,11 @@
 				background: #f9fafb;
 				cursor:pointer;
         	}
-        	
-        	    
-        	#form-search-results a:last-child {
+			#form-search-results a:last-child {
 				border-bottom:none;
+        	}
+        	#form-search-input{
+        		transition: width 0.5s;
         	}
         </style>
 	</head>
@@ -356,10 +360,12 @@
 							</form>
 					        <script type="text/javascript">
 								$('.nav-search').hover(function() {
-										$('#form-search-results').css('display', 'block');
+										$('#form-search-results').css('visibility', 'visible');
+										$('#form-search-results').css('opacity', '1');
 										$('#form-search-input').css('width', '350px');
 									},function() {
-										$('#form-search-results').css('display', 'none');
+										$('#form-search-results').css('visibility', 'hidden');
+										$('#form-search-results').css('opacity', '0');
 										$('#form-search-input').css('width', '152px');
 									}
 								);	
