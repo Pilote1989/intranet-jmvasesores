@@ -354,7 +354,7 @@
 								<div class="espera" align="center">
 									Ingrese un texto a buscar.
 								</div>
-								<div id="resultados">
+								<div id="resulBus">
 								</div>
 							</div>
 							</form>
@@ -379,15 +379,15 @@
 												'type': 'POST',
 												'beforeSend': function() {
 													$("#iconoB").removeClass('fa-search').addClass('fa-spinner fa-spin');
-													$("#resultados").hide();
+													$("#resulBus").hide();
 													$(".espera").show();
 													$(".espera").text('Buscando...');
 												},
 												'success': function(server_response) {
 													$("#iconoB").removeClass('fa-spinner fa-spin').addClass('fa-search');
 													$(".espera").hide();
-													$("#resultados").html(server_response);
-													$("#resultados").show();
+													$("#resulBus").html(server_response);
+													$("#resulBus").show();
 												}
 											});											
 											
