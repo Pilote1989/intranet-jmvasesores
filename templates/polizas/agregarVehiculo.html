@@ -23,25 +23,25 @@
     <button class="btn btn-sm btn-success" type="button" id="buscarClientes" name="buscarClientes"> Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
   </div>
 </div>
-<div id="resultados">
+<div id="resulVeh">
 </div>
 <script type="text/javascript">
-$('#resultados').hide();
+$('#resulVeh').hide();
 $('#buscarClientes').click(function() {
 		//voy a buscar por documento
 			$("#buscarVehiculo").hide();
-			$("#resultados").show();
-			$("#resultados").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+			$("#resulVeh").show();
+			$("#resulVeh").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
 			$.ajax({
 				type: "POST",
 				url: '?do=vehiculos.buscar',
 				data: $("#porPlaca").serialize(),
 				success: function(data) {
-					$("#resultados").html(data);
+					$("#resulVeh").html(data);
 				}
 			});	
 });
-$('#resultados').on( 'click', 'button.agregaAsegurado', function (e) {
+$('#resulVeh').on( 'click', 'button.agregaAsegurado', function (e) {
 	var idCliente = $(this).attr('x-link');
 	var idPoliza = $(this).attr('x-pol');
 	$.ajax({
