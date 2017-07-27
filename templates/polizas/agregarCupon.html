@@ -1,0 +1,115 @@
+			<form class="form-horizontal" enctype="multipart/form-data" method="POST" role="form" method="POST" action="?do=polizas.procesarCupones" id="generaCupon" name="generaCupon">
+				<fieldset>					
+					<div class="form-group">
+						<label for="numeroCupon" class="col-sm-3 control-label no-padding-right"> Numero de Cupon </label>
+						<div class="col-sm-9">
+          					<div class="clearfix">
+								<input name="numeroCupon" type="text" class="col-sm-12 col-xs-12" id="numeroCupon">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="vencimiento" class="col-sm-3 control-label no-padding-right"> Fecha de Vencimiento </label>
+						<div class="col-sm-9">
+							<div class="input-group">
+								<input type="text" name="vencimiento" data-date-format="dd/mm/yyyy" class=" form-control date-picker" id="vencimiento">
+								<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="monto" class="col-sm-3 control-label no-padding-right"> Monto </label>
+						<div class="col-sm-9">
+							<div class="clearfix">
+								<input name="monto" type="text" class="col-sm-12 col-xs-12" id="monto">
+							</div>
+						</div>
+					</div>
+					<input name="idPoliza" type="hidden" id="idPoliza" value="{idPoliza}">
+				</fieldset>
+				<div class="form-actions center">
+					<button class="btn btn-sm btn-success" type="button" id="enviarCupon">
+						Agregar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
+					</button>
+				</div>
+			</form>
+<script>
+	$('.date-picker').mask("99/99/9999");
+	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});	
+	$('#generaCupon').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			numeroCupon: {
+				required: true,
+			},
+			vencimiento: {
+				required: true,
+			},
+			monto: {
+				required: true,
+			}
+		},
+
+		messages: {
+			numeroCupon: {
+				required: "Ingrese el Numero de Cupon",
+			},
+			vencimiento: {
+				required: "Ingrese el Vencimiento",
+			},
+			monto: {
+				required: "Ingrese el monto",
+			}
+		},
+
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	$('#enviarCupon').click(function() {
+		if($("#generaCupon").valid()){
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: '?do=polizas.guardarCupon',
+				data: $("#generaCupon").serialize(),
+				success: function(data) {
+					if(data["respuesta"]=="SUCCESS"){
+						$("#tab-3").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-3").load('/?do=polizas.verCupones&idPoliza={idPoliza}');	
+						$( "#dialogoCupones" ).dialog("close");
+					}
+				}
+			});	
+		}
+	})	
+</script>
