@@ -105,8 +105,8 @@
 				data: $("#generaCupon").serialize(),
 				success: function(data) {
 					if(data["respuesta"]=="SUCCESS"){
-						$("#tab-3").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
-						$("#tab-3").load('/?do=polizas.verCupones&idPoliza={idPoliza}');	
+						$("#tabCupones").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tabCupones").load('/?do=polizas.verCupones&idPoliza={idPoliza}');	
 						$( "#dialogoCupones" ).dialog("close");
 					}
 				}

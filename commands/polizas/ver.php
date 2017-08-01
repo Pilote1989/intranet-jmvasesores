@@ -93,35 +93,7 @@ class ver extends sessionCommand{
 			$i = 0;
 			if($this->checkAccess("crearUsuario", true)){
 				$this->addBlock("admin");
-			}	
-			if($this->request->t){
-				if($this->request->t=="c"){
-					$this->addVar("bas", "");
-					$this->addVar("mov", "");
-					$this->addVar("cor", "");
-					$this->addVar("cup", "active");
-				}else if($this->request->t=="m"){
-					$this->addVar("bas", "");
-					$this->addVar("cup", "");
-					$this->addVar("cor", "");
-					$this->addVar("mov", "active");
-				}else if($this->request->t=="car"){
-					$this->addVar("cup", "");
-					$this->addVar("mov", "");
-					$this->addVar("cor", "active");
-					$this->addVar("bas", "");
-				}else{
-					$this->addVar("cup", "");
-					$this->addVar("mov", "");
-					$this->addVar("cor", "");
-					$this->addVar("bas", "active");
-				}
-			}else{
-				$this->addVar("cup", "");
-				$this->addVar("mov", "");
-				$this->addVar("cor", "");
-				$this->addVar("bas", "active");
-			}	
+			}
 			if($this->request->m=="ee"){
 				$this->addBlock("ee");
 			}

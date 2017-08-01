@@ -114,8 +114,8 @@ $( "#dialog-message-endosos" ).dialog({
 					dataType: "json",
 					url: $(this).data('link'),
 					success: function() {
-						$("#tab-5").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
-						$("#tab-5").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
+						$("#tabEndosos").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tabEndosos").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
 					}
 				});
 				$( this ).dialog( "close" );
@@ -157,8 +157,8 @@ $('.abreLink').click( function() {
 							dataType: "json",
 							url: '/?do=polizas.anularEndoso&idEndoso=' + idEndoso,
 							success: function() {
-								$("#tab-5").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
-								$("#tab-5").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
+								$("#tabEndosos").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+								$("#tabEndosos").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
 							}
 						});
 						}
@@ -177,8 +177,8 @@ $('.abreLink').click( function() {
 								dataType: "json",
 								url: '/?do=polizas.anularEndoso&idEndoso=' + idEndoso + '&motivo=' + result,
 								success: function() {
-									$("#tab-5").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
-									$("#tab-5").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
+									$("#tabEndosos").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+									$("#tabEndosos").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
 								}
 							});
 						}
