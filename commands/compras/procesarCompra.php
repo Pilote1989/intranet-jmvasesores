@@ -50,6 +50,7 @@ class procesarCompra extends sessionCommand{
 				$dbLink=&FrontController::instance()->getLink();
 				$dbLink->next_result();
 				$compra->setIdCliente($dbLink->insert_id);
+				$dbLink->next_result();
 			}
 		}
 
