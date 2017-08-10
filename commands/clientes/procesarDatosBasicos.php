@@ -44,6 +44,7 @@ class procesarDatosBasicos extends sessionCommand{
 		$dbLink=&FrontController::instance()->getLink();
 		
 		if($new){
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 		}else{
 			$id=$cliente->getId();

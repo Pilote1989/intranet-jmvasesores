@@ -36,7 +36,8 @@ class guardarEndoso extends sessionCommand{
 			$cobro->setIdPersona($this->request->idPersona);
 			$cobro->storeIntoDB();	
 			if(!$this->request->idEndoso){
-				$dbLink=&FrontController::instance()->getLink();			
+				$dbLink=&FrontController::instance()->getLink();	
+				$dbLink->next_result();
 				$id=$dbLink->insert_id;
 				//si no existe
 				$endoso->setIdCobro($id);

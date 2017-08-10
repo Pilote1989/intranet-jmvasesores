@@ -31,7 +31,8 @@ class guardar extends sessionCommand{
 				$vehiculo->setGps("0");
 			}
 			$vehiculo->storeIntoDB();			
-			$dbLink=&FrontController::instance()->getLink();			
+			$dbLink=&FrontController::instance()->getLink();
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 			if($new){
 				$vehiculoEnPoliza = new VehiculoEnPoliza();

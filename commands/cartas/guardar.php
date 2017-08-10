@@ -21,7 +21,8 @@ class guardar extends sessionCommand{
 			$carta->setDetalle($this->request->detalle);				
 			$carta->setFecha(date("Y-m-d"));		
 			$carta->storeIntoDB();			
-			$dbLink=&FrontController::instance()->getLink();			
+			$dbLink=&FrontController::instance()->getLink();	
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 			$response["respuesta"]="NEW";
 			$response["ids"]=$id;

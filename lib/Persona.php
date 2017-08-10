@@ -16,6 +16,7 @@ class Persona extends DBObject{
 		if(sizeof($usuarios)==1)
 		{
 			$_SESSION["TIPO_LOGIN"]="CLIENTES";
+			$_SESSION["ID"]=$usuarios[0]->getId();
 			SessionCommand::setUsuario($usuarios[0]);
 			return true;
 		}else{
@@ -26,8 +27,9 @@ class Persona extends DBObject{
 			$usuarios=Fabrica::getAllFromDB("Persona",$filtros_alt);
 			if(sizeof($usuarios)==1)
 			{
-				$_SESSION["TIPO_LOGIN"]="CLIENTES";
 				SessionCommand::setUsuario($usuarios[0]);
+				$_SESSION["TIPO_LOGIN"]="CLIENTES";
+				$_SESSION["ID"]=$usuarios[0]->getId();
 				return true;
 			}
 		}

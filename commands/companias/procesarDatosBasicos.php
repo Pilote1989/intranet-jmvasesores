@@ -26,6 +26,7 @@ class procesarDatosBasicos extends sessionCommand{
 		if($this->request->idCompania){
 			$id=$this->request->idCompania;
 		}else{
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 		}
 		

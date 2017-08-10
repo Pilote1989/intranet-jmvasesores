@@ -34,6 +34,7 @@ class procesarBono extends sessionCommand{
 			$liquidacion->setBono("1");
 			$liquidacion->storeIntoDB();
 			$dbLink=&FrontController::instance()->getLink();
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 			$i = 0;
 		}

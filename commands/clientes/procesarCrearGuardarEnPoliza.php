@@ -40,6 +40,7 @@ class procesarCrearGuardarEnPoliza extends sessionCommand{
 			$cliente->setFechaDeCreacion(date('Y',time()) . "/" . date('m',time()). "/" . date('d',time()));
 			$cliente->storeIntoDB();
 			$dbLink=&FrontController::instance()->getLink();
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 			$clienteEnPoliza = new ClienteEnPoliza();
 			$clienteEnPoliza->setIdPoliza($this->request->idPoliza);

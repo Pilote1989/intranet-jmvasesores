@@ -293,9 +293,9 @@ abstract class DBObject{
 		if(!(sizeof($col))){
 			return false;
 		}
-		$query="INSERT INTO ".$this->tableName." (".implode(", ",$col).") VALUES ('".implode("', '",$val)."')";
+		$query="SET @user_id = '".$_SESSION["ID"]."';INSERT INTO ".$this->tableName." (".implode(", ",$col).") VALUES ('".implode("', '",$val)."');SET @user_id = null;";
 		//echo '<div style="width:100%;background:#AAFFAA; color:#449944; font-size:10px; font-weight:bold;">'.$query.'</div>';
-		if(!($result=$dbLink->query($query))){
+		if(!($result=$dbLink->multi_query($query))){
 			printf("Error : %s\n", $dbLink->error);
 			return $result;
 		}
@@ -309,7 +309,7 @@ abstract class DBObject{
 	private function update(){
 		$dbLink=&FrontController::instance()->getLink();
 		$primaryKey=DescripcionTablas::getPrimaryKey($this->tableName);
-		$query="UPDATE ".$this->tableName." SET ";
+		$query="SET @user_id = '".$_SESSION["ID"]."';UPDATE ".$this->tableName." SET ";
 		foreach($this->dataArray as $campo=>$valor){
 			if(trim($valor)==""){
 				$query.="`".$campo."` = NULL, ";
@@ -317,10 +317,10 @@ abstract class DBObject{
 				$query.="`".$campo."`= '".$dbLink->real_escape_string(utf8_decode($valor))."', ";
 			}
 		}
-		$query=substr($query,0,-2)." WHERE `".$primaryKey."`='".$this->getOriginalId()."' LIMIT 1";
+		$query=substr($query,0,-2)." WHERE `".$primaryKey."`='".$this->getOriginalId()."' LIMIT 1;SET @user_id = null;";
 		//echo '<div style="width:100%;background:#AAFFAA; color:#449944; font-size:10px; font-weight:bold;">'.$query.'</div>';
-//echo "<div>".$query."</div>";
-		$result=$dbLink->query($query);
+		//echo "<div>".$query."</div>";
+		$result=$dbLink->multi_query($query);
 		if(!$result){
 			printf("Error : %s\n", $dbLink->error);
 			return $result;
@@ -551,6 +551,147 @@ abstract class Fabrica{
 		$result->free();
 		return $suma;
 	}
+	
+	public static function getHistoryFromDB($className,$id,$queryPrint=NULL){
+		if (!class_exists($className)) {
+			$fc=&FrontController::instance();
+			$fc->import("lib.".$className);
+			if(!class_exists($className)){
+				echo("Clase <i>".$className."</i> no declarada en carpeta lib");
+				exit();
+			}
+		}
+		$aux=new $className();
+		if(!sizeof( $keys= DescripcionTablas::getPrimaryKeys($aux->tableName))){
+			echo("No se encontraron claves primarias para la clase <i>".$className."</i>");
+			exit();
+		}
+		$idArray=explode(".",$id);
+		if(sizeof($keys)!=sizeof($idArray)){
+			echo("El número de claves primarias especificadas para obtener objetos de la clase <i>".$className."</i> no corresponde");
+			exit();
+		}
+		$filtros=array();
+		for($i=0;$i<sizeof($keys);$i++){
+			$filtros[]=$keys[$i]."='".$idArray[$i]."'";
+		}
+		if(sizeof($filtros)){
+			$stringWhere=" WHERE (".implode(") AND (",$filtros).")";
+		}
+		
+		$dbLink=&$fc->getLink();
+		$aux=new $className();
+		$query="SELECT * FROM x_".$aux->tableName." ".$stringWhere. " ORDER BY 'revision' ASC";
+		if($queryPrint){
+			echo '<div style="width:100%;background:#AAFFAA; color:#449944; font-size:10px; font-weight:bold;">'.$query.'</div>';
+		}
+		$query=utf8_decode($query);
+		$objetos=array();
+		if($result=$dbLink->query($query)){
+			//numero de registros encontrados
+			$countQuery="SELECT FOUND_ROWS() as total";
+			if($countResult=$dbLink->query($countQuery)){
+				$row=$countResult->fetch_assoc();
+				self::$num_rows=$row['total'];
+			}else{
+				printf("Error: %s\n", $dbLink->error);
+				return null;
+			}
+			$countResult->free();
+			//instanciar objetos
+			$lista=array();
+			while($row=$result->fetch_assoc()){
+				$lista[]=$row;
+				/*
+				$aux = new $className;
+				foreach($row as $key => $data){
+					$setAtributo="set".ucfirst($key);
+					$aux->$setAtributo(stripslashes(utf8_encode($data)),"DB");
+					$aux->setOriginalId($aux->getId());
+				}
+				
+				self::$instancias[$className][$aux->getId()]=$aux;
+				$objetos[]=&self::$instancias[$className][$aux->getId()];*/
+			}
+		}else{
+			printf("Error: %s\n", $dbLink->error);
+			return null;
+		}
+		$result->free();
+		return $lista;
+		/*
+		$arrayClassName=self::getAllFromDB($className,$filtros);
+		
+		if(is_array($arrayClassName)){
+			if(sizeof($arrayClassName)==1){	
+				return $arrayClassName[0];
+			}
+		}
+		return null;		
+		*/
+		
+		
+		
+		/*
+		$fc=&FrontController::instance();
+		if (!class_exists($className)) {
+			$fc->import("lib.".$className);
+		}
+		$stringWhere="";
+		$stringOrder="";
+		$stringLimit="";
+		$stringFoundRows="";
+		//Arreglo de filtros, string de WHERE
+		if(sizeof($arrayFiltros)){
+			$stringWhere=" WHERE (".implode(") AND (",$arrayFiltros).")";
+		}
+		//String de orden
+		if($order){
+			$stringOrder=" ORDER BY	".$order;
+		}
+		//String de Limit
+		if($limit){
+			$stringFoundRows="SQL_CALC_FOUND_ROWS ";
+			$stringLimit=" LIMIT ".$limit;
+		}
+		$dbLink=&$fc->getLink();
+		$aux=new $className();
+		$query="SELECT ".$stringFoundRows."* FROM ".$aux->tableName.$stringWhere.$stringOrder.$stringLimit;
+		if($queryPrint){
+			echo '<div style="width:100%;background:#AAFFAA; color:#449944; font-size:10px; font-weight:bold;">'.$query.'</div>';
+		}
+		$query=utf8_decode($query);
+		$objetos=array();
+		if($result=$dbLink->query($query)){
+			//numero de registros encontrados
+			$countQuery="SELECT FOUND_ROWS() as total";
+			if($countResult=$dbLink->query($countQuery)){
+				$row=$countResult->fetch_assoc();
+				self::$num_rows=$row['total'];
+			}else{
+				printf("Error: %s\n", $dbLink->error);
+				return null;
+			}
+			$countResult->free();
+			//instanciar objetos
+			while($row=$result->fetch_assoc()){
+				$aux = new $className;
+				foreach($row as $key => $data){
+					$setAtributo="set".ucfirst($key);
+					$aux->$setAtributo(stripslashes(utf8_encode($data)),"DB");
+					$aux->setOriginalId($aux->getId());
+				}
+				
+				self::$instancias[$className][$aux->getId()]=$aux;
+				$objetos[]=&self::$instancias[$className][$aux->getId()];
+			}
+		}else{
+			printf("Error: %s\n", $dbLink->error);
+			return null;
+		}
+		$result->free();
+		return $objetos;*/
+	}	
 	
 	public static function getCountFromDB($className,$arrayFiltros=array(),$order=NULL,$limit=NULL,$queryPrint=NULL,$distinct=NULL){
 		$fc=&FrontController::instance();

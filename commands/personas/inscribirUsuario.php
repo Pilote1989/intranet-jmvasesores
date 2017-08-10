@@ -38,6 +38,7 @@ class inscribirUsuario extends sessionCommand{
 						$persona->setUserName($this->request->usuario);
 						$persona->storeIntoDB();
 						$dbLink=&FrontController::instance()->getLink();
+						$dbLink->next_result();
 						$id=$dbLink->insert_id;					
 						$persona->agregarPerfil("2");
 						$fc->redirect("?do=personas.verDatosBasicos&idPersona=".$id);

@@ -48,6 +48,7 @@ class procesarCompra extends sessionCommand{
 				$cliente->setDoc($this->request->doc);
 				$cliente->storeIntoDB();
 				$dbLink=&FrontController::instance()->getLink();
+				$dbLink->next_result();
 				$compra->setIdCliente($dbLink->insert_id);
 			}
 		}
@@ -56,6 +57,7 @@ class procesarCompra extends sessionCommand{
 		$dbLink=&FrontController::instance()->getLink();
 		
 		if($new){
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 		}else{
 			$id=$compra->getId();

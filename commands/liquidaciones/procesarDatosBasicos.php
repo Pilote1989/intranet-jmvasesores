@@ -44,6 +44,7 @@ class procesarDatosBasicos extends SessionCommand{
 			$liquidacion->setTotalFactura($this->request->totalFac);
 			$liquidacion->storeIntoDB();
 			$dbLink=&FrontController::instance()->getLink();
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 			$i = 0;
 			foreach($this->request->idCobro as $idCobro){

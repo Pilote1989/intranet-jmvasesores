@@ -27,7 +27,7 @@ class procesarRenovacion extends sessionCommand{
 		$cobro->setIdPersona($this->request->idPersona);
 		$cobro->storeIntoDB();
 		$dbLink=&FrontController::instance()->getLink();
-		
+		$dbLink->next_result();
 		$id=$dbLink->insert_id;
 
 		$renovacion->setIdCobro($id);
@@ -77,6 +77,7 @@ class procesarRenovacion extends sessionCommand{
 		$renovacion->storeIntoDB();
 		
 		$dbLink=&FrontController::instance()->getLink();
+		$dbLink->next_result();
 		$id=$dbLink->insert_id;
 		$fc->redirect("?do=polizas.ver&idPoliza=" . $this->request->idPoliza . "&vig=" . $id);
 	}

@@ -45,6 +45,7 @@ class procesarDatosBasicos extends sessionCommand{
 		if($this->request->idPoliza){
 			$id=$cobro->getId();
 		}else{
+			$dbLink->next_result();
 			$id=$dbLink->insert_id;
 		}
 		
