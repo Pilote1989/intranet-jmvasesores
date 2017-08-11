@@ -75,6 +75,7 @@ class procesarDatosBasicos extends sessionCommand{
 		}else{
 			$dbLink->next_result();
 			$id=$dbLink->insert_id;
+			$dbLink->next_result();
 		}
 		//echo "<br/>";
 		//echo $matriz;

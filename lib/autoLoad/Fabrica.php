@@ -321,6 +321,7 @@ abstract class DBObject{
 		//echo '<div style="width:100%;background:#AAFFAA; color:#449944; font-size:10px; font-weight:bold;">'.$query.'</div>';
 		//echo "<div>".$query."</div>";
 		$result=$dbLink->multi_query($query);
+		while ($dbLink->next_result()) {;}
 		if(!$result){
 			printf("Error : %s\n", $dbLink->error);
 			return $result;
