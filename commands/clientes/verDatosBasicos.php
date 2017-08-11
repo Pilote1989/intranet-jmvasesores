@@ -69,14 +69,25 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("correo", $cliente->getCorreo());
 			$this->addVar("doc", $cliente->getDoc());
 			$this->addVar("tipoDoc", $cliente->getTipoDoc());
-			$this->addVar("aniversario", $cliente->getAniversario('DATE'));
+			if($cliente->getAniversario()!='0000-00-00'){
+				$this->addVar("aniversario", $cliente->getAniversario('DATE'));
+			}else{
+				$this->addEmptyVar("aniversario");
+			}
 			if($cliente->getTipoDoc()=="RUC"){
 				$this->addBlock("cia");
 				$this->addVar("ggeneral", $cliente->getGerente());
-				$this->addVar("cumpleGGeneral", $cliente->getFechaGerente('DATE'));
+				if($cliente->getFechaGerente()!='0000-00-00'){
+					$this->addVar("cumpleGGeneral", $cliente->getFechaGerente('DATE'));
+				}else{
+					$this->addEmptyVar("cumpleGGeneral");
+				}
 				$this->addVar("encargado", $cliente->getEncargado());
-				$this->addVar("cumpleEncargado", $cliente->getFechaEncargado('DATE'));
-				
+				if($cliente->getFechaEncargado()!='0000-00-00'){
+					$this->addVar("cumpleEncargado", $cliente->getFechaEncargado('DATE'));
+				}else{
+					$this->addEmptyVar("cumpleEncargado");
+				}
 			}
 			$this->addVar("correo2", $cliente->getCorreoAlternativo());
 			$this->addVar("nombreFicha", "Ficha Cliente");

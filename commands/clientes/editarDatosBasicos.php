@@ -21,11 +21,23 @@ class editarDatosBasicos extends sessionCommand{
 			$doc = $cliente->getTipoDoc();
 			$distrito = $cliente->getDistrito();
 			$asesorCliente = $cliente->getIdPersona();
-			$this->addVar("nac", $cliente->getAniversario("DATE"));
+			if($cliente->getAniversario()!='0000-00-00'){
+				$this->addVar("nac", $cliente->getAniversario('DATE'));
+			}else{
+				$this->addEmptyVar("nac");
+			}
 			$this->addVar("ggeneral", $cliente->getGerente());
-			$this->addVar("nacGG", $cliente->getFechaGerente("DATE"));
+			if($cliente->getFechaGerente()!='0000-00-00'){
+				$this->addVar("nacGG", $cliente->getFechaGerente('DATE'));
+			}else{
+				$this->addEmptyVar("nacGG");
+			}
 			$this->addVar("encargado", $cliente->getEncargado());
-			$this->addVar("nacEncargado", $cliente->getFechaEncargado("DATE"));
+			if($cliente->getFechaEncargado()!='0000-00-00'){
+				$this->addVar("nacEncargado", $cliente->getFechaEncargado('DATE'));
+			}else{
+				$this->addEmptyVar("nacEncargado");
+			}
 		}else{
 			$this->addBlock("creando");
 			$this->addBlock("bloqueEditarClientes");

@@ -16,7 +16,7 @@ class vistaMeses extends sessionCommand{
     error_reporting(E_ALL);
 		*/
 		$lista = array();
-		$meses = Fabrica::getAllFromDB("Mes",array(),"anio, mes","",false);
+		$meses = Fabrica::getAllFromDB("Mes",array(),"anio DESC, mes ASC ","",false);
 		$anioActual = 0;
 		$i=0;
 		foreach($meses as $mes){

@@ -77,8 +77,8 @@ class ver extends sessionCommand{
 				$polizas[$i]["nombreCliente"] = $poliza["nombreCliente"];
 				$polizas[$i]["nombreCompania"] = $poliza["nombreCompania"];
 				$polizas[$i]["siglaCompania"] = $poliza["siglaCompania"];
-				$polizas[$i]["inicioVigencia"] = $poliza["inicioVigencia"];
-				$polizas[$i]["finVigencia"] = $poliza["finVigencia"];			
+				$polizas[$i]["inicioVigencia"] = $actual->getInicioVigencia("DATE"); 
+				$polizas[$i]["finVigencia"] = $actual->getFinVigencia("DATE"); 			
 				$polizas[$i]["estado"] = $actual->estadoLabel();
 			}
 			
