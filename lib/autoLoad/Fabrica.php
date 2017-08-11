@@ -554,8 +554,8 @@ abstract class Fabrica{
 	}
 	
 	public static function getHistoryFromDB($className,$id,$queryPrint=NULL){
+		$fc=&FrontController::instance();
 		if (!class_exists($className)) {
-			$fc=&FrontController::instance();
 			$fc->import("lib.".$className);
 			if(!class_exists($className)){
 				echo("Clase <i>".$className."</i> no declarada en carpeta lib");
@@ -603,16 +603,6 @@ abstract class Fabrica{
 			$lista=array();
 			while($row=$result->fetch_assoc()){
 				$lista[]=$row;
-				/*
-				$aux = new $className;
-				foreach($row as $key => $data){
-					$setAtributo="set".ucfirst($key);
-					$aux->$setAtributo(stripslashes(utf8_encode($data)),"DB");
-					$aux->setOriginalId($aux->getId());
-				}
-				
-				self::$instancias[$className][$aux->getId()]=$aux;
-				$objetos[]=&self::$instancias[$className][$aux->getId()];*/
 			}
 		}else{
 			printf("Error: %s\n", $dbLink->error);
@@ -620,79 +610,74 @@ abstract class Fabrica{
 		}
 		$result->free();
 		return $lista;
-		/*
-		$arrayClassName=self::getAllFromDB($className,$filtros);
-		
-		if(is_array($arrayClassName)){
-			if(sizeof($arrayClassName)==1){	
-				return $arrayClassName[0];
-			}
-		}
-		return null;		
-		*/
-		
-		
-		
-		/*
-		$fc=&FrontController::instance();
-		if (!class_exists($className)) {
-			$fc->import("lib.".$className);
-		}
-		$stringWhere="";
-		$stringOrder="";
-		$stringLimit="";
-		$stringFoundRows="";
-		//Arreglo de filtros, string de WHERE
-		if(sizeof($arrayFiltros)){
-			$stringWhere=" WHERE (".implode(") AND (",$arrayFiltros).")";
-		}
-		//String de orden
-		if($order){
-			$stringOrder=" ORDER BY	".$order;
-		}
-		//String de Limit
-		if($limit){
-			$stringFoundRows="SQL_CALC_FOUND_ROWS ";
-			$stringLimit=" LIMIT ".$limit;
-		}
-		$dbLink=&$fc->getLink();
-		$aux=new $className();
-		$query="SELECT ".$stringFoundRows."* FROM ".$aux->tableName.$stringWhere.$stringOrder.$stringLimit;
-		if($queryPrint){
-			echo '<div style="width:100%;background:#AAFFAA; color:#449944; font-size:10px; font-weight:bold;">'.$query.'</div>';
-		}
-		$query=utf8_decode($query);
-		$objetos=array();
-		if($result=$dbLink->query($query)){
-			//numero de registros encontrados
-			$countQuery="SELECT FOUND_ROWS() as total";
-			if($countResult=$dbLink->query($countQuery)){
-				$row=$countResult->fetch_assoc();
-				self::$num_rows=$row['total'];
-			}else{
-				printf("Error: %s\n", $dbLink->error);
-				return null;
-			}
-			$countResult->free();
-			//instanciar objetos
-			while($row=$result->fetch_assoc()){
-				$aux = new $className;
-				foreach($row as $key => $data){
-					$setAtributo="set".ucfirst($key);
-					$aux->$setAtributo(stripslashes(utf8_encode($data)),"DB");
-					$aux->setOriginalId($aux->getId());
-				}
-				
-				self::$instancias[$className][$aux->getId()]=$aux;
-				$objetos[]=&self::$instancias[$className][$aux->getId()];
-			}
-		}else{
-			printf("Error: %s\n", $dbLink->error);
-			return null;
-		}
-		$result->free();
-		return $objetos;*/
 	}	
+	
+	public static function getHistoryTable($className,$id,$fields=null){
+		$lista = array(
+			"idUser" => array(
+				"campo"=>"userName",
+				"tabla"=>"Persona",
+			),
+			"idCliente" => array(
+				"campo"=>"nombre",
+				"tabla"=>"Cliente",
+			),
+		);
+		$array=self::getHistoryFromDB($className,$id);
+		if(!is_null($fields)){
+			$fields[]="action";
+			$fields[]="revision";
+			$fields[]="dt_datetime";
+			$fields[]="idUser";
+			foreach ($array as $k=>$subArr) {
+				foreach ($subArr as $key => $value) {
+					if(!in_array($key,$fields)) {
+						unset($array[$k][$key]);
+					}
+				}
+			}
+		}
+		$keys = array_keys($array[0]);
+		$tabla = "<table class='table table-striped table-bordered table-condensed table-hover'>";
+		$tabla .= "<tr>";
+		$tabla .= "<th>Accion</th>";
+		$tabla .= "<th>Revision</th>";
+		$tabla .= "<th>Fecha</th>";
+		$tabla .= "<th>Usuario</th>";
+		$keys = array_slice($keys,4);
+		foreach($keys as $key) {
+			$tabla .= "<th>" . ucfirst(preg_replace('/(?<!\ )[A-Z]/', ' $0', $key)) . "</th>";	
+		}
+		$tabla .= "</tr>";				
+		foreach($array as $row) {
+			$tabla .= '<tr>';
+			foreach($row as $key => $cell){
+				if(substr($key,0,2)=="id" && array_key_exists($key,$lista)){
+					$temp=self::getFromDB($lista["$key"]["tabla"],$cell);
+					$get = "get" . $lista["$key"]["campo"];
+					$tabla .= '<td>' . $temp->$get() . '</td>';	
+				}else{
+					if($key=="dt_datetime"){
+						$tabla .= '<td>' . date('d/m/Y', strtotime($cell)) . '</td>';	
+					}else if($key=="action"){
+						if($cell=='creado'){
+							$tabla .= '<td>Creado</td>';	
+						}elseif($cell=='modifica'){
+							$tabla .= '<td>Modificado</td>';	
+						}else{
+							$tabla .= '<td>Error</td>';	
+						}
+					}else{
+						$tabla .= '<td>' . $cell . '</td>';	
+					}
+				}
+			}
+			$tabla .= '</tr>';
+		}	
+		$tabla .= "</table>";
+		return $tabla;		
+	}
+	
 	
 	public static function getCountFromDB($className,$arrayFiltros=array(),$order=NULL,$limit=NULL,$queryPrint=NULL,$distinct=NULL){
 		$fc=&FrontController::instance();
