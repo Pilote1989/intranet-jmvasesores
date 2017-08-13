@@ -29,9 +29,8 @@ class procesarRenovacion extends sessionCommand{
 		$dbLink=&FrontController::instance()->getLink();
 		$dbLink->next_result();
 		$id=$dbLink->insert_id;
-
+		$dbLink->next_result();
 		$renovacion->setIdCobro($id);
-		
 		$renovacion->setObservaciones($this->request->observaciones);
 		$renovacion->setMoneda($this->request->moneda);
 		$renovacion->setIdRamo($poliza->getIdRamo());
@@ -50,13 +49,10 @@ class procesarRenovacion extends sessionCommand{
 		$renovacion->setComision($this->request->comision);
 		$renovacion->setIntereses($this->request->intereses);
 		$renovacion->setTipo("REN");		
-		
 		//inicio - manejo de archivos
-		//print_r($_FILES);
 		$target_path = "uploads/";
 		$db = time() . "-" . basename( $_FILES['pdf']['name']);
 		$target_path = $target_path . $db;
-		//echo $target_path;
 		if ($_FILES["pdf"]["type"] == "application/pdf"){
 			if ($_FILES["pdf"]["error"] > 0){
 				echo "Return Code: " . $_FILES["pdf"]["error"] . "<br>";
@@ -73,9 +69,7 @@ class procesarRenovacion extends sessionCommand{
 			$renovacion->setRecordatorio(1);
 		}
 		$renovacion->setIdCliente($poliza->getIdCliente());
-		
 		$renovacion->storeIntoDB();
-		
 		$dbLink=&FrontController::instance()->getLink();
 		$dbLink->next_result();
 		$id=$dbLink->insert_id;

@@ -39,6 +39,7 @@ class guardarEndoso extends sessionCommand{
 				$dbLink=&FrontController::instance()->getLink();	
 				$dbLink->next_result();
 				$id=$dbLink->insert_id;
+				$dbLink->next_result();
 				//si no existe
 				$endoso->setIdCobro($id);
 			}	

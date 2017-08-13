@@ -42,12 +42,11 @@ class procesarCrearGuardarEnPoliza extends sessionCommand{
 			$dbLink=&FrontController::instance()->getLink();
 			$dbLink->next_result();
 			$id=$dbLink->insert_id;
+			$dbLink->next_result();
 			$clienteEnPoliza = new ClienteEnPoliza();
 			$clienteEnPoliza->setIdPoliza($this->request->idPoliza);
 			$clienteEnPoliza->setIdCliente($id);
 			$clienteEnPoliza->storeIntoDB();			
-			//$dbLink=&FrontController::instance()->getLink();			
-			//$id=$dbLink->insert_id;
 			$response["respuesta"]="SUCCESS";
 		}
 		echo json_encode($response);

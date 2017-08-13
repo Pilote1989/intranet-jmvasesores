@@ -13,7 +13,6 @@ class procesarDatosBasicos extends sessionCommand{
 			$compania=new Compania();
 			$nuevo = true;
 		}
-		
 		$compania->setNombre($this->request->nombre);
 		$compania->setDireccion($this->request->direccion);
 		$compania->setCorreo($this->request->correo);
@@ -28,9 +27,8 @@ class procesarDatosBasicos extends sessionCommand{
 		}else{
 			$dbLink->next_result();
 			$id=$dbLink->insert_id;
+			$dbLink->next_result();
 		}
-		
-		
 		foreach($this->request->comisiones as $clave => $comision){
 			if($nuevo){
 				$comisionTemp = new Comision();
@@ -48,11 +46,8 @@ class procesarDatosBasicos extends sessionCommand{
 				$comisionTemp[0]->setComision($comision);
 				$comisionTemp[0]->storeIntoDB();
 			}
-			
-			//echo $clave . " - " . $comision . "<br />";
 		}
 		$fc->redirect("?do=companias.verDatosBasicos&idCompania=".$id);
-		//print_r($this->request);
 	}
 }
 ?>

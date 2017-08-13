@@ -10,9 +10,7 @@ class guardarEnPoliza extends sessionCommand{
 				$vehiculoEnPoliza = new VehiculoEnPoliza();
 				$vehiculoEnPoliza->setIdPoliza($this->request->idPoliza);
 				$vehiculoEnPoliza->setIdVehiculo($this->request->idVehiculo);
-				$vehiculoEnPoliza->storeIntoDB();			
-				//$dbLink=&FrontController::instance()->getLink();			
-				//$id=$dbLink->insert_id;
+				$vehiculoEnPoliza->storeIntoDB();
 				$response["respuesta"]="SUCCESS";
 			}
 		}

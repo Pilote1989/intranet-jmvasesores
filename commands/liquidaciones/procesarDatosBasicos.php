@@ -46,6 +46,7 @@ class procesarDatosBasicos extends SessionCommand{
 			$dbLink=&FrontController::instance()->getLink();
 			$dbLink->next_result();
 			$id=$dbLink->insert_id;
+			$dbLink->next_result();
 			$i = 0;
 			foreach($this->request->idCobro as $idCobro){
 				$cobro = Fabrica::getFromDB("Cobro",$idCobro);

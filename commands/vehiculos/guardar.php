@@ -34,6 +34,7 @@ class guardar extends sessionCommand{
 			$dbLink=&FrontController::instance()->getLink();
 			$dbLink->next_result();
 			$id=$dbLink->insert_id;
+			$dbLink->next_result();
 			if($new){
 				$vehiculoEnPoliza = new VehiculoEnPoliza();
 				$vehiculoEnPoliza->setIdPoliza($this->request->idPoliza);

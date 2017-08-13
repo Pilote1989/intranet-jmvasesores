@@ -11,8 +11,6 @@ class guardarEnPoliza extends sessionCommand{
 				$clienteEnPoliza->setIdPoliza($this->request->idPoliza);
 				$clienteEnPoliza->setIdCliente($this->request->idCliente);
 				$clienteEnPoliza->storeIntoDB();			
-				//$dbLink=&FrontController::instance()->getLink();			
-				//$id=$dbLink->insert_id;
 				$response["respuesta"]="SUCCESS";
 			}
 		}
