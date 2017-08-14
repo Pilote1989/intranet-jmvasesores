@@ -13,13 +13,13 @@ class despachoEndoso extends sessionCommand{
 				$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
 				$endoso = Fabrica::getFromDB("Endoso",$this->request->idEndoso);
 				$cobro = Fabrica::getFromDB("Cobro",$endoso->getIdCobro());
-				//print_r($cobro);
+				$cobroPoliza = Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
 				$simbolo="US$ ";
-				if($cobro->getMoneda()=="Dolares"){
+				if($cobroPoliza->getMoneda()=="Dolares"){
 					$simbolo="US$ ";
-				}elseif($cobro->getMoneda()=="Soles"){
+				}elseif($cobroPoliza->getMoneda()=="Soles"){
 					$simbolo="S/. ";
-				}elseif($poliza->getMoneda()=="Euros"){
+				}elseif($cobroPoliza->getMoneda()=="Euros"){
 					$simbolo="&euro; ";
 				}
 				$distritos = array(
