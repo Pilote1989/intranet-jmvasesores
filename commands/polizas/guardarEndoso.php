@@ -32,7 +32,7 @@ class guardarEndoso extends sessionCommand{
 			$cobro->setComision($this->request->comision);
 			$cobro->setComisionCedidaP($this->request->comisionVendedorP);
 			$cobro->setComisionCedida($this->request->comisionVendedor);
-			//$cobro->setIdPersona($cobroPoliza->getIdPersona());
+			$cobro->setMoneda($cobroPoliza->getMoneda());
 			$cobro->setIdPersona($this->request->idPersona);
 			$cobro->storeIntoDB();	
 			if(!$this->request->idEndoso){
