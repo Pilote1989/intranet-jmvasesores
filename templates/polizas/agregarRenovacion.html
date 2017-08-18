@@ -141,47 +141,47 @@
 					</div>		
 					
 					<div class="form-group">
-            <label for="idPersona" class="col-sm-3 control-label no-padding-right">Asesor </label>
-            <div class="col-sm-9">
-               <select class="col-sm-12 col-xs-12 form-control" name="idPersona" id="idPersona" >
-				              {personas}
-              </select>
-            </div>
-          </div>
-        <div id="divComisionVendedor">
-          <div class="form-group">
-            <label for="comisionP" class="col-sm-3 control-label no-padding-right">Comision Vendedor (%)</label>
-            <div class="col-sm-9">
-              <div class="clearfix">
-                <input class="col-sm-12 col-xs-12" name="comisionVendedorP" type="text"  id="comisionVendedorP" value="{comisionVendedorP}" placeholder="Comision Vendedor (%)">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="comisionVendedor" class="col-sm-3 control-label no-padding-right">Comision Vendedor</label>
-            <div class="col-sm-9">
-              <div class="clearfix">
-                <input class="col-sm-12 col-xs-12" name="comisionVendedor" type="text"  id="comisionVendedor" value="{comisionVendedor}" placeholder="Comision Vendedor">
-              </div>
-            </div>
-          </div>
-        </div>
-					
-					
+						<label for="idPersona" class="col-sm-3 control-label no-padding-right">Asesor </label>
+						<div class="col-sm-9">
+							<select class="col-sm-12 col-xs-12 form-control" name="idPersona" id="idPersona" >
+								{personas}
+							</select>
+						</div>
+					</div>
+					<div id="divComisionVendedor">
+						<div class="form-group">
+						<label for="comisionP" class="col-sm-3 control-label no-padding-right">Comision Vendedor (%)</label>
+							<div class="col-sm-9">
+								<div class="clearfix">
+									<input class="col-sm-12 col-xs-12" name="comisionVendedorP" type="text"  id="comisionVendedorP" value="{comisionVendedorP}" placeholder="Comision Vendedor (%)">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="comisionVendedor" class="col-sm-3 control-label no-padding-right">Comision Vendedor</label>
+							<div class="col-sm-9">
+								<div class="clearfix">
+									<input class="col-sm-12 col-xs-12" name="comisionVendedor" type="text"  id="comisionVendedor" value="{comisionVendedor}" placeholder="Comision Vendedor">
+								</div>
+							</div>
+						</div>
+			        </div>
 					<div class="form-group">
 						<label for="fechaInicio" class="col-sm-3 control-label no-padding-right"> Fecha de Inicio </label>
 						<div class="col-sm-9">
-							<div class="clearfix">
-								<input type="text" name="fechaInicio" data-date-format="dd/mm/yyyy" class="date-picker col-sm-11 col-xs-10" id="fechaInicio" value="{fechaInicio}" onKeyPress="return disableEnterKey(event)" readonly>
-								<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span> </div>
+							<div class="input-group">
+								<input type="text" name="fechaInicio" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="fechaInicio" value="{fechaInicio}" onKeyPress="return disableEnterKey(event)" readonly>
+								<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="fechaFin" class="col-sm-3 control-label no-padding-right"> Fecha de Fin </label>
 						<div class="col-sm-9">
-							<div class="clearfix">
-								<input type="text" name="fechaFin" data-date-format="dd/mm/yyyy" class="date-picker col-sm-11 col-xs-10" id="fechaFin" value="{fechaFin}" onKeyPress="return disableEnterKey(event)" readonly>
-								<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span> </div>
+							<div class="input-group">
+								<input type="text" name="fechaFin" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="fechaFin" value="{fechaFin}" onKeyPress="return disableEnterKey(event)" readonly>
+								<span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
