@@ -47,19 +47,19 @@ class Mes extends DBObject{
 	}	
 	
 	function calSubtotalCompras($moneda = "Dolares"){
-		return Fabrica::getSumFromDB("Compra","subtotal",array("YEAR(fecha) = " . $this->getAnio(),"MONTH(fecha) = " .  $this->getMes(),"moneda = '".$moneda."'"));
+		return Fabrica::getSumFromDB("Compra","subtotal",array("YEAR(fechaPresentacion) = " . $this->getAnio(),"MONTH(fechaPresentacion) = " .  $this->getMes(),"moneda = '".$moneda."'"));
 	}
 	
 	function calIgvCompras($moneda = "Dolares"){
-		return Fabrica::getSumFromDB("Compra","igv",array("YEAR(fecha) = " . $this->getAnio(),"MONTH(fecha) = " .  $this->getMes(),"moneda = '".$moneda."'"));
+		return Fabrica::getSumFromDB("Compra","igv",array("YEAR(fechaPresentacion) = " . $this->getAnio(),"MONTH(fechaPresentacion) = " .  $this->getMes(),"moneda = '".$moneda."'"));
 	}
 	
 	function calOtrosCompras($moneda = "Dolares"){
-		return Fabrica::getSumFromDB("Compra","otros",array("YEAR(fecha) = " . $this->getAnio(),"MONTH(fecha) = " .  $this->getMes(),"moneda = '".$moneda."'"));
+		return Fabrica::getSumFromDB("Compra","otros",array("YEAR(fechaPresentacion) = " . $this->getAnio(),"MONTH(fechaPresentacion) = " .  $this->getMes(),"moneda = '".$moneda."'"));
 	}
 	
 	function calTotalCompras($moneda = "Dolares"){
-		return Fabrica::getSumFromDB("Compra","total",array("YEAR(fecha) = " . $this->getAnio(),"MONTH(fecha) = " .  $this->getMes(),"moneda = '".$moneda."'"));
+		return Fabrica::getSumFromDB("Compra","total",array("YEAR(fechaPresentacion) = " . $this->getAnio(),"MONTH(fechaPresentacion) = " .  $this->getMes(),"moneda = '".$moneda."'"));
 	}
 }
 ?>
