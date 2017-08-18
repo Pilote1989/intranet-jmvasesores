@@ -655,7 +655,11 @@ abstract class Fabrica{
 				if(substr($key,0,2)=="id" && array_key_exists($key,$lista)){
 					$temp=self::getFromDB($lista["$key"]["tabla"],$cell);
 					$get = "get" . $lista["$key"]["campo"];
-					$tabla .= '<td>' . $temp->$get() . '</td>';	
+					if(count($temp)){
+						$tabla .= '<td>' . $temp->$get() . '</td>';	
+					}else{
+						$tabla .= '<td>' . $cell . '</td>';	
+					}
 				}else{
 					if($key=="dt_datetime"){
 						$tabla .= '<td>' . date('d/m/Y', strtotime($cell)) . '</td>';	

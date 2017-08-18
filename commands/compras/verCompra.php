@@ -28,17 +28,20 @@ class verCompra extends sessionCommand{
 			}else{
 				$this->addVar("concepto", $compra->getConcepto());
 			}
-			$this->addVar("moneda", $compra->getMoneda());
+			$this->addVar("moneda", $compra->moneda());
 			$this->addVar("subtotal", $compra->getSubtotal());
 			$this->addVar("igv", $compra->getIgv());
 			$this->addVar("otros", $compra->getOtros());
 			$this->addVar("total", $compra->getTotal());
 			$this->addVar("fechaFactura", $compra->getFecha("DATE"));
+			$this->addVar("fechaPresentacion", $compra->fechaPresentacion());
 			$this->addVar("idCompra", $compra->getId());
 			if($this->request->c=="1"){
 				$this->addBlock("c");
 			}
 			$this->addLayout("ace");
+			$tabla=Fabrica::getHistoryTable("Compra","16",array("numeroFactura","idCliente","concepto","tipo","moneda","subtotal","igv","otros","total","fecha"));
+			$this->addVar("historial",$tabla);
 			$this->processTemplate("compras/verCompra.html");
 		}
 	}

@@ -23,6 +23,7 @@ class editar extends sessionCommand{
 			$this->addVar("total", $compra->getTotal());
 			$this->addVar("comando", "Editar");
 			$this->addVar("fechaFac", $compra->getFecha("DATE"));
+			$this->addVar("fechaPre", $compra->fechaPresentacion());
 			$this->addLayout("ace");
 			$this->processTemplate("compras/editar.html");
 		}else{

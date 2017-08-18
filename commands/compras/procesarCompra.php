@@ -15,6 +15,7 @@ class procesarCompra extends sessionCommand{
 			$compra->setTipo($this->request->tipo);
 			$compra->setMoneda($this->request->moneda);
 			$compra->setFecha($this->request->fecha,"DATE");
+			$compra->setFechaPresentacion("15/".$this->request->fechaPre,"DATE");
 			$compra->setSubtotal($this->request->subtotal);
 			$compra->setIgv($this->request->igv);
 			$compra->setOtros($this->request->otros);
@@ -27,6 +28,7 @@ class procesarCompra extends sessionCommand{
 			$compra->setTipo($this->request->tipo);
 			$compra->setMoneda($this->request->moneda);
 			$compra->setFecha($this->request->fecha,"DATE");
+			$compra->setFechaPresentacion("15/".$this->request->fechaPre,"DATE");
 			$compra->setSubtotal($this->request->subtotal);
 			$compra->setOtros($this->request->otros);
 			$compra->setIgv($this->request->igv);

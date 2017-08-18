@@ -1,5 +1,5 @@
      <div class="widget-main no-padding">
-      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="crearCobro" id="crearCobro" action="?do=compras.procesarCompra" role="form">
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="crearCompra" id="crearCompra" action="?do=compras.procesarCompra" role="form">
         <!-- <legend>Form</legend> -->
         <fieldset>
         	<block start="creacionCliente"/>
@@ -61,14 +61,23 @@
             </div>            
           </div>
           <div class="form-group">
-            <label for="fecha" class="col-sm-3 control-label no-padding-right"> Fecha </label>
+            <label for="fecha" class="col-sm-3 control-label no-padding-right"> Fecha de la Factura </label>
             <div class="col-sm-9">
               <div class="input-group">
                 <input type="text" name="fecha" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="fecha">
                 <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
               </div>
             </div>
-          </div>          
+          </div>  
+          <div class="form-group">
+            <label for="fechaPre" class="col-sm-3 control-label no-padding-right"> Fecha de Presentacion </label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input type="text" name="fechaPre" class="form-control monthPicker" id="fechaPre">
+                <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
+              </div>
+            </div>
+          </div>                
 					<div class="form-group">
             <label for="tipo" class="col-sm-3 control-label no-padding-right"> Tipo </label>
             <div class="col-sm-9">
@@ -195,7 +204,15 @@
 	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
 					$(this).prev().focus();
 				});
- 	$('#crearCobro').validate({
+	$('.monthPicker').datepicker({
+		viewMode: 'years',
+    format: 'mm/yyyy',
+    minViewMode: 'months',
+		autoclose:true
+		}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+	});
+ 	$('#crearCompra').validate({
 		errorElement: 'div',
 		errorClass: 'help-block',
 		focusInvalid: false,
@@ -248,7 +265,7 @@
 					}
 				}
 			},
-			fecha: {
+			fechaPre: {
 				required: true,
 				remote: {
 					url: "?do=contabilidad.revisarMes",
@@ -263,15 +280,18 @@
           },
 					data: {
 						mes: function() {
-						  var d =  $( "#fecha" ).val().split("/");
-							return d["1"];
+						  var d =  $( "#fechaPre" ).val().split("/");
+							return d["0"];
 						},
 						anio: function() {
-						  var d =  $( "#fecha" ).val().split("/");
-							return d["2"];
+						  var d =  $( "#fechaPre" ).val().split("/");
+							return d["1"];
 						}
 					}
 				}
+			},
+			fecha: {
+				required: true,
 			},
 			tipo: {
 				required: true,
@@ -302,9 +322,12 @@
 				required: 'Ingrese el Numero de Documento',
 				remote: 'El proveedor ya tiene una compra con este numero de Factura'
 			},
-			fecha: {
+			fechaPre: {
 				required: 'Ingrese la Fecha',
 				remote: "El mes se encuentra cerrado",
+			},
+			fecha: {
+				required: 'Ingrese la Fecha',
 			},
 			tipo: {
 				required: 'Ingrese el Tipo',
@@ -349,27 +372,15 @@
 		},
 	});
 	$('#enviaCobro').click(function() {
-		if($("#crearCobro").valid()){
-			$("#crearCobro").submit();
-			/*
-			$.ajax({
-				type: "POST",
-				dataType: "json",
-				url: '?do=clientes.procesarCrearGuardarEnPoliza',
-				data: $("#crearCobro").serialize(),
-				success: function(data) {
-					if (data["respuesta"] == "SUCCESS") {
-						$("#tabParticulares").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
-						$("#tabParticulares").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
-						$("#dialog-general").dialog("close");
-					}
-				}
-			});	*/
+		if($("#crearCompra").valid()){
+			$("#crearCompra").submit();
 		}
 	});
-	$(document).on('change', '#fecha', function() {
-  //$(this).closest('.form-group').removeClass('has-error');
-  //$(this).closest('.help-block').hide();
-  $("#crearCobro").validate().element("#fecha");
+$(document).on('change', '#fecha', function() {
+  $("#crearCompra").validate().element("#fecha");
+});
+
+$(document).on('change', '#fechaPre', function() {
+  $("#crearCompra").validate().element("#fechaPre");
 });
 </script>
