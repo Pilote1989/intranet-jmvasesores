@@ -5,7 +5,7 @@ class verDatosBasicos extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
 		if($this->request->idCompania){
-			$polizas = Fabrica::getAllFromDB("Poliza", array());
+			$polizas = Fabrica::getAllFromDB("Poliza", array('idCompania ="'. $this->request->idCompania .'"'));
 			$this->addVar("numPolizas", count($polizas));
 			$compania = Fabrica::getFromDB("Compania",$this->request->idCompania);
 			$this->addVar("idCompania", $this->request->idCompania);
