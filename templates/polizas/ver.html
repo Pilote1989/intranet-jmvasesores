@@ -1,7 +1,6 @@
 <div class="page-header">
   <h1> Poliza <small> <i class="ace-icon fa fa-angle-double-right"></i>&nbsp;&nbsp;{num}&nbsp;&nbsp;<i class="ace-icon fa fa-angle-double-right"></i> &nbsp;&nbsp;{vigenciaSeleccionada}&nbsp;&nbsp;</small>
     <block start="admin"/>
-    
     <div class="btn-group pull-right">
       <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown">
         <i class="ace-icon fa fa-cogs bigger-120"></i> Opciones <span class="ace-icon fa fa-caret-down fa-on-right"></span>
@@ -25,13 +24,13 @@
       </ul>
     </div>
     <block end="admin"/>
-    
   </h1>
 </div>
 <!-- /.page-header -->
 <div class="row">
   <div class="col-xs-12">
     <div class="row">
+      <!--
       <div class="col-sm-2 center hidden-xs">
         <span title="{compania}" class=" tool btn btn-app btn-primary no-hover"> <i class="ace-icon fa fa-legal bigger-230"></i> <span class="line-height-1 smaller-90"> {sigC} </span> </span>
         <div class="hr hr12 dotted">
@@ -42,22 +41,22 @@
         <span class="label label-xlg label-{colorEstado} col-xs-12">{estado}</span>
         <div class="hr hr12 dotted">
         </div>
-      </div>
-      <div class="col-sm-10">
+      </div>-->
+      <div class="col-sm-12">
         <div class="tabbable">
-          <ul id="myTab" class="nav nav-tabs responsive-tabs">
+          <ul id="myTab" class="nav nav-tabs responsive-tabs padding-18">
             <li> <a href="#tabBasicos" x-link="/?do=polizas.verDatosBasicos&idPoliza={idPoliza}" data-toggle="tab"> <i class="green ace-icon fa fa-home bigger-120"></i> Datos Basicos </a> </li>
             <li> <a href="#tabParticulares" x-link="/?do=polizas.verDatosParticulares&idPoliza={idPoliza}" data-toggle="tab"> <i class="red ace-icon fa fa-rss bigger-120"></i> Datos Particulares </a> </li>
             <li> <a href="#tabEndosos" x-link="/?do=polizas.verEndosos&idPoliza={idPoliza}" data-toggle="tab"> <i class="blue ace-icon fa fa-money bigger-120"></i> Endosos <span class="badge badge-info">{endosos}</span> </a> </li>
             <li> <a href="#tabCupones" x-link="/?do=polizas.verCupones&idPoliza={idPoliza}" data-toggle="tab"><i class="orange ace-icon fa fa-credit-card bigger-120"></i> Cupones <span class="badge badge-warning">{cupones}</span> </a> </li>
             <li> <a href="#tabCorrespondencia" x-link="/?do=polizas.verCorrespondencia&idPoliza={idPoliza}" data-toggle="tab"><i class="pink ace-icon fa fa-inbox bigger-120"></i> Correspondencia </a> </li>
           </ul>
-          <div class="tab-content">
+          <div class="tab-content no-border">
             <div class="tab-pane {bas}" id="tabBasicos">
               <div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
                 <div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;">
                 </div>
-              </div>
+              </div> 
             </div>
             <div class="tab-pane {mov}" id="tabParticulares">
               <div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">

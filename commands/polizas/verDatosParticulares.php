@@ -102,12 +102,7 @@ class verDatosParticulares extends sessionCommand{
 				}
 				$this->processTemplate("polizas/verAsegurados.html");
 			}else{
-				echo "
-				<div style='
-					margin: 0 auto;
-					width: 500px;
-				'><img src='assets/img/enConstruccion.png' align='middle'></div>
-				";	
+				$this->processTemplate("polizas/enConstruccion.html");
 			}
 		}
 	}
