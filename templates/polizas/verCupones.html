@@ -160,5 +160,11 @@ $('.abreLink').click( function() {
 	});
 	event.preventDefault();
 });
+$('body').on('focus',".date-picker", function(){
+    $(this).mask("99/99/9999");
+	$(this).datepicker({autoclose:true}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});	
+});
 
 </script>
