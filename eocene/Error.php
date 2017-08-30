@@ -29,7 +29,7 @@ class Error{
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-        <title>eBase - JMV Asesores</title>
+        <title>eBase - '.$fc->appSettings["nombreCompania"].'</title>
         <base href="http://intranetjmvasesores-pilote1989.c9.io:80/">
 
 		<meta name="description" content="" />

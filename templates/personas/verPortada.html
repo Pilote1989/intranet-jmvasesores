@@ -71,7 +71,7 @@
 <div class="page-header">
   <h1 class="row">
     <span class="col-xs-6">
-      Portada <small> <i class="ace-icon fa fa-angle-double-right"></i> Intranet Clientes JMV (v2.0) </small>
+      Portada <small> <i class="ace-icon fa fa-angle-double-right"></i> {nombreSistema} </small>
     </span>
     <span class="col-xs-6">
       <span class="pull-right inline">
@@ -91,11 +91,6 @@
               <i class="ace-icon fa fa-bullhorn blue"></i>
                 Notificaciones
             </h4>
-            <div class="widget-toolbar">
-              <a href="#" data-action="collapse">
-                <i class="ace-icon fa fa-chevron-up"></i>
-              </a>
-            </div>
           </div>
           <div class="widget-body">
             <div class="widget-main no-padding">
@@ -107,16 +102,14 @@
                 Hay <strong>{porLiquidar}</strong> comisiones pendientes de liquidar.
               </div>
               <div class="well well-sm">
-                <h5 class="green"><i class="ace-icon fa fa-comments"></i> Polizas por Vencer
-                  <button class="btn btn-xs btn-success pull-right"> <span class="bigger-110">Ver</span> <i class="ace-icon fa fa-arrow-right fa-on-right"></i> </button>
-                </h5>
+                <h5 class="green"><i class="ace-icon fa fa-comments"></i> Polizas por Vencer</h5>
                 Hay <strong>{porVencer}</strong> p&oacute;lizas que vencen esta semana.
               </div>
               <div class="well well-sm">
                 <h5 class="blue"><i class="ace-icon fa fa-comments"></i> Recordatorios por Enviar
                   <button class="link btn btn-xs btn-info pull-right" x-link="?do=admin.recordatorios"> <span class="bigger-110">Ver</span> <i class="ace-icon fa fa-arrow-right fa-on-right"></i> </button>
                 </h5>
-                Mañana se enviaran <strong>{recordatoriosPorEnviar}</strong> recordatorios de cupones pendientes.
+                Revisar los recordatorios que se enviaran el dia de mañana.
               </div>              
             </div>
             <!-- /widget-main -->
@@ -131,11 +124,6 @@
               <i class="ace-icon fa fa-bar-chart blue"></i>
                 Comisiones : {mesInicio} - {mesFin}
             </h4>
-            <div class="widget-toolbar">
-              <a href="#" data-action="collapse">
-                <i class="ace-icon fa fa-chevron-up"></i>
-              </a>
-            </div>
           </div>
           <div class="widget-body">
             <div class="widget-main no-padding">
@@ -157,11 +145,6 @@
               <i class="ace-icon fa fa-globe blue"></i>
                 Produccion por Compañia
             </h4>
-            <div class="widget-toolbar">
-              <a href="#" data-action="collapse">
-                <i class="ace-icon fa fa-chevron-up"></i>
-              </a>
-            </div>
           </div>
           <div class="widget-body">
             <div class="widget-main no-padding">
@@ -179,11 +162,6 @@
               <i class="ace-icon fa fa-cogs blue"></i>
                 Produccion por Ramo
             </h4>
-            <div class="widget-toolbar">
-              <a href="#" data-action="collapse">
-                <i class="ace-icon fa fa-chevron-up"></i>
-              </a>
-            </div>
           </div>
           <div class="widget-body">
             <div class="widget-main no-padding">
@@ -205,7 +183,7 @@
   <block start="crearMes"/>
   var alerta = $.gritter.add({
 		title: '¡Atencion!',
-		text: 'El mes de actual aun no ha sido abierto, no se podran crear facturas. <p><button id="crearMes" class="btn btn-warning btn-sm" x-link="/?do=contabilidad.crearMes">Crear Mes</button> <button class="btn btn-sm" href="/?do=contabilidad.meses">No Crear</button></p>',
+		text: 'El mes de actual aun no ha sido abierto, no se podran crear facturas ni agregar compras. <p><button id="crearMes" class="btn btn-warning btn-sm" x-link="/?do=contabilidad.crearMes">Crear Mes</button> <button class="btn btn-sm" href="/?do=contabilidad.meses">No Crear</button></p>',
 		image: 'assets/avatars/user.jpg',
 		sticky: true,
 		time: '',

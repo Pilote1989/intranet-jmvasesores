@@ -13,7 +13,7 @@
           <div class="form-group">
             <label for="rango" class="col-sm-3 control-label no-padding-right"> Rango </label>
             <div class="col-sm-9">
-              <input class="form-control" type="text" name="rango" id="rango" value="{rango}"/>
+              <input class="form-control" type="text" name="rango" id="rango" value="{rango}" data-date-format="dd/mm/yyyy"/>
               <div class="alert alert-warning">
                 <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-remove"></i> </button>
                 <strong>¡Atencion!</strong> Solo se muestra los cupones con un maximo de 14 dias de antiguedad. <br>
@@ -38,12 +38,7 @@
                   <label>
                     <input name="enviadoHoy" type="checkbox" class="ace" {enviadoHoy} />
                     <span class="lbl"> Enviado Hoy </span> </label>
-                </div><!--
-                <div class="col-sm-3 center">
-                  <label>
-                    <input name="noProgramado" type="checkbox" class="ace" />
-                    <span class="lbl"> No Programado </span> </label>
-                </div>-->
+                </div>
               </div>
             </div>
           </div>
@@ -99,9 +94,23 @@
 <script>
 	cargarFormulario('principal','?do=admin.busquedaCupones','divBusquedaRecordatorios');
 	jQuery(function($) {
-		$('#rango').daterangepicker({ 
-		format: 'DD/MM/YYYY',
-		minDate: '{minimo}'
+	  $('#rango').daterangepicker({ 
+		  minDate: '{minimo}',
+		  autoUpdateInput: false,
+		  locale: {
+		    format: 'DD/MM/YYYY'
+		  }
 	  });
+	  
+	  
+  $('#rango').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+  });
+
+  $('#rango').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });	  
+	  
+	  
 	});
   </script>

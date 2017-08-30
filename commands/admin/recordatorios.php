@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class recordatorios extends sessionCommand{
 	function execute(){
 		$fc=FrontController::instance();
@@ -49,9 +49,10 @@ class recordatorios extends sessionCommand{
 			$this->addEmptyVar("rango");
 		}
 		
-		$fecha = date('Y-m-j');
-		$nuevafecha = strtotime('-14 day',strtotime($fecha));
-		$nuevafecha = date ( 'd/m/Y' , $nuevafecha );
+		//$fecha = date('Y-m-j');
+		//$nuevafecha = strtotime('-14 day',strtotime($fecha));
+		//$nuevafecha = date ( 'd/m/Y' , $nuevafecha );
+		$nuevafecha = date('d/m/Y', strtotime('-14 days'));
 		$this->addVar("minimo",$nuevafecha);
 		// Nombre
 		$this->addBlock("bloqueNombre");

@@ -92,6 +92,8 @@ class TemplateEngine{
 		$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 		//Salida: Viernes 24 de Febrero del 2012
 		$this->variables["fecha"] = $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y');
+		$this->variables["nombreSistema"] = $fc->appSettings["nombreSistema"];
+		$this->variables["nombreCompania"] = $fc->appSettings["nombreCompania"];
 		$this->processVariables();
 		//recortar el template
 		$this->processBlocks();

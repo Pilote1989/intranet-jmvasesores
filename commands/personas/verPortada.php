@@ -10,6 +10,7 @@ class verPortada extends sessionCommand{
 		if(!$perfiles = $usuario->getPerfiles()){
 			$fc->redirect("?do=home");
 		}
+		$temporal = "";
 		if($this->checkAccess("crearUsuario", true)){
 			
 			$sMes = array(
@@ -240,7 +241,7 @@ class verPortada extends sessionCommand{
 			$meses = array();
 			foreach($lista as $item){
 				if($i==0){
-					$this->addVar("mesInicio",$tMes[$item["mes"]]);
+					$temporal = $tMes[$item["mes"]];
 				}
 				$meses[$i]["mes"] = $sMes[$item["mes"]];
 				$tempMes = $item["mes"];
@@ -248,6 +249,8 @@ class verPortada extends sessionCommand{
 				$meses[$i]["pri"] = $item["pri"];
 				$i++;
 			}
+			
+			$this->addVar("mesInicio",$temporal);
 			$this->addVar("mesFin",$tMes[$tempMes]);
 			
 			$this->addLoop("meses",$meses);

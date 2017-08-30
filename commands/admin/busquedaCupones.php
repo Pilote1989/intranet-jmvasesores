@@ -3,7 +3,6 @@ class busquedaCupones extends SessionCommand{
 	function execute(){
 		$this->fc->import("lib.Paginador");
 		$usuario=$this->getUsuario();
-		
 		if(!$this->request->pagina){
 			$paginaActual=1;
 		}else{
@@ -11,11 +10,9 @@ class busquedaCupones extends SessionCommand{
 			$_SESSION["busquedaCupones"]["pagina"]=$this->request->pagina;
 		}
 		$limite=10;
-
 		$minimoDePagina=Paginador::getMinimo($paginaActual,$limite);
-		
 		$where=array();
-		
+		//echo $this->request->rango;
 		if($this->request->rango){
 			$fechas = explode("-", $this->request->rango);
 			$_SESSION["busquedaCupones"]["rango"] = $this->request->rango;
@@ -57,10 +54,7 @@ class busquedaCupones extends SessionCommand{
 		if(sizeof($where)){
 			$whereCondition=" AND ((".implode(") OR (",$where)."))";
 		}
-		
 		$pPaginador = "";
-		
-
 		$cupones = array();
 		$query = "
 				SELECT SQL_CALC_FOUND_ROWS
@@ -94,10 +88,8 @@ class busquedaCupones extends SessionCommand{
 				printf("Error: %s\n", $dbLink->error);
 				return null;
 			}
-			
 			$listaCupones=array();
 			$this->fc->import("lib.Paginador");
-			
 			while($row=$result->fetch_assoc()){
 				if($test){
 					$listaCupones[]=$row;	
@@ -105,20 +97,13 @@ class busquedaCupones extends SessionCommand{
 					$num_rows = 0;	
 				}
 			}
-			
 		}else{
 			printf("Error: %s\n", $link->error);
 			return null;
 		}
-		
 		$i=0;
-		
 		foreach($listaCupones as $cupon){
-			
 			$cuponActual = Fabrica::getFromDB("Cupon",$cupon["idCupon"]);
-			//$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
-			//print_r($cuponActual);
-			//$actual = Fabrica::getFromDB("Poliza", $poliza["idPersona"]);
 			$cupones[$i]["contratante"] = $cupon["contratante"];
 			$cupones[$i]["ramo"] = $cupon["ramo"];
 			$cupones[$i]["numeroPoliza"] = $cupon["numeroPoliza"];			
@@ -126,21 +111,17 @@ class busquedaCupones extends SessionCommand{
 			$cupones[$i]["cia"] = $cupon["cia"];			
 			$cupones[$i]["scia"] = $cupon["scia"];				
 			$cupones[$i]["monto"] = $cuponActual->monto();	
-			$cupones[$i]["vencimiento"] = $cupon["fechaVenc"];	
+			$cupones[$i]["vencimiento"] = date( "d/m/Y", strtotime($cupon["fechaVenc"]));
 			$cupones[$i]["fecha_diferencia"] = $cupon["fecha_diferencia"];				
 			$cupones[$i]["estado"] = $cuponActual->estadoColor();			
 			$cupones[$i]["idPoliza"] = $cupon["idPoliza"];	
 			$i++;
 		}
 		$tablaPaginas=Paginador::crearNewHtmlAjax($paginaActual,$num_rows,"?do=admin.busquedaCupones".$pPaginador,"divBusquedaRecordatorios", $limite);
-		//print_r($_SESSION["busquedaCupones"]);
 		$this->addVar("paginas",$tablaPaginas);
 		$this->addVar("num_rows",$num_rows);
-		
 		$this->addLoop("cupones",$cupones);
-
 		$this->processTemplate("admin/busquedaCupones.html");
-		
 	}
 }
 ?>
