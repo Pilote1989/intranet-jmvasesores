@@ -94,6 +94,7 @@ class TemplateEngine{
 		$this->variables["fecha"] = $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y');
 		$this->variables["nombreSistema"] = $fc->appSettings["nombreSistema"];
 		$this->variables["nombreCompania"] = $fc->appSettings["nombreCompania"];
+		$this->variables["siglasCompania"] = $fc->appSettings["siglasCompania"];
 		$this->processVariables();
 		//recortar el template
 		$this->processBlocks();

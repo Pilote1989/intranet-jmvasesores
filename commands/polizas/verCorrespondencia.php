@@ -20,7 +20,7 @@ class verCorrespondencia extends sessionCommand{
 				//print_r($pieces);
 				//echo $pieces[2] . "/" . $pieces[1] . "/" . $pieces[0] . "<br>";
 				$listaCartas[$i]["fecha"] = $pieces[2] . "/" . $pieces[1] . "/" . $pieces[0];
-				$listaCartas[$i]["numero"] = "JMV - " . sprintf('%05d', $carta->getId()) . " - " . $pieces[0];
+				$listaCartas[$i]["numero"] = $fc->appSettings["siglasCompania"] . " - " . sprintf('%05d', $carta->getId()) . " - " . $pieces[0];
 				$listaCartas[$i]["detalle"] = $carta->getDetalle();
     			$listaCartas[$i]["idCarta"] = $carta->getId();
 				//echo $cupon->getId();
