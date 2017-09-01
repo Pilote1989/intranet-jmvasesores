@@ -165,14 +165,11 @@
               </div>
             </div>
           </div>
-
-
           <block start="bloqueadoVendedor"/>
           <div class="alert alert-block alert-warning">
             <i class="ace-icon fa fa-check warning"></i> <strong class="warning"> Alerta</strong>, no se puede modificar los datos de una comision cedida que ya ha sido pagada.
           </div>
           <block end="bloqueadoVendedor"/>          
-          
           <div class="form-group">
             <label for="idPersona" class="col-sm-3 control-label no-padding-right">Asesor </label>
             <div class="col-sm-9">
@@ -290,20 +287,24 @@
 			btn_change:'Cambiar',
 			droppable:false,
 			onchange:null,
-			thumbnail:false, //| true | large
+			thumbnail:false,
 			whitelist:'pdf',
 			blacklist:'exe|php',
-			//onchange:''
-			//
 		}); 		
 		if($("#idPersona").val() == "1"){
 			jQuery("#divComisionVendedor").hide();	
 		}
-		
+		jQuery("#idCompania,#idRamo").change(function () {
+		  if(!$("#comisionP").is('[readonly]')){
+        $("#comisionP").val("");
+        $.getJSON( "?do=companias.obtenerComision&idCompania="+$("#idCompania").val()+"&idRamo="+$("#idRamo").val(), function( json ) {
+          $("#comisionP").val(json.comision);
+        });
+      }
+		});
 		jQuery("#idCliente").change(function () {
 			$('#idPersona').val($("#idCliente option:selected").attr('x-asesor')).change();
 		});
-				
 		jQuery("#idPersona").change(function () {
 			if($("#idPersona").val() != "1"){
 				jQuery("#divComisionVendedor").show('slow');
@@ -320,13 +321,6 @@
 		jQuery("#idRamo").val({idRamo});
 		jQuery("#idPersona").val({idPersona});
 		jQuery("#moneda").val("{moneda}");
-//		if(jQuery('#new').val() == 1){
-//			jQuery("#antiguo").hide("slow");
-//			jQuery("#nuevo").show("slow");	
-//		}else if(jQuery('#new').val() == 0){
-//			jQuery("#nuevo").hide("slow");
-//			jQuery("#antiguo").show("slow");	
-//		}
     });
 	jQuery('.date-picker').mask("99/99/9999");
 	jQuery('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
@@ -342,7 +336,6 @@
 		}
 	});
 	jQuery("#prima").keyup(function () {
-	  //alert(noDerecho.indexOf(jQuery("#idRamo").val()) + " - " + jQuery("#idRamo").val());
 	  if(noDerecho.indexOf(jQuery("#idRamo").val())=="-1"){
 	    jQuery("#derecho").val((parseFloat(jQuery("#prima").val())*0.03).toFixed(2));
 	    jQuery("#primaComercial").val((parseFloat(jQuery("#prima").val())*1.03).toFixed(2));		
@@ -461,7 +454,6 @@
 				} 
 			}
 		},
-
 		messages: {
 			idCliente: {
 				required: "Seleccione el Cliente",
@@ -489,21 +481,17 @@
 				remote: "El aviso de cobranza ya existe",
 			},
 		},
-
-		invalidHandler: function (event, validator) { //display error alert on form submit   
+		invalidHandler: function (event, validator) {
 			$('.alert-danger', $('.login-form')).show();
 		},
-
 		highlight: function (e) {
 			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
 		},
-
 		success: function (e) {
 			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
 			$(e).remove();
 			
 		},
-
 		errorPlacement: function (error, element) {
 			if(element.is(':checkbox') || element.is(':radio')) {
 				var controls = element.closest('div[class*="col-"]');
@@ -524,7 +512,4 @@
 			$("#principal2").submit();
 		}
 	});
-	
-	
-	
-    </script> 
+</script> 
