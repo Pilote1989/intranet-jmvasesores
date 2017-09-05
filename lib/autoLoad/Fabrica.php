@@ -205,7 +205,8 @@ abstract class DBObject{
 				//echo '<div>'.$x[0].'-'.$tipo.'</div>';
 				switch($tipo){
 					case "DB":
-						$this->dataArray[$varname]=self::unhtmlentities ($x[0]);
+						//$this->dataArray[$varname]=self::unhtmlentities ($x[0]);
+						$this->dataArray[$varname]=htmlspecialchars($x[0]);
 						return true;
 					case "MD5":
 						$this->dataArray[$varname]=md5($x[0]);
@@ -287,7 +288,7 @@ abstract class DBObject{
 		foreach($this->dataArray as $campo=>$valor){
 			if(trim($valor)!=""){
 				$col[]=$campo;
-				$val[]=$dbLink->real_escape_string(utf8_decode($valor));
+				$val[]=$dbLink->real_escape_string(($valor));
 			}
 		}
 		if(!(sizeof($col))){
@@ -314,7 +315,7 @@ abstract class DBObject{
 			if(trim($valor)==""){
 				$query.="`".$campo."` = NULL, ";
 			}else{
-				$query.="`".$campo."`= '".$dbLink->real_escape_string(utf8_decode($valor))."', ";
+				$query.="`".$campo."`= '".$dbLink->real_escape_string(($valor))."', ";
 			}
 		}
 		$query=substr($query,0,-2)." WHERE `".$primaryKey."`='".$this->getOriginalId()."' LIMIT 1;SET @user_id = null;";
