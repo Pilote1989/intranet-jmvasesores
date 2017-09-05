@@ -161,7 +161,7 @@ abstract class DBObject{
 						$output=str_replace(">","&gt;",$output);
 						return $output;
 					case "DB":
-						return ($this->dataArray[$varname]);
+						return utf8_decode($this->dataArray[$varname]);
 					case "BASE64DECODE":
 						return base64_decode($this->dataArray[$varname]);
 					case "JS":
