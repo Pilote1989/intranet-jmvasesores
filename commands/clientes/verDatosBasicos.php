@@ -92,9 +92,18 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("correo2", $cliente->getCorreoAlternativo());
 			$this->addVar("nombreFicha", "Ficha Cliente");
 			$this->addVar("idPoliza", $this->request->idPoliza);
-			$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
+			//$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
+			if($cliente->getIdUbigeo()!="0"){
+				$ubigeo = Fabrica::getFromDB("Ubigeo", $cliente->getIdUbigeo());
+				$this->addVar("distrito", $ubigeo->getNombre());
+				$this->addVar("provincia", $ubigeo->provincia());
+				$this->addVar("departamento", $ubigeo->departamento());	
+			}else{
+				$this->addVar("distrito", "Sin Definir");
+				$this->addVar("provincia", "Sin Definir");
+				$this->addVar("departamento", "Sin Definir");
+			}
 			$this->addVar("menu", "menuClientes?idCliente=".$this->request->idCliente);
-			
 			$persona = Fabrica::getFromDB("Persona", $cliente->getIdPersona());
 			//var_dump($persona);
 			$this->addVar("asesor", $persona->getNombres() . " " . $persona->getApellidoPaterno() . " " . $persona->getApellidoMaterno());

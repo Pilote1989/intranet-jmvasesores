@@ -94,8 +94,12 @@ class blanco extends sessionCommand{
 				$this->addVar("primero", $simbolo . " " . number_format($cupones[0]->getMonto(),2));
 				
 			}
-			
-			$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
+			if($cliente->getIdUbigeo()!="0"){
+				$this->addVar("distrito", $cliente->obtenerUbigeo());
+			}else{
+				$this->addVar("distrito", "");	
+			}
+			//$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
 			$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
 			$this->addVar("ramo", $ramo->getNombre());
 			$this->addVar("idPoliza",$this->request->idPoliza);

@@ -81,8 +81,14 @@ class despachoEndoso extends sessionCommand{
 					$this->addVar("direccion", "[direccion]");
 				}else{
 					$this->addVar("direccion", $cliente->getDireccion());
+					
 				}
-				$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
+				//$this->addVar("distrito", $distritos[$cliente->getDistrito()]);
+				if($cliente->getIdUbigeo()!="0"){
+					$this->addVar("distrito", $cliente->obtenerUbigeo());
+				}else{
+					$this->addVar("distrito", "");	
+				}
 				$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
 				$this->addVar("ramo", $ramo->getNombre());
 				$this->addVar("idPoliza",$this->request->idPoliza);

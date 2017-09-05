@@ -4,7 +4,6 @@ class procesarDatosBasicos extends sessionCommand{
 		// -> Banner
 		$fc=FrontController::instance();
 		$fc->import("lib.Cliente");
-		
 		$new = true;
 		if($this->request->idCliente){
 			if($this->request->idCliente=="nan"){
@@ -16,12 +15,12 @@ class procesarDatosBasicos extends sessionCommand{
 		}else{
 			$cliente=new Cliente();
 		}
-		
 		$cliente->setNombre($this->request->nombre);
 		$cliente->setDireccion($this->request->direccion);
 		$cliente->setCorreo($this->request->correo);
 		$cliente->setCorreoAlternativo($this->request->correo2);
-		$cliente->setDistrito($this->request->distrito);
+		//$cliente->setDistrito($this->request->distrito);
+		$cliente->setIdUbigeo($this->request->distrito);
 		$cliente->setDoc($this->request->doc);
 		$cliente->setTipoDoc($this->request->tipoDoc);
 		$cliente->setIdPersona($this->request->asesor);
