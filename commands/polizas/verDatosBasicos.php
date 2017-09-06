@@ -77,8 +77,8 @@ class verDatosBasicos extends sessionCommand{
 			}
 			
 			//$vigencias = Fabrica::getAllFromDB("Vigencia", array("idPoliza = " . $poliza->getId()), "inicioVigencia ASC");
-			//$listaVigencias = array();
-			//$i = 0;
+			$listaVigencias = array();
+			$i = 0;
 			if($this->checkAccess("crearUsuario", true)){
 				$this->addBlock("admin");
 			}

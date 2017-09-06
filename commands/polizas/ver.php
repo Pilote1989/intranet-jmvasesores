@@ -90,6 +90,8 @@ class ver extends sessionCommand{
 			$this->addVar("endosos", count($endosos));
 			$cupones = Fabrica::getAllFromDB("Cupon", array("idPoliza = " . $seleccionada));
 			$this->addVar("cupones", count($cupones));
+			$cartas = Fabrica::getAllFromDB("Carta", array("idPoliza = " . $seleccionada));
+			$this->addVar("cartas", count($cartas));
 			$i = 0;
 			if($this->checkAccess("crearUsuario", true)){
 				$this->addBlock("admin");

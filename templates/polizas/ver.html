@@ -39,9 +39,9 @@
           <ul id="myTab" class="nav nav-tabs responsive-tabs padding-18">
             <li> <a href="#tabBasicos" x-link="/?do=polizas.verDatosBasicos&idPoliza={idPoliza}" data-toggle="tab"> <i class="green ace-icon fa fa-home bigger-120"></i> Datos Basicos </a> </li>
             <li> <a href="#tabParticulares" x-link="/?do=polizas.verDatosParticulares&idPoliza={idPoliza}" data-toggle="tab"> <i class="purple ace-icon fa fa-rss bigger-120"></i> Datos Particulares </a> </li>
-            <li> <a href="#tabEndosos" x-link="/?do=polizas.verEndosos&idPoliza={idPoliza}" data-toggle="tab"> <i class="blue ace-icon fa fa-money bigger-120"></i> Endosos <span class="badge badge-info">{endosos}</span> </a> </li>
-            <li> <a href="#tabCupones" x-link="/?do=polizas.verCupones&idPoliza={idPoliza}" data-toggle="tab"><i class="orange ace-icon fa fa-credit-card bigger-120"></i> Cupones <span class="badge badge-warning">{cupones}</span> </a> </li>
-            <li> <a href="#tabCorrespondencia" x-link="/?do=polizas.verCorrespondencia&idPoliza={idPoliza}" data-toggle="tab"><i class="pink ace-icon fa fa-inbox bigger-120"></i> Correspondencia </a> </li>
+            <li> <a href="#tabEndosos" x-link="/?do=polizas.verEndosos&idPoliza={idPoliza}" data-toggle="tab"> <i class="blue ace-icon fa fa-money bigger-120"></i> Endosos <span class="badge badge-info" id="cantidadEndosos">{endosos}</span> </a> </li>
+            <li> <a href="#tabCupones" x-link="/?do=polizas.verCupones&idPoliza={idPoliza}" data-toggle="tab"><i class="orange ace-icon fa fa-credit-card bigger-120"></i> Cupones <span class="badge badge-warning" id="cantidadCupones">{cupones}</span> </a> </li>
+            <li> <a href="#tabCorrespondencia" x-link="/?do=polizas.verCorrespondencia&idPoliza={idPoliza}" data-toggle="tab"><i class="pink ace-icon fa fa-inbox bigger-120"></i> Correspondencia <span class="badge badge-pink" id="cantidadCartas">{cartas}</span></a> </li>
           </ul>
           <div class="tab-content no-border">
             <div class="tab-pane" id="tabBasicos">
@@ -83,7 +83,14 @@
 <link rel="stylesheet" href="assets/css/jquery.gritter.css" />
 <script src="assets/js/jquery.gritter.min.js"></script>
 <script>
-
+function actValores() {
+  $.getJSON( "?do=polizas.getNumeros&idPoliza={idPoliza}", function( data ) {
+    $('#cantidadEndosos').text(data["endosos"]);
+    $('#cantidadCupones').text(data["cupones"]);
+    $('#cantidadCartas').text(data["cartas"]);
+    console.log(data)
+  });
+}
 $(document).ready(function(){
   $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
     _title: function(title) {
