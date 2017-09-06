@@ -7,7 +7,8 @@ class guardar extends sessionCommand{
 		$response["respuesta"]="OLD";
 		if($this->request->idCarta){
 			$carta = Fabrica::getFromDB("Carta",$this->request->idCarta);
-			$carta->setCarta(htmlspecialchars($this->request->texto, ENT_QUOTES, 'UTF-8'));	
+			//$carta->setCarta(htmlspecialchars($this->request->texto, ENT_QUOTES, 'UTF-8'),"CARTA");	
+			$carta->setCarta($this->request->texto,"CARTA");	
 			$carta->setDetalle($this->request->detalle);		
 			$carta->storeIntoDB();			
 			//guardando carta que esta creada
@@ -16,7 +17,8 @@ class guardar extends sessionCommand{
 		}else if($this->request->idPoliza){
 			//guardando nueva carta
 			$carta = new Carta();
-			$carta->setCarta(htmlspecialchars($this->request->texto, ENT_QUOTES, 'UTF-8'));
+			//$carta->setCarta(htmlspecialchars($this->request->texto, ENT_QUOTES, 'UTF-8'),"CARTA");
+			$carta->setCarta($this->request->texto,"CARTA");	
 			$carta->setIdPoliza($this->request->idPoliza);			
 			$carta->setDetalle($this->request->detalle);				
 			$carta->setFecha(date("Y-m-d"));		

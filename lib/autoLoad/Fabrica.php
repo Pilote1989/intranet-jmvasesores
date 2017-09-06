@@ -160,6 +160,8 @@ abstract class DBObject{
 						$output=str_replace("<","&lt;",$output);
 						$output=str_replace(">","&gt;",$output);
 						return $output;
+					case "CARTA":
+						return html_entity_decode($this->dataArray[$varname]);
 					case "DB":
 						return utf8_decode($this->dataArray[$varname]);
 					case "BASE64DECODE":
@@ -204,6 +206,9 @@ abstract class DBObject{
 				}
 				//echo '<div>'.$x[0].'-'.$tipo.'</div>';
 				switch($tipo){
+					case "CARTA":
+						$this->dataArray[$varname]=self::unhtmlentities ($x[0]);
+						return true;
 					case "DB":
 						//$this->dataArray[$varname]=self::unhtmlentities ($x[0]);
 						$this->dataArray[$varname]=htmlspecialchars($x[0]);

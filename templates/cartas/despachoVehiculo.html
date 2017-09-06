@@ -84,6 +84,7 @@
           <p style="text-align:justify;">
           Detalle de Envio:
           </p>
+          <block start="unVehiculo"/>
           <p style="text-align:justify;">
           Emisi&oacute;n de la p&oacute;liza de seguro que ampara al siguiente veh&iacute;culo:
           </p>
@@ -102,6 +103,55 @@
           Cabe mencionar que para esta vigencia su aseguradora SI est&aacute; condicionando la cobertura de robo a la instalaci&oacute;n de un sistema GPS, para lo cual deber&aacute; de contactarse con los proveedores que se indican en su p&oacute;liza, o en su defecto si ya cuenta con el sistema instalado, deber&aacute; de enviarnos la constancia de servicio vigente emitida por cualquiera de los proveedores afiliados que se indican en su p&oacute;liza, esto &uacute;ltimo es muy importante ya que la cobertura de robo est&aacute; supeditada a la instalaci&oacute;n del sistema GPS.
           </p>
           <block end="GPS"/>
+          <block end="unVehiculo"/>
+          <block start="variosVehiculos"/>
+          <table width="90%" cellpadding="4" cellspacing="0" style="height: 40px; margin-left: auto; margin-right: auto;">
+          <tbody>
+          <tr>
+          <td align="center">
+          Marca
+          </td>
+          <td align="center">
+          Modelo
+          </td>
+          <td align="center">
+          Nro Rodaje
+          </td>
+          <td align="center">
+          GPS
+          </td>
+          <td align="center">
+          Endosatario
+          </td>
+          <loop start="vehiculos"/>
+          </tr>
+          <tr>
+          <td align="center" style="border-top:1px solid black;">
+          {vehiculos.marca}
+          </td>
+          <td align="center" style="border-top:1px solid black;">
+          {vehiculos.modelo}
+          </td>
+          <td align="center" style="border-top:1px solid black;">
+          {vehiculos.placa}
+          </td>
+          <td align="center" style="border-top:1px solid black;">
+          {vehiculos.gps}
+          </td>
+          <td align="center" style="border-top:1px solid black;">
+          {vehiculos.endosatario}
+          </td>
+          </tr>
+          <loop end="vehiculos"/>
+          </tbody>
+          </table>
+          <p style="text-align:justify;">
+          Convenio de pago numero : {convenio} <br />
+          Numero de cuotas mensuales : {cuotas} <br />
+          Fecha de vencimiento del primer pago el d&iacute;a : {ultimo} <br />
+          Importe del primer pago : {primero}
+          </p>
+          <block end="variosVehiculos"/>
           <p style="text-align:justify;">
           Asimismo en caso no haya solicitado el pago con cargo en su cuenta bancaria es importante que tenga en cuenta efectuar los pagos en sus vencimientos a fin de evitar estar sin cobertura en caso de ocurrir un siniestro.
           </p>

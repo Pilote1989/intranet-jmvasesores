@@ -95,13 +95,11 @@ class despachoVehiculo extends sessionCommand{
 			$this->addVar("documento", $cobro->getDocumento());
 			$this->addVar("moneda", $simbolo);
 			$this->addVar("monto", number_format($cobro->getTotalFactura(),2));
-			
 			$VehiculoEnPoliza = Fabrica::getAllFromDB("VehiculoEnPoliza", array("idPoliza = '" .$this->request->idPoliza . "'"));
-
 			if(count($VehiculoEnPoliza)=="1"){
+				$this->addBlock("unVehiculo");
 				$vehiculos = Fabrica::getFromDB("Vehiculo", $VehiculoEnPoliza[0]->getIdVehiculo());
 				$modelo = Fabrica::getFromDB("Modelo", $vehiculos->getIdModelo());
-				
 				if($vehiculos->getIdModelo()!=""){
 					$this->addVar("modelo", $modelo->getModelo());
 					$marca = Fabrica::getFromDB("Marca", $modelo->getIdMarca());
@@ -113,7 +111,33 @@ class despachoVehiculo extends sessionCommand{
 				if($vehiculos->getGps()=="1"){
 					$this->addBlock("GPS");
 				}
-				$this->addVar("placa", $vehiculos->getPlaca());				
+				$this->addVar("placa", $vehiculos->getPlaca());	
+				$this->addVar("endosatario", $vehiculos->getEndosatario());
+			}elseif(count($VehiculoEnPoliza)>"1"){
+				$this->addBlock("variosVehiculos");
+				$listaVehiculos = array();
+				$i=0;
+				foreach($VehiculoEnPoliza as $temp){
+					$vehiculo = Fabrica::getFromDB("Vehiculo", $temp->getIdVehiculo());
+					if($vehiculo->getIdModelo()!=""){
+						$modelo = Fabrica::getFromDB("Modelo", $vehiculo->getIdModelo());
+						$listaVehiculos[$i]["modelo"] = $modelo->getModelo();	
+						$marca = Fabrica::getFromDB("Marca", $modelo->getIdMarca());
+						$listaVehiculos[$i]["marca"] = $marca->getMarca();
+					}else{
+						$listaVehiculos[$i]["modelo"] = "Sin Definir";
+						$listaVehiculos[$i]["marca"] = "Sin Definir";
+					}
+					if($vehiculo->getGps()=="1"){
+						$listaVehiculos[$i]["gps"] = "Si";
+					}else{
+						$listaVehiculos[$i]["gps"] = "No";
+					}
+					$listaVehiculos[$i]["placa"] = $vehiculo->getPlaca();
+					$listaVehiculos[$i]["endosatario"] = $vehiculo->getEndosatario();
+					$i++;
+				}
+				$this->addLoop("vehiculos",$listaVehiculos);
 			}
 			$cupones = Fabrica::getAllFromDB("Cupon", array("idPoliza = " . $poliza->getId()), "fechaVencimiento ASC");
 			$this->addVar("cuotas", count($cupones));

@@ -15,7 +15,7 @@ class Cliente extends DBObject{
 		return $temp[0];
 	}
 	function obtenerUbigeo(){
-		if($this->getIdUbigeo()=="0"){
+		if($this->getIdUbigeo()!="0"){
 			return Fabrica::getFromDB("Ubigeo",$this->getIdUbigeo())->getNombre().", ".$this->obtenerProvincia()->getNombre().", ".$this->obtenerDepartamento()->getNombre();	
 		}
 		return "Sin Distrito";

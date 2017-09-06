@@ -10,7 +10,7 @@ class editar extends sessionCommand{
 			$this->addVar("idCarta", $this->request->idCarta);
 			$this->addVar("anio", $pieces[0]);
 			$this->addVar("numero", sprintf('%05d', $this->request->idCarta));
-			$this->addVar("carta", $carta->getCarta());
+			$this->addVar("carta", $carta->getCarta("CARTA"));
 			$this->addVar("detalle", $carta->getDetalle());
 			$this->addVar("idPoliza", $carta->getIdPoliza());
 			$this->processTemplate("cartas/editar.html");
