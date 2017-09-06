@@ -74,7 +74,8 @@ No hay cartas para esta p&oacute;liza.
 							url: $(this).data('link'),
 							success: function() {
 								$("#tabCorrespondencia").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
-								$("#tabCorrespondencia").load('/?do=polizas.verCorrespondencia&idPoliza={idPoliza}');					
+								$("#tabCorrespondencia").load('/?do=polizas.verCorrespondencia&idPoliza={idPoliza}');	
+								actValores();
 								checkChild();
 							}
 						});
@@ -111,6 +112,7 @@ No hay cartas para esta p&oacute;liza.
 				clearInterval(timer);
 				$("#tabCorrespondencia").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
 				$("#tabCorrespondencia").load('/?do=polizas.verCorrespondencia&idPoliza={idPoliza}');
+				actValores();
 			}
 		}
 

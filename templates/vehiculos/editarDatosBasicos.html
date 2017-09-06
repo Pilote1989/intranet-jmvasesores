@@ -224,6 +224,7 @@
 					if (data["respuesta"] == "SUCCESS") {
 						$("#tabParticulares").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
 						$("#tabParticulares").load('/?do=polizas.verDatosParticulares&idPoliza={idPoliza}');
+						actValores();
 						$("#dialog-general").dialog("close");
 					}
 				}
