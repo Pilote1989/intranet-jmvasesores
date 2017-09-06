@@ -12,22 +12,24 @@ class cambiarClave extends sessionCommand{
 					$persona=$personas[0];
 					if($this->request->seed == $persona->getPassword()){
 						$this->addBlock("mostrarForm");
-						$this->addEmptyVar("errorUsuario");
 						$this->addEmptyVar("errorLogin");
 						$this->addVar("mail",$persona->getMail());
 					}else{
 						$this->addVar("errorUsuario", "La clave ya ha sido modificada");
+						$this->addBlock("mostrarError");
 					}
 				}else{
 					$this->addVar("errorUsuario", "No existe el usuario");
+					$this->addBlock("mostrarError");
 				}
 			}elseif($this->request->password){
 				if(count($personas)>0){
 					$persona=$personas[0];
-					$persona->setPassword($this->request->password, "MD5");	
+					$persona->setPassword($this->request->password, "MD5");
 					$persona->storeIntoDB();
 					// Dependiendo de donde esté el usuario se muestra el mensaje
 					$this->addVar("errorUsuario", "Se ha cambiado la Clave.");
+					$this->addBlock("mostrarError");
 					$this->addEmptyVar("errorLogin");
 				}else{
 					$this->addBlock("mostrarForm");

@@ -1,4 +1,21 @@
-<div id="divErrores2" style="padding-left:20px"> {errorUsuario} </div>
+<block start="mostrarError"/>
+<div class="error-container">
+  <div class="well">
+    <h1 class="grey lighter smaller">
+      <span class="blue bigger-125">
+        <i class="ace-icon fa fa-random"></i>
+			</span> {errorUsuario}
+    </h1>
+    <hr>
+    <div class="space"></div>
+    <div class="center">
+      <a href="?do=personas.verPortada" class="btn btn-grey">
+				<i class="ace-icon fa fa-arrow-left"></i>Regresar a la Portada.
+			</a>
+    </div>
+  </div>
+</div>
+<block end="mostrarError"/>
 <block start="mostrarForm"/>
 <div class="widget-box">
   <div class="widget-header">
@@ -6,14 +23,14 @@
   </div>
   <div class="widget-body">
     <div class="widget-main no-padding">
-      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="principal2" id="principal2" action="?do=polizas.procesarDatosBasicos" role="form">
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST" name="cambioClave" id="cambioClave" action="?do=personas.cambiarClave" role="form">
         <!-- <legend>Form</legend> -->
         <fieldset>
           <div class="form-group">
             <label for="numeroPoliza" class="col-sm-3 control-label no-padding-right">Correo Electronico</label>
             <div class="col-sm-9">
               <div class="clearfix">
-                <input class="col-sm-12 col-xs-12" name="mail" type="text"  id="mail" value="{mail}"  placeholder="Password" readonly="readonly">
+                <input class="col-sm-12 col-xs-12" name="mail" type="text"  id="mail" value="{mail}" readonly="readonly">
               </div>
             </div>
           </div>
@@ -21,7 +38,7 @@
             <label for="password_2" class="col-sm-3 control-label no-padding-right">Nueva Contraseña</label>
             <div class="col-sm-9">
               <div class="clearfix">
-                <input class="col-sm-12 col-xs-12" name="password_2" type="text"  id="password_2"  placeholder="Contraseña">
+                <input class="col-sm-12 col-xs-12" name="password" type="text"  id="password"  placeholder="Contraseña">
               </div>
             </div>
           </div>
@@ -29,23 +46,71 @@
             <label for="cobranza" class="col-sm-3 control-label no-padding-right">Confirmar Contraseña</label>
             <div class="col-sm-9">
               <div class="clearfix">
-                <input class="col-sm-12 col-xs-12" name="cobranza" type="text"  id="cobranza" placeholder="Confirmar Contraseña">
+                <input class="col-sm-12 col-xs-12" name="password_2" type="text"  id="password_2" placeholder="Confirmar Contraseña">
               </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <div id="divErrores" style="padding-left:20px"> {errorLogin} </div>
             </div>
           </div>
         </fieldset>
         <div class="form-actions center"><block start="admin"/>
               <input type="hidden" name="admin" value="1">
               <block end="admin"/>
-          <button class="btn btn-sm btn-success" type="button" id="enviarPrincipal2"> Cambiar Clave <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
+          <button class="btn btn-sm btn-success" type="button" id="enviarCambioClave"> Cambiar Clave <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 <block end="mostrarForm"/>
+<script type="text/javascript">
+	$('#cambioClave').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+    rules: {
+      password: {
+        required: true,
+      },
+      password_2: {
+        equalTo: "#password"
+      }
+		},
+		messages: {
+			password: {
+				required: "Ingrese la Nueva Contraseña",
+			},
+			password_2: {
+				equalTo: "Las contraseñas deben ser iguales.",
+			},
+		},
+		invalidHandler: function (event, validator) {
+			$('.alert-danger', $('.login-form')).show();
+		},
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	$('#enviarCambioClave').click(function() {
+		if($("#cambioClave").valid()){
+			$("#cambioClave").submit();
+		}
+	});
+</script>
