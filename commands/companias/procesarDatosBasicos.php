@@ -14,14 +14,9 @@ class procesarDatosBasicos extends sessionCommand{
 			$nuevo = true;
 		}
 		$compania->setNombre($this->request->nombre);
-		$compania->setDireccion($this->request->direccion);
-		$compania->setCorreo($this->request->correo);
-		$compania->setCorreoAlternativo($this->request->correo2);
-		
+		$compania->setSigla($this->request->sigla);
 		$compania->storeIntoDB();
-		
 		$dbLink=&FrontController::instance()->getLink();
-		
 		if($this->request->idCompania){
 			$id=$this->request->idCompania;
 		}else{
@@ -36,6 +31,8 @@ class procesarDatosBasicos extends sessionCommand{
 				$comisionTemp->setIdRamo($clave);
 				$comisionTemp->setComision($comision);
 				$comisionTemp->storeIntoDB();
+				$dbLink->next_result();
+				$dbLink->next_result();
 			}else{
 				$comisionTemp = Fabrica::getAllFromDB("Comision", 
 					array(
@@ -45,6 +42,8 @@ class procesarDatosBasicos extends sessionCommand{
 				);	
 				$comisionTemp[0]->setComision($comision);
 				$comisionTemp[0]->storeIntoDB();
+				$dbLink->next_result();
+				$dbLink->next_result();
 			}
 		}
 		$fc->redirect("?do=companias.verDatosBasicos&idCompania=".$id);
