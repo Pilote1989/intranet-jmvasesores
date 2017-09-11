@@ -60,6 +60,9 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "personas.inscribirUsuario"){
 			$this->addVar("administracion", "class='active open'");
 			$this->addVar("personas.inscribirUsuario", "class='active'");
+		}elseif($this->request->doFalso == "ramos.busqueda"){
+			$this->addVar("administracion", "class='active open'");
+			$this->addVar("ramos.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "polizas.ver"){
 			$this->addVar("polizas", "class='active'");
 		}elseif($this->request->doFalso == "polizas.editarDatosBasicos"){

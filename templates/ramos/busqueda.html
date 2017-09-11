@@ -1,0 +1,113 @@
+<block start="nuevaBusqueda"/>
+<div class="well" style="margin-bottom:0px;">
+    <form class="form-horizontal" role="form" id="principal" name="principal">
+        <fieldset>
+            <div class="form-group">
+                <label for="nombre" class="col-sm-3 control-label no-padding-right"> Nombre </label>
+                <div class="col-sm-9">
+                    <input name="nombre" type="text" id="nombre" placeholder="Nombre" value="{nombre}" class="col-sm-12">
+                </div>
+            </div>
+        </fieldset>
+        <input name="busqueda" type="hidden" id="busqueda" value="1" />
+        <div class="center">
+            <button class="btn btn-sm btn-success" type="button" id="realizaBusqueda">
+                Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" type="button" id="limpiar">
+                Limpiar Filtros <i class="ace-icon fa fa-trash fa-on-right bigger-110"></i>
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-sm btn-info" type="button" href="?do=ramos.editarDatosBasicos">
+                Agregar Ramo <i class="ace-icon fa fa-plus fa-on-right bigger-110"></i>
+            </a>
+        </div>
+    </form>	
+</div>
+<block end="nuevaBusqueda"/>
+<block start="antiguaBusqueda"/>
+<div class="widget-box">
+    <div class="widget-header">
+        <h4 class="widget-title">Filtros de Busqueda</h4>
+        <div class="widget-toolbar"> <a data-action="collapse" href="#"> <i class="ace-icon fa fa-chevron-up"></i> </a> <a data-action="close" href="#"> <i class="ace-icon fa fa-remove"></i> </a> </div>
+    </div>
+    <div class="widget-body">
+        <div class="widget-main no-padding">
+            <form class="form-horizontal" role="form" id="principal" name="principal">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="nombre" class="col-sm-3 control-label no-padding-right"> Nombre </label>
+                        <div class="col-sm-9">
+                            <input name="nombre" type="text" id="nombre" placeholder="Nombre" value="{nombre}" class="col-sm-12">
+                        </div>
+                    </div>
+                </fieldset>
+                <input name="busqueda" type="hidden" id="busqueda" value="1" />
+                <div class="form-actions center">
+                    <button class="btn btn-sm btn-success" type="button" id="realizaBusqueda">
+                        Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" type="button" id="limpiar">
+                        Limpiar Filtros <i class="ace-icon fa fa-trash fa-on-right bigger-110"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>   
+<h3 class="row header smaller lighter blue"> <span class="col-xs-12"> Resultados de Búsqueda </span></h3>
+<block end="antiguaBusqueda"/>
+<div class="progress progress-striped active" id="procesando">
+	<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+</div>
+<table id="tableSearch" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Siglas</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+</table>
+<script>
+	$('#tableSearch').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        },
+        "serverSide": true,
+        "ajax": {
+            "url": "?do=busquedaAjax&matriz=ramos",
+            "data": function ( d ) {
+                return $.extend( {}, d, JSON.parse(JSON.stringify( $('#principal').serializeArray())) );
+            }
+        },
+        "fnPreDrawCallback":function(){
+            $("#tableSearch").hide();
+            $("#procesando").show();
+        },
+        "fnDrawCallback":function(){
+            $("#tableSearch").show();
+            $("#procesando").hide();
+        },
+        "dom": '<"row"<"col-xs-6"i><"col-xs-6"p>>rt<"clear">',
+        "aoColumns": [
+            null, null,
+            { "bSortable": false }
+		],
+		"aoColumnDefs": [
+            { "sClass": "center", "aTargets": "_all" }
+        ],
+    }); 
+    $("#realizaBusqueda").on('click', function(){
+       $('#tableSearch').DataTable().ajax.reload();
+    });
+    $("#limpiar").on('click', function(){
+        $('#principal').trigger('reset');
+        $('#principal').find('input:text, input:password, select, textarea').val('');
+        $('#principal').find('input:radio, input:checkbox').prop('checked', false);
+        $.getJSON( "?do=limpiarBusqueda&matriz=ramos")
+          .done(function( json ) {
+            $('#tableSearch').DataTable().ajax.reload();
+          });
+    });
+</script>

@@ -1,0 +1,54 @@
+<div class="page-header" style="padding-bottom:0px;">
+  <h1 style="padding-bottom: 10px;"> Ver Ramo <small> <i class="ace-icon fa fa-angle-double-right"></i> {nombre} </small>
+    <block start="admin"/>
+    <div class="btn-group pull-right">
+      <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown">
+        <i class="ace-icon fa fa-cogs bigger-120"></i> Opciones <span class="ace-icon fa fa-caret-down fa-on-right"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-info pull-right">
+        <li> <a href="/?do=ramos.editarDatosBasicos&idRamo={idRamo}">Editar Datos Basicos</a> </li>
+      </ul>
+    </div>
+    <block end="admin"/>
+  </h1>
+  <p>
+    <span class="label label-lg label-primary">{numPolizas} - Polizas</span>
+	</p>
+</div>
+<div class="row">
+  <!--<div class="col-sm-2 center">
+    <span class="btn btn-app btn-primary no-hover"> <span class="line-height-1 bigger-230"> {numPolizas} </span> <br>
+    <span class="line-height-1 smaller-90"> Polizas </span> </span>
+    <div class="hr hr12 dotted">
+    </div>
+  </div>-->
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs responsive-tabs padding-18">
+        <li class="active"> <a href="#home" data-toggle="tab"> <i class="green ace-icon fa fa-home bigger-120"></i> Datos Basicos </a> </li>
+      </ul>
+      <div class="tab-content no-border">
+        <div class="tab-pane active" id="home">
+          <div class="profile-user-info profile-user-info-striped">
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Nombre
+              </div>
+              <div class="profile-info-value">
+                {nombre}&nbsp;
+              </div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-name">
+                Siglas
+              </div>
+              <div class="profile-info-value">
+                {sigla}&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

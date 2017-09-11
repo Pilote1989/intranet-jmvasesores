@@ -1,0 +1,96 @@
+<block start="bloqueEditarRamos"/>
+<div class="widget-box">
+  <div class="widget-header">
+    <h4>{editar}</h4>
+  </div>
+  <div class="widget-body">
+    <div class="widget-main no-padding">
+      <form class="form-horizontal"enctype="multipart/form-data" method="POST" name="crearRamo" id="crearRamo" action="?do=ramos.procesarDatosBasicos" role="form">
+        <!-- <legend>Form</legend> -->
+        <fieldset>
+          <div class="form-group">
+            <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre del Ramo </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input name="nombre" type="text"  id="nombre" value="{nombre}" onKeyPress="return disableEnterKey(event)" placeholder="Nombre" class="col-sm-12">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sigla" class="col-sm-3 control-label no-padding-right">Siglas </label>
+            <div class="col-sm-9">
+              <div class="clearfix">
+                <input name="sigla" type="text"  id="sigla" value="{sigla}" onKeyPress="return disableEnterKey(event)" placeholder="Siglas" class="col-sm-12">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <block start="idRamo"/>
+        <input type="hidden" name="idRamo" value="{idRamo}">
+        <block end="idRamo"/>
+        <div class="form-actions center">
+          <button class="btn btn-sm btn-success" type="button" id="enviarCrearRamo">
+            Editar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<block end="bloqueEditarRamos"/>
+<script>
+	$('#crearRamo').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			nombre: {
+				required: true,
+			},
+			sigla: {
+				required: true,
+			},
+		},
+		messages: {
+			nombre: {
+				required: "Ingrese el Nombre",
+			},
+			sigla: {
+				required: "Ingrese las Siglas",
+			},
+		},
+		invalidHandler: function (event, validator) { //display error alert on form submit   
+			$('.alert-danger', $('.login-form')).show();
+		},
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});
+	$('#enviarCrearRamo').click(function() {
+		if($("#crearRamo").valid()){
+			$("#crearRamo").submit();
+		}
+	})
+</script> 

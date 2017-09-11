@@ -61,7 +61,7 @@ class Request{
 			$this->_createArrayVariable($key,$value);
 		}else{			
 			$this->_createNonArrayVariable($key,$value);
-		}	
+		}
 	}
 	function _createNonArrayVariable(&$key,&$value){
 		$this->{$key} = $this->_getProcessedString($value);
@@ -69,7 +69,11 @@ class Request{
 	}
 	function _createArrayVariable(&$key,&$values){
 		while (list($arrayKey,$arrayValue)=each($values)){
-			$values[$arrayKey]=$this->_getProcessedString($arrayValue);
+			if(is_array($arrayValue)){
+				$values[$arrayKey]=$arrayValue;
+			}else{
+				$values[$arrayKey]=$this->_getProcessedString($arrayValue);
+			}
 		}
 		$this->{$key}=$values;
 		array_push($this->param,$key);
