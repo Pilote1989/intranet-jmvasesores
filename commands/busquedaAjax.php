@@ -2,13 +2,29 @@
 class busquedaAjax extends sessionCommand{
 	function execute(){
 		$usuario=$this->getUsuario();
+		$debug = false;
 		$mapa = array(
 			"clientes" => array(
 				"tabla" => "Cliente",
+				"session" => "busquedaClientes",
 				"columnas" => array(
 					"nombre",
 					"direccion",
 					"documento"
+				),
+				"busqueda" => array(
+					"nombre" => array(
+						"order" => 0,
+						"tabla" => "clientes",
+						"campo" => "nombre",
+						"tipo" => "LIKE%"
+					),
+					"doc" => array(
+						"order" => 1,
+						"tabla" => "clientes",
+						"campo" => "doc",
+						"tipo" => "LIKE%"
+					)
 				),
 				"extras" => array(
 					"ver"
@@ -31,6 +47,25 @@ class busquedaAjax extends sessionCommand{
 				),
 				"extras" => array(
 					"ver"
+				)
+			),
+			"companias" => array(
+				"tabla" => "Compania",
+				"session" => "busquedaCompanias",
+				"columnas" => array(
+					"sigla",
+					"nombre"
+				),
+				"busqueda" => array(
+					"nombre" => array(
+						"order" => 0,
+						"tabla" => "ramos",
+						"campo" => "nombre",
+						"tipo" => "LIKE%"
+					)
+				),
+				"extras" => array(
+					"verDatosBasicos"
 				)
 			),
 		);
@@ -69,7 +104,7 @@ class busquedaAjax extends sessionCommand{
 						$search[] = $buscando["campo"]." = ".$orden["value"]."";	
 				}
 			}
-			$resultados = Fabrica::getAllFromDB($tabla,$search,$order,$inicio.",".$limite, false);
+			$resultados = Fabrica::getAllFromDB($tabla,$search,$order,$inicio.",".$limite, $debug);
 			$total = Fabrica::getCountFromDB($tabla,$search);
 			$resultadoJson = array();
 			$resultadoJson["draw"] = (int)$this->request->draw;
@@ -89,6 +124,8 @@ class busquedaAjax extends sessionCommand{
 				}
 				if(in_array('ver',$mapa[$matriz]["extras"]))
 					$temp[]='<div class="action-buttons"><a class="blue" href="?do='.$matriz.'.ver&id'.$tabla.'='.$resultado->getId().'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a></div>';
+				if(in_array('verDatosBasicos',$mapa[$matriz]["extras"]))
+					$temp[]='<div class="action-buttons"><a class="blue" href="?do='.$matriz.'.verDatosBasicos&id'.$tabla.'='.$resultado->getId().'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a></div>';					
 				$dataJson[]=$temp;
 				$i++;
 			}

@@ -1,0 +1,75 @@
+<div class="well" style="margin-bottom:0px;">
+    <form class="form-horizontal" role="form" id="principal" name="principal">
+        <fieldset>
+            <div class="form-group">
+                <label for="nombre" class="col-sm-3 control-label no-padding-right"> Nombre </label>
+                <div class="col-sm-9">
+                    <input name="nombre" type="text" id="nombre" placeholder="Nombre" value="{nombre}" class="col-sm-12">
+                </div>
+            </div>
+        </fieldset>
+        <input name="busqueda" type="hidden" id="busqueda" value="1" />
+        <div class="center">
+            <button class="btn btn-sm btn-success" type="button" id="realizaBusqueda">
+                Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" type="button" id="limpiar">
+                Limpiar Filtros <i class="ace-icon fa fa-trash fa-on-right bigger-110"></i>
+            </button>
+        </div>
+    </form>	
+</div>
+<div class="progress progress-striped active" id="procesando">
+	<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+</div>
+<table id="tableSearch" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Siglas</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+</table>
+<script>
+	$('#tableSearch').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        },
+        "serverSide": true,
+        "ajax": {
+            "url": "?do=busquedaAjax&matriz=companias",
+            "data": function ( d ) {
+                return $.extend( {}, d, JSON.parse(JSON.stringify( $('#principal').serializeArray())) );
+            }
+        },
+        "fnPreDrawCallback":function(){
+            $("#tableSearch").hide();
+            $("#procesando").show();
+        },
+        "fnDrawCallback":function(){
+            $("#tableSearch").show();
+            $("#procesando").hide();
+        },
+        "dom": '<"row"<"col-xs-6"i><"col-xs-6"p>>rt<"clear">',
+        "aoColumns": [
+            null, null,
+            { "bSortable": false }
+		],
+		"aoColumnDefs": [
+            { "sClass": "center", "aTargets": "_all" }
+        ],
+    }); 
+    $("#realizaBusqueda").on('click', function(){
+       $('#tableSearch').DataTable().ajax.reload();
+    });
+    $("#limpiar").on('click', function(){
+        $('#principal').trigger('reset');
+        $('#principal').find('input:text, input:password, select, textarea').val('');
+        $('#principal').find('input:radio, input:checkbox').prop('checked', false);
+        $.getJSON( "?do=limpiarBusqueda&matriz=companias")
+          .done(function( json ) {
+            $('#tableSearch').DataTable().ajax.reload();
+          });
+    });
+</script>

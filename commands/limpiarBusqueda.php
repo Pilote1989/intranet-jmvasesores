@@ -3,8 +3,9 @@ class limpiarBusqueda extends sessionCommand{
 	function execute(){
 		$usuario=$this->getUsuario();
 		$mapa = array(
-			"clientes" => "",
-			"ramos" => "busquedaRamos"
+			"clientes" => "busquedaClientes",
+			"ramos" => "busquedaRamos",
+			"companias" => "busquedaCompanias"
 		);
 		$response = false;
 		$matriz=$this->request->matriz;
