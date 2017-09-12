@@ -92,7 +92,8 @@ class verPortada extends sessionCommand{
 			$tempMes = 10;
 			$tempAnio = 2016;
 			
-			$url = "http://www.google.com/finance/converter?a=1&from=USD&to=PEN"; 
+			//$url = "http://www.google.com/finance/converter?a=1&from=USD&to=PEN";
+			$url = "http://finance.google.com/finance/converter?a=1&from=USD&to=PEN"; 
 			$request = curl_init(); 
 			$timeOut = 0; 
 			curl_setopt ($request, CURLOPT_URL, $url); 
@@ -104,7 +105,6 @@ class verPortada extends sessionCommand{
 			$regularExpression     = '#\<span class=bld\>(.+?)\<\/span\>#s';
 			preg_match($regularExpression, $response, $finalData);
 			$exchangeRate = substr($finalData[0],16,6);
-			
 			$this->addVar("tc",$exchangeRate);
 			$sqlCompania = "
 				SELECT SQL_CALC_FOUND_ROWS  `compania` , moneda, TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `comision` / " . $exchangeRate . ", `comision` ) ) , 2 ) AS valor
