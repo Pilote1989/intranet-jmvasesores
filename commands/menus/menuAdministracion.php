@@ -63,6 +63,9 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "ramos.busqueda"){
 			$this->addVar("administracion", "class='active open'");
 			$this->addVar("ramos.busqueda", "class='active'");
+		}elseif($this->request->doFalso == "ramos.ver"){
+			$this->addVar("administracion", "class='active open'");
+			$this->addVar("ramos.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "polizas.ver"){
 			$this->addVar("polizas", "class='active'");
 		}elseif($this->request->doFalso == "polizas.editarDatosBasicos"){
@@ -82,17 +85,17 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "clientes.editarDatosBasicos"){
 			$this->addVar("clientes", "class='active open'");
 			$this->addVar("clientes.editarDatosBasicos", "class='active'");
-		}elseif($this->request->doFalso == "clientes.verClientes"){
+		}elseif($this->request->doFalso == "clientes.busqueda"){
 			$this->addVar("clientes", "class='active open'");
-			$this->addVar("clientes.verClientes", "class='active'");
+			$this->addVar("clientes.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "companias.verDatosBasicos"){
 			$this->addVar("companias", "class='active'");
 		}elseif($this->request->doFalso == "companias.editarDatosBasicos"){
 			$this->addVar("companias", "class='active open'");
 			$this->addVar("companias.editarDatosBasicos", "class='active'");
-		}elseif($this->request->doFalso == "companias.verCompanias"){
+		}elseif($this->request->doFalso == "companias.busqueda"){
 			$this->addVar("companias", "class='active open'");
-			$this->addVar("companias.verCompanias", "class='active'");
+			$this->addVar("companias.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "reportes.generar"){
 			$this->addVar("reportes", "class='active open'");
 			$this->addVar("reportes.generar", "class='active'");
