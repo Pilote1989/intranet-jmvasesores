@@ -1,0 +1,107 @@
+<div class="well" style="margin-bottom:0px;">
+    <form class="form-horizontal" role="form" id="principal" name="principal">
+        <fieldset>
+            <div class="form-group">
+                <label for="contratante" class="col-sm-3 control-label no-padding-right"> Contratante </label>
+                <div class="col-sm-9">
+                  <input name="contratante" type="text" class="col-sm-12" id="contratante" value="{nombre}" onKeyPress="return disableEnterKey(event)" placeholder="Contratante">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="idRamo" class="col-sm-3 control-label no-padding-right"> Ramo </label>
+                <div class="col-sm-9">
+                  <select name="idRamo" class="col-sm-12" id="idRamo" onKeyPress="return disableEnterKey(event)">
+                    {ramos}
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="idCompania" class="col-sm-3 control-label no-padding-right"> Compañia </label>
+                <div class="col-sm-9">
+                  <select name="idCompania" class="col-sm-12" id="idCompania" onKeyPress="return disableEnterKey(event)">
+                    {companias}
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="idVendedor" class="col-sm-3 control-label no-padding-right"> Vendedor </label>
+                <div class="col-sm-9">
+                  <select name="idVendedor" class="col-sm-12" id="idVendedor" onKeyPress="return disableEnterKey(event)">
+                    {vendedores}
+                  </select>
+                </div>
+            </div>            
+        </fieldset>
+        <input name="busqueda" type="hidden" id="busqueda" value="1" />
+        <div class="center">
+            <button class="btn btn-sm btn-success" type="button" id="realizaBusqueda">
+                Buscar <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" type="button" id="limpiar">
+                Limpiar Filtros <i class="ace-icon fa fa-trash fa-on-right bigger-110"></i>
+            </button>
+        </div>
+    </form>	
+</div>
+<div class="progress progress-striped active" id="procesando">
+	<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+</div>
+<table id="tableSearch" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Compañia - Poliza</th>
+            <th>Contratante</th>
+            <th>Ramo</th>
+            <th>Vigencia</th>
+            <th>Opc</th>
+        </tr>
+    </thead>
+</table>
+<script>
+	$('#idRamo').val("{idRamo}");
+	$('#idCompania').val("{idCompania}");
+	$('#idVendedor').val("{idVendedor}");
+	$('#tableSearch').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        },
+        "serverSide": true,
+        "ajax": {
+            "url": "?do=busquedaAjax&matriz=polizas",
+            "data": function ( d ) {
+                return $.extend( {}, d, JSON.parse(JSON.stringify( $('#principal').serializeArray())) );
+            }
+        },
+        "fnPreDrawCallback":function(){
+            $("#tableSearch").hide();
+            $("#procesando").show();
+        },
+        "fnDrawCallback":function(){
+            $("#tableSearch").show();
+            $("#procesando").hide();
+        },
+        "dom": '<"row"<"col-xs-6"i><"col-xs-6"p>>rt<"clear">',
+        "aoColumns": [
+            null,
+            null,
+            null,
+            null,
+            { "bSortable": false }
+		],
+		"aoColumnDefs": [
+            { "sClass": "center", "aTargets": "_all" }
+        ]
+    }); 
+    $("#realizaBusqueda").on('click', function(){
+       $('#tableSearch').DataTable().ajax.reload();
+    });
+    $("#limpiar").on('click', function(){
+        $('#principal').trigger('reset');
+        $('#principal').find('input:text, input:password, select, textarea').val('');
+        $('#principal').find('input:radio, input:checkbox').prop('checked', false);
+        $.getJSON( "?do=limpiarBusqueda&matriz=polizas")
+          .done(function( json ) {
+            $('#tableSearch').DataTable().ajax.reload();
+          });
+    });
+</script>

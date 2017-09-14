@@ -146,5 +146,17 @@ class Poliza extends DBObject{
 				return null;
 			}
 	}
+	function getRamo(){
+		$ramo = Fabrica::getFromDB("Ramo", $this->getIdRamo());			
+		return $ramo->getNombre();
+	}
+	function getCliente(){
+		$cliente = Fabrica::getFromDB("Cliente", $this->getIdCliente());			
+		return $cliente->getNombre();
+	}
+	function getCiaNumero(){
+		$compania = Fabrica::getFromDB("Compania", $this->getIdCompania());
+		return $compania->getSigla()." - ".$this->getNumeroPoliza();
+	}
 }
 ?>
