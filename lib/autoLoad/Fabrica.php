@@ -211,7 +211,8 @@ abstract class DBObject{
 						return true;
 					case "DB":
 						//$this->dataArray[$varname]=self::unhtmlentities ($x[0]);
-						$this->dataArray[$varname]=htmlspecialchars($x[0]);
+						//$this->dataArray[$varname]=htmlspecialchars($x[0]);
+						$this->dataArray[$varname]=$x[0];
 						return true;
 					case "MD5":
 						$this->dataArray[$varname]=md5($x[0]);
