@@ -112,9 +112,9 @@ class busquedaAjax extends sessionCommand{
 					"CONCAT(Compania.sigla,' - ',Poliza.numeroPoliza) as ciaNumero",
 					"Cliente.nombre as cliente",
 					"Ramo.nombre as ramo",
-					"CONCAT(DATE_FORMAT(Poliza.inicioVigencia,'%d/%m/%Y'),' - ',DATE_FORMAT(Poliza.finVigencia,'%d/%m/%Y')) as vigencia",
-					"Poliza.inicioVigencia as inicioVigencia",
-					"Poliza.finVigencia as finVigencia"
+					"CONCAT(DATE_FORMAT(MIN(Poliza.inicioVigencia),'%d/%m/%Y'),' - ',DATE_FORMAT(MAX(Poliza.finVigencia),'%d/%m/%Y')) as vigencia",
+					"MIN(Poliza.inicioVigencia) as inicioVigencia",
+					"MAX(Poliza.finVigencia) as finVigencia"
 				),
 				"busqueda" => array(
 					"contratante" => array(
