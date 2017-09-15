@@ -99,9 +99,9 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "reportes.generar"){
 			$this->addVar("reportes", "class='active open'");
 			$this->addVar("reportes.generar", "class='active'");
-		}elseif($this->request->doFalso == "reportes.historico"){
+		}elseif($this->request->doFalso == "reportes.especial"){
 			$this->addVar("reportes", "class='active open'");
-			$this->addVar("reportes.historico", "class='active'");
+			$this->addVar("reportes.especial", "class='active'");
 		}elseif($this->request->doFalso == "reportes.pantalla"){
 			$this->addVar("reportes", "class='active open'");
 			$this->addVar("reportes.pantalla", "class='active'");
