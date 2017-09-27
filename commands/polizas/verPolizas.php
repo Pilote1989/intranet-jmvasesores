@@ -28,7 +28,7 @@ class verPolizas extends sessionCommand{
 		}
 		$this->addVar("companias",$selectCompania);
 
-		$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
+		$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 		$selectPersona = '<option value=""></option>';
 		foreach($personas as $persona){
 			$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" >'.$persona->getNombres(). ' ' . $persona->getApellidoPaterno() . ' ' . $persona->getApellidoMaterno() . '</option>';

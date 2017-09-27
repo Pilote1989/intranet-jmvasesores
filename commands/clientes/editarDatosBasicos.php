@@ -90,7 +90,7 @@ class editarDatosBasicos extends sessionCommand{
 		if(!$empresa){
 			$this->addBlock("noEmpresa");
 		}
-		$asesores = Fabrica::getAllFromDB("Persona",array());
+		$asesores = Fabrica::getAllFromDB("Persona",array("vendedor = '1'"));
 		$selectAsesores = "";
 		foreach($asesores as $asesor){
 			if($asesor->getId() == $asesorCliente){

@@ -25,7 +25,7 @@ class agregarRenovacion extends sessionCommand{
 			$this->addVar("idCompania", $compania->getNombre());
 			$this->addVar("idPersona",$cliente->getIdPersona());
 
-			$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
+			$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 			$selectCompania = '<option value=""></option>';
 			$this->addEmptyVar("documento");
 			$this->addEmptyVar("cobranza");

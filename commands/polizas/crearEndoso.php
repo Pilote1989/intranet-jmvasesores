@@ -40,7 +40,7 @@ class crearEndoso extends sessionCommand{
 				$this->addVar("comisionVendedor",$cobro->getComisionCedida());
 				
 				$this->addVar("idPersona",$cobro->getIdPersona());
-				$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
+				$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 				$selectCompania = '<option value=""></option>';
 				foreach($personas as $persona){
 					if($cobro->getIdPersona()!=$persona->getId()){
@@ -87,7 +87,7 @@ class crearEndoso extends sessionCommand{
 				$this->addVar("comision","0.00");
 				$this->addVar("comisionVendedor","0.00");
 				$this->addEmptyVar("idPersona");
-				$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
+				$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 				$selectCompania = '<option value=""></option>';
 				foreach($personas as $persona){
 					if($cliente->getIdPersona()!=$persona->getId()){

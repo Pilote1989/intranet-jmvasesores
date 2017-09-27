@@ -87,7 +87,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addBlock("revisaAviso");
 					
 			$this->addVar("idPersona",$poliza->getIdPersona());
-			$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
+			$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 			$selectCompania = '<option value=""></option>';
 			foreach($personas as $persona){
 				if($cobro->getIdPersona()!=$persona->getId()){
@@ -164,7 +164,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addBlock("bloqueEditarRamo");
 
 			$this->addEmptyVar("idPersona");
-			$personas=Fabrica::getAllFromDB("Persona",array(),"nombres ASC");	
+			$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 			$selectCompania = '<option value=""></option>';
 			foreach($personas as $persona){
 				if($persona->getId() != "1"){
