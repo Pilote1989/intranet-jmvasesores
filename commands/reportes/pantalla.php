@@ -5,14 +5,12 @@ class pantalla extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
 		
-		
 		$ramos=Fabrica::getAllFromDB("Ramo", array(), "nombre");	
 		$selectRamo = '<option value=""></option>';
 		foreach($ramos as $ramo){
 			$selectRamo=$selectRamo.'\n<option value="'.$ramo->getId().'" >'.$ramo->getNombre().'</option>';
 		}
 		$this->addVar("ramos",$selectRamo);
-		
 		
 		$companias=Fabrica::getAllFromDB("Compania", array(), "nombre");	
 		$selectCompania = '<option value=""></option>';
@@ -28,6 +26,12 @@ class pantalla extends sessionCommand{
 		}
 		$this->addVar("clientes",$selectCliente);		
 		
+		$personas=Fabrica::getAllFromDB("Persona", array("vendedor = '1'"), "nombres");	
+		$selectPersona = '<option value=""></option>';
+		foreach($personas as $persona){
+			$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" >'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
+		}
+		$this->addVar("personas",$selectPersona);			
 		
 		$this->addLayout("ace");
 		

@@ -6,8 +6,7 @@ class generaPantalla extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
 		//var_dump($this->request);
-		
-		if($this->request->ase || $this->request->com || $this->request->ram){
+		if($this->request->ase || $this->request->com || $this->request->ram || $this->request->ven || $this->request->vencimiento){
 			if($this->request->ase!=""){
 				$where[]="rtf.idCliente = '".$this->request->ase."'";
 				$this->addVar("ase",$this->request->ase);
@@ -35,12 +34,27 @@ class generaPantalla extends sessionCommand{
 			}else{
 				$this->addEmptyVar("com");
 			}
-			
+			if($this->request->ven!=""){
+				$where[]="cob.idPersona = '".$this->request->ven."'";
+				$this->addVar("ven",$this->request->ven);
+				$persona = Fabrica::getFromDB("Persona", $this->request->ven);
+				$this->addVar("persona",$persona->getNombres()." ".$persona->getApellidoPaterno()." ".$persona->getApellidoMaterno());
+				$this->addBlock("ven");	
+			}else{
+				$this->addEmptyVar("ven");
+			}
+			if($this->request->vencimiento!=""){
+				$venc = explode("/", $this->request->vencimiento);
+				$where[]="MONTH(rtf.finVigencia) = '".$venc[0]."'";
+				$where[]="YEAR(rtf.finVigencia) = '".$venc[1]."'";
+				$this->addVar("vencimiento",$this->request->vencimiento);
+				$this->addBlock("vencimiento");
+			}
 			if($this->request->vigentes=="on"){
 				$where[]="rtf.inicioVigencia <= NOW()";
 				$where[]="rtf.finVigencia >= NOW()";
+				$this->addBlock("vigentes");
 			}
-			
 			if($this->request->inicioVigencia){
 				$inicioVigencia = explode(" - ", $this->request->inicioVigencia);
 				$inicioVigencia[0] = $this->procesarFecha($inicioVigencia[0]);
@@ -96,13 +110,10 @@ class generaPantalla extends sessionCommand{
 				ORDER BY numeroPoliza, inicioVigencia
 			";
 			//echo "<br / >" . $query . "<br / >";
-			
 			$query=utf8_decode($query);		
 			$link=&$this->fc->getLink();
-			
 			if($result=$link->query($query)){
 				$countQuery="SELECT FOUND_ROWS() as total";
-			
 				if($countResult=$link->query($countQuery)){
 					$row=$countResult->fetch_assoc();
 					$num_rows=$row['total'];
@@ -119,7 +130,6 @@ class generaPantalla extends sessionCommand{
 				printf("Error: %s\n", $link->error);
 				return null;
 			}
-			
 			$i=0;
 			$polizas = array();
 			$totalSoles = 0;
@@ -180,7 +190,6 @@ class generaPantalla extends sessionCommand{
 			$this->addVar("pnSoles",number_format($pnSoles,2));
 			$this->addVar("pnDolares",number_format($pnDolares,2));
 			$this->addVar("pnEuros",number_format($pnEuros,2));
-
 			if($this->request->vista==0){
 				$this->addLayout("adminAlone");
 				$this->processTemplate("reportes/generaPantalla2.html");

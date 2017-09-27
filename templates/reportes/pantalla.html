@@ -12,7 +12,7 @@
             <label for="com" class="col-sm-3 control-label no-padding-right"> Compañia </label>
             <div class="col-sm-9">
               <select name="com" class="chosen-select" id="com" data-placeholder="Escoja una Compañia...">
-				{companias}
+				    {companias}
               </select>
             </div>
           </div>
@@ -20,9 +20,7 @@
             <label for="ram" class="col-sm-3 control-label no-padding-right"> Ramo </label>
             <div class="col-sm-9">
               <select name="ram" class="chosen-select" id="ram" data-placeholder="Escoja un Ramo...">
-                
-						{ramos}
-              
+            {ramos}
               </select>
             </div>
           </div>
@@ -30,29 +28,26 @@
             <label for="ase" class="col-sm-3 control-label no-padding-right"> Cliente </label>
             <div class="col-sm-9">
               <select name="ase" class="chosen-select" id="ase"  data-placeholder="Escoja un Cliente...">
-				{clientes}
+				    {clientes}
               </select>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="inicioVigencia">Inicio de Vigencia</label>
+            <label for="ven" class="col-sm-3 control-label no-padding-right"> Vendedor </label>
             <div class="col-sm-9">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="ace-icon fa fa-calendar bigger-110"></i>
-								</span>
-								<input class="form-control date-pick" type="text" name="inicioVigencia" id="inicioVigencia" />
-							</div>
-						</div>            
+              <select name="ven" class="chosen-select" id="ven"  data-placeholder="Escoja un Vendedor...">
+				    {personas}
+              </select>
+            </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="finVigencia">Fin de Vigencia</label>
+            <label class="col-sm-3 control-label no-padding-right" for="vencimiento">Por Vencimiento</label>
             <div class="col-sm-9">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="ace-icon fa fa-calendar bigger-110"></i>
 								</span>
-								<input class="form-control date-pick" type="text" name="finVigencia" id="finVigencia" value="" />
+								<input class="form-control date-picker" data-date-format="mm/yyyy" type="text" name="vencimiento" id="vencimiento" value="" />
 							</div>
 						</div>            
           </div>
@@ -66,8 +61,7 @@
                 </label>								
 							</div>
 						</div>            
-          </div>
-          
+          </div>        
         </fieldset>
         <input name="busqueda" type="hidden" id="busqueda" value="1" />
         <div class="form-actions center">
@@ -90,75 +84,27 @@
 <div id="reporte">
 </div>
 <script>
-$('input.date-pick').daterangepicker({
-      'autoUpdateInput' : false,
-			'applyClass' : 'btn-sm btn-success',
-			'cancelClass' : 'btn-sm btn-default',
-      "locale": {
-        "format": "DD/MM/YYYY",
-        "separator": " - ",
-        "applyLabel": "Aplicar",
-        "cancelLabel": "Cancelar",
-        "fromLabel": "De",
-        "toLabel": "Hasta",
-        "customRangeLabel": "Custom",
-        "daysOfWeek": [
-            "D",
-            "L",
-            "M",
-            "M",
-            "J",
-            "V",
-            "S"
-        ],
-        "monthNames": [
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo",
-            "Junio",
-            "Julio",
-            "Agosto",
-            "Setiembre",
-            "Octubre",
-            "Noviembre",
-            "Diciembre"
-        ],
-        "firstDay": 1
-    },
-}).prev().on(ace.click_event, function(){
-	$(this).next().focus();
+$(document).ready(function() {
+  $('.date-picker').mask("99/9999");
+  $('.date-picker').datepicker({
+		viewMode: 'years',
+    format: 'mm/yyyy',
+    minViewMode: 'months',
+		autoclose:true,
+		clearBtn:true,
+  }).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
 });
-
-$('input.date-pick').on('apply.daterangepicker', function(ev, picker) {
-  $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-  });
-
-$('input.date-pick').on('cancel.daterangepicker', function(ev, picker) {
-  $(this).val('');
-});
-
 $('#load').hide();
 $('#alerta').hide();
 $(".chosen-select").chosen({
 	no_results_text: "No se hay ningun registro con esos datos.",
+	allow_single_deselect: true,
 	width: "100%"
 }); 
-$("#busAsegurado").click(function() {
-	$.post("?do=clientes.serializar", {
-	  'nombre' : $('#buscarAsegurado').val() },
-	  function(data) {
-		var sel = $("#asegurado");
-		sel.empty();
-		for (var i=0; i<data.length; i++) {
-		  sel.append('<option value="' + data[i].idCliente + '">' + data[i].nombre + '</option>');
-		}
-	  }, "json");
-	  $("#asegurado").prop( "disabled", false );
-});
 function enviaForm(){
-	if($('#ase').val()!="" || $('#com').val()!="" || $('#ram').val()!=""){
+	if($('#ase').val()!="" || $('#com').val()!="" || $('#ram').val()!="" || $('#ven').val()!="" || $('#vencimiento').val()!=""){
 		$('#load').show();
 		$('#alerta').hide();
     $.ajax({
