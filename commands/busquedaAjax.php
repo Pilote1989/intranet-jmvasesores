@@ -5,6 +5,60 @@ class busquedaAjax extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$debug = false;
 		$mapa = array(
+			"compras" => array(
+				"tabla" => "Compra",
+				"tablasExtra" => array("Cliente"),
+				"tablasLink" => array(
+					"Compra.idCliente = Cliente.idCliente"
+				),
+				"session" => "busquedaCompras",
+				"columnas" => array(
+					"numeroFactura",
+					"vendedor",
+					"tipo",
+					"moneda",
+					"subTotal",
+					"igv",
+					"otros",
+					"total",
+					"fechaCompra"
+				),
+				"columnasSQL" => array(
+					"Compra.idCompra as id",
+					"Cliente.nombre as vendedor",
+					"Compra.numeroFactura as numeroFactura",
+					"Compra.tipo as tipo",
+					"Compra.moneda as moneda",
+					"FORMAT(Compra.subTotal,2) as subTotal",
+					"FORMAT(Compra.igv,2) as igv",
+					"FORMAT(Compra.otros,2) as otros",
+					"FORMAT(Compra.total,2) as total",
+					"DATE_FORMAT(Compra.fecha,'%d/%m/%Y') as fechaCompra"
+				),
+				"busqueda" => array(
+					"vendedor" => array(
+						"order" => 0,
+						"tabla" => "Cliente",
+						"campo" => "nombre",
+						"tipo" => "LIKE%"
+					),
+					"tipo" => array(
+						"order" => 1,
+						"tabla" => "Compra",
+						"campo" => "tipo",
+						"tipo" => "LIKE"
+					),
+					"moneda" => array(
+						"order" => 2,
+						"tabla" => "Compra",
+						"campo" => "moneda",
+						"tipo" => "LIKE"
+					)
+				),
+				"extras" => array(
+					"ver"
+				)
+			),
 			"clientes" => array(
 				"tabla" => "Cliente",
 				"tablasExtra" => array(),

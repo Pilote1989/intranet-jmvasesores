@@ -1,85 +1,28 @@
 <?php
-class busqueda extends SessionCommand{
+class busqueda extends sessionCommand{
 	function execute(){
-		$this->fc->import("lib.Paginador");
+		$fc=FrontController::instance();
 		$usuario=$this->getUsuario();
-		if(!$this->request->pagina){
-			$paginaActual=1;
+		$this->addVar("doFalso", $this->request->do);
+		$nameSession = "busquedaCompras";
+		if($_SESSION[$nameSession]["length"]){
+			$this->addVar("length",$_SESSION[$nameSession]["length"]);
 		}else{
-			$paginaActual=$this->request->pagina;
-			$_SESSION["busquedaCompras"]["pagina"]=$this->request->pagina;
+			$this->addVar("length","10");
 		}
-		if(!$this->request->limite){
-			$limite=10;
+		if($_SESSION[$nameSession]["start"]){
+			$this->addVar("start",$_SESSION[$nameSession]["start"]);
 		}else{
-			$limite=$this->request->limite;
-			$_SESSION["busquedaCompras"]["limite"] = $this->request->limite;
+			$this->addVar("start","0");
 		}
-		$minimoDePagina=Paginador::getMinimo($paginaActual,$limite);
-		$where=array();
-		if($this->request->vendedor){
-			$_SESSION["busquedaCompras"]["contratante"]=$this->request->vendedor;
-			$where[]="c.nombre LIKE '%".$this->request->vendedor."%'";
+		//print_r($_SESSION["busquedaCompras"]);
+		if($_SESSION[$nameSession]["nombre"]){
+			$this->addVar("nombre",$_SESSION[$nameSession]["nombre"]);
 		}else{
-			$_SESSION["busquedaPolizas"]["contratante"]="";
+			$this->addEmptyVar("nombre");
 		}
-		$pPaginador = "";
-		$where[]="Compra.idCliente = c.idCliente";
-		if(sizeof($where)){
-			$whereCondition=" WHERE (".implode(") AND (",$where).")";
-		}
-		$compras=array();
-		$query="
-			SELECT SQL_CALC_FOUND_ROWS
-				DISTINCT idCompra, numeroFactura, c.nombre as vendedor, moneda, concepto, tipo, subtotal, igv, otros, total, fecha
-			FROM Compra, Cliente c
-			".$whereCondition."
-			ORDER BY
-				fecha DESC
-			LIMIT ".$minimoDePagina.", ".$limite."
-		";
-		$query=utf8_decode($query);		
-		$link=&$this->fc->getLink();
-		
-		if($result=$link->query($query)){
-			$countQuery="SELECT FOUND_ROWS() as total";
-			if($countResult=$link->query($countQuery)){
-				$row=$countResult->fetch_assoc();
-				$num_rows=$row['total'];
-			}else{
-				printf("Error: %s\n", $dbLink->error);
-				return null;
-			}
-			$listaPolizas=array();
-			$this->fc->import("lib.Paginador");
-			while($row=$result->fetch_assoc()){
-				$listaCompras[]=$row;
-			}
-		}else{
-			printf("Error: %s\n", $link->error);
-			return null;
-		}
-		$i=0;
-		foreach($listaCompras as $compra){
-			$compras[$i]["idCompra"] = $compra["idCompra"];	
-			$compras[$i]["numero"] = $compra["numeroFactura"];	
-			
-			$compras[$i]["vendedor"] = $compra["vendedor"];		
-			$compras[$i]["tipo"] = $compra["tipo"];	
-			$compras[$i]["moneda"] = $compra["moneda"];
-			$compras[$i]["subtotal"] = $compra["subtotal"];
-			$compras[$i]["igv"] = $compra["igv"];
-			$compras[$i]["otros"] = $compra["otros"];
-			$compras[$i]["total"] = $compra["total"];
-			$compras[$i]["fechaCompra"] = date("d/m/Y",strtotime($compra["fecha"]));
-			$i++;				
-		}
-		$tablaPaginas=Paginador::crearHtmlAjax($paginaActual,$num_rows,"?do=compras.busqueda".$pPaginador,"divBusqueda", $limite);
-		$this->addVar("paginas",$tablaPaginas);
-		$this->addVar("num_rows",$num_rows);
-		$this->addLoop("compras",$compras);
+		$this->addLayout("ace");
 		$this->processTemplate("compras/busqueda.html");
-		
 	}
 }
 ?>

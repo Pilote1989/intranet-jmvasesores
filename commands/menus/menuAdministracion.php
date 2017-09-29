@@ -151,15 +151,15 @@ class menuAdministracion extends SessionCommand{
 		}elseif($this->request->doFalso == "contabilidad.meses"){
 			$this->addVar("contabilidad", "class='active open'");
 			$this->addVar("contabilidad.meses", "class='active'");
-		}elseif($this->request->doFalso == "compras.ver"){
+		}elseif($this->request->doFalso == "compras.busqueda"){
 			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.ver", "class='active'");
+			$this->addVar("compras.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "compras.verCompra"){
 			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.ver", "class='active'");
+			$this->addVar("compras.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "compras.editar"){
 			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.ver", "class='active'");
+			$this->addVar("compras.busqueda", "class='active'");
 		}elseif($this->request->doFalso == "compras.agregar"){
 			$this->addVar("compras", "class='active open'");
 			$this->addVar("compras.agregar", "class='active'");
