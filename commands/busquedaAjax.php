@@ -283,7 +283,9 @@ class busquedaAjax extends sessionCommand{
 					if(in_array('ver',$matrizBase["extras"]))
 						$temp[]='<div class="action-buttons"><a class="blue" href="?do='.$matriz.'.ver&id'.$tabla.'='.$row["id"].'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a></div>';
 					if(in_array('verDatosBasicos',$matrizBase["extras"]))
-						$temp[]='<div class="action-buttons"><a class="blue" href="?do='.$matriz.'.verDatosBasicos&id'.$tabla.'='.$row["id"].'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a></div>';					
+						$temp[]='<div class="action-buttons"><a class="blue" href="?do='.$matriz.'.verDatosBasicos&id'.$tabla.'='.$row["id"].'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a></div>';
+					if(in_array('verCompra',$matrizBase["extras"]))
+						$temp[]='<div class="action-buttons"><a class="blue" href="?do='.$matriz.'.verCompra&id'.$tabla.'='.$row["id"].'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a></div>';
 					$dataJson[]=$temp;
 				}				
 			}
