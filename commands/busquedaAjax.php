@@ -56,7 +56,7 @@ class busquedaAjax extends sessionCommand{
 					)
 				),
 				"extras" => array(
-					"ver"
+					"verCompra"
 				)
 			),
 			"clientes" => array(
