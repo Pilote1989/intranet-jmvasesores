@@ -12,23 +12,14 @@ class autentificar extends SessionCommand{
 				if(isset($_SESSION["URL_ACTUAL"])){
 					$fc->redirect($_SESSION["URL_ACTUAL"]);
 				}else{
-					//if(!Persona::permission(verConstrucciones,$usuario->getId())){
-					if($this->request->loginModal){
-						// Si se hace el login desde el thickbox solo necesitamos cerrarlo
-						echo "
-						<script>
-							tb_remove();
-							intLogin = setInterval(\"comprobarSesion()\",30000);
-						</script>
-						";
-					}else{
-						$fc->redirect("?do=personas.verPortada");
-					}
+					$fc->redirect("?do=personas.verPortada");
 				}
 			}else{
-					$fc->redirect("?do=login&error=2");
+				error_log("Error de Login: User: " . $this->request->mail . " - Pass: ". $this->request->password, 0);
+				$fc->redirect("?do=login&error=2");
 			}
 		}else{
+			error_log("Error de Login: User: " . $this->request->mail . " - Pass: ". $this->request->password, 0);
 			$fc->redirect("?do=login&error=1");			
 		}
 	}
