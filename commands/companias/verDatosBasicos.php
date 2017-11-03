@@ -10,6 +10,7 @@ class verDatosBasicos extends sessionCommand{
 			$compania = Fabrica::getFromDB("Compania",$this->request->idCompania);
 			$this->addVar("idCompania", $this->request->idCompania);
 			$this->addVar("nombre", $compania->getNombre());
+			$this->addVar("ruc", $compania->getRuc());
 			$this->addVar("sigla", $compania->getSigla());
 			$i = 1;
 			$ramos = Fabrica::getAllFromDB("Comision", array("idCompania = " . $this->request->idCompania));

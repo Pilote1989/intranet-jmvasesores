@@ -13,6 +13,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("idCompania",$compania->getId());
 			$this->addVar("nombre",$compania->getNombre());
 			$this->addVar("sigla",$compania->getSigla());
+			$this->addVar("ruc",$compania->getRuc());
 			$ramos = Fabrica::getAllFromDB("Ramo", array());
 			foreach($ramos as $ramo){
 				$comisionTemp = Fabrica::getAllFromDB("Comision", 
@@ -36,6 +37,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addEmptyVar("idCompania");
 			$this->addEmptyVar("nombre");
 			$this->addEmptyVar("sigla");
+			$this->addEmptyVar("ruc");
 			$ramos = Fabrica::getAllFromDB("Ramo", array());
 			foreach($ramos as $ramo){				
 				$listaRamos[$i]["idRamo"] = $ramo->getId();

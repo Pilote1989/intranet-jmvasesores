@@ -15,6 +15,7 @@ class procesarDatosBasicos extends sessionCommand{
 		}
 		$compania->setNombre($this->request->nombre);
 		$compania->setSigla($this->request->sigla);
+		$compania->setRuc($this->request->ruc);
 		$compania->storeIntoDB();
 		$dbLink=&FrontController::instance()->getLink();
 		if($this->request->idCompania){
