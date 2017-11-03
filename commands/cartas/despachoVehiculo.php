@@ -111,8 +111,11 @@ class despachoVehiculo extends sessionCommand{
 				if($vehiculos->getGps()=="1"){
 					$this->addBlock("GPS");
 				}
-				$this->addVar("placa", $vehiculos->getPlaca());	
-				$this->addVar("endosatario", $vehiculos->getEndosatario());
+				$this->addVar("placa", $vehiculos->getPlaca());
+				if($vehiculos->getEndosatario()!=""){
+					$this->addVar("endosatario", $vehiculos->getEndosatario());
+					$this->addBlock("endosado");
+				}
 			}elseif(count($VehiculoEnPoliza)>"1"){
 				$this->addBlock("variosVehiculos");
 				$listaVehiculos = array();
