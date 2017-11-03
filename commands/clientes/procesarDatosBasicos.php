@@ -19,7 +19,7 @@ class procesarDatosBasicos extends sessionCommand{
 		$cliente->setDireccion($this->request->direccion);
 		$cliente->setCorreo($this->request->correo);
 		$cliente->setCorreoAlternativo($this->request->correo2);
-		//$cliente->setDistrito($this->request->distrito);
+		$cliente->setTelefono($this->request->telefono);
 		$cliente->setIdUbigeo($this->request->distrito);
 		$cliente->setDoc($this->request->doc);
 		$cliente->setTipoDoc($this->request->tipoDoc);

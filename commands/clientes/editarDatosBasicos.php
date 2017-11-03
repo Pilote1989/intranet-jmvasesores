@@ -25,6 +25,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("idCliente",$cliente->getId());
 			$this->addVar("nombre",$cliente->getNombre());
 			$this->addVar("doc",$cliente->getDoc());
+			$this->addVar("telefono",$cliente->getTelefono());
 			$this->addVar("direccion",$cliente->getDireccion());
 			$this->addVar("correo",$cliente->getCorreo());
 			$this->addVar("correo2", $cliente->getCorreoAlternativo());
@@ -59,6 +60,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addEmptyVar("correo");
 			$this->addEmptyVar("correo2");
 			$this->addEmptyVar("nac");
+			$this->addEmptyVar("telefono");
 			$this->addEmptyVar("ggeneral");
 			$this->addEmptyVar("nacGG");
 			$this->addEmptyVar("encargado");

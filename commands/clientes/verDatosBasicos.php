@@ -68,6 +68,7 @@ class verDatosBasicos extends sessionCommand{
 			$this->addVar("direccion", $cliente->getDireccion());
 			$this->addVar("correo", $cliente->getCorreo());
 			$this->addVar("doc", $cliente->getDoc());
+			$this->addVar("telefono", $cliente->getTelefono());
 			$this->addVar("tipoDoc", $cliente->getTipoDoc());
 			if($cliente->getAniversario()!='0000-00-00'){
 				$this->addVar("aniversario", $cliente->getAniversario('DATE'));
