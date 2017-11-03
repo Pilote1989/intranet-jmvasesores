@@ -24,7 +24,12 @@ class agregarRenovacion extends sessionCommand{
 			$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());
 			$this->addVar("idCompania", $compania->getNombre());
 			$this->addVar("idPersona",$cliente->getIdPersona());
-
+			$comision = Fabrica::getAllFromDB("Comision",array("idCompania = '".$poliza->getIdCompania()."'","idRamo = '".$poliza->getIdRamo()."'"));
+			if(count($comision)>0){
+				$this->addVar("comision",$comision[0]->getComision());
+			}else{
+				$this->addEmptyVar("comision");
+			}
 			$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
 			$selectCompania = '<option value=""></option>';
 			$this->addEmptyVar("documento");
@@ -34,7 +39,6 @@ class agregarRenovacion extends sessionCommand{
 			$this->addEmptyVar("derecho");
 			$this->addEmptyVar("igv");
 			$this->addEmptyVar("total");
-			$this->addEmptyVar("comision");
 			$this->addVar("comisionVendedorP",number_format(0,2,'.',''));	
 			$this->addVar("comisionVendedor",number_format(0,2,'.',''));
 			$this->addEmptyVar("intereses");
