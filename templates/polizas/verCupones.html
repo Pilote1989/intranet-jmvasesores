@@ -85,7 +85,7 @@ $( "#botonAgregarCupon" ).click(function(event){
 		url: '/?do=polizas.agregarCupon&idPoliza={idPoliza}',
 		success: function(responseText){
 			$('#dialogoCupones').html(responseText);
-			$('#dialogoCupones').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-sign blue'></i> Agregar Cupon</h4></div>");
+			$('#dialogoCupones').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-circle blue'></i> Agregar Cupon</h4></div>");
 			$('#dialogoCupones').dialog("open");
 		},
 		error: function(responseText){
@@ -100,7 +100,7 @@ $( "#botonAgregarVariosCupones" ).click(function(event){
 		url: '/?do=polizas.agregarVariosCupones&idPoliza={idPoliza}',
 		success: function(responseText){
 			$('#dialogoCupones').html(responseText);
-			$('#dialogoCupones').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-sign blue'></i> Agregar Cupon</h4></div>");
+			$('#dialogoCupones').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-circle blue'></i> Agregar Cupon</h4></div>");
 			$('#dialogoCupones').dialog("open");
 		},
 		error: function(responseText){

@@ -84,7 +84,7 @@ $( "#botonAgregarEndoso" ).click(function(){
 		url: '/?do=polizas.crearEndoso&idPoliza={idPoliza}',
 		success: function(responseText){
 			$('#dialogoEndosos').html(responseText);
-			$('#dialogoEndosos').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-sign blue'></i> Crear Endoso</h4></div>");
+			$('#dialogoEndosos').dialog('option', 'title', "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-plus-circle blue'></i> Crear Endoso</h4></div>");
 			$('#dialogoEndosos').dialog("open");
 		},
 		error: function(responseText){
