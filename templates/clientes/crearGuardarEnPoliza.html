@@ -34,13 +34,25 @@
               <input name="direccion" type="text"  id="direccion" onKeyPress="return disableEnterKey(event)" placeholder="Direccion" class="col-sm-12">
             </div>
           </div>          
+					<div class="form-group">
+            <label for="departamento" class="col-sm-3 control-label no-padding-right">Departamento </label>
+            <div class="col-sm-9">
+              <select  class="col-sm-12 col-xs-12 form-control" name="departamento" id="departamento" >
+                {departamentos}
+              </select>
+            </div>
+          </div>             
+          <div class="form-group">
+            <label for="provincia" class="col-sm-3 control-label no-padding-right">Provincia </label>
+            <div class="col-sm-9">
+              <select  class="col-sm-12 col-xs-12 form-control" name="provincia" id="provincia">
+              </select>
+            </div>
+          </div>   
           <div class="form-group">
             <label for="distrito" class="col-sm-3 control-label no-padding-right">Distrito </label>
             <div class="col-sm-9">
-              <select  class="col-sm-12 col-xs-12 form-control" name="distrito" id="distrito" >
-                
-                {distritos}
-              
+              <select  class="col-sm-12 col-xs-12 form-control" name="distrito" id="distrito">
               </select>
             </div>
           </div>
@@ -156,7 +168,19 @@
 		}else{
 			$("#divNumeroDoc").show();
 		}
-		
 	});
+	$("#departamento").on('change', function () {
+    id_departamento = $(this).val();
+    $.post("?do=ubigeos.obtenerProvincias", { departamento: id_departamento }, function(data){
+      $("#provincia").html(data);
+      $("#distrito").html("");
+    });    
+  });
+	$("#provincia").on('change', function () {
+    id_provincia = $(this).val();
+    $.post("?do=ubigeos.obtenerDistritos", { provincia: id_provincia }, function(data){
+      $("#distrito").html(data);
+    });    
+  });
 	
 </script>
