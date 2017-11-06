@@ -12,6 +12,9 @@ class procesarCrearGuardarEnPoliza extends sessionCommand{
 			$cliente->setDireccion($this->request->direccion);
 			$cliente->setCorreo($this->request->correo);
 			$cliente->setIdUbigeo($this->request->distrito);
+			if($this->request->nac!=""){
+				$cliente->setAniversario($this->request->nac,"DATE");	
+			}			
 			if($this->request->tipoDocu == "SD"){
 				$query = "
 					SELECT MAX( CAST(  `doc` AS UNSIGNED ) ) AS maximo

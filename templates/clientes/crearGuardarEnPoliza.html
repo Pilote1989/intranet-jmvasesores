@@ -29,6 +29,15 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="nac" class="col-sm-3 control-label no-padding-right"> Nacimiento </label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input type="text" name="nac" data-date-format="dd/mm/yyyy" class="form-control date-picker" id="nac" value="{nac}">
+                <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="direccion" class="col-sm-3 control-label no-padding-right">Direccion </label>
             <div class="col-sm-9">
               <input name="direccion" type="text"  id="direccion" onKeyPress="return disableEnterKey(event)" placeholder="Direccion" class="col-sm-12">
@@ -71,6 +80,10 @@
     </div>
 <script>
 	$("#dialog-general").dialog("option", "position", {my: "center", at: "center", of: window});
+  jQuery('.date-picker').mask("99/99/9999");
+	jQuery('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});	
  	$('#principal19').validate({
 		onfocusout: false,
 		onkeyup: false,
