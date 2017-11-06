@@ -13,6 +13,7 @@ class verCupones extends sessionCommand{
 			}else{
 				$this->addBlock("bloqueNoResultados");				
 			}
+			$total = 0;
 			foreach($cupones as $cupon){
 				//$listaCupones[$i]["fechaVencimiento"] = $cupon->getFechaVencimiento();
 				$pieces = explode("-", $cupon->getFechaVencimiento());
@@ -20,13 +21,23 @@ class verCupones extends sessionCommand{
 				//echo $pieces[2] . "/" . $pieces[1] . "/" . $pieces[0] . "<br>";
 				$listaCupones[$i]["fechaVencimiento"] = $pieces[2] . "/" . $pieces[1] . "/" . $pieces[0];
 				$listaCupones[$i]["monto"] = number_format($cupon->getMonto(),2);
+				$total += $cupon->getMonto();
 				$listaCupones[$i]["numeroCupon"] = $cupon->getNumeroCupon();
 				$listaCupones[$i]["idLista"] = $i + 1;
 				$listaCupones[$i]["idCupon"] = $cupon->getId();
 				//echo $cupon->getId();
 				$i++;
 			}
-			$this->addVar("nombreFicha", "Ficha Poliza");
+			$this->addVar("sumaCupones",number_format($total,2));
+			$cobro = Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
+			if(number_format($total,2)==number_format($cobro->getTotalFactura(),2)){
+				$this->addBlock("iguales");
+			}else if(number_format($total,2)>number_format($cobro->getTotalFactura(),2)){
+				$this->addBlock("mayor");
+			}else{
+				$this->addBlock("menor");
+			}
+			$this->addVar("totalFactura",number_format($cobro->getTotalFactura(),2));
 			$this->addVar("idPoliza",$this->request->idPoliza);
 			$this->addVar("menu", "menuPolizas?idPoliza=".$this->request->idPoliza);
 			$this->addLoop("cupones", $listaCupones);

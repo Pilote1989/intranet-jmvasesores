@@ -44,7 +44,32 @@
 			</tr>
 			<loop end="cupones"/>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td align="center" colspan="2"><b>Total</b></td>
+				<td align="center"><b>{sumaCupones}</b></td>
+				<td colspan="2"></td>
+			</tr>
+		</tfoot>
 	</table>
+	<block start="iguales"/>
+		<p align="center">
+			<i class="fa fa-check-circle green bigger-110"></i>
+			<span>El monto de los cupones concuerda con el total de factura de la poliza.</span>
+		</p>
+	<block end="iguales"/>
+	<block start="mayor"/>
+		<p align="center">
+			<i class="fa fa-exclamation-triangle orange bigger-110"></i>
+			<span>El monto de los cupones es mayor al total de factura de la poliza. <b>{totalFactura}</b></span>
+		</p>
+	<block end="mayor"/>
+	<block start="menor"/>
+		<p align="center">
+			<i class="fa fa-exclamation-triangle orange bigger-110"></i>
+			<span>El monto de los cupones es menor al total de factura de la poliza. <b>{totalFactura}</b></span>
+		</p>
+	<block end="menor"/>
 	<block start="bloqueNoResultados"/>
 	<p> No se encontraron cupones en la Poliza. </p>
 	<block end="bloqueNoResultados"/>
