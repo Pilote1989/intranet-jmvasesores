@@ -32,7 +32,7 @@
             <tbody>
               <loop start="asegurados"/>
               <tr>
-                <td align="center"> {asegurados.nombre} </td>
+                <td align="center"> <a href="?do=clientes.ver&idCliente={asegurados.idAsegurado}">{asegurados.nombre}</a> </td>
                 <td align="center"> {asegurados.tipoDoc} - {asegurados.documento} </td>
                 <td align="center"> {asegurados.nacimiento} </td>
                 <td align="center"> {asegurados.edad} </td>

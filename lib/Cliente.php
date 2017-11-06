@@ -20,5 +20,19 @@ class Cliente extends DBObject{
 		}
 		return "Sin Distrito";
 	}
+	function calculaEdad($fecha = null){
+		if($fecha==null){
+			$fecha_poliza =  new DateTime(date('Y/m/d',time()));
+		}else{
+			$fecha_poliza =  new DateTime(date('Y/m/d',strtotime($fecha)));
+		}
+		$fecha_nac = new DateTime(date('Y/m/d',strtotime($this->getAniversario())));
+		$edad = date_diff($fecha_nac,$fecha_poliza);
+		if($edad->format('%r')=="-"){
+			return "-";
+		}else{
+			return $edad->format('%Y')." años y ".$edad->format('%m')." meses";
+		}
+	}
 }
 ?>

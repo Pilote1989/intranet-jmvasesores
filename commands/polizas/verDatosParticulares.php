@@ -87,8 +87,9 @@ class verDatosParticulares extends sessionCommand{
 					$listaAsegurados[$i]["nombre"] = $aseguradoTemp->getNombre();
 					$listaAsegurados[$i]["tipoDoc"] = $aseguradoTemp->getTipoDoc();	
 					$listaAsegurados[$i]["documento"] = $aseguradoTemp->getDoc();	
-					$listaAsegurados[$i]["nacimiento"] = "-";
-					$listaAsegurados[$i]["edad"] = "-";
+					$listaAsegurados[$i]["nacimiento"] = $aseguradoTemp->getAniversario("DATE");
+					$listaAsegurados[$i]["edad"] = $aseguradoTemp->calculaEdad($poliza->getInicioVigencia());
+					$listaAsegurados[$i]["idAsegurado"] = $aseguradoTemp->getId();
 					$listaAsegurados[$i]["id"] = $asegurado->getId();
 					$i++;
 				}			
