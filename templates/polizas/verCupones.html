@@ -23,8 +23,8 @@
 			<tr>
 				<th align="center">No.</th>
 				<th align="center">Numero de Cupon</th>
-				<th align="center">Monto</th>
 				<th align="center">Fecha Vencimiento</th>
+				<th align="center">Monto</th>
 				<th align="center">Detalles</th>
 			</tr>
 		</thead>
@@ -33,8 +33,8 @@
 			<tr>
 				<td align="center"> {cupones.idLista} </td>
 				<td align="center">{cupones.numeroCupon}</td>
-				<td style="text-align:center;">{cupones.monto} </td>
 				<td style="text-align:center;">{cupones.fechaVencimiento} </td>
+				<td style="text-align:center;">{cupones.monto} </td>
 				<td style="text-align:center;">
 					<div class="action-buttons">
 						<a class="blue abreLink" x-tittle="Editar Cupon" x-link="?do=polizas.agregarCupon&idCupon={cupones.idCupon}&idPoliza={idPoliza}" href="#"> <i class="ace-icon fa fa-edit bigger-130"></i> </a>
@@ -46,9 +46,9 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td align="center" colspan="2"><b>Total</b></td>
+				<td align="center" colspan="3"><b>Total</b></td>
 				<td align="center"><b>{sumaCupones}</b></td>
-				<td colspan="2"></td>
+				<td>&nbsp;</td>
 			</tr>
 		</tfoot>
 	</table>
