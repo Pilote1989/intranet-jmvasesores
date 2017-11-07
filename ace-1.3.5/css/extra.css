@@ -81,3 +81,6 @@
         	#form-search-input{
         		transition: width 0.5s;
         	}
+			.scrollTable{
+				overflow-x: scroll;
+			}

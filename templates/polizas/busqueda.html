@@ -46,7 +46,7 @@
 <div class="progress progress-striped active" id="procesando">
 	<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
 </div>
-<table id="tableSearch" class="table table-striped table-bordered table-hover">
+<table id="tableSearch" class="table table-striped table-bordered table-hover" width="100%">
     <thead>
         <tr>
             <th>Compañia - Poliza</th>
@@ -80,7 +80,7 @@
             $("#tableSearch").show();
             $("#procesando").hide();
         },
-        "dom": '<"row"<"col-xs-6"i><"col-xs-6"p>>rt<"clear">',
+        "dom": '<"row"<"col-sm-6"i><"col-sm-6"p>>r<"scrollTable"t><"clear">',
         "aoColumns": [
             null,
             null,
