@@ -1,157 +1,113 @@
-<style type="text/css">
-.profile-info-name{
-	width: 250px;
-	
-}
-</style> 
-<div class="page-header">
-  <h1> Ver Vehiculo <small> <i class="ace-icon fa fa-angle-double-right"></i> {idVehiculo} </small> </h1>
-</div>
-<div class="row">
-  <div class="col-sm-2 center">
-    <span class="btn btn-app btn-primary no-hover"> <span class="line-height-1 bigger-230"> {numPolizas} </span> <br>
-    <span class="line-height-1 smaller-90"> Polizas </span> </span>
-    <div class="hr hr12 dotted">
-    </div>
-  </div>
-  <div class="col-sm-10">
-    <div class="tabbable">
-      <ul id="myTab" class="nav nav-tabs">
-        <li class="active"> <a href="#home" data-toggle="tab"> <i class="green ace-icon fa fa-home bigger-110"></i> Datos Basicos </a> </li>
+<div class="page-header" style="padding-bottom:0px;">
+  <h1 style="padding-bottom: 10px;"> Vehiculo <small> <i class="ace-icon fa fa-angle-double-right"></i>&nbsp;&nbsp;{placa}</small>
+    <block start="elimina"/>
+    <div class="btn-group pull-right">
+      <button class="btn btn-primary btn-sm dropdown-toggle " data-toggle="dropdown">
+        <i class="ace-icon fa fa-cogs bigger-120"></i> Opciones <span class="ace-icon fa fa-caret-down fa-on-right"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-info pull-right">
+        <li><a x-link="?do=vehiculos.eliminaVehiculo&idVehiculo={idVehiculo}" href="#" id="eliminaVehiculo">Eliminar Vehiculo</a> </li>
       </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="home">
-          <div class="profile-user-info profile-user-info-striped">
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Placa
-              </div>
-              <div class="profile-info-value">
-                {placa}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Tipo
-              </div>
-              <div class="profile-info-value">
-                {tipo}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Marca
-              </div>
-              <div class="profile-info-value">
-                {marca}&nbsp;
+    </div>
+    <block end="elimina"/>
+  </h1>
+  <p>
+    <span class="label label-lg label-primary">{marca}</span>
+		<span class="label label-lg">{modelo}</span>
+	</p>  
+</div>
+<!-- /.page-header -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="tabbable">
+          <ul id="myTab" class="nav nav-tabs responsive-tabs padding-18">
+            <li class="active" id="active"> <a href="#tab-1" x-link="/?do=vehiculos.verDatosBasicos&idVehiculo={idVehiculo}" data-toggle="tab"> <i class="green ace-icon fa fa-home bigger-120"></i> Datos Basicos </a> </li>
+            <li> <a href="#tab-2" x-link="/?do=vehiculos.verPolizas&idVehiculo={idVehiculo}" data-toggle="tab"><i class="blue ace-icon fa fa-inbox bigger-120"></i> Polizas <span class="badge badge-info" id="cantidadPolizas">{numPolizas}</span></a> </li>
+          </ul>
+          <div class="tab-content no-border">
+            <div class="tab-pane active" id="tab-1">
+              <div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
+                <div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;">
+                </div>
               </div>
             </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Modelo
-              </div>
-              <div class="profile-info-value">
-                {modelo}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Año
-              </div>
-              <div class="profile-info-value">
-                {anio}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Suma Asegurada
-              </div>
-              <div class="profile-info-value">
-                {sumaAsegurada}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                GPS
-              </div>
-              <div class="profile-info-value">
-                {gps}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Numero de Motor
-              </div>
-              <div class="profile-info-value">
-                {motor}&nbsp;
-              </div>
-            </div>
-            <div class="profile-info-row">
-              <div class="profile-info-name">
-                Numero de Chasis
-              </div>
-              <div class="profile-info-value">
-                {chasis}&nbsp;
+            <div class="tab-pane" id="tab-2">
+              <div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
+                <div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;">
+                </div>
               </div>
             </div>
           </div>
-          <h3 class="header smaller lighter blue">Polizas</h3>
-          <div class="col-xs-12" id="tablaComisionesSeleccionadas">
-            <div class="table-header">
-              Polizas del Vehiculo
-            </div>
-            <div class="table-responsive">
-              <table id="polizas" class="table table-striped table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>&nbsp;</th>
-                    <th>Poliza</th>
-                    <th>Cliente</th>
-                    <th>Vigencia</th>
-                    <th>Estado</th>
-                    <th>&nbsp;</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <loop start="polizas"/>
-                  <tr>
-                    <td>{polizas.id}</td>
-                    <td><span class="show-option grey" title="{polizas.nombreCompania}" href="#">{polizas.siglaCompania} - {polizas.numeroPoliza}</span></td>
-                    <td>{polizas.nombreCliente}</td>
-                    <td>{polizas.inicioVigencia} - {polizas.finVigencia}</td>
-                    <td align="center">{polizas.estado}</td>
-                    <td align="center"><div class="action-buttons"> <a class="blue" href="?do=polizas.ver&idPoliza={polizas.idPoliza}&vig={polizas.idPoliza}"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> </div></td>
-                  </tr>
-                  <loop end="polizas"/>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <br style="clear:both"/>
         </div>
-        <hr />
-        <!--<div class="center">
-          <button onClick="location.href='?do=vehiculos.editarDatosBasicos&idVehiculo={idVehiculo}';" class="btn btn-xs btn-success"> <i class="ace-icon fa fa-edit bigger-120"></i>Editar </button>-->
       </div>
     </div>
   </div>
 </div>
-</div>
-</div>
+  <div id="dialog-message-vehiculo">
+    <div class="alert alert-info bigger-110">
+      El vehiculo se eliminara permanentemente, no sera posible recuperarlo.
+    </div>
+    <div class="space-6">
+    </div>
+    <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
+  </div>
 <script>
-	var polizas = $('#resultadosSeleccionados').dataTable( {
-		"aoColumns": [
-		  { "bSortable": false },
-		  null, null,null, null, null, null,
-		],
-		"oLanguage": {
-			"sUrl": "assets/js/dataTableSpanish.json"
-		},
-		"iDisplayLength" : 5,
-		"aLengthMenu": [[5, 10, 25, -1], [5 , 10, 25, "Todos"]]
+$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+	_title: function(title) {
+		if (!this.options.title ) {
+			title.html("&#160;");
+		} else {
+			title.html(this.options.title);
+		}
+	}
+}));
+
+$(document).ready(function(){
+  $('#eliminaVehiculo').click( function() {
+  	event.preventDefault();
+  	$( "#dialog-message-vehiculo" ).data('link', $(this).attr("x-link")).dialog("open");
+  });
+  
+  $( "#dialog-message-vehiculo" ).dialog({
+  	resizable: false,
+  	modal: true,
+  	title_html: true,
+  	title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-warning-sign red'></i>¿Desea eliminar el Vehiculo?</h4></div>",
+  	autoOpen: false,
+  	buttons: [
+  		{
+  			html: "<i class='ace-icon fa fa-trash bigger-110'></i>&nbsp; Eliminar",
+  			"class" : "btn btn-danger btn-xs",
+  			click: function() {
+  				$.ajax({
+  					type: "POST",
+  					dataType: "json",
+  					url: $(this).data('link'),
+            success: function(data) {
+					    if (data == true) {
+    					  window.location.href = "/?do=vehiculos.verVehiculos";
+              }
+            }
+  				});
+  				$( this ).dialog( "close" );
+  			}
+  		}
+  		,
+  		{
+  			html: "<i class='ace-icon fa fa-remove bigger-110'></i>&nbsp;Cancelar",
+  			"class" : "btn btn-xs",
+  			click: function() {
+  				$( this ).dialog( "close" );
+  			}
+  		}
+  	]			
+  });		
+  $($('#myTab li#active a').attr('href')).load($('#myTab li#active a').attr('x-link'));
+	$('#myTab li a').click(function(){
+		var currentTab = $(this).attr('href');
+		$(currentTab).load($(this).attr('x-link'));
 	});
-	
-	jQuery(function($) {
-		$( ".show-option" ).tooltip();
-	});
+});
 </script>

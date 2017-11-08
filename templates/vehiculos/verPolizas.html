@@ -1,0 +1,46 @@
+          <div class="col-xs-12" id="tablaComisionesSeleccionadas">
+            <div class="table-responsive">
+              <table id="polizas" class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Poliza</th>
+                    <th>Cliente</th>
+                    <th>Vigencia</th>
+                    <th>Estado</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <loop start="polizas"/>
+                  <tr>
+                    <td>{polizas.id}</td>
+                    <td>{polizas.siglaCompania} - {polizas.numeroPoliza}</td>
+                    <td>{polizas.nombreCliente}</td>
+                    <td>{polizas.inicioVigencia} - {polizas.finVigencia}</td>
+                    <td align="center">{polizas.estado}</td>
+                    <td align="center"><div class="action-buttons"> <a class="blue" href="?do=polizas.ver&idPoliza={polizas.idPoliza}&vig={polizas.idPoliza}"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> </div></td>
+                  </tr>
+                  <loop end="polizas"/>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br style="clear:both"/>
+<script>
+	var polizas = $('#resultadosSeleccionados').dataTable( {
+		"aoColumns": [
+		  { "bSortable": false },
+		  null, null,null, null, null, null,
+		],
+		"oLanguage": {
+			"sUrl": "assets/js/dataTableSpanish.json"
+		},
+		"iDisplayLength" : 5,
+		"aLengthMenu": [[5, 10, 25, -1], [5 , 10, 25, "Todos"]]
+	});
+	
+	jQuery(function($) {
+		$( ".show-option" ).tooltip();
+	});
+</script>

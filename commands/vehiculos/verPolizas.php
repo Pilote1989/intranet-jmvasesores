@@ -1,19 +1,11 @@
 <?php
-class ver extends sessionCommand{
+class verPolizas extends sessionCommand{
 	function execute(){
 		$fc=FrontController::instance();
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
 		if($this->request->idVehiculo){
-			if($this->request->m){
-				$this->addBlock("mensaje");	
-				$this->addVar("m", "No se puede eliminar un vehiculos que tiene polizas");	
-			}
 			$vehiculo = Fabrica::getFromDB("Vehiculo",$this->request->idVehiculo);
-			$this->addVar("idVehiculo", $this->request->idVehiculo);
-			$this->addVar("placa", $vehiculo->getPlaca());
-			$this->addVar("marca", $vehiculo->textoMarca());
-			$this->addVar("modelo", $vehiculo->textoModelo());
 			$query="
 				SELECT 
 					vp.idVehiculo AS idVehiculo, 
@@ -55,15 +47,23 @@ class ver extends sessionCommand{
 				printf("Error: %s\n", $link->error);
 				return null;
 			}			
-			$i=0;			
-			$numPolizas=count($listaPolizas);
-			$this->addVar("numPolizas",$numPolizas);
-			if($numPolizas=="0"){
-				$this->addBlock("elimina");
+			$i=0;
+			$polizas=array();
+			foreach($listaPolizas as $poliza){
+				$actual = Fabrica::getFromDB("Poliza", $poliza["idPoliza"]);
+				$polizas[$i]["id"] = ++$i;
+				$polizas[$i]["idVehiculo"] = $poliza["idVehiculo"];
+				$polizas[$i]["idPoliza"] = $poliza["idPoliza"];
+				$polizas[$i]["numeroPoliza"] = $poliza["numeroPoliza"];
+				$polizas[$i]["nombreCliente"] = $poliza["nombreCliente"];
+				$polizas[$i]["nombreCompania"] = $poliza["nombreCompania"];
+				$polizas[$i]["siglaCompania"] = $poliza["siglaCompania"];
+				$polizas[$i]["inicioVigencia"] = $actual->getInicioVigencia("DATE"); 
+				$polizas[$i]["finVigencia"] = $actual->getFinVigencia("DATE"); 			
+				$polizas[$i]["estado"] = $actual->estadoLabel();
 			}
-			$this->addLayout("ace");
-			$this->addBlock("admin");
-			$this->processTemplate("vehiculos/ver.html");
+			$this->addLoop("polizas",$polizas);			
+			$this->processTemplate("vehiculos/verPolizas.html");
 		}
 	}
 }
