@@ -4,6 +4,7 @@ class verPoliza extends sessionCommand{
 		$fc=FrontController::instance();
 		$usuario=$this->getUsuario();
 		if($this->request->id){
+			$this->addVar("doFalso",$this->request->do);
 			$solicitud = Fabrica::getFromDB("Transporte", $this->request->id);
 			if($this->checkAccess("verSolicitudes", true)){
 				$this->addVar("idTransporte",$solicitud->getId());
