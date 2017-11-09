@@ -5,6 +5,7 @@ class agregarRenovacion extends sessionCommand{
 		$fc=FrontController::instance();	
 		$usuario=$this->getUsuario();
 		if($this->request->idPoliza){
+			$this->addVar("doFalso", $this->request->do);
 			$poliza=Fabrica::getFromDB("Poliza",$this->request->idPoliza);
 			$this->addBlock("bloqueEditarPolizas");
 			$this->addBlock("idPoliza");
