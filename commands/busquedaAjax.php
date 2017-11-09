@@ -5,6 +5,38 @@ class busquedaAjax extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$debug = false;
 		$mapa = array(
+			"vehiculos" => array(
+				"tabla" => "Vehiculo",
+				"tablasExtra" => array("Marca","Modelo"),
+				"tablasLink" => array(
+					"Vehiculo.idModelo = Modelo.idModelo",
+					"Marca.idMarca = Modelo.idMarca"
+				),
+				"session" => "busquedaVehiculos",
+				"columnas" => array(
+					"placa",
+					"modelo",
+					"marca",
+					"anio",
+				),
+				"columnasSQL" => array(
+					"Vehiculo.placa as placa",
+					"Modelo.modelo as modelo",
+					"Marca.marca as marca",
+					"Vehiculo.anio as anio",
+				),
+				"busqueda" => array(
+					"vendedor" => array(
+						"order" => 0,
+						"tabla" => "Vehiculo",
+						"campo" => "placa",
+						"tipo" => "LIKE%"
+					),
+				),
+				"extras" => array(
+					"ver"
+				)
+			),
 			"compras" => array(
 				"tabla" => "Compra",
 				"tablasExtra" => array("Cliente"),
