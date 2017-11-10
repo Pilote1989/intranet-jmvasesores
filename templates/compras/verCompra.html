@@ -141,7 +141,7 @@ $( "#eliminarCompra" ).on('click', function(e) {
   					dataType: "json",
   					url: '?do=compras.eliminarCompra&idCompra={idCompra}',
   					success: function() {
-  						window.location.href = "?do=compras.ver";
+  						window.location.href = "?do=compras.busqueda";
   					}
   				});
   				$( this ).dialog( "close" );
