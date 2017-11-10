@@ -4,169 +4,299 @@ class menuAdministracion extends SessionCommand{
 		// -> Banner
 		$fc=FrontController::instance();
 		$user = $this->getUsuario();
-		if($this->checkAccess("crearUsuario", true)){
-			$this->addBlock("admin");
+		$permisos = $user->getMenus();
+		$menu = '<ul class="nav nav-list" id="mainMenu">';
+		$matriz= array(
+			1 => array(
+				"nombre" => "Inicio",
+				"icon" => "dashboard",
+				"tipo" => "menu-text",
+				"link" => "personas.verPortada"
+			),
+			2 => array(
+				"nombre" => "Solicitudes",
+				"icon" => "edit",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "solicitudes",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Hacer una Solicitud",
+						"link" => "solicitudes.crearSolicitud"
+					),
+					2 => array(
+						"nombre" => "Ver Mis Solicitudes",
+						"link" => "solicitudes.verSolicitudes",
+						"extra" => array("transportes.verPoliza")
+					)
+				)
+			),
+			3 => array(
+				"nombre" => "Administracion",
+				"icon" => "desktop",
+				"tipo" => "dropdown-toggle",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Inscribir Usuario",
+						"link" => "personas.inscribirUsuario",
+						"acceso" => "administracion",
+					),
+					2 => array(
+						"nombre" => "Ver Personas",
+						"link" => "personas.verPersonas",
+						"acceso" => "administracion",
+						"extra" => array(
+							"personas.verDatosBasicos",
+							"personas.editarDatosBasicos"
+						),
+					),
+					3 => array(
+						"nombre" => "Ver Ramos",
+						"link" => "ramos.busqueda"
+					),
+					4 => array(
+						"nombre" => "Cambiar mi clave",
+						"link" => "personas.cambiarClave&mail=".$user->getMail()."&seed=".$user->getPassword()."",
+						"extra" => array("personas.cambiarClave"),
+					),
+					5 => array(
+						"nombre" => "Registro de Cambios",
+						"link" => "admin.changelog",
+						"acceso" => "administracion"
+					)
+				)
+			),
+			4 => array(
+				"nombre" => "Contabilidad",
+				"icon" => "usd",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "contabilidad",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Meses Contables",
+						"link" => "contabilidad.meses"
+					),
+					2 => array(
+						"nombre" => "Reporte SBS",
+						"link" => "reportes.generaSBS"
+					),
+					3 => array(
+						"nombre" => "Estadisticas por Año",
+						"link" => "contabilidad.estadisticas"
+					)
+				)
+			),
+			5 => array(
+				"nombre" => "Polizas",
+				"icon" => "folder-open",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "polizas",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Crear una Poliza",
+						"link" => "polizas.editarDatosBasicos"
+					),
+					2 => array(
+						"nombre" => "Buscar Polizas",
+						"link" => "polizas.busqueda",
+						"extra" => array(
+							"polizas.ver",
+							"polizas.agregarRenovacion"
+						),
+					),
+					3 => array(
+						"nombre" => "Busqueda Especial",
+						"link" => "polizas.busquedaEspecial"
+					),
+					4 => array(
+						"nombre" => "Buscar Vehiculos",
+						"link" => "vehiculos.verVehiculos",
+						"extra" => array("vehiculos.ver"),
+					)
+				)
+			),
+			6 => array(
+				"nombre" => "Comisiones",
+				"icon" => "money",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "comisiones",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Crear Liquidacion",
+						"submenu" => array(
+							1 => array(
+								"nombre" => "Comisiones",
+								"icon" => "leaf",
+								"link" => "liquidaciones.editarDatosBasicos"
+							),
+							2 => array(
+								"nombre" => "Bonos",
+								"icon" => "pencil",
+								"link" => "liquidaciones.crearBono"
+							)
+						)
+					),
+					2 => array(
+						"nombre" => "Ver Liquidaciones",
+						"link" => "liquidaciones.verLiquidaciones",
+						"extra" => array("liquidaciones.ver"),
+					),
+					3 => array(
+						"nombre" => "Comisiones Cedidas",
+						"submenu" => array(
+							1 => array(
+								"nombre" => "Crear Cedida",
+								"icon" => "pencil",
+								"link" => "liquidaciones.editarCedida"
+							),
+							2 => array(
+								"nombre" => "Listado",
+								"icon" => "leaf",
+								"link" => "liquidaciones.verCedidas",
+								"extra" => array("liquidaciones.verCedida"),
+							),
+							3 => array(
+								"nombre" => "Pendientes",
+								"icon" => "inbox",
+								"link" => "reportes.cedidasPendientes"
+							)
+						)
+					),
+					4 => array(
+						"nombre" => "Reporte de Facturas",
+						"link" => "liquidaciones.reportes"
+					),
+					5 => array(
+						"nombre" => "Comisiones por Cobrar",
+						"link" => "reportes.comisionesPendientes"
+					)
+				)
+			),
+			7 => array(
+				"nombre" => "Compras",
+				"icon" => "shopping-cart",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "compras",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Agregar Compra",
+						"link" => "compras.agregar"
+					),
+					2 => array(
+						"nombre" => "Buscar Compras",
+						"link" => "compras.busqueda",
+						"extra" => array("compras.verCompra"),
+					)
+				)
+			),
+			8 => array(
+				"nombre" => "Clientes",
+				"icon" => "group",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "clientes",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Agregar Cliente",
+						"link" => "clientes.editarDatosBasicos"
+					),
+					2 => array(
+						"nombre" => "Buscar Clientes",
+						"link" => "clientes.busqueda",
+						"extra" => array("clientes.ver"),
+					)
+				)
+			),
+			9 => array(
+				"nombre" => "Compañias",
+				"icon" => "briefcase",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "companias",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Agregar Compañia",
+						"link" => "companias.editarDatosBasicos"
+					),
+					2 => array(
+						"nombre" => "Buscar Compañias",
+						"link" => "companias.busqueda",
+						"extra" => array("companias.verDatosBasicos"),
+					)
+				)
+			),
+			10 => array(
+				"nombre" => "Reportes",
+				"icon" => "bar-chart",
+				"tipo" => "dropdown-toggle",
+				"acceso" => "reportes",
+				"submenu" => array(
+					1 => array(
+						"nombre" => "Consultas Web",
+						"link" => "reportes.pantalla"
+					),
+					2 => array(
+						"nombre" => "Reportes",
+						"link" => "reportes.especial"
+					)
+				)
+			),
+		);
+		foreach($matriz as $item){
+			if($item["tipo"]=="menu-text"){
+				if($item["link"]==$this->request->doFalso || in_array($this->request->doFalso,$item["extra"])){
+					$menu .= '<li class="active"> <a href="?do='.$item["link"].'"> <i class="menu-icon fa fa-'.$item["icon"].'"></i><span class="menu-text"> '.$item["nombre"].' </span> </a> </li>';
+				}else{
+					$menu .= '<li> <a href="?do='.$item["link"].'"> <i class="menu-icon fa fa-'.$item["icon"].'"></i><span class="menu-text"> '.$item["nombre"].' </span> </a> </li>';
+				}				
+			}elseif($item["tipo"]=="dropdown-toggle"){
+				if(in_array($item["acceso"],$permisos) || $item["acceso"]==null){
+					$menu_sub = "";
+					$encontrado = false;
+					foreach($item["submenu"] as $subitem){
+						if(in_array($subitem["acceso"],$permisos) || $subitem["acceso"]==null){
+							if(array_key_exists("submenu",$subitem)){
+								$menu_sub_sub = "";
+								$encontrado_sub = false;
+								foreach($subitem["submenu"] as $sub){
+									if($sub["link"]==$this->request->doFalso || in_array($this->request->doFalso,$sub["extra"])){
+										$menu_sub_sub .= '<li class="active menu_item"> <a href="?do='.$sub["link"].'"> <i class="menu-icon fa fa-'.$sub["icon"].'"></i> '.$sub["nombre"].' </a> </li>';	
+										$encontrado = true;
+										$encontrado_sub = true;
+									}else{
+										$menu_sub_sub .= '<li class="menu_item"> <a href="?do='.$sub["link"].'"> <i class="menu-icon fa fa-'.$sub["icon"].'"></i> '.$sub["nombre"].' </a> </li>';
+									}
+								}
+								if($encontrado_sub){
+									$menu_sub .= '<li class="open">';
+								}else{
+									$menu_sub .= '<li>';
+								}
+								$menu_sub .= '<a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-angle-double-right"></i> '.$subitem["nombre"].' <b class="arrow fa fa-angle-down"></b></a>';
+								$menu_sub .= '<ul class="submenu">';
+								$menu_sub .= $menu_sub_sub;
+								$menu_sub .= '</ul>';
+								$menu_sub .= '</li>';
+							}else{
+								if($subitem["link"]==$this->request->doFalso || in_array($this->request->doFalso,$subitem["extra"])){
+									$menu_sub .= '<li class="active menu_item"> <a href="?do='.$subitem["link"].'"> <i class="menu-icon fa fa-angle-double-right"></i> '.$subitem["nombre"].' </a> </li>';
+									$encontrado = true;
+								}else{
+									$menu_sub .= '<li class="menu_item"> <a href="?do='.$subitem["link"].'"> <i class="menu-icon fa fa-angle-double-right"></i> '.$subitem["nombre"].' </a> </li>';
+								}								
+							}
+						}
+					}
+					if($encontrado){
+						$menu .= '<li class="active open"> <a class="dropdown-toggle" href="#"> <i class="menu-icon fa fa-'.$item["icon"].'"></i> <span class="menu-text"> '.$item["nombre"].' </span> <b class="arrow fa fa-angle-down"></b> </a>';
+					}else{
+						$menu .= '<li> <a class="dropdown-toggle" href="#"> <i class="menu-icon fa fa-'.$item["icon"].'"></i> <span class="menu-text"> '.$item["nombre"].' </span> <b class="arrow fa fa-angle-down"></b> </a>';
+					}
+					$menu .= '<ul class="submenu">';
+					$menu .= $menu_sub;
+					$menu .= '</ul>';
+				}
+			}
 		}
-		if($this->checkAccess("hacerSolicitud", true)){
-			$this->addBlock("cliente");
-		}
-		if($this->checkAccess("verPolizas", true)){
-			$this->addBlock("vendedor");
-		}
-		$this->addVar("mail", $user->getMail());
-		$this->addVar("seed", $user->getPassword());
-		$this->addEmptyVar("inicio");
-		$this->addEmptyVar("administracion");
-		$this->addEmptyVar("personas.inscribirUsuario");
-		$this->addEmptyVar("personas.verPersonas");
-		$this->addEmptyVar("personas.cambiarClave");
-		$this->addEmptyVar("polizas");
-		$this->addEmptyVar("polizas.editarDatosBasicos");
-		$this->addEmptyVar("polizas.verPolizas");
-		$this->addEmptyVar("polizas.busquedaEspecial");
-		$this->addEmptyVar("clientes");
-		$this->addEmptyVar("clientes.editarDatosBasicos");
-		$this->addEmptyVar("clientes.verClientes");
-		$this->addEmptyVar("companias");
-		$this->addEmptyVar("companias.editarDatosBasicos");
-		$this->addEmptyVar("companias.verCompanias");
-		$this->addEmptyVar("reportes");
-		$this->addEmptyVar("reportes.generar");
-		$this->addEmptyVar("reportes.historico");
-		$this->addEmptyVar("solicitudes");
-		$this->addEmptyVar("solicitudes.crearSolicitud");
-		$this->addEmptyVar("solicitudes.verSolicitudes");
-		$this->addEmptyVar("admin.changelog");
-		if($this->request->doFalso == "personas.verPortada"){
-			$this->addVar("inicio", "class='active'");
-		}elseif($this->request->doFalso == "solicitudes.crearSolicitud"){
-			$this->addVar("solicitudes", "class='active open'");
-			$this->addVar("solicitudes.crearSolicitud", "class='active'");
-		}elseif($this->request->doFalso == "solicitudes.verSolicitudes"){
-			$this->addVar("solicitudes", "class='active open'");
-			$this->addVar("solicitudes.verSolicitudes", "class='active'");
-		}elseif($this->request->doFalso == "personas.inscribirUsuario"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("personas.inscribirUsuario", "class='active'");
-		}elseif($this->request->doFalso == "personas.verPersonas"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("personas.verPersonas", "class='active'");
-		}elseif($this->request->doFalso == "personas.verDatosBasicos"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("personas.verPersonas", "class='active'");
-		}elseif($this->request->doFalso == "personas.cambiarClave"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("personas.cambiarClave", "class='active'");
-		}elseif($this->request->doFalso == "personas.inscribirUsuario"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("personas.inscribirUsuario", "class='active'");
-		}elseif($this->request->doFalso == "ramos.busqueda"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("ramos.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "ramos.ver"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("ramos.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "polizas.ver"){
-			$this->addVar("polizas", "class='active'");
-		}elseif($this->request->doFalso == "polizas.editarDatosBasicos"){
-			$this->addVar("polizas", "class='active open'");
-			$this->addVar("polizas.editarDatosBasicos", "class='active'");
-		}elseif($this->request->doFalso == "polizas.verPolizas"){
-			$this->addVar("polizas", "class='active open'");
-			$this->addVar("polizas.verPolizas", "class='active'");
-		}elseif($this->request->doFalso == "polizas.busquedaEspecial"){
-			$this->addVar("polizas", "class='active open'");
-			$this->addVar("polizas.busquedaEspecial", "class='active'");
-		}elseif($this->request->doFalso == "vehiculos.verVehiculos"){
-			$this->addVar("polizas", "class='active open'");
-			$this->addVar("vehiculos.verVehiculos", "class='active'");
-		}elseif($this->request->doFalso == "clientes.verDatosBasicos"){
-			$this->addVar("clientes", "class='active'");;
-		}elseif($this->request->doFalso == "clientes.editarDatosBasicos"){
-			$this->addVar("clientes", "class='active open'");
-			$this->addVar("clientes.editarDatosBasicos", "class='active'");
-		}elseif($this->request->doFalso == "clientes.busqueda"){
-			$this->addVar("clientes", "class='active open'");
-			$this->addVar("clientes.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "companias.verDatosBasicos"){
-			$this->addVar("companias", "class='active'");
-		}elseif($this->request->doFalso == "companias.editarDatosBasicos"){
-			$this->addVar("companias", "class='active open'");
-			$this->addVar("companias.editarDatosBasicos", "class='active'");
-		}elseif($this->request->doFalso == "companias.busqueda"){
-			$this->addVar("companias", "class='active open'");
-			$this->addVar("companias.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "reportes.generar"){
-			$this->addVar("reportes", "class='active open'");
-			$this->addVar("reportes.generar", "class='active'");
-		}elseif($this->request->doFalso == "reportes.especial"){
-			$this->addVar("reportes", "class='active open'");
-			$this->addVar("reportes.especial", "class='active'");
-		}elseif($this->request->doFalso == "reportes.pantalla"){
-			$this->addVar("reportes", "class='active open'");
-			$this->addVar("reportes.pantalla", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.verLiquidaciones"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.verLiquidaciones", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.reportes"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.reportes", "class='active'");
-		}elseif($this->request->doFalso == "reportes.comisionesPendientes"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("reportes.comisionesPendientes", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.verCedidas"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.cedidas", "class='open'");
-			$this->addVar("liquidaciones.cedidasSub", "style='display: block;'");
-			$this->addVar("liquidaciones.verCedidas", "class='active'");
-		}elseif($this->request->doFalso == "reportes.cedidasPendientes"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.cedidas", "class='open'");
-			$this->addVar("liquidaciones.cedidasSub", "style='display: block;'");
-			$this->addVar("reportes.cedidasPendientes", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.editarCedida"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.cedidas", "class='open'");
-			$this->addVar("liquidaciones.cedidasSub", "style='display: block;'");
-			$this->addVar("liquidaciones.editarCedida", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.crearBono"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.crear", "class='open'");
-			$this->addVar("liquidaciones.submenu", "style='display: block;'");
-			$this->addVar("liquidaciones.bonos", "class='active'");
-		}elseif($this->request->doFalso == "liquidaciones.editarDatosBasicos"){
-			$this->addVar("liquidaciones", "class='active open'");
-			$this->addVar("liquidaciones.crear", "class='open'");
-			$this->addVar("liquidaciones.submenu", "style='display: block;'");
-			$this->addVar("liquidaciones.editarDatosBasicos", "class='active'");
-		}elseif($this->request->doFalso == "admin.changelog"){
-			$this->addVar("administracion", "class='active open'");
-			$this->addVar("admin.changelog", "class='active'");
-		}elseif($this->request->doFalso == "reportes.generaSBS"){
-			$this->addVar("contabilidad", "class='active open'");
-			$this->addVar("reportes.generaSBS", "class='active'");
-		}elseif($this->request->doFalso == "contabilidad.estadisticas"){
-			$this->addVar("contabilidad", "class='active open'");
-			$this->addVar("contabilidad.estadisticas", "class='active'");
-		}elseif($this->request->doFalso == "contabilidad.meses"){
-			$this->addVar("contabilidad", "class='active open'");
-			$this->addVar("contabilidad.meses", "class='active'");
-		}elseif($this->request->doFalso == "compras.busqueda"){
-			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "compras.verCompra"){
-			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "compras.editar"){
-			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.busqueda", "class='active'");
-		}elseif($this->request->doFalso == "compras.agregar"){
-			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.agregar", "class='active'");
-		}elseif($this->request->doFalso == "compras.crear"){
-			$this->addVar("compras", "class='active open'");
-			$this->addVar("compras.agregar", "class='active'");
-		}
+		$menu .= '</ul>';
+		$this->addVar("menu", $menu);
 		$this->processTemplate("menus/menuAdministracion.html");
 	}
 }
