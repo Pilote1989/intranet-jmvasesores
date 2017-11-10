@@ -109,7 +109,7 @@ class menuAdministracion extends SessionCommand{
 					),
 					4 => array(
 						"nombre" => "Buscar Vehiculos",
-						"link" => "vehiculos.verVehiculos",
+						"link" => "vehiculos.busqueda",
 						"extra" => array("vehiculos.ver"),
 					)
 				)

@@ -20,6 +20,7 @@ class busquedaAjax extends sessionCommand{
 					"anio",
 				),
 				"columnasSQL" => array(
+					"Vehiculo.idVehiculo as id",
 					"Vehiculo.placa as placa",
 					"Modelo.modelo as modelo",
 					"Marca.marca as marca",
