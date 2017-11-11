@@ -5,6 +5,42 @@ class busquedaAjax extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$debug = false;
 		$mapa = array(
+			"liquidaciones" => array(
+				"tabla" => "Liquidacion",
+				"tablasExtra" => array("Compania"),
+				"tablasLink" => array(
+					"Liquidacion.idCompania = Compania.idCompania"
+				),
+				"session" => "busquedaLiquidaciones",
+				"columnas" => array(
+					"factura",
+					"compania",
+					"fecha",
+				),
+				"columnasSQL" => array(
+					"Liquidacion.idLiquidacion as id",
+					"Liquidacion.factura as factura",
+					"DATE_FORMAT(Liquidacion.fechaFactura, '%d/%m/%Y') as fecha",
+					"Compania.nombre as compania"
+				),
+				"busqueda" => array(
+					"factura" => array(
+						"order" => 0,
+						"tabla" => "Liquidacion",
+						"campo" => "factura",
+						"tipo" => "LIKE%"
+					),
+					"idCompania" => array(
+						"order" => 1,
+						"tabla" => "Compania",
+						"campo" => "idCompania",
+						"tipo" => "EQUAL"
+					),
+				),
+				"extras" => array(
+					"ver"
+				)
+			),
 			"vehiculos" => array(
 				"tabla" => "Vehiculo",
 				"tablasExtra" => array("Marca","Modelo"),

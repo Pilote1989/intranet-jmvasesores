@@ -167,7 +167,7 @@ $( "#dialog-message" ).dialog({
 					dataType: "json",
 					url: '?do=liquidaciones.eliminarLiquidacion&idLiquidacion={idLiquidacion}',
 					success: function() {
-						window.location.href = "?do=liquidaciones.verLiquidaciones";
+						window.location.href = "?do=liquidaciones.busqueda";
 					}
 				});
 				$( this ).dialog( "close" );

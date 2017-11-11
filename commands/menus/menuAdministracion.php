@@ -137,7 +137,7 @@ class menuAdministracion extends SessionCommand{
 					),
 					2 => array(
 						"nombre" => "Ver Liquidaciones",
-						"link" => "liquidaciones.verLiquidaciones",
+						"link" => "liquidaciones.busqueda",
 						"extra" => array("liquidaciones.ver"),
 					),
 					3 => array(
