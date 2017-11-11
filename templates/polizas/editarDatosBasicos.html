@@ -413,6 +413,27 @@
 			},
 			numeroPoliza: {
 				required: true,
+				remote: {
+					url: "?do=polizas.revisarNumeroPoliza",
+					type: "post",
+          beforeSend: function(e){
+            $('#loading').show();
+            $('#enviarPrincipal2').hide();
+          },
+          complete: function(e, valid){
+            $('#loading').hide();
+            $('#enviarPrincipal2').show();
+          },
+					data: {
+						cia: function() {
+						  var d =  $("#idCompania").val();
+							return d;
+						},
+						<block start="revisaAviso"/>
+						poliza: '{idPoliza}'
+						<block end="revisaAviso"/>
+					}
+				} 
 			},
 			idCompania: {
 				required: true,
@@ -460,6 +481,7 @@
 			},
 			numeroPoliza: {
 				required: "Ingrese el Numero de Poliza",
+				remote: "Ya existe una poliza con ese numero",
 			},
 			idCompania: {
 				required: "Seleccione la Compania",
@@ -511,5 +533,9 @@
 		if($("#principal2").valid()){
 			$("#principal2").submit();
 		}
+	});
+	$("#idCompania").change(function() {
+    var item = $("#numeroPoliza");
+    item.data("previousValue", null).valid();
 	});
 </script> 
