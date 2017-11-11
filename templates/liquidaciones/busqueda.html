@@ -40,6 +40,8 @@
         </tr>
     </thead>
 </table>
+<link href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.0/js/dataTables.responsive.min.js"></script>
 <script>
 	$('#tableSearch').DataTable({
         "language": {
@@ -68,6 +70,7 @@
 		"aoColumnDefs": [
             { "sClass": "center", "aTargets": "_all" }
         ],
+        responsive: true
     }); 
     $("#realizaBusqueda").on('click', function(){
        $('#tableSearch').DataTable().ajax.reload();
