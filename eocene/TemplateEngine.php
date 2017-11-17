@@ -158,11 +158,7 @@ class TemplateEngine{
 			$replaceThis = '<plugextra command="'.$plugAction.'"/>';
 			$urlParts=explode("?",$plugAction);
 			$fc=&FrontController::instance();
-			if($this->variables["doFalso"] == ""){
-				$response=$fc->executeCommand($plugAction);
-			}else{
-				$response=$fc->executeCommand($plugAction . "?doFalso=" . $this->variables["doFalso"]);
-			}
+			$response=$fc->executeCommand($plugAction."?baseCommand=".$this->variables["baseCommand"]."&foundValue=".$this->variables["foundValue"]);
 			$plugContents=$response->getContent();
 			$fileContents = str_replace($replaceThis, $plugContents, $fileContents);
 		}

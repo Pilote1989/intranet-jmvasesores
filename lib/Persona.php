@@ -173,5 +173,8 @@ class Persona extends DBObject{
 			return null;
 		}
 	}
+	function getNombreCompleto(){
+		return $this->getNombres()." ".$this->getApellidoPaterno()." ".$this->getApellidoMaterno();
+	}
 }
 ?>

@@ -124,8 +124,13 @@ class FrontController {
 		//obtencion del command adecuado
 		$command=$this->getCommand($commandName);
 		//ejecucion del command
-		//$usuario=$command->getUsuario();	
-		//$command->addVar("nombreUsuario", $usuario->getNombres());
+		//$usuario=$command->getUsuario();
+		foreach ($_GET as $key => $value) {
+			if (preg_match("/\bid+/", $key)) {
+				$command->addVar("foundValue", $value);
+			}
+		}		
+		$command->addVar("baseCommand", $_GET['do']);
 		$response=$command->getResponse();
 		// se imprime el codigo de response
 		if(!($this->debugMode)){
