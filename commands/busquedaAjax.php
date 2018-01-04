@@ -294,6 +294,7 @@ class busquedaAjax extends sessionCommand{
 			$order = $matrizBase["columnas"][$this->request->order[0]["column"]]." ".$this->request->order[0]["dir"];
 			$search = array();
 			$search[] = "'1' = '1'";
+			$search[] = "Poliza.estado = '1'";
 			foreach($matrizBase["busqueda"] as $buscando){
 				$mapaLinks[]=$buscando["link"];
 				$orden=$this->request->$buscando["order"];
@@ -330,6 +331,7 @@ class busquedaAjax extends sessionCommand{
 			$stringLimit=" LIMIT ".$inicio.",".$limite;
 			$query="SELECT SQL_CALC_FOUND_ROWS ".$stringRows." FROM ".$stringTables.$stringWhere.$matrizBase["group"].$stringOrder.$stringLimit;
 			$query=utf8_decode($query);
+			//echo "<div>".$query."</div>";
 			$resultadoJson = array();
 			$i = 0;
 			$dbLink=&$fc->getLink();
