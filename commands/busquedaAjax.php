@@ -220,7 +220,8 @@ class busquedaAjax extends sessionCommand{
 				"tablasLink" => array(
 					"Poliza.idCliente = Cliente.idCliente",
 					"Poliza.idRamo = Ramo.idRamo",
-					"Poliza.idCompania = Compania.idCompania"
+					"Poliza.idCompania = Compania.idCompania",
+					"Poliza.estado = '1'"
 				),
 				"session" => "busquedaPolizas",
 				"group" => " GROUP BY Poliza.numeroPoliza ",
@@ -294,7 +295,6 @@ class busquedaAjax extends sessionCommand{
 			$order = $matrizBase["columnas"][$this->request->order[0]["column"]]." ".$this->request->order[0]["dir"];
 			$search = array();
 			$search[] = "'1' = '1'";
-			$search[] = "Poliza.estado = '1'";
 			foreach($matrizBase["busqueda"] as $buscando){
 				$mapaLinks[]=$buscando["link"];
 				$orden=$this->request->$buscando["order"];
