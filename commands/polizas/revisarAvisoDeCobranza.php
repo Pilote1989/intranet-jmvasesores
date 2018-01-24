@@ -18,8 +18,13 @@ class revisarAvisoDeCobranza extends sessionCommand{
 					if($cobroPol->getAvisoDeCobranza() == $cobro[0]->getAvisoDeCobranza()){
 						$valid = true;
 					}
+				}elseif($this->request->endoso){
+					$endoso=Fabrica::getFromDB("Endoso",$this->request->endoso);
+					$cobroEnd=Fabrica::getFromDB("Cobro",$endoso->getIdCobro());
+					if($cobroEnd->getAvisoDeCobranza() == $cobro[0]->getAvisoDeCobranza()){
+						$valid = true;
+					}
 				}
-			}else{
 				$valid = true;
 			}		
 		}

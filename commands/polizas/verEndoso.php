@@ -19,6 +19,12 @@ class verEndoso extends sessionCommand{
 			$this->addVar("idEndoso", $this->request->idEndoso);
 			$this->addVar("documento", $endoso->getDocumento());
 			$this->addVar("detalle", $endoso->getDetalle());
+			$this->addVar("pdf", $endoso->getPdf());
+			if($endoso->getPdf()==""){
+				$this->addBlock("noPDF");
+			}else{
+				$this->addBlock("siPDF");
+			}
 			$this->addVar("inicioVigencia", $endoso->getInicioVigencia());
 			$this->addVar("finVigencia", $endoso->getFinVigencia());
 			$cobro = Fabrica::getFromDB("Cobro",$endoso->getIdCobro());

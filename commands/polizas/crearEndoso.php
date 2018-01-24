@@ -38,6 +38,7 @@ class crearEndoso extends sessionCommand{
 				$this->addVar("comision", $cobro->getComision());
 				$this->addVar("comisionVendedorP",$cobro->getComisionCedidaP());
 				$this->addVar("comisionVendedor",$cobro->getComisionCedida());
+				$this->addBlock("revisaAviso");
 				
 				$this->addVar("idPersona",$cobro->getIdPersona());
 				$personas=Fabrica::getAllFromDB("Persona",array("vendedor = '1'"),"nombres ASC");	
@@ -65,6 +66,12 @@ class crearEndoso extends sessionCommand{
 					$this->addVar("readonlyVendedor","readonly");	
 					$this->addBlock("bloqueadoVendedor");				
 				}
+				if($endoso->getPdf()==""){
+					$this->addBlock("polizaPDFn");
+				}else{
+					$this->addBlock("polizaPDF");
+					$this->addVar("pdf",$poliza->getPdf());	
+				}				
 			}else{
 				//si no lo mando, creo
 				$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
@@ -73,6 +80,7 @@ class crearEndoso extends sessionCommand{
 				$this->addVar("accion", "Crear Endoso");
 				$this->addEmptyVar("documento");
 				$this->addEmptyVar("detalle");
+				$this->addBlock("polizaPDFn");
 				$this->addVar("finVigencia","");
 				$this->addVar("inicioVigencia",date("d/m/Y"));
 				$this->addVar("finVigencia", $poliza->getFinVigencia("DATE"));

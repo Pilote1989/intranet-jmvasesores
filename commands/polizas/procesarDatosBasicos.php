@@ -51,7 +51,7 @@ class procesarDatosBasicos extends sessionCommand{
 		$target_path = "uploads/";
 		$db = time() . "-" . substr(md5(basename( $_FILES['pdf']['name'])), 0 , 4) . ".pdf";
 		$target_path = $target_path . $db;
-		print_r($_FILES);
+		//print_r($_FILES);
 		if ($_FILES["pdf"]["type"] == "application/pdf"){
 			if ($_FILES["pdf"]["error"] > 0){
 				echo "Return Code: " . $_FILES["pdf"]["error"] . "<br>";

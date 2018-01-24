@@ -56,6 +56,16 @@
     <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
   </div>
 </div>
+<div id="dialog-eliminarPDFendoso" class="hide">
+	<div class="alert alert-info bigger-110">
+		El archivo se eliminara permanentemente.
+	</div>
+	<div class="space-6"></div>
+	<p class="bigger-110 bolder center grey">
+		<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+		¿Esta seguro?
+	</p>
+</div>
 <script>
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 	_title: function(title) {
@@ -74,7 +84,7 @@ $( "#dialogoEndosos" ).dialog({
 	maxWidth: 680,
 	width: 680,
 	open: function() {
-  	$(this).css("maxHeight", 600);
+  	$(this).css("maxHeight", 500);
   }
 });
 
@@ -187,5 +197,38 @@ $('.abreLink').click( function() {
 						}
 					});
 				});
-
+				
+				$(document).on('click','.eliminarPDFendoso', function(e){
+					e.preventDefault();
+					var temp = $(this).attr("x-id");
+					$( "#dialog-eliminarPDFendoso" ).removeClass('hide').dialog({
+						resizable: false,
+						width: '320',
+						modal: true,
+						title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> ¿Eliminar el archivo guardado?</h4></div>",
+						title_html: true,
+						buttons: [
+							{
+								html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Eliminar",
+								"class" : "btn btn-danger btn-minier",
+								click: function() {
+									$.getJSON("?do=polizas.eliminarPDFendoso&idEndoso="+temp, function( data ) {
+										console.log(data)
+									});						
+									$(".ui-dialog-content").dialog("close");
+									$("#tabEndosos").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+									$("#tabEndosos").load('/?do=polizas.verEndosos&idPoliza={idPoliza}');
+								}
+							},
+							{
+								html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancelar",
+								"class" : "btn btn-minier",
+								click: function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						]
+					});
+					return;
+				})
 </script>

@@ -10,7 +10,6 @@
 		<div class="profile-info-value"> {motivoAnulacion}&nbsp; </div>
 	</div>	
 	<block end="anulado"/>
-	
 	<div class="profile-info-row">
 		<div class="profile-info-name">Documento </div>
 		<div class="profile-info-value"> {documento}&nbsp; </div>
@@ -26,6 +25,22 @@
 	<div class="profile-info-row">
 		<div class="profile-info-name"> Fin de Vigencia </div>
 		<div class="profile-info-value"> {finVigencia}&nbsp; </div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> Poliza en PDF </div>
+		<div class="profile-info-value">
+			<block start="siPDF"/>
+			<a href="uploads/{pdf}" target="_blank"><i class="ace-icon fa fa-save"></i> Descargar</a> 
+			<div class="action-buttons inline">
+				<a href="#" class="red eliminarPDFendoso" style="border-bottom:0px;outline:none;" x-id="{idEndoso}">
+					<i class="ace-icon fa fa-times-circle"></i>
+				</a>
+			</div>
+			<block end="siPDF"/>
+			<block start="noPDF"/>
+			No hay archivo
+			<block end="noPDF"/>
+			&nbsp; </div>
 	</div>
 </div>
 <h3 class="header smaller lighter blue">Facturacion</h3>

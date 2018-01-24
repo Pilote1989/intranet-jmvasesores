@@ -1,5 +1,5 @@
 <block start="bloqueEditarEndoso"/>
-<form class="form-horizontal"enctype="multipart/form-data" method="POST" name="editarEndoso" id="editarEndoso" action="?do=polizas.procesarEndoso" role="form">
+<form class="form-horizontal" enctype="multipart/form-data" method="POST" name="editarEndoso" id="editarEndoso" action="?do=polizas.procesarEndoso" role="form">
   <!-- <legend>Form</legend> -->
   <fieldset>
     <div id="contenedor1">
@@ -43,6 +43,34 @@
           </div>
         </div>
       </div>
+          <block start="polizaPDF"/>
+          <div class="form-group">
+            <label for="file" class="col-sm-3 control-label no-padding-right">Poliza en PDF </label>
+            <div class="col-sm-9">
+              <input type="file" id="pdf" name="pdf">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-9">
+              <div class="alert alert-block alert-warning">
+                <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
+                <p> <strong> <i class="ace-icon fa fa-exclamation-triangle"></i> ¡Atenci&oacute;n!</strong><br />
+                  Ya existe un archivo PDF, si escoje un PDF si sube un nuevo archivo el anterior sera eliminado. </p>
+                <p> <a class="btn btn-sm btn-warning" id="descargarPdf" target="_blank" href="uploads/{pdf}"> Dercargar Archivo <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </a> </p>
+              </div>
+            </div>
+          </div>
+          <block end="polizaPDF"/>
+          <block start="polizaPDFn"/>
+          <div class="form-group">
+            <label for="file" class="col-sm-3 control-label no-padding-right">Poliza en PDF </label>
+            <div class="col-sm-9">
+              <input type="file" id="pdf" name="pdf">
+            </div>
+          </div>
+          <block end="polizaPDFn"/>      
     </div>
     <div id="contenedor2">
       <block start="bloqueado"/>
@@ -163,6 +191,17 @@
 </form>
 <block end="bloqueEditarEndoso"/>
 <script>
+	$('#pdf').ace_file_input({
+		no_file:'Escoja ...',
+		btn_choose:'Subir',
+		btn_change:'Cambiar',
+		droppable:false,
+		onchange:null,
+		thumbnail:false,
+		whitelist:'pdf',
+		blacklist:'exe|php',
+	}); 
+	
   $('#loading').hide();
 
 	if($("#idPersona").val() == "1"){
@@ -227,17 +266,18 @@
 					type: "post",
           beforeSend: function(e){
             $('#loading').show();
-            $('#siguiente').hide();
           },
           complete: function(e, valid){
             $('#loading').hide();
-            $('#siguiente').show();
           },
 					data: {
 						aviso: function() {
 						  var d =  $("#cobranza").val();
 							return d;
-						}
+						},
+						<block start="revisaAviso"/>
+						endoso: '{idEndoso}'
+						<block end="revisaAviso"/>
 					}
 				} 
 			}
@@ -298,11 +338,14 @@
 				});
 	$('#enviarEndoso').click(function() {
 		if($("#editarEndoso").valid()){
+		  var formData = new FormData(document.getElementById("editarEndoso"));
 			$.ajax({
 				type: "POST",
 				dataType: "json",
 				url: '?do=polizas.guardarEndoso',
-				data: $("#editarEndoso").serialize(),
+				data: formData,
+        processData: false,
+        contentType: false,
 				success: function(data) {
 					if(data["respuesta"]=="SUCCESS"){
 						$("#tabEndosos").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
