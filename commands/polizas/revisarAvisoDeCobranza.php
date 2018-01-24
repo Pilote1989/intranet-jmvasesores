@@ -25,8 +25,9 @@ class revisarAvisoDeCobranza extends sessionCommand{
 						$valid = true;
 					}
 				}
+			}else{
 				$valid = true;
-			}		
+			}
 		}
 		echo json_encode($valid);
 	}
