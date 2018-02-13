@@ -10,7 +10,7 @@ class busqueda extends BaseCommand{
 			FROM Poliza, Cliente c, Ramo r, Compania cia
 			WHERE (Poliza.idCliente = c.idCliente) AND (r.idRamo = Poliza.idRamo) AND (cia.idCompania = Poliza.idCompania) AND (Poliza.estado = '1')
 			AND numeroPoliza LIKE '%".$q."%'
-			GROUP BY numeroPoliza
+			GROUP BY numeroPoliza, cia.sigla
 			ORDER BY
 				maxVig DESC
 			LIMIT 0, 3

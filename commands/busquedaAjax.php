@@ -224,7 +224,7 @@ class busquedaAjax extends sessionCommand{
 					"Poliza.estado = '1'"
 				),
 				"session" => "busquedaPolizas",
-				"group" => " GROUP BY Poliza.numeroPoliza ",
+				"group" => " GROUP BY Poliza.numeroPoliza, Compania.sigla",
 				"columnas" => array(
 					"ciaNumero",
 					"cliente",

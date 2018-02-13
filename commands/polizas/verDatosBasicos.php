@@ -82,7 +82,7 @@ class verDatosBasicos extends sessionCommand{
 			if($this->checkAccess("crearUsuario", true)){
 				$this->addBlock("admin");
 			}
-			$vigencias = Fabrica::getAllFromDB("Poliza", array("numeroPoliza = '" . $poliza->getNumeroPoliza() . "'","estado = '1'"), "inicioVigencia DESC");			
+			$vigencias = Fabrica::getAllFromDB("Poliza", array("numeroPoliza = '" . $poliza->getNumeroPoliza() . "'", "estado = '1'", "idCompania = '". $poliza->getIdCompania() ."'"), "inicioVigencia DESC");			
 			foreach($vigencias as $vigencia){
 				$cobroTemp = Fabrica::getFromDB("Cobro",$vigencia->getIdCobro());
 				$listaVigencias[$i]["aviso"] = $cobroTemp->getAvisoDeCobranza();

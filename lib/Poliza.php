@@ -133,7 +133,7 @@ class Poliza extends DBObject{
 		//echo $query;
 	}
 	function matriz(){
-		$query ='SELECT idPoliza AS a FROM jmvclientes.Poliza WHERE numeroPoliza="' . $this->getNumeroPoliza() . '" AND tipo = "POL"';
+		$query ='SELECT idPoliza AS a FROM jmvclientes.Poliza WHERE numeroPoliza="' . $this->getNumeroPoliza() . '" AND tipo = "POL" AND idCompania="' . $this->getIdCompania() . '"';
 		//echo $query;
 		$query=utf8_decode($query);		
 		$link = &$this->fc->getLink();	
