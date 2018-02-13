@@ -92,6 +92,9 @@ class busquedaAjax extends sessionCommand{
 					"total",
 					"fechaCompra"
 				),
+				"columnasOrder" => array(
+					"8" => "STR_TO_DATE(fechaCompra, '%d/%m/%Y')"
+				),
 				"columnasSQL" => array(
 					"Compra.idCompra as id",
 					"Cliente.nombre as vendedor",
@@ -292,7 +295,11 @@ class busquedaAjax extends sessionCommand{
 			$tabla = $matrizBase["tabla"];
 			$listaResultados = array();
 			$order = null;
-			$order = $matrizBase["columnas"][$this->request->order[0]["column"]]." ".$this->request->order[0]["dir"];
+			if(array_key_exists($this->request->order[0]["column"],$matrizBase["columnasOrder"])){
+				$order = $matrizBase["columnasOrder"][$this->request->order[0]["column"]]." ".$this->request->order[0]["dir"];
+			}else{
+				$order = $matrizBase["columnas"][$this->request->order[0]["column"]]." ".$this->request->order[0]["dir"];
+			}
 			$search = array();
 			$search[] = "'1' = '1'";
 			foreach($matrizBase["busqueda"] as $buscando){
