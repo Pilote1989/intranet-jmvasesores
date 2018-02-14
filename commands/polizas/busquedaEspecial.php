@@ -14,9 +14,14 @@ class busquedaEspecial extends sessionCommand{
 				$poliza=Fabrica::getAllFromDB("Poliza",array("idCobro = '" . $cobro[0]->getId() . "'"));
 				if(count($poliza)=="1"){
 					//Se encontro una poliza
-					$response["respuesta"]="SUCCESS";
-					$response["id"]=$poliza[0]->getId();
-					$response["m"]="Se encontro una poliza, redireccionando...";
+					if($poliza[0]->getEstado()=="0"){
+						//poliza eliminada
+						$response["m"]="No se encontro ninguna poliza con ese Aviso de Cobranza.";	
+					}else{
+						$response["respuesta"]="SUCCESS";
+						$response["id"]=$poliza[0]->getId();
+						$response["m"]="Se encontro una poliza, redireccionando...";	
+					}
 				}else{
 					//Debe ser un endoso
 					$endoso=Fabrica::getAllFromDB("Endoso",array("idCobro = '" . $cobro[0]->getId() . "'"));
