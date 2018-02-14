@@ -92,9 +92,11 @@ class menuNavegacion extends SessionCommand{
 								"dir" => "ramos.ver"
 							),
 							3 => array(
-								"dir" => "ramos.editarDatosBasicos"
-							),
-						),
+								"dir" => "ramos.editarDatosBasicos",
+								"cond" => "foundValue",
+								"val" => true
+							),	
+						),					
 						"extra" => array(
 							"ramos.ver",
 							"ramos.editarDatosBasicos"
