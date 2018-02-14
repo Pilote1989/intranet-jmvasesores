@@ -358,8 +358,10 @@ class busquedaAjax extends sessionCommand{
 					foreach($matrizBase["columnas"] as $columna){
 						$temp[]=$row[$columna];
 					}
-					if(in_array('verPoliza',$matrizBase["extras"]))
-						$temp[]='<a class="blue" href="?do='.$matriz.'.ver&id'.$tabla.'='.$row["id"].'&vig='.$row["id"].'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>';
+					if(in_array('verPoliza',$matrizBase["extras"])){
+						$polizaRow = Fabrica::getFromDB("Poliza", $row["id"]);
+						$temp[]='<a class="blue" href="?do='.$matriz.'.ver&id'.$tabla.'='.$row["id"].'&vig='.$polizaRow->masReciente().'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>';
+					}
 					if(in_array('ver',$matrizBase["extras"]))
 						$temp[]='<a class="blue" href="?do='.$matriz.'.ver&id'.$tabla.'='.$row["id"].'"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>';
 					if(in_array('verDatosBasicos',$matrizBase["extras"]))

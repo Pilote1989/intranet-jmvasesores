@@ -63,7 +63,7 @@ class Poliza extends DBObject{
 		}
 	}
 	function inicioGrupo($a){
-		$query ='SELECT min(inicioVigencia) AS a FROM jmvclientes.Poliza WHERE numeroPoliza="' . $a. '" AND estado = "1" AND anulada = "0"';
+		$query ='SELECT min(inicioVigencia) AS a FROM Poliza WHERE numeroPoliza="' . $a. '" AND estado = "1" AND anulada = "0"';
 		$query=utf8_decode($query);		
 		$link = &$this->fc->getLink();	
 			if($countResult=$link->query($query)){
@@ -76,7 +76,7 @@ class Poliza extends DBObject{
 			}
 	}
 	function finGrupo($a){
-		$query ='SELECT max(finVigencia) AS a FROM jmvclientes.Poliza WHERE numeroPoliza="' . $a. '" AND estado = "1" AND anulada = "0"';
+		$query ='SELECT max(finVigencia) AS a FROM Poliza WHERE numeroPoliza="' . $a. '" AND estado = "1" AND anulada = "0"';
 		$query=utf8_decode($query);		
 		$link = &$this->fc->getLink();	
 			if($countResult=$link->query($query)){
@@ -89,7 +89,7 @@ class Poliza extends DBObject{
 			}
 	}
 	function prima(){
-		$query ='SELECT SUM(monto) AS a FROM jmvclientes.Cupon WHERE idPoliza="' . $this->getId(). '" group by idPoliza';
+		$query ='SELECT SUM(monto) AS a FROM Cupon WHERE idPoliza="' . $this->getId(). '" group by idPoliza';
 		//echo $query;
 		$query=utf8_decode($query);		
 		$link = &$this->fc->getLink();	
@@ -104,7 +104,7 @@ class Poliza extends DBObject{
 	}
 	function primaNetaTotal(){
 		//primero Obtengo la prima neta de la poliza
-		$query ='SELECT SUM(primaNeta) AS a FROM jmvclientes.Cobro WHERE idCobro="' . $this->getIdCobro() . '"';
+		$query ='SELECT SUM(primaNeta) AS a FROM Cobro WHERE idCobro="' . $this->getIdCobro() . '"';
 		$query=utf8_decode($query);		
 		$link = &$this->fc->getLink();
 		//echo $query . "<br/>";	
@@ -116,9 +116,9 @@ class Poliza extends DBObject{
 			return null;
 		}//luego obtengo la prima neta de los endosos
 		$query ='SELECT SUM(primaNeta) AS a 
-					FROM jmvclientes.Cobro, jmvclientes.Endoso 
-					WHERE jmvclientes.Endoso.idPoliza = "' . $this->getId() . '"
-					AND jmvclientes.Endoso.IdCobro = jmvclientes.Cobro.idCobro';
+					FROM Cobro, Endoso 
+					WHERE Endoso.idPoliza = "' . $this->getId() . '"
+					AND Endoso.IdCobro = Cobro.idCobro';
 		$query=utf8_decode($query);		
 		//echo $query;
 		$link = &$this->fc->getLink();	
@@ -133,7 +133,28 @@ class Poliza extends DBObject{
 		//echo $query;
 	}
 	function matriz(){
-		$query ='SELECT idPoliza AS a FROM jmvclientes.Poliza WHERE numeroPoliza="' . $this->getNumeroPoliza() . '" AND tipo = "POL" AND idCompania="' . $this->getIdCompania() . '"';
+		$query ='SELECT idPoliza AS a FROM Poliza WHERE numeroPoliza="' . $this->getNumeroPoliza() . '" AND tipo = "POL" AND idCompania="' . $this->getIdCompania() . '"';
+		//echo $query;
+		$query=utf8_decode($query);		
+		$link = &$this->fc->getLink();	
+			if($countResult=$link->query($query)){
+				$row=$countResult->fetch_assoc();
+				$resultado=$row['a'];
+				return $resultado;
+			}else{
+				printf("Error: %s\n", $dbLink->error);
+				return null;
+			}
+	}
+	function masReciente(){
+		/*
+		SELECT * 
+		FROM  `Poliza` 
+		WHERE  `numeroPoliza` LIKE  '12122'
+		ORDER BY  `Poliza`.`finVigencia` DESC 
+		LIMIT 0 , 1
+		*/
+		$query ='SELECT idPoliza AS a FROM Poliza WHERE numeroPoliza="' . $this->getNumeroPoliza() . '" AND idCompania="' . $this->getIdCompania() . '" AND estado=1 ORDER BY finVigencia DESC';
 		//echo $query;
 		$query=utf8_decode($query);		
 		$link = &$this->fc->getLink();	
