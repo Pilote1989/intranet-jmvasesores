@@ -104,7 +104,7 @@ class busqueda extends BaseCommand{
 					$ramo=Fabrica::getFromDB("Ramo",$poliza[0]->getIdRamo());
 					$cliente=Fabrica::getFromDB("Cliente",$poliza[0]->getIdCliente());
 					$avisos[$i]["scia"] = $compania->getSigla();
-					$avisos[$i]["sramo"] = $compania->getRamo();
+					$avisos[$i]["sramo"] = $ramo->getNombre();
 					$avisos[$i]["cliente"] = $cliente->getNombre();
 					$i++;				
 				}else{
@@ -119,7 +119,7 @@ class busqueda extends BaseCommand{
 						$ramo=Fabrica::getFromDB("Ramo",$poliza[0]->getIdRamo());
 						$cliente=Fabrica::getFromDB("Cliente",$poliza[0]->getIdCliente());
 						$avisos[$i]["scia"] = $compania->getSigla();
-						$avisos[$i]["sramo"] = $compania->getRamo();
+						$avisos[$i]["sramo"] = $ramo->getNombre();
 						$avisos[$i]["cliente"] = $cliente->getNombre();
 					$i++;				
 					}
