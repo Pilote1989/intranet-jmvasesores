@@ -136,7 +136,7 @@ $(document).ready(function(){
   <block end="anulaPoliza"/>
   <block start="rehabilitaPoliza"/>
   //para rehabilitar la poliza
-  			$("#rehabilita").on(ace.click_event, function() {
+        $("#rehabilita").on(ace.click_event, function() {
 					bootbox.dialog({
 						message: "<span class='bigger-110'>¿Desea rehabilitar la p&oacute;liza?</span>",
 						buttons:
@@ -155,13 +155,18 @@ $(document).ready(function(){
 								"className" : "btn-sm btn-success",
 								"callback": function() {
 									$.ajax({
-                  	url: '/?do=polizas.rehabilitaRenovacion&idPoliza={idPoliza}',
-              	  	success: function(responseText){
-              	  		  location.reload(false);
-              	  		},
-              	  	error: function(responseText){
-              	  	}
-              	  });
+                    url: '/?do=polizas.rehabilitaRenovacion&idPoliza={idPoliza}',
+                    success: function(responseText){
+                      var json = $.parseJSON(responseText);
+                      if(json.respuesta=="SUCCESS"){
+                        location.reload("true");
+                      }else{
+                        alert(json.m);
+                      }
+                    },
+                    error: function(responseText){
+                    }
+                  });
 								}
 							}
 						}

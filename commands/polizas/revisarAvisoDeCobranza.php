@@ -2,31 +2,29 @@
 class revisarAvisoDeCobranza extends sessionCommand{
 	function execute(){
 		header('Content-type: application/json');
-		//ini_set('display_errors', 1);
-		//ini_set('display_startup_errors', 1);
-		//error_reporting(E_ALL);
 		$fc=FrontController::instance();
 		$usuario=$this->getUsuario();
-		$valid = false;
+		$valid = true;
 		if($this->request->aviso){
-			$cobro=Fabrica::getAllFromDB("Cobro",array("avisoDeCobranza LIKE '" . $this->request->aviso . "'"));
-			if(count($cobro)>0){
-				$valid = false;
+			$cobroParaRevisar=Fabrica::getAllFromDB("Cobro",array("avisoDeCobranza LIKE '" . $this->request->aviso . "'"));
+			foreach($cobroParaRevisar as $tempCobro){
 				if($this->request->poliza){
-					$poliza=Fabrica::getFromDB("Poliza",$this->request->poliza);
-					$cobroPol=Fabrica::getFromDB("Cobro",$poliza->getIdCobro());
-					if($cobroPol->getAvisoDeCobranza() == $cobro[0]->getAvisoDeCobranza()){
-						$valid = true;
-					}
-				}elseif($this->request->endoso){
-					$endoso=Fabrica::getFromDB("Endoso",$this->request->endoso);
-					$cobroEnd=Fabrica::getFromDB("Cobro",$endoso->getIdCobro());
-					if($cobroEnd->getAvisoDeCobranza() == $cobro[0]->getAvisoDeCobranza()){
-						$valid = true;
-					}
+					$polizaTest=Fabrica::getAllFromDB("Poliza",array("idCobro = '" . $tempCobro->getId() . "'","anulada = '0'","estado = '1'","idPoliza <> '".$this->request->poliza."'"));
+				}else{
+					$polizaTest=Fabrica::getAllFromDB("Poliza",array("idCobro = '" . $tempCobro->getId() . "'","anulada = '0'","estado = '1'"));
 				}
-			}else{
-				$valid = true;
+				if($this->request->endoso){
+					$endosoTest=Fabrica::getAllFromDB("Endoso",array("idCobro = '" . $tempCobro->getId() . "'","anulada = '0'","idEndoso <> '".$this->request->endoso."'"));
+				}else{
+					$endosoTest=Fabrica::getAllFromDB("Endoso",array("idCobro = '" . $tempCobro->getId() . "'","anulada = '0'"));
+				}
+				if(count($polizaTest)){
+					$valid = false;
+					$response["m"]="Hay una poliza con ese aviso de cobranza.";
+				}elseif(count($endosoTest)){
+					$valid = false;
+					$response["m"]="Hay un endoso con ese aviso de cobranza.";
+				}
 			}
 		}
 		echo json_encode($valid);
