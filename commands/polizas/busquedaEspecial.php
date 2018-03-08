@@ -10,42 +10,47 @@ class busquedaEspecial extends sessionCommand{
 			$response["m"]="No se encontro ninguna poliza con ese Aviso de Cobranza.";
 			$cobro=Fabrica::getAllFromDB("Cobro",array("avisoDeCobranza LIKE'" . $this->request->aviso . "'"));
 			$response["cuenta"]=count($cobro);
-			if(count($cobro)=="1"){
-				$poliza=Fabrica::getAllFromDB("Poliza",array("idCobro = '" . $cobro[0]->getId() . "'"));
-				if(count($poliza)=="1"){
-					//Se encontro una poliza
-					if($poliza[0]->getEstado()=="0"){
-						//poliza eliminada
-						$response["m"]="No se encontro ninguna poliza con ese Aviso de Cobranza.";	
-					}else{
-						$response["respuesta"]="SUCCESS";
-						$response["id"]=$poliza[0]->getId();
-						$response["m"]="Se encontro una poliza, redireccionando...";	
-					}
-				}else{
-					//Debe ser un endoso
-					$endoso=Fabrica::getAllFromDB("Endoso",array("idCobro = '" . $cobro[0]->getId() . "'"));
-					if(count($endoso)=="1"){
-						//Se encontro un endoso
-						$response["respuesta"]="SUCCESS";
-						$response["id"]=$endoso[0]->getIdPoliza();
-						$response["m"]="Se encontro un endoso, redireccionando a la poliza...";
-					}else{
-						//Error
-						$response["m"]="Error desconocido.";
-						
-					}
+			$y=0;
+			$tipo=null;
+			foreach($cobro as $tempcobro){
+				$poliza=Fabrica::getAllFromDB("Poliza",array("idCobro = '" . $tempcobro->getId() . "'", "estado = '1'"));
+				if(count($poliza)==1){
+					$pol=$poliza[0]->getId();
+					$y++;	
+					$tipo="pol";
+				}else if(count($poliza)>1){
+					$y=$y+2;
 				}
-			}elseif(count($cobro)=="0"){
-				$response["m"]="No se encontro ninguna poliza con ese Aviso de Cobranza.";
-			}else{
-				$response["m"]="Se encontro mas de 1 poliza con ese Aviso de Cobranza.";
+				$endoso=Fabrica::getAllFromDB("Endoso",array("idCobro = '" . $tempcobro->getId() . "'"));
+				if(count($endoso)==1){
+					$pol=$endoso[0]->getIdPoliza();
+					$y++;	
+					$tipo="end";
+				}else if(count($endoso)>1){
+					$y=$y+2;
+				}
+			}
+			if($y==0){
+				$response["m"]="No se encontro ningun documento con ese Aviso de Cobranza.";
+			}else if($y==1){
+				$response["respuesta"]="SUCCESS";
+				$response["id"]=$pol;
+				if($tipo=="pol"){
+					$response["tipo"]="pol";
+					$response["m"]="Se encontro una poliza, redireccionando...";
+				}else{
+					$response["tipo"]="end";
+					$response["m"]="Se encontro un endoso, redireccionando a la poliza...";
+				}
+			}else if($y>1){
+				$response["m"]="Se encontro mas de 1 documento con ese Aviso de Cobranza.";	
 			}
 			echo json_encode($response);
 		}else{
 			$this->addLayout("ace");
 			$this->processTemplate("polizas/busquedaEspecial.html");
 		}
+		
 	}
 }
 ?>
