@@ -95,6 +95,7 @@ class TemplateEngine{
 		$this->variables["nombreSistema"] = $fc->appSettings["nombreSistema"];
 		$this->variables["nombreCompania"] = $fc->appSettings["nombreCompania"];
 		$this->variables["siglasCompania"] = $fc->appSettings["siglasCompania"];
+		$this->variables["head"] = $fc->appSettings["head"];
 		$this->processVariables();
 		//recortar el template
 		$this->processBlocks();
