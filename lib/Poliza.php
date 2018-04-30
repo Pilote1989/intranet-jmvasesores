@@ -52,7 +52,7 @@ class Poliza extends DBObject{
 		if($this->getAnulada()==1){
 			return "red";
 		}
-		if($today<strtotime($fin) && $today>=strtotime($inicio)){
+		if($today<=strtotime($fin) && $today>=strtotime($inicio)){
 			return 'green';
 		}elseif($today>strtotime($fin)){
 			return 'yellow';
