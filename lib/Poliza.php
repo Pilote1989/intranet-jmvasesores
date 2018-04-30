@@ -14,7 +14,7 @@ class Poliza extends DBObject{
 		if($this->getAnulada()==1){
 			return "Anulada";
 		}
-		if($today<strtotime($fin) && $today>=strtotime($inicio)){
+		if($today<=strtotime($fin) && $today>=strtotime($inicio)){
 			return "Vigente";
 		}elseif($today>strtotime($fin)){
 			return "Vencida";
