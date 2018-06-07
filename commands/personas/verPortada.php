@@ -107,7 +107,7 @@ class verPortada extends sessionCommand{
 			//$regularExpression     = '#\<span class=bld\>(.+?)\<\/span\>#s';
 			$regularExpression = '#\<div class=\"J7UKTe\"\>(.+?)\<\/div\>#s';
 			preg_match($regularExpression, $response, $finalData);
-			$exchangeRate = substr($finalData[1],14,4);
+			$exchangeRate = 3.23;
 			//$exchangeRate = substr($finalData[0],16,6);
 			$this->addVar("tc",$exchangeRate);
 			$sqlCompania = "
