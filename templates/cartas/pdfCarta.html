@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>eBase - {nombreCompania} - Carta {numero}</title>
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<style>
+.main-container {
+	padding: 100px 25px 25px 25px;
+	background: #FFF;
+	font: 11px verdana;
+	color: #000;
+	line-height: 1.5;
+}
+.float {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+.boton {
+	box-shadow: 0 0 0 1px rgba(0,0,0,0.08) inset!important;
+	width: 64px;
+	font-size: 15px;
+	border-radius: 8px;
+	line-height: 1.45;
+	background-image: linear-gradient(to bottom, #f4f4f4 0, #e6e6e6 100%);
+	background-repeat: repeat-x;
+	color: #5a5a5a;
+	text-shadow: 0 1px 1px #EEE;
+	display: inline-block;
+	text-align: center;
+	border: 0;
+	padding: 12px 0 8px;
+	margin: 2px;
+	transition: all ease .15s;
+	cursor: pointer;
+	vertical-align: middle;
+	-webkit-appearance: button;
+	text-transform: none;
+	box-sizing: border-box;
+}
+.boton:hover {
+	background-color: #CCC;
+	background-image: none;
+}
+.icono {
+	display: block;
+	font-size: 24px;
+	line-height: 24px;
+	margin: 0;
+	min-width: 0;
+	padding: 0;
+	text-align: center;
+	box-sizing: border-box;
+	color: #5a5a5a!important;
+	text-shadow: 0 1px 1px #EEE!important;
+}
+@media print {
+.no-print, .no-print * {
+	display: none !important;
+}
+}
+</style>
+</head>
+<body>
+<div class="no-print float">
+  <button class="boton" onClick="window.print()">
+    <i class="ace-icon fa fa-print icono bigger-160"></i> Imprimir
+  </button>
+</div>
+<div >
+  <div class="main-container">
+    {numero}<br /> 
+    {carta}
+  </div>
+</div>
+</body>
+</html>

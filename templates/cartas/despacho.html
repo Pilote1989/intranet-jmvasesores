@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>eBase - {nombreCompania} - Crear Carta</title>
+<!-- basic styles -->
+
+        <!-- basic styles -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+        <!-- page specific plugin styles -->
+        <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.full.min.css" />
+        <link rel="stylesheet" href="assets/css/datepicker.css" />
+		<link rel="stylesheet" href="assets/css/daterangepicker.css" />
+        <link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
+        <!-- fonts -->
+        <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+		<link rel="stylesheet" href="assets/css/chosen.css" />
+        <!-- ace styles -->
+        <link rel="stylesheet" href="assets/css/ace.min.css" />
+        <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+        <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+        <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+        <script src="assets/js/ace-extra.min.js"></script>
+        <style>
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+}
+</style>
+        <!-- Ajax -->
+        <script type="text/javascript" src="jScripts/ajax_core.js"></script>
+        <script type="text/javascript" src="jScripts/ajform.js"></script>
+
+        <!--Fin Ajax-->
+
+</head>
+<body>
+<!-- basic scripts --> 
+<!--[if !IE]> -->
+                <script type="text/javascript">
+                    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+                </script>
+                <!-- <![endif]--> 
+<!--[if IE]>
+                <script type="text/javascript">
+                 window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+                </script>
+                <![endif]--> 
+<script type="text/javascript">
+                    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+                </script> 
+<script src="assets/js/bootstrap.min.js"></script> 
+<script src="assets/js/typeahead-bs2.min.js"></script> 
+
+<!-- page specific plugin scripts --> 
+<script src="assets/js/jquery-ui-1.10.3.full.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script> 
+<script src="assets/js/jquery.dataTables.bootstrap.js"></script> 
+<script src="assets/js/fuelux/fuelux.wizard.min.js"></script> 
+<script src="assets/js/additional-methods.min.js"></script> 
+<script src="assets/js/bootbox.min.js"></script> 
+<script src="assets/js/jquery.maskedinput.min.js"></script> 
+<script src="assets/js/select2.min.js"></script> 
+<script src="assets/js/date-time/bootstrap-datepicker.min.js"></script> 
+<script src="assets/js/chosen.jquery.min.js"></script> 
+<script src="assets/js/jquery.validate.min.js"></script> 
+<script src="assets/js/date-time/moment.min.js"></script>
+<script src="assets/js/date-time/daterangepicker.min.js"></script>
+
+<!-- ace scripts --> 
+
+<script src="assets/js/ace-elements.min.js"></script> 
+<script src="assets/js/ace.min.js"></script>
+<script type="text/javascript" src="tinymce/js/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    height: 450,
+	language : 'es',
+    plugins: [
+        "advlist autolink lists preview",
+        "visualblocks code fullscreen",
+        "table contextmenu paste"
+    ],
+    toolbar: "insertfile undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+});
+</script>
+<div id="dialog-message" align="center">
+	<p> Enviando </p>
+	<div class="progress progress-striped active">
+		<div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+	</div>
+</div>
+<div class="main-container">
+<div class="page-content">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <h3 class="header blue lighter"> Despacho Electronico Carta - {siglasCompania} - {numero} - {anio}</h3>
+      </h3>
+    </div>
+  </div>
+  <form class="form-horizontal" method="post" id="principal" name="principal" action="/?do=cartas.procesarCarta">
+    <fieldset>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+        <div class="form-group">
+          <textarea id="texto" name="texto">
+          <p style="text-align: justify;">Estimado Cliente:</p>
+          <p style="text-align: justify;">Adjunto le enviamos en formato electrónico la carta de despacho numero {numero} mediante la cual les hacemos llegar los documentos que se detallan en la misma.</p>
+          <p style="text-align: justify;">Este env&iacute;o incluye nuestra carta de despacho, folleto informativo así como la documentaci&oacute;n emitida por la aseguradora en formato electr&oacute;nico, la misma que podr&aacute;(n) imprimir en sus oficinas tan igual que los originales.</p>
+          <p style="text-align: justify;">Cabe indicar que a partir de Setiembre 2018 los env&iacute;os de documentación simple los haremos en formato PDF por medio de un correo a su dirección electr&oacute;nica, a fin de contribuir con la política general del cuidado del medio ambiente. </p>
+          <p style="text-align: justify;">Gracias por su comprensi&oacute;n, quedamos a su disposici&oacute;n, para cualquier consulta.</p>
+          <p style="text-align: justify;">Atentamente.</p>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                           <tbody>
+                              <tr>
+                                 <td valign="top" width="180">
+                                    <p align="center"><img tabindex="0" src="/assets/unnamed.jpg" alt="" width="200" height="160" /></p>
+                                 </td>
+                                 <td valign="top" width="350">
+                                    <br/><br/><strong><span style="font-size: large;">Julio C. Martinez-Vargas Caro</span>
+                                    <br/><span style="font-size: small;">Asesor Corredor de Seguros</span>
+                                    <br/></strong><br /><strong>Calle Ricardo Angulo, N&ordm; 840, C&oacute;rpac, San Isidro</strong>
+                                    <br/><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><strong><span lang="EN-US">T:&nbsp; &nbsp; &nbsp;(51 1) 611-3604</span></strong></span>
+                                    <br/><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span lang="EN-US"><strong>C:&nbsp; &nbsp; 9927-10108</strong></span></span>
+                                    <br/><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span lang="EN-US">E:&nbsp; &nbsp;</span><a href="mailto:jmartinez@jmvasesores.com" target="_blank" rel="noreferrer"><span lang="EN-US">jmartinez@jmvasesores.com</span></a></span>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="detalle" class="col-sm-3 control-label no-padding-right">Detalle de la Carta </label>
+          <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="detalle" type="text" class="col-sm-12 col-xs-12" id="detalle" placeholder="Detalle" value="{detalle}">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-9 col-sm-offset-3">
+          <input name="cartaPDF" type="checkbox" class="ace" checked />
+					<span class="lbl"> Adjuntar Carta en PDF <a href="/?do=cartas.pdfCarta&idCarta={idCarta}" target="_blank">&lt;ver carta aqui&gt;</a></span>
+					</label>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-9 col-sm-offset-3">
+          <input name="polizaPDF" type="checkbox" class="ace" checked />
+					<span class="lbl"> Adjuntar Poliza en PDF <a href="/?do=cartas.pdfCarta&idCarta={idCarta}" target="_blank">&lt;ver poliza aqui&gt;</a></span>
+					</label>
+        </div>
+        <div class="form-group">
+          <label for="archivos" class="col-sm-3 control-label no-padding-right">Documentos a Adjuntar</label>
+          <div class="col-sm-9 checkbox">
+            <div class="clearfix">
+							<input multiple="" type="file" id="archivos" name="archivos"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="idCarta" name="idCarta" value="{idCarta}" />
+    </fieldset>
+    <div class="clearfix form-actions">
+      <div class="col-md-12 col-sm-12 center">
+        <input id="envio" name="envio" class="btn btn-info" type="submit">
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+				$('#archivos').ace_file_input({
+					style: 'well',
+					btn_choose: 'Arrastre los archivos a adjuntar o haga click aqui',
+					btn_change: null,
+					no_icon: 'ace-icon fa fa-cloud-upload',
+					droppable: true,
+					thumbnail: 'small',
+					preview_error : function(filename, error_code) {
+						//name of the file that failed
+						//error_code values
+						//1 = 'FILE_LOAD_FAILED',
+						//2 = 'IMAGE_LOAD_FAILED',
+						//3 = 'THUMBNAIL_FAILED'
+						//alert(error_code);
+					}
+				}).on('change', function(){
+					console.log($(this).data('ace_input_files'));
+					console.log($(this).data('ace_input_method'));
+				});
+$( "#dialog-message" ).dialog({
+	autoOpen: false,
+	modal: true
+});					
+jQuery(function($) {
+  
+  
+  
+  $("form#principal").submit(function(e) {
+      e.preventDefault();    
+      $( "#dialog-message" ).dialog("open");
+  		$(".ui-dialog-titlebar-close").hide();
+  		tinyMCE.triggerSave();
+      var formData = new FormData(this);
+      
+      
+
+      
+      
+      $.ajax({
+          url: '?do=cartas.enviar',
+          type: 'POST',
+          data: formData,
+  		    dataType: "json",
+          success: function (data) {
+              //alert(data);
+              $( "#dialog-message" ).dialog("close");
+          },
+          cache: false,
+          contentType: false,
+          processData: false
+      });  
+  });
+
+
+
+
+
+});				
+</script>
+</body>
+</html>
