@@ -111,6 +111,22 @@ tinymce.init({
     <div class="row">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1">
         <div class="form-group">
+          <label for="detalle" class="col-sm-3 control-label no-padding-right">Para</label>
+          <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="correos" type="text" class="col-sm-12 col-xs-12" id="correos" placeholder="Detalle" value="{email}">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="detalle" class="col-sm-3 control-label no-padding-right">Asunto del Correo </label>
+          <div class="col-sm-9">
+            <div class="clearfix">
+              <input name="detalle" type="text" class="col-sm-12 col-xs-12" id="detalle" placeholder="Detalle" value="{asunto}">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <textarea id="texto" name="texto">
           <p style="text-align: justify;">Estimado Cliente:</p>
           <p style="text-align: justify;">Adjunto le enviamos en formato electrónico la carta de despacho numero {numero} mediante la cual les hacemos llegar los documentos que se detallan en la misma.</p>
@@ -138,14 +154,6 @@ tinymce.init({
           </textarea>
         </div>
         <div class="form-group">
-          <label for="detalle" class="col-sm-3 control-label no-padding-right">Detalle de la Carta </label>
-          <div class="col-sm-9">
-            <div class="clearfix">
-              <input name="detalle" type="text" class="col-sm-12 col-xs-12" id="detalle" placeholder="Detalle" value="{detalle}">
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
           <label class="col-sm-9 col-sm-offset-3">
           <input name="cartaPDF" type="checkbox" class="ace" checked />
 					<span class="lbl"> Adjuntar Carta en PDF <a href="/?do=cartas.pdfCarta&idCarta={idCarta}" target="_blank">&lt;ver carta aqui&gt;</a></span>
@@ -153,15 +161,20 @@ tinymce.init({
         </div>
         <div class="form-group">
           <label class="col-sm-9 col-sm-offset-3">
+          <block start="noPDF"/>
+					<span class="lbl">No hay poliza adjunta</span>
+          <block end="noPDF"/>
+          <block start="siPDF"/>
           <input name="polizaPDF" type="checkbox" class="ace" checked />
-					<span class="lbl"> Adjuntar Poliza en PDF <a href="/?do=cartas.pdfCarta&idCarta={idCarta}" target="_blank">&lt;ver poliza aqui&gt;</a></span>
+					<span class="lbl"> Adjuntar Poliza en PDF <a href="uploads/{pdf}" target="_blank">&lt;ver poliza aqui&gt;</a></span>
+          <block end="siPDF"/>
 					</label>
         </div>
         <div class="form-group">
           <label for="archivos" class="col-sm-3 control-label no-padding-right">Documentos a Adjuntar</label>
           <div class="col-sm-9 checkbox">
             <div class="clearfix">
-							<input multiple="" type="file" id="archivos" name="archivos"/>
+							<input multiple="" type="file" id="archivos" name="archivos[]"/>
             </div>
           </div>
         </div>
@@ -201,20 +214,12 @@ $( "#dialog-message" ).dialog({
 	modal: true
 });					
 jQuery(function($) {
-  
-  
-  
   $("form#principal").submit(function(e) {
       e.preventDefault();    
       $( "#dialog-message" ).dialog("open");
   		$(".ui-dialog-titlebar-close").hide();
   		tinyMCE.triggerSave();
       var formData = new FormData(this);
-      
-      
-
-      
-      
       $.ajax({
           url: '?do=cartas.enviar',
           type: 'POST',
@@ -229,12 +234,10 @@ jQuery(function($) {
           processData: false
       });  
   });
-
-
-
-
-
-});				
+});		
+//$(function() {
+//  $('#correos').multiple_emails({position: 'bottom'});
+//});
 </script>
 </body>
 </html>

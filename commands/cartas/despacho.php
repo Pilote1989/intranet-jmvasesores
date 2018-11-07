@@ -13,6 +13,16 @@ class despacho extends sessionCommand{
 			//$this->addVar("carta", $carta->getCarta("CARTA"));
 			$this->addVar("detalle", $carta->getDetalle());
 			$this->addVar("idPoliza", $carta->getIdPoliza());
+			$poliza = Fabrica::getFromDB("Poliza",$carta->getIdPoliza());
+			$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
+			$cliente = Fabrica::getFromDB("Cliente", $poliza->getIdCliente());
+			$this->addVar("asunto", "Despacho de Documentos - Cliente : ".$cliente->getNombre()." - Poliza : " . $ramo->getSigla() . "-". $poliza->getNumeroPoliza() );
+			$this->addVar("pdf", $poliza->getPdf());
+			if($poliza->getPdf()==""){
+				$this->addBlock("noPDF");
+			}else{
+				$this->addBlock("siPDF");
+			}
 			$this->processTemplate("cartas/despacho.html");
 		}
 	}
