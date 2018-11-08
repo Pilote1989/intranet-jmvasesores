@@ -39,7 +39,6 @@ class enviar extends sessionCommand{
 		$temp = str_replace("assets/unnamed.jpg", "cid:logo", $temp);
 		$mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT']."/assets/unnamed.jpg", "logo", "logo.jpg");
 		$mail->Body     =  $temp;
-		echo $temp;
 		$mail->CharSet = "UTF-8";
 		if($poliza->getPdf()!="" && $this->request->polizaPDF=="on"){
 			//adjuntar el pdf
