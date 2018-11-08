@@ -20,7 +20,7 @@ class enviar extends sessionCommand{
                 }
             }
         }
-		$mail->SMTPDebug = 3;
+		$mail->SMTPDebug = 0;
 		$mail->isSMTP();  
 		$mail->Host = 'smtp-relay.gmail.com';
 		$mail->SMTPAuth = true; 
