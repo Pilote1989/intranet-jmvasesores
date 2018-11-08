@@ -29,7 +29,7 @@ class enviar extends sessionCommand{
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587; 
 		$mail->setFrom('no-responder@jmvasesores.com', 'JMV Asesores - Despacho de Documentos');
-		//$mail->addBCC('jmartinez@jmvasesores.com');
+		$mail->addBCC('jmartinez@jmvasesores.com');
 		$mail->IsHTML(true);
 		$mail->Subject  =  $this->request->idPoliza;
 		$mail->addReplyTo("jmartinez@jmvasesores.com","Despacho de Documentos");
