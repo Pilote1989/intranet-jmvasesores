@@ -23,6 +23,10 @@
         <link rel="stylesheet" href="assets/css/ace.min.css" />
         <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
         <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+        <link rel="stylesheet" href="assets/css/multiple-emails.css" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
         <!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
@@ -78,6 +82,7 @@ html {
 
 <script src="assets/js/ace-elements.min.js"></script> 
 <script src="assets/js/ace.min.js"></script>
+<script src="assets/js/multiple-email.js"></script>
 <script type="text/javascript" src="tinymce/js/tinymce.min.js"></script>
 <script type="text/javascript">
 tinymce.init({
@@ -106,15 +111,15 @@ tinymce.init({
       </h3>
     </div>
   </div>
-  <form class="form-horizontal" method="post" id="principal" name="principal" action="/?do=cartas.procesarCarta">
-    <fieldset>
+  <form class="form-horizontal" method="post" id="principal" name="principal" enctype="multipart/form-data" action="/?do=cartas.procesarCarta">
+    <fieldset style="border:0;">
     <div class="row">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1">
         <div class="form-group">
           <label for="detalle" class="col-sm-3 control-label no-padding-right">Para</label>
           <div class="col-sm-9">
             <div class="clearfix">
-              <input name="correos" type="text" class="col-sm-12 col-xs-12" id="correos" placeholder="Detalle" value="{email}">
+              <input name="correos" type="text" class="col-sm-12 col-xs-12" id="correos" placeholder="Detalle" value='<block start="sicorreo"/>["{correo}"]<block end="sicorreo"/>'>
             </div>
           </div>
         </div>
@@ -215,29 +220,82 @@ $( "#dialog-message" ).dialog({
 });					
 jQuery(function($) {
   $("form#principal").submit(function(e) {
-      e.preventDefault();    
-      $( "#dialog-message" ).dialog("open");
-  		$(".ui-dialog-titlebar-close").hide();
-  		tinyMCE.triggerSave();
-      var formData = new FormData(this);
-      $.ajax({
-          url: '?do=cartas.enviar',
-          type: 'POST',
-          data: formData,
-  		    dataType: "json",
-          success: function (data) {
-              //alert(data);
-              $( "#dialog-message" ).dialog("close");
-          },
-          cache: false,
-          contentType: false,
-          processData: false
-      });  
+      e.preventDefault();
+      if($("#detalle").valid() && $('#correos').valid()){
+        $( "#dialog-message" ).dialog("open");
+    		$(".ui-dialog-titlebar-close").hide();
+    		tinyMCE.triggerSave();
+        var formData = new FormData(this);
+        $.ajax({
+            url: '?do=cartas.enviar',
+            type: 'POST',
+            data: formData,
+    		    dataType: "json",
+            success: function (data) {
+                //alert(data);
+                $( "#dialog-message" ).dialog("close");
+                window.close();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });  
+      }
   });
-});		
-//$(function() {
-//  $('#correos').multiple_emails({position: 'bottom'});
-//});
+  $('#correos').multiple_emails({position: 'bottom'});
+
+	$('#principal').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		rules: {
+			correos: {
+				minlength: 3,
+			},
+			detalle: {
+				required: true,
+			},
+		},
+		messages: {
+			correos: {
+				minlength: "Ingrese al menos un correo",
+			},
+			detalle: {
+				required: "Ingrese el asunto del correo",
+			},
+		},
+		invalidHandler: function (event, validator) {
+			$('.alert-danger', $('.login-form')).show();
+		},
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+			$(e).remove();
+			
+		},
+		errorPlacement: function (error, element) {
+			if(element.is(':checkbox') || element.is(':radio')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+	});  
+  
+  
+  
+});
+
+
 </script>
 </body>
 </html>

@@ -25,10 +25,7 @@
         <td align="center"> {cartas.fecha} </td>
         <td align="center"> {cartas.despacho} </td>
         <td align="center"><div class="action-buttons">
-            <a class="blue abreLink" x-link="/?do=cartas.despacho&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-envelope bigger-130"></i> </a> 
-            <a class="blue abreLink" x-link="/?do=cartas.editar&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> 
-            <a class="blue abreLink" x-link="/?do=cartas.procesarCarta&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-print bigger-130"></i> </a> 
-            <a class="blue elimina" x-link="/?do=cartas.eliminarCarta&idCarta={cartas.idCarta}" href="#"> <i class="ace-icon fa fa-trash bigger-130"></i> </a>
+        		{cartas.acciones}
           </div></td>
       </tr>
       <loop end="cartas"/>

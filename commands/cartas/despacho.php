@@ -16,6 +16,10 @@ class despacho extends sessionCommand{
 			$poliza = Fabrica::getFromDB("Poliza",$carta->getIdPoliza());
 			$ramo = Fabrica::getFromDB("Ramo", $poliza->getIdRamo());
 			$cliente = Fabrica::getFromDB("Cliente", $poliza->getIdCliente());
+			if(filter_var($cliente->getCorreo(), FILTER_VALIDATE_EMAIL)){
+				$this->addBlock("sicorreo");
+				$this->addVar("correo", $cliente->getCorreo());
+			}
 			$this->addVar("asunto", "Despacho de Documentos - Cliente : ".$cliente->getNombre()." - Poliza : " . $ramo->getSigla() . "-". $poliza->getNumeroPoliza() );
 			$this->addVar("pdf", $poliza->getPdf());
 			if($poliza->getPdf()==""){

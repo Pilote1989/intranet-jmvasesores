@@ -23,7 +23,24 @@ class verCorrespondencia extends sessionCommand{
 				$listaCartas[$i]["numero"] = $fc->appSettings["siglasCompania"] . " - " . sprintf('%05d', $carta->getId()) . " - " . $pieces[0];
 				$listaCartas[$i]["detalle"] = $carta->getDetalle();
     			$listaCartas[$i]["idCarta"] = $carta->getId();
-				//echo $cupon->getId();
+    			
+    			if(validateDate($carta->getDespacho("DATE"), 'd/m/Y')){
+    				//valido, enviado
+    				$listaCartas[$i]["despacho"] = '<span class="label label-success">Enviada el '.$carta->getDespacho("DATE").'</span>';
+	    			$listaCartas[$i]["acciones"] = '
+			            <a class="blue abreLink" x-link="/cartas/carta'.$carta->getId().'.pdf" href="#"> <i class="ace-icon fa fa-envelope bigger-130"></i> </a>  
+			            <a class="blue abreLink" x-link="/?do=cartas.procesarCarta&idCarta='.$carta->getId().'" href="#"> <i class="ace-icon fa fa-print bigger-130"></i> </a>   			
+	    			';
+    			}else{
+    				//no fecha
+    				$listaCartas[$i]["despacho"] = '<span class="label">Pendiente</span>';
+    				$listaCartas[$i]["acciones"] = '
+			            <a class="blue abreLink" x-link="/?do=cartas.despacho&idCarta='.$carta->getId().'" href="#"> <i class="ace-icon fa fa-envelope bigger-130"></i> </a> 
+			            <a class="blue abreLink" x-link="/?do=cartas.editar&idCarta='.$carta->getId().'" href="#"> <i class="ace-icon fa fa-search-plus bigger-130"></i> </a> 
+			            <a class="blue abreLink" x-link="/?do=cartas.procesarCarta&idCarta='.$carta->getId().'" href="#"> <i class="ace-icon fa fa-print bigger-130"></i> </a> 
+			            <a class="blue elimina" x-link="/?do=cartas.eliminarCarta&idCarta='.$carta->getId().'" href="#"> <i class="ace-icon fa fa-trash bigger-130"></i> </a>    			
+	    			';
+    			}
 				$i++;
 			}
 			$this->addVar("idPoliza",$this->request->idPoliza);
@@ -31,5 +48,9 @@ class verCorrespondencia extends sessionCommand{
 			$this->processTemplate("polizas/verCorrespondencia.html");
 		}
 	}
+}
+function validateDate($date, $format = 'Y-m-d H:i:s'){
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
 }
 ?>
