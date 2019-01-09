@@ -190,25 +190,12 @@
 							<input name="observaciones" class="col-sm-12 col-xs-12" type="text"  id="observaciones" onKeyPress="return disableEnterKey(event)" placeholder="Observaciones">
 						</div>
 					</div>
-					<block start="polizaPDF"/>
 					<div class="form-group">
 						<label for="file" class="col-sm-3 control-label no-padding-right">Poliza en PDF </label>
 						<div class="col-sm-9">
-							<div class="ace-file-input">
-								<input type="file" id="pdf">
-								<label data-title="Choose" class="file-label"><span data-title="Escoja ..." class="file-name"><i class="ace-icon fa fa-upload-alt"></i></span></label>
-								<a href="#" class="remove"><i class="ace-icon fa fa-remove"></i></a></div>
+							<input type="file" id="pdf" name="pdf">
 						</div>
 					</div>
-					<block end="polizaPDF"/>
-					<block start="polizaPDFn"/>
-					<div class="form-group">
-						<label for="file" class="col-sm-3 control-label no-padding-right">Poliza en PDF </label>
-						<div class="col-sm-9">
-							<input type="file" id="pdf">
-						</div>
-					</div>
-					<block end="polizaPDFn"/>
 				</fieldset>
 				<div class="form-actions center">
 				
@@ -233,13 +220,10 @@
 			btn_change:'Cambiar',
 			droppable:false,
 			onchange:null,
-			thumbnail:false, //| true | large
-			whitelist:'gif|png|jpg|jpeg',
+			thumbnail:false,
+			whitelist:'pdf',
 			blacklist:'exe|php',
-			//onchange:''
-			//
-		}); 		
-		
+		});
 		jQuery("#moneda").val('{moneda}');
 		jQuery("#idPersona").val({idPersona}).change();
     });

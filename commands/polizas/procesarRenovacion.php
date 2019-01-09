@@ -48,10 +48,10 @@ class procesarRenovacion extends sessionCommand{
 		$renovacion->setTotal($this->request->total);
 		$renovacion->setComision($this->request->comision);
 		$renovacion->setIntereses($this->request->intereses);
-		$renovacion->setTipo("REN");		
+		$renovacion->setTipo("REN");	
 		//inicio - manejo de archivos
 		$target_path = "uploads/";
-		$db = time() . "-" . basename( $_FILES['pdf']['name']);
+		$db = time() . "-" . substr(md5(basename( $_FILES['pdf']['name'])), 0 , 4) . ".pdf";
 		$target_path = $target_path . $db;
 		if ($_FILES["pdf"]["type"] == "application/pdf"){
 			if ($_FILES["pdf"]["error"] > 0){
@@ -59,7 +59,7 @@ class procesarRenovacion extends sessionCommand{
 			}elseif(!move_uploaded_file($_FILES['pdf']['tmp_name'], $target_path)){
 				echo 'Error al subir el archivo';
 			}else{
-				$renovacion->setPdf($db);	
+				$renovacion->setPdf($db);
 			}
 		}else{
 			echo 'El archivo no es un pdf';

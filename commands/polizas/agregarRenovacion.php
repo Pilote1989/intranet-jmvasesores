@@ -47,7 +47,6 @@ class agregarRenovacion extends sessionCommand{
 				$selectPersona=$selectPersona.'\n<option value="'.$persona->getId().'" x-com='.$persona->getComision().'>'.$persona->getNombres().' '.$persona->getApellidoPaterno().' '.$persona->getApellidoMaterno().'</option>';
 			}
 			$this->addVar("personas",$selectPersona);
-			$this->addBlock("polizaPDF");
 		}else{
 			
 			

@@ -51,14 +51,13 @@ class procesarDatosBasicos extends sessionCommand{
 		$target_path = "uploads/";
 		$db = time() . "-" . substr(md5(basename( $_FILES['pdf']['name'])), 0 , 4) . ".pdf";
 		$target_path = $target_path . $db;
-		//print_r($_FILES);
 		if ($_FILES["pdf"]["type"] == "application/pdf"){
 			if ($_FILES["pdf"]["error"] > 0){
 				echo "Return Code: " . $_FILES["pdf"]["error"] . "<br>";
 			}elseif(!move_uploaded_file($_FILES['pdf']['tmp_name'], $target_path)){
 				echo 'Error al subir el archivo';
 			}else{
-				$poliza->setPdf($db);	
+				$poliza->setPdf($db);
 			}
 		}else{
 			echo 'El archivo no es un pdf.';
