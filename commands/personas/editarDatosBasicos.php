@@ -17,6 +17,11 @@ class editarDatosBasicos extends sessionCommand{
 				$this->addVar("apellidoMaterno", $persona->getApellidoMaterno());
 				$this->addVar("usuario", $persona->getUserName());
 				$this->addVar("comision", $persona->getComision());
+				if($persona->getVendedor()==1)
+					$this->addVar("vendedor", " checked ");
+				else
+					$this->addEmptyVar("vendedor");				
+				
 				$this->addLayout("ace");
 				$this->processTemplate("personas/editarDatosBasicos.html");
 				

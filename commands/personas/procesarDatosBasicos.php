@@ -16,6 +16,11 @@ class procesarDatosBasicos extends sessionCommand{
 				$persona->setRuc($this->request->ruc);
 				$persona->setUserName($this->request->usuario);
 				$persona->setComision($this->request->comision);
+				if($this->request->vendedor){
+					$persona->setVendedor(1);
+				}else{
+					$persona->setVendedor(0);
+				}
 				$persona->storeIntoDB();
 				$fc->redirect("?do=personas.verDatosBasicos&idPersona=" . $this->request->idPersona);
 			}else{
