@@ -141,6 +141,12 @@
                                 </div>
                               </div>
                             </div>
+                            <div class="form-group">
+									            <label for="file" class="col-sm-3 control-label no-padding-right">Factura en PDF </label>
+									            <div class="col-sm-9">
+									              <input type="file" id="pdf" name="pdf">
+									            </div>
+									          </div>
                           </div>
                           <div class="row">
                             <div class="col-xs-12 label label-lg label-info arrowed-in arrowed-right">
@@ -225,6 +231,18 @@
 <block end="bloqueEditarLiquidacion"/>
 
 <script>
+    jQuery(document).ready(function() {
+			jQuery('#pdf').ace_file_input({
+				no_file:'Escoja ...',
+				btn_choose:'Subir',
+				btn_change:'Cambiar',
+				droppable:false,
+				onchange:null,
+				thumbnail:false,
+				whitelist:'pdf',
+				blacklist:'exe|php',
+			}); 	
+		}); 	
 	$('#principal2').validate({
 		errorElement: 'div',
 		errorClass: 'help-block',

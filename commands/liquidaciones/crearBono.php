@@ -25,6 +25,13 @@ class crearBono extends sessionCommand{
 			$this->addVar("igv",$liquidacion->getIgv());
 			$this->addVar("totalFac",$liquidacion->getTotalFactura());
 			$this->addVar("idLiquidacion",$liquidacion->getId());
+			if($liquidacion->getPdf()==""){
+				$this->addBlock("facturaPDFn");
+			}else{
+				$this->addBlock("facturaPDF");
+				$this->addVar("pdf",$liquidacion->getPdf());	
+				
+			}
 			$selectCompania = '<option value=""></option>';
 			foreach($companias as $compania){
 				if($liquidacion->getIdCompania() == $compania->getId()){
@@ -45,6 +52,7 @@ class crearBono extends sessionCommand{
 			$this->addEmptyVar("fechaFactura");	
 			$this->addEmptyVar("idLiquidacion");
 			$this->addEmptyVar("obser");
+			$this->addBlock("facturaPDFn");
 			$this->addVar("subTotal","0.00");
 			$this->addVar("igv","0.00");
 			$this->addVar("totalFac","0.00");

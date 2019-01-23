@@ -26,6 +26,24 @@
           </div>
           <!-- row -->
           
+          <div class="profile-user-info profile-user-info-striped">
+          	<div class="profile-info-row">
+          		<div class="profile-info-name" style="min-width:250px;"> Factura en PDF </div>
+          		<div class="profile-info-value">
+          			<block start="siPDF"/>
+          			<a href="uploads/{pdf}" target="_blank"><i class="ace-icon fa fa-save"></i> Descargar</a> 
+          			<div class="action-buttons inline">
+          				<a href="#" class="red" style="border-bottom:0px;outline:none;" id="eliminarPDF">
+          					<i class="ace-icon fa fa-times-circle"></i>
+          				</a>
+          			</div>
+          			<block end="siPDF"/>
+          			<block start="noPDF"/>
+          			No hay archivo
+          			<block end="noPDF"/>
+          			&nbsp; </div>
+          	</div>
+        	</div>
           <block start="vacio"/>
           <div class="space">
           </div>

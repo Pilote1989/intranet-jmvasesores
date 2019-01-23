@@ -55,6 +55,34 @@
                               </div>
                             </div>
                           </div>
+									          <block start="facturaPDF"/>
+									          <div class="form-group">
+									            <label for="file" class="col-sm-3 control-label no-padding-right">Factura en PDF </label>
+									            <div class="col-sm-9">
+									              <input type="file" id="pdf" name="pdf">
+									            </div>
+									          </div>
+									          <div class="form-group">
+									            <div class="col-sm-3">
+									            </div>
+									            <div class="col-sm-9">
+									              <div class="alert alert-block alert-warning">
+									                <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
+									                <p> <strong> <i class="ace-icon fa fa-exclamation-triangle"></i> ¡Atenci&oacute;n!</strong><br />
+									                  Ya existe un archivo PDF, si escoje un PDF si sube un nuevo archivo el anterior sera eliminado. </p>
+									                <p> <a class="btn btn-sm btn-warning" id="descargarPdf" target="_blank" href="uploads/{pdf}"> Dercargar Archivo <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </a> </p>
+									              </div>
+									            </div>
+									          </div>
+									          <block end="facturaPDF"/>
+									          <block start="facturaPDFn"/>
+									          <div class="form-group">
+									            <label for="file" class="col-sm-3 control-label no-padding-right">Factura en PDF </label>
+									            <div class="col-sm-9">
+									              <input type="file" id="pdf" name="pdf">
+									            </div>
+									          </div>
+									          <block end="facturaPDFn"/>                                                      
                         </div>
                         <hr/>
                       </div>
@@ -115,6 +143,19 @@
   </div>
 </div>
 <script>
+
+    jQuery(document).ready(function() {
+			jQuery('#pdf').ace_file_input({
+				no_file:'Escoja ...',
+				btn_choose:'Subir',
+				btn_change:'Cambiar',
+				droppable:false,
+				onchange:null,
+				thumbnail:false,
+				whitelist:'pdf',
+				blacklist:'exe|php',
+			}); 	
+		}); 	
   $('#loading').hide();
 	$('#principal2').validate({
 		errorElement: 'div',

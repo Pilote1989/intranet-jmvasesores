@@ -48,6 +48,22 @@
                     {moneda}
                   </div>
                 </div>
+              	<div class="profile-info-row">
+              		<div class="profile-info-name" style="min-width:250px;"> Factura en PDF </div>
+              		<div class="profile-info-value">
+              			<block start="siPDF"/>
+              			<a href="uploads/{pdf}" target="_blank"><i class="ace-icon fa fa-save"></i> Descargar</a> 
+              			<div class="action-buttons inline">
+              				<a href="#" class="red" style="border-bottom:0px;outline:none;" id="eliminarPDF">
+              					<i class="ace-icon fa fa-times-circle"></i>
+              				</a>
+              			</div>
+              			<block end="siPDF"/>
+              			<block start="noPDF"/>
+              			No hay archivo
+              			<block end="noPDF"/>
+              			&nbsp; </div>
+              	</div>
               </div>
           </div>
           <div>
@@ -115,7 +131,51 @@
     </div>
     <p class="bigger-110 bolder center grey"> <i class="ace-icon fa fa-hand-right blue bigger-120"></i> ¿Esta seguro? </p>
   </div>
+<div id="dialog-eliminarPDF" class="hide">
+	<div class="alert alert-info bigger-110">
+		El archivo se eliminara permanentemente.
+	</div>
+	<div class="space-6"></div>
+	<p class="bigger-110 bolder center grey">
+		<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+		¿Esta seguro?
+	</p>
+</div>
 <script>
+$(function() {
+	$('#eliminarPDF').on('click', function(e){
+		e.preventDefault();
+		$( "#dialog-eliminarPDF" ).removeClass('hide').dialog({
+			resizable: false,
+			width: '320',
+			modal: true,
+			title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> ¿Eliminar el archivo guardado?</h4></div>",
+			title_html: true,
+			buttons: [
+				{
+					html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Eliminar",
+					"class" : "btn btn-danger btn-minier",
+					click: function() {
+						$.getJSON("?do=liquidaciones.eliminarPDF&idLiquidacion={idLiquidacion}", function( data ) {
+							console.log(data);
+						  location.reload();
+						});
+						$( this ).dialog( "close" );
+						
+					}
+				},
+				{
+					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancelar",
+					"class" : "btn btn-minier",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		});
+		return;
+	})
+});
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 	_title: function(title) {
 		if (!this.options.title ) {

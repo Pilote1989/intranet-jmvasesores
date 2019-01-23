@@ -21,6 +21,20 @@ class procesarDatosBasicos extends SessionCommand{
 			$liquidacion->setMoneda($this->request->mon);
 			$liquidacion->setIgv($this->request->igv);
 			$liquidacion->setTotalFactura($this->request->totalFac);
+			$target_path = "uploads/";
+			$db = time() . "-" . substr(md5(basename( $_FILES['pdf']['name'])), 0 , 4) . ".pdf";
+			$target_path = $target_path . $db;
+			if ($_FILES["pdf"]["type"] == "application/pdf"){
+				if ($_FILES["pdf"]["error"] > 0){
+					echo "Return Code: " . $_FILES["pdf"]["error"] . "<br>";
+				}elseif(!move_uploaded_file($_FILES['pdf']['tmp_name'], $target_path)){
+					echo 'Error al subir el archivo';
+				}else{
+					$liquidacion->setPdf($db);
+				}
+			}else{
+				echo 'El archivo no es un pdf.';
+			}				
 			$liquidacion->storeIntoDB();
 			$i = 0;
 			foreach($this->request->idCobro as $idCobro){
@@ -42,6 +56,21 @@ class procesarDatosBasicos extends SessionCommand{
 			$liquidacion->setMoneda($this->request->mon);
 			$liquidacion->setIgv($this->request->igv);
 			$liquidacion->setTotalFactura($this->request->totalFac);
+			$target_path = "uploads/";
+			$db = time() . "-" . substr(md5(basename( $_FILES['pdf']['name'])), 0 , 4) . ".pdf";
+			$target_path = $target_path . $db;
+			if ($_FILES["pdf"]["type"] == "application/pdf"){
+				if ($_FILES["pdf"]["error"] > 0){
+					echo "Return Code: " . $_FILES["pdf"]["error"] . "<br>";
+				}elseif(!move_uploaded_file($_FILES['pdf']['tmp_name'], $target_path)){
+					echo 'Error al subir el archivo';
+				}else{
+					$liquidacion->setPdf($db);
+				}
+			}else{
+				echo 'El archivo no es un pdf.';
+			}				
+			
 			$liquidacion->storeIntoDB();
 			$dbLink=&FrontController::instance()->getLink();
 			$dbLink->next_result();
@@ -58,6 +87,7 @@ class procesarDatosBasicos extends SessionCommand{
 			}
 			//print_r($this->request);
 		}
+
 		$fc->redirect("?do=liquidaciones.ver&idLiquidacion=" . $id);
 	}
 }

@@ -53,6 +53,13 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addVar("compania",$compania->getId());
 			$this->addVar("companiaNombre",$compania->getNombre());
 			
+			if($liquidacion->getPdf()==""){
+				$this->addBlock("facturaPDFn");
+			}else{
+				$this->addBlock("facturaPDF");
+				$this->addVar("pdf",$liquidacion->getPdf());	
+				
+			}
 
 			$this->addLayout("ace");
 			$this->processTemplate("liquidaciones/editarDatosBasicos.html");
@@ -60,6 +67,7 @@ class editarDatosBasicos extends sessionCommand{
 		}else{
 			$this->addBlock("bloqueEditarLiquidacion");
 			$this->addVar("editar","Crear Liquidacion");
+			$this->addBlock("facturaPDFn");
 			$this->addEmptyVar("mon");
 			$companias=Fabrica::getAllFromDB("Compania",array(),"nombre ASC");	
 			$selectCompania = '<option value=""></option>';
