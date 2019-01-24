@@ -8,6 +8,7 @@ class ver extends sessionCommand{
 		$this->addVar("idLiquidacion", $this->request->idLiquidacion);
 		$this->addVar("numeroFactura", $liquidacion->getFactura());
 		$this->addVar("fechaFactura", $liquidacion->getFechaFactura("DATE"));
+		$this->addVar("moneda", $liquidacion->getMoneda());
 		$this->addVar("pdf", $liquidacion->getPdf());
 		if($liquidacion->getPdf()==""){
 			$this->addBlock("noPDF");
