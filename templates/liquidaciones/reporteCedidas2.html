@@ -24,20 +24,6 @@
             <th class="col-xs-1">Cedida</th>
           </tr>
         </thead>
-        <tfoot>
-          <tr>
-            <td colspan="7" class="center"><strong>SubTotal</strong></td>
-            <td class="center"><strong>{facturas.subTotal}</strong></td>
-          </tr>
-          <tr>
-            <td colspan="7" class="center"><strong>IGV</strong></td>
-            <td class="center"><strong>{facturas.IGV}</strong></td>
-          </tr>
-          <tr>
-            <td colspan="7" class="center"><strong>Total Factura</strong></td>
-            <td class="center"><strong>{facturas.total}</strong></td>
-          </tr>
-        </tfoot>
         <tbody>
           <loop start="facturas.cobros"/>
           <tr>
@@ -52,6 +38,20 @@
           </tr>
           <loop end="facturas.cobros"/>
         </tbody>
+        <tfoot style="display: table-row-group">
+          <tr>
+            <td colspan="7" class="center"><strong>SubTotal</strong></td>
+            <td class="center"><strong>{facturas.subTotal}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="7" class="center"><strong>IGV</strong></td>
+            <td class="center"><strong>{facturas.IGV}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="7" class="center"><strong>Total Factura</strong></td>
+            <td class="center"><strong>{facturas.total}</strong></td>
+          </tr>
+        </tfoot>
       </table>
     <loop end="facturas"/>
   </div>
