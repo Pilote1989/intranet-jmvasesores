@@ -333,7 +333,7 @@ $("#siguiente").click(function() {
 					'<td><input name="facComisionP[]" class="input-small" type="text" value="' + this.comCP + '"/></td>' + 
 					'<td><input name="facComision[]" class="input-small comisionEdita" type="text" value="' + this.comC + '"/></td>' + 
 					'</tr>');
-					suma += parseFloat(this.com);
+					suma += parseFloat(this.comC);
 					$('#subTotal').val(suma.toFixed(2));
 					$('#igv').val((suma * 0.18).toFixed(2));
 					$('#totalFac').val((suma * 1.18).toFixed(2));
