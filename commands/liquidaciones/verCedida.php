@@ -7,6 +7,7 @@ class verCedida extends sessionCommand{
 		$cedida = Fabrica::getFromDB("Cedida",$this->request->idCedida);
 		$this->addVar("idCedida", $this->request->idCedida);
 		$this->addVar("numeroFactura", $cedida->getFactura());
+		$this->addVar("moneda", $cedida->getMoneda());
 		$this->addVar("fechaFactura", $cedida->getFechaFactura("DATE"));
 		if($cedida->getObservaciones()==""){
 			$this->addVar("observaciones", "-");
