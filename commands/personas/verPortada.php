@@ -11,6 +11,38 @@ class verPortada extends sessionCommand{
 			$fc->redirect("?do=home");
 		}
 		$temporal = "";
+		
+		$mesCheck = Fabrica::getAllFromDB("Mes", array("mes = '" . date('n') . "'","anio = '" . date('Y') . "'"));	
+		if(count($mesCheck) == 0){
+			$this->addBlock("crearMes");
+			$exchangeRate = 0;
+		}else{
+			$exchangeRate = $mesCheck[0]->getTc();
+		}
+		
+			
+		/*else{
+			//$url = "http://www.google.com/finance/converter?a=1&from=USD&to=PEN";
+			$url = "http://finance.google.com/finance/converter?a=1&from=USD&to=PEN"; 
+			$url = "https://www.google.com.pe/search?q=1+usd+to+pen";
+			$request = curl_init(); 
+			$timeOut = 0; 
+			curl_setopt ($request, CURLOPT_URL, $url); 
+			curl_setopt ($request, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt ($request, CURLOPT_USERAGENT,"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)"); 
+			curl_setopt ($request, CURLOPT_CONNECTTIMEOUT, $timeOut); 
+			$response = curl_exec($request); 
+			curl_close($request); 
+			//echo $response;
+			//$regularExpression     = '#\<span class=bld\>(.+?)\<\/span\>#s';
+			$regularExpression = '#\<div class=\"J7UKTe\"\>(.+?)\<\/div\>#s';
+			preg_match($regularExpression, $response, $finalData);
+			$exchangeRate = 3.23;
+			
+		}*/
+		
+		
+		
 		if($this->checkAccess("crearUsuario", true)){
 			
 			$sMes = array(
@@ -89,26 +121,13 @@ class verPortada extends sessionCommand{
 			$this->addVar("porVencer", $porVencer);
 			$this->addVar("recordatoriosPorEnviar", $recordatoriosPorEnviar);
 			
+			
+			
 			$tempMes = 10;
 			$tempAnio = 2016;
-			
-			//$url = "http://www.google.com/finance/converter?a=1&from=USD&to=PEN";
-			$url = "http://finance.google.com/finance/converter?a=1&from=USD&to=PEN"; 
-			$url = "https://www.google.com.pe/search?q=1+usd+to+pen";
-			$request = curl_init(); 
-			$timeOut = 0; 
-			curl_setopt ($request, CURLOPT_URL, $url); 
-			curl_setopt ($request, CURLOPT_RETURNTRANSFER, 1); 
-			curl_setopt ($request, CURLOPT_USERAGENT,"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)"); 
-			curl_setopt ($request, CURLOPT_CONNECTTIMEOUT, $timeOut); 
-			$response = curl_exec($request); 
-			curl_close($request); 
-			//echo $response;
-			//$regularExpression     = '#\<span class=bld\>(.+?)\<\/span\>#s';
-			$regularExpression = '#\<div class=\"J7UKTe\"\>(.+?)\<\/div\>#s';
-			preg_match($regularExpression, $response, $finalData);
-			$exchangeRate = 3.23;
 			//$exchangeRate = substr($finalData[0],16,6);
+			//nuevo!!!!!
+			//http://free.currencyconverterapi.com/api/v5/convert?q=USD_PEN&compact=y
 			$this->addVar("tc",$exchangeRate);
 			$sqlCompania = "
 				SELECT SQL_CALC_FOUND_ROWS  `compania` , moneda, TRUNCATE( SUM( IF(  `moneda` =  'Soles',  `comision` / " . $exchangeRate . ", `comision` ) ) , 2 ) AS valor
@@ -260,10 +279,6 @@ class verPortada extends sessionCommand{
 			$this->addLoop("meses",$meses);
 			
 			
-		}
-		$mesCheck = Fabrica::getAllFromDB("Mes", array("mes = '" . date('n') . "'","anio = '" . date('Y') . "'"));	
-		if(count($mesCheck) == 0){
-			$this->addBlock("crearMes");
 		}
 		
 		// Nombre

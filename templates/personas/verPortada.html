@@ -183,7 +183,7 @@
   <block start="crearMes"/>
   var alerta = $.gritter.add({
 		title: '¡Atencion!',
-		text: 'El mes de actual aun no ha sido abierto, no se podran crear facturas ni agregar compras. <p><button id="crearMes" class="btn btn-warning btn-sm" x-link="/?do=contabilidad.crearMes">Crear Mes</button> <button class="btn btn-sm" href="/?do=contabilidad.meses">No Crear</button></p>',
+		text: 'El mes de actual aun no ha sido abierto, no se podran crear facturas ni agregar compras. <br/><b>Tipo de Cambio:</b><br/><form id="tipodecambio"><input class="input-sm" type="number" name="tc" id="tc" value="{tc}"></form><br/><button id="crearMes" class="btn btn-warning btn-sm" x-link="/?do=contabilidad.crearMes">Crear Mes</button> <button class="btn btn-sm" href="/?do=contabilidad.meses">No Crear</button>',
 		image: 'assets/avatars/user.jpg',
 		sticky: true,
 		time: '',
@@ -195,6 +195,7 @@
     $("#crearMes").html('<img src="assets/img/loading.gif"/> Creando');
     $.ajax({
       url: $(this).attr('x-link'),
+      data: $('#tipodecambio').serialize(),
       success: function(responseText){
         $.gritter.remove(alerta, {
           fade: true,

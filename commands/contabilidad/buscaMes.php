@@ -31,6 +31,7 @@ class buscaMes extends sessionCommand{
 			$this->addVar("idMes",$this->request->id);
 			$this->addVar("color",$mes->estadoColor());
 			
+			$this->addVar("tc",number_format($mes->getTc(),2));
 			$this->addVar("primaNetaDolares",number_format($mes->getPrimaNetaDolares(),2));
 			$this->addVar("comisionDolares",number_format($mes->getComisionDolares(),2));
 			$this->addVar("igvFacturasDolares",number_format($mes->getIgvFacturasDolares(),2));

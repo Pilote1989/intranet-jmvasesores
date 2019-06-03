@@ -9,13 +9,15 @@ class crearMes extends sessionCommand{
 		//reviso si esta creado
 		$fc->import("lib.Mes");
 		
-		$response["respuesta"]="FAIL";
+		$response["tc"]=$this->request->tc;
+		$response["respuesta"]="SUCCESS";
 		$mesCheck = Fabrica::getAllFromDB("Mes", array("mes = '" . date('n') . "'","anio = '" . date('Y') . "'"));	
 		if(count($mesCheck) == 0){
 			$mes = new Mes();
 			$mes->setEstado(0);
 			$mes->setMes(date('n'));
 			$mes->setAnio(date('Y'));	
+			$mes->setTc($this->request->tc);	
 			$mes->storeIntoDB();
 			$response["respuesta"]="SUCCESS";
 		}
