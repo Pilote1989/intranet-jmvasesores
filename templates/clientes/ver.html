@@ -53,6 +53,16 @@
 <script>
 
 $(document).ready(function(){
+  $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+    _title: function(title) {
+      if (!this.options.title ) {
+        title.html("&#160;");
+      } else {
+        title.html(this.options.title);
+      }
+    }
+  }));    
+  
 	$($('#myTab li#active a').attr('href')).load($('#myTab li#active a').attr('x-link'));
 	$('#myTab li a').click(function(){
 		var currentTab = $(this).attr('href');

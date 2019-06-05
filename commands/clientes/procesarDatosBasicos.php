@@ -24,6 +24,22 @@ class procesarDatosBasicos extends sessionCommand{
 		$cliente->setDoc($this->request->doc);
 		$cliente->setTipoDoc($this->request->tipoDoc);
 		$cliente->setIdPersona($this->request->asesor);
+		
+		$target_path = "uploads/";
+		$db = time() . "-" . substr(md5(basename( $_FILES['pdf']['name'])), 0 , 4) . ".pdf";
+		$target_path = $target_path . $db;
+		if ($_FILES["pdf"]["type"] == "application/pdf"){
+			if ($_FILES["pdf"]["error"] > 0){
+				echo "Return Code: " . $_FILES["pdf"]["error"] . "<br>";
+			}elseif(!move_uploaded_file($_FILES['pdf']['tmp_name'], $target_path)){
+				echo 'Error al subir el archivo';
+			}else{
+				$cliente->setCartanombramiento($db);
+			}
+		}else{
+			echo 'El archivo no es un pdf.';
+		}
+		
 		if($this->request->nac!=""){
 			$cliente->setAniversario($this->request->nac,"DATE");	
 		}

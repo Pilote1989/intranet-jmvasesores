@@ -49,6 +49,12 @@ class editarDatosBasicos extends sessionCommand{
 			}else{
 				$this->addEmptyVar("nacEncargado");
 			}
+			if($cliente->getCartanombramiento()==""){
+				$this->addBlock("cartaPDFn");
+			}else{
+				$this->addBlock("cartaPDF");
+				$this->addVar("cartanombamiento",$cliente->getCartanombramiento());	
+			}			
 		}else{
 			$this->addBlock("creando");
 			$this->addBlock("bloqueEditarClientes");
@@ -65,6 +71,7 @@ class editarDatosBasicos extends sessionCommand{
 			$this->addEmptyVar("nacGG");
 			$this->addEmptyVar("encargado");
 			$this->addEmptyVar("nacEncargado");
+			$this->addBlock("cartaPDFn");
 		}
 		$departamentos = Fabrica::getAllFromDB("Ubigeo",array("provincia = '00'","distrito = '00'"));
 		$selectDepartamentos = "<option></option>";

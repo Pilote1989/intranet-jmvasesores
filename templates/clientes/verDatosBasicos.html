@@ -142,4 +142,68 @@
                 </div>
               </div>
             <block end="cia"/>
+              <div class="profile-info-row">
+                <div class="profile-info-name">
+                  Carta de Nombramiento
+                </div>
+                <div class="profile-info-value">
+            			<block start="siPDF"/>
+            			<a href="uploads/{cartanombramiento}" target="_blank"><i class="ace-icon fa fa-save"></i> Descargar</a> 
+            			<div class="action-buttons inline">
+            				<a href="#" class="red" style="border-bottom:0px;outline:none;" id="eliminarPDF">
+            					<i class="ace-icon fa fa-times-circle"></i>
+            				</a>
+            			</div>
+            			<block end="siPDF"/>
+            			<block start="noPDF"/>
+            			No hay archivo
+            			<block end="noPDF"/>
+                </div>
+              </div>
           </div>
+<div id="dialog-eliminarPDF" class="hide">
+	<div class="alert alert-info bigger-110">
+		El archivo se eliminara permanentemente.
+	</div>
+	<div class="space-6"></div>
+	<p class="bigger-110 bolder center grey">
+		<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+		¿Esta seguro?
+	</p>
+</div>
+<script>
+$(function() {
+	$('#eliminarPDF').on('click', function(e){
+		e.preventDefault();
+		$( "#dialog-eliminarPDF" ).removeClass('hide').dialog({
+			resizable: false,
+			width: '320',
+			modal: true,
+			title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> ¿Eliminar el archivo guardado?</h4></div>",
+			title_html: true,
+			buttons: [
+				{
+					html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Eliminar",
+					"class" : "btn btn-danger btn-minier",
+					click: function() {
+						$.getJSON("?do=clientes.eliminarPDF&idCliente={idCliente}", function( data ) {
+							console.log(data)
+						});						
+						$( this ).dialog( "close" );
+						$("#tab-1").html('<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success" style="width: 100%;"></div></div>');
+						$("#tab-1").load('/?do=clientes.verDatosBasicos&idCliente={idCliente}');
+					}
+				},
+				{
+					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancelar",
+					"class" : "btn btn-minier",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		});
+		return;
+	})
+});
+</script>

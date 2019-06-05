@@ -149,8 +149,37 @@
                   <span class="input-group-addon"> <i class="ace-icon fa fa-calendar"></i> </span>
                 </div>
               </div>
-            </div>   
+            </div>
           </div>
+   
+            <block start="cartaPDF"/>
+            <div class="form-group">
+              <label for="file" class="col-sm-3 control-label no-padding-right">Carta de Nombramiento </label>
+              <div class="col-sm-9">
+                <input type="file" id="pdf" name="pdf">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-3">
+              </div>
+              <div class="col-sm-9">
+                <div class="alert alert-block alert-warning">
+                  <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
+                  <p> <strong> <i class="ace-icon fa fa-exclamation-triangle"></i> ¡Atenci&oacute;n!</strong><br />
+                    Ya existe un archivo PDF, si escoje un PDF si sube un nuevo archivo el anterior sera eliminado. </p>
+                  <p> <a class="btn btn-sm btn-warning" id="descargarPdf" target="_blank" href="uploads/{cartanombamiento}"> Dercargar Archivo <i class="ace-icon fa fa-arrow-right fa-on-right bigger-110"></i> </a> </p>
+                </div>
+              </div>
+            </div>
+            <block end="cartaPDF"/>
+            <block start="cartaPDFn"/>
+            <div class="form-group">
+              <label for="file" class="col-sm-3 control-label no-padding-right">Carta de Nombramiento </label>
+              <div class="col-sm-9">
+                <input type="file" id="pdf" name="pdf">
+              </div>
+            </div>
+            <block end="cartaPDFn"/>          
           
         </fieldset>
         <input type="hidden" name="idCliente" value="{idCliente}" id="idCliente">
@@ -163,6 +192,17 @@
 </div>
 <block end="bloqueEditarClientes"/>
 <script>
+
+		jQuery('#pdf').ace_file_input({
+			no_file:'Escoja ...',
+			btn_choose:'Subir',
+			btn_change:'Cambiar',
+			droppable:false,
+			onchange:null,
+			thumbnail:false,
+			whitelist:'pdf',
+			blacklist:'exe|php',
+		}); 
   <block start="noEmpresa"/>
   $('#empresa').hide();
   <block end="noEmpresa"/>

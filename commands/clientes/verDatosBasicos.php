@@ -104,6 +104,13 @@ class verDatosBasicos extends sessionCommand{
 				$this->addVar("provincia", "Sin Definir");
 				$this->addVar("departamento", "Sin Definir");
 			}
+			if($cliente->getCartanombramiento()==""){
+				$this->addBlock("noPDF");
+			}else{
+				$this->addBlock("siPDF");
+				$this->addVar("cartanombramiento", $cliente->getCartanombramiento());
+			}			
+			
 			$this->addVar("menu", "menuClientes?idCliente=".$this->request->idCliente);
 			$persona = Fabrica::getFromDB("Persona", $cliente->getIdPersona());
 			//var_dump($persona);
