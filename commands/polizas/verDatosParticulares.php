@@ -5,7 +5,7 @@ class verDatosParticulares extends sessionCommand{
 		$usuario=$this->getUsuario();
 		if($this->request->idPoliza){
 			$poliza = Fabrica::getFromDB("Poliza",$this->request->idPoliza);
-			if($poliza->getIdRamo()=="2"){
+			if($poliza->getIdRamo()=="2" || $poliza->getIdRamo()=="19"){
 				$vehiculos = Fabrica::getAllFromDB("VehiculoEnPoliza", array("idPoliza = '" .$this->request->idPoliza . "'"));	
 				//$vehiculos = Fabrica::getAllFromDB("Vehiculo", array("idPoliza = '" .$this->request->idPoliza . "'"));	
 				$listaVehiculos = array();

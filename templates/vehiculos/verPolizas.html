@@ -4,6 +4,7 @@
                 <thead>
                   <tr>
                     <th>No.</th>
+                    <th>Ramo</th>
                     <th>Poliza</th>
                     <th>Cliente</th>
                     <th>Vigencia</th>
@@ -15,6 +16,7 @@
                   <loop start="polizas"/>
                   <tr>
                     <td>{polizas.id}</td>
+                    <td>{polizas.ramo}</td>
                     <td>{polizas.siglaCompania} - {polizas.numeroPoliza}</td>
                     <td>{polizas.nombreCliente}</td>
                     <td>{polizas.inicioVigencia} - {polizas.finVigencia}</td>

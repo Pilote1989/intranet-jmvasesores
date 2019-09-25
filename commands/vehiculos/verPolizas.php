@@ -15,10 +15,11 @@ class verPolizas extends sessionCommand{
 					com.nombre AS nombreCompania,
 					com.sigla AS siglaCompania,
 					p.inicioVigencia AS inicioVigencia,
-					p.finVigencia AS finVigencia
+					p.finVigencia AS finVigencia,
+                    r.sigla as ramo
 				FROM
 					VehiculoEnPoliza vp,
-					Poliza p, Cliente cli, Compania com
+					Poliza p, Cliente cli, Compania com, Ramo r
 				WHERE
 					vp.idPoliza = p.idPoliza
 					AND 
@@ -26,7 +27,11 @@ class verPolizas extends sessionCommand{
 					AND
 					com.idCompania = p.idCompania
 					AND
+					r.idRamo = p.idRamo
+					AND
 						vp.idVehiculo = '" . $this->request->idVehiculo . "'
+                ORDER BY 
+                    p.inicioVigencia ASC 
 				";
 			$query=utf8_decode($query);		
 			$link=&$this->fc->getLink();
@@ -54,6 +59,7 @@ class verPolizas extends sessionCommand{
 				$polizas[$i]["id"] = ++$i;
 				$polizas[$i]["idVehiculo"] = $poliza["idVehiculo"];
 				$polizas[$i]["idPoliza"] = $poliza["idPoliza"];
+				$polizas[$i]["ramo"] = $poliza["ramo"];
 				$polizas[$i]["numeroPoliza"] = $poliza["numeroPoliza"];
 				$polizas[$i]["nombreCliente"] = $poliza["nombreCliente"];
 				$polizas[$i]["nombreCompania"] = $poliza["nombreCompania"];
