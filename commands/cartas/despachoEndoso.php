@@ -69,7 +69,8 @@ class despachoEndoso extends sessionCommand{
 					"42" => "Villa El Salvador",
 					"35" => "Villa María del Triunfo"
 				);
-				$this->addVar("inicio", $poliza->getInicioVigencia("DATE"));
+				$this->addVar("idEndoso", $this->request->idEndoso);
+				$this->addVar("inicio", $endoso->getInicioVigencia("DATE"));
 				$this->addVar("pol", $poliza->getNumeroPoliza());
 				$this->addVar("fin	", $poliza->getFinVigencia("DATE"));
 				$compania = Fabrica::getFromDB("Compania", $poliza->getIdCompania());

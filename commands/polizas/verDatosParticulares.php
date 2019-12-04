@@ -73,7 +73,7 @@ class verDatosParticulares extends sessionCommand{
 					$this->addBlock('NoAnulada');
 				}
 				$this->processTemplate("polizas/verVehiculos.html");	
-			}else if($poliza->getIdRamo()=="4"){
+			}else if($poliza->getIdRamo()=="4" || $poliza->getIdRamo()=="12"){
 				//ver personas de asistencia medica	
 				$asegurados = Fabrica::getAllFromDB("ClienteEnPoliza", array("idPoliza = '" .$this->request->idPoliza . "'"));	
 				if(count($asegurados)){
