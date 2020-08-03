@@ -244,26 +244,32 @@ class busquedaAjax extends sessionCommand{
 					"MAX(Poliza.finVigencia) as finVigencia"
 				),
 				"busqueda" => array(
-					"contratante" => array(
+					"numeropoli" => array(
 						"order" => 0,
+						"tabla" => "Poliza",
+						"campo" => "numeroPoliza",
+						"tipo" => "LIKE%"
+					),
+					"contratante" => array(
+						"order" => 1,
 						"tabla" => "Cliente",
 						"campo" => "nombre",
 						"tipo" => "LIKE%"
 					),
 					"idRamo" => array(
-						"order" => 1,
+						"order" => 2,
 						"tabla" => "Ramo",
 						"campo" => "idRamo",
 						"tipo" => "EQUAL"
 					),
 					"idCompania" => array(
-						"order" => 2,
+						"order" => 3,
 						"tabla" => "Compania",
 						"campo" => "idCompania",
 						"tipo" => "EQUAL"
 					),
 					"idVendedor" => array(
-						"order" => 3,
+						"order" => 4,
 						"tabla" => "Poliza",
 						"campo" => "idVendedor",
 						"tipo" => "EQUAL"

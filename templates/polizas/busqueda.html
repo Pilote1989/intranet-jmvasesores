@@ -2,6 +2,12 @@
     <form class="form-horizontal" role="form" id="principal" name="principal">
         <fieldset>
             <div class="form-group">
+                <label for="numeropoli" class="col-sm-3 control-label no-padding-right"> Numero de Poliza </label>
+                <div class="col-sm-9">
+                  <input name="numeropoli" type="text" class="col-xs-12" id="numeropoli" value="{numeropoli}" onKeyPress="return disableEnterKey(event)" placeholder="Numero de Poliza">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="contratante" class="col-sm-3 control-label no-padding-right"> Contratante </label>
                 <div class="col-sm-9">
                   <input name="contratante" type="text" class="col-xs-12" id="contratante" value="{nombre}" onKeyPress="return disableEnterKey(event)" placeholder="Contratante">

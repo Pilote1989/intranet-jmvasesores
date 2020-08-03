@@ -5,6 +5,11 @@ class busqueda extends sessionCommand{
 		$usuario=$this->getUsuario();
 		$this->addVar("doFalso", $this->request->do);
 		$nameSession = "busquedaPolizas";
+		if($_SESSION[$nameSession]["numeropoli"]){
+			$this->addVar("numeropoli",$_SESSION[$nameSession]["numeropoli"]);
+		}else{
+			$this->addEmptyVar("numeropoli");
+		}
 		if($_SESSION[$nameSession]["length"]){
 			$this->addVar("length",$_SESSION[$nameSession]["length"]);
 		}else{
