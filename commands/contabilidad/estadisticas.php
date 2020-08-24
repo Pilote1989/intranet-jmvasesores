@@ -43,7 +43,7 @@ class estadisticas extends sessionCommand{
 		$query = '
 			SELECT l.Month, COALESCE( comisionSoles, 0 ) AS comisionSoles, COALESCE( primaNetaSoles, 0 ) AS primaNetaSoles, COALESCE( comisionDolares, 0 ) AS comisionDolares, COALESCE( primaNetaDolares, 0 ) AS primaNetaDolares
 			FROM (
-			
+
 			SELECT 1 AS 
 			MONTH UNION ALL SELECT 2 
 			UNION ALL SELECT 3 
@@ -116,13 +116,25 @@ class estadisticas extends sessionCommand{
 		$this->addVar("comisionDolares",'["' . implode('","', $comisionDolares). '"]');
 		$this->addVar("primaNetaDolares",'["' . implode('","', $primaNetaDolares). '"]');
     	*/
+
     	foreach($resultados as $resultado){
-			$data[$i]["mes"] = $nomMeses[$resultado["Month"]-1];
+            $mes = Fabrica::getAllFromDB("Mes", array("anio = '" . $anioSelec . "'", "mes = '" . $resultado["Month"] . "'"));
+            $data[$i]["mes"] = $nomMeses[$resultado["Month"]-1];
 			$data[$i]["primaDolares"] = $resultado["primaNetaDolares"];
 			$data[$i]["comisionDolares"] = $resultado["comisionDolares"];
 			$data[$i]["primaSoles"] = $resultado["primaNetaSoles"];
 			$data[$i]["comisionSoles"] = $resultado["comisionSoles"];
-			$i++;
+            if(!is_null($mes[0])){
+                //echo $mes[0]->getTc();
+    			$data[$i]["primaTotal"] = $resultado["primaNetaSoles"] + $mes[0]->getTc() * $resultado["primaNetaDolares"];
+	    		$data[$i]["comisionTotal"] = $resultado["comisionSoles"] + $mes[0]->getTc() * $resultado["comisionDolares"];
+                $data[$i]["mesTotal"] = $nomMeses[$resultado["Month"]-1] . " TC: " . $mes[0]->getTc();
+            }else{
+    			$data[$i]["primaTotal"] = 0;
+	    		$data[$i]["comisionTotal"] = 0;
+                $data[$i]["mesTotal"] = $nomMeses[$resultado["Month"]-1] . " TC: 0.00";
+            }
+            $i++;
     	}
     	if($this->request->t){
 			if($this->request->t == "2"){

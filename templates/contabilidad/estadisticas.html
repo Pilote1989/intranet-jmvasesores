@@ -35,12 +35,12 @@ function dataCreate() {
       ["{data.mes}", {data.comisionDolares}],
       <loop end="data"/>
     ]);
-    
+
     var data2 = new google.visualization.DataTable();
     data2.addColumn('string', 'Mes');
     data2.addColumn('number', 'Prima Neta');
     data2.addColumn('number', 'Comision');
-    
+
     data2.addRows([   
       <loop start="data"/>
       ["{data.mes}", {data.primaSoles}, {data.comisionSoles}],
@@ -57,21 +57,67 @@ function dataCreate() {
       ["{data.mes}", {data.primaSoles}],
       <loop end="data"/>
     ]);    
-    
-    
+
+
 
     var data2C = new google.visualization.DataTable();
     data2C.addColumn('string', 'Mes');
     data2C.addColumn('number', 'Comision');
-    
+
     data2C.addRows([   
       <loop start="data"/>
       ["{data.mes}", {data.comisionSoles}],
       <loop end="data"/>
     ]);
 
+    
 
-    return [data,data2,dataP,data2P,dataC,data2C];
+    
+    
+
+
+    var data3 = new google.visualization.DataTable();
+    data3.addColumn('string', 'Mes');
+    data3.addColumn('number', 'Prima Neta');
+    data3.addColumn('number', 'Comision');
+
+    data3.addRows([   
+      <loop start="data"/>
+      ["{data.mesTotal}", {data.primaTotal}, {data.comisionTotal}],
+      <loop end="data"/>
+    ]);
+
+
+    var data3P = new google.visualization.DataTable();
+    data3P.addColumn('string', 'Mes');
+    data3P.addColumn('number', 'Prima Neta');
+
+    data2P.addRows([   
+      <loop start="data"/>
+      ["{data.mesTotal}", {data.primaTotal}],
+      <loop end="data"/>
+    ]);    
+
+
+
+    var data3C = new google.visualization.DataTable();
+    data3C.addColumn('string', 'Mes');
+    data3C.addColumn('number', 'Comision');
+
+    data3C.addRows([   
+      <loop start="data"/>
+      ["{data.mesTotal}", {data.comisionTotal}],
+      <loop end="data"/>
+    ]);
+
+
+
+
+
+
+
+    //return [data,data2,data3,dataP,data2P,data3P,dataC,data2C,data3C];
+    return [data,data2,dataP,data2P,dataC,data2C,data3,data3P,data3C];
 }
 
 function findGetParameter(parameterName) {
@@ -119,9 +165,9 @@ function drawMultSeries() {
     //chart.setColumns([0,2]);
     chart.draw(data, options);
     /////    
-    
+
     //var data2 = resultData[1];
-    
+
     if(findGetParameter("t")==3){
       //comisiones
       var data2 = resultData[5];
@@ -139,12 +185,43 @@ function drawMultSeries() {
         'title': temp + ' - Soles',
         'legend': 'bottom',
         height: '400',
-        
+
     };
-    
+
     var chart2 = new google.visualization.ColumnChart(
     document.getElementById('soles'));
     chart2.draw(data2, options2);
+
+
+    
+
+
+
+
+
+    if(findGetParameter("t")==3){
+      //comisiones
+      var data3 = resultData[8];
+    }else if(findGetParameter("t")==2){
+      //primas
+      var data3 = resultData[7];
+    }else{
+      var data3 = resultData[6];
+    }    
+
+    var options3 = {
+        vAxis: {
+          title: 'US$',
+        },
+        'title': temp + ' - Total',
+        'legend': 'bottom',
+        height: '400',
+
+    };    
+
+    var chart3 = new google.visualization.ColumnChart(
+    document.getElementById('total'));
+    chart3.draw(data3, options3);
     
     
 }
@@ -215,6 +292,8 @@ function drawMultSeries() {
 	<div id="dolares" style="width: 100%">
 	</div>
 	<div id="soles" style="width: 100%">
+	</div>
+	<div id="total" style="width: 100%">
 	</div>
 </div>
 <script>
