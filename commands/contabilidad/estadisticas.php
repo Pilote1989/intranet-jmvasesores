@@ -126,8 +126,8 @@ class estadisticas extends sessionCommand{
 			$data[$i]["comisionSoles"] = $resultado["comisionSoles"];
             if(!is_null($mes[0])){
                 //echo $mes[0]->getTc();
-    			$data[$i]["primaTotal"] = ( $resultado["primaNetaSoles"] / $mes[0]->getTc() ) + $resultado["primaNetaDolares"];
-	    		$data[$i]["comisionTotal"] = ( $resultado["comisionSoles"] / $mes[0]->getTc() ) + $resultado["comisionDolares"];
+    			$data[$i]["primaTotal"] = round(( $resultado["primaNetaSoles"] / $mes[0]->getTc() ) + $resultado["primaNetaDolares"],2);
+	    		$data[$i]["comisionTotal"] = round(( $resultado["comisionSoles"] / $mes[0]->getTc() ) + $resultado["comisionDolares"],2);
                 $data[$i]["mesTotal"] = $nomMeses[$resultado["Month"]-1] . " TC: " . $mes[0]->getTc();
             }else{
     			$data[$i]["primaTotal"] = 0;
