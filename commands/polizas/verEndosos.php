@@ -29,8 +29,22 @@ class verEndosos extends sessionCommand{
 				$listaEndosos[$i]["documento"] = $endoso->getDocumento();
 				$listaEndosos[$i]["avisoCobranza"] = $cobro->getAvisoDeCobranza();
 				$listaEndosos[$i]["primaNeta"] = number_format($cobro->getPrimaNeta(),2);
-				$listaEndosos[$i]["comision"] = number_format($cobro->getComision(),2);;
+				$listaEndosos[$i]["comision"] = number_format($cobro->getComision(),2);
 				$listaEndosos[$i]["idEndoso"] = $endoso->getId();
+
+                //$this->addVar("pdf", $endoso->getPdf());
+
+                if($endoso->getPdf()==""){
+			    	//$this->addBlock("noPDF");
+                    $endosoTemp = "";
+    			}else{
+	    			//$this->addBlock("siPDF");
+                    $endosoTemp = '
+                    <a href="uploads/'.$endoso->getPdf().'" target="_blank"><i class="ace-icon fa fa-save"></i> Descargar</a>
+                    ';
+                }
+				$listaEndosos[$i]["pdf"] = $endosoTemp;
+
 				if($cobro->getIdLiquidacion()!="" || $cobro->getIdCedida()!=""){
 					//NO puedo eliminarlo ni anularlo					
 					$listaEndosos[$i]["verEliminar"] = "style='display:none'";
