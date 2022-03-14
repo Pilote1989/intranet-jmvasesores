@@ -11,25 +11,50 @@
 		</div>
 	</div>
 	<div class="well">
+		<h4 class="blue smaller">Reporte de Polizas Vigentes</h4>
+		<div class="center">
+			<button class="btn btn-sm btn-success" onclick="window.location.href = '?do=reportes.vigentes'">
+				<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> Descargar <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+			</button>
+		</div>
+	</div>
+	<div class="well">
+		<h4 class="blue smaller">Reporte de Siniestros</h4>
+		<div class="center">
+			<button class="btn btn-sm btn-success" onclick="window.location.href = '#'">
+				<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> Descargar <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+			</button>
+		</div>
+	</div>
+	<div class="well">
 		<h4 class="blue smaller">Reporte de Renovaciones</h4>
 		<div class="center">
-			<button class="btn btn-sm btn-success" onclick="window.location.href = '#'">
-				<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> Descargar <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-			</button>
+			<select id="mesreporte">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+			<select id="anioreporte">
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+            </select>
 		</div>
-	</div>
-	<div class="well">
-		<h4 class="blue smaller">Estado de Cuenta</h4>
 		<div class="center">
-			<button class="btn btn-sm btn-success" onclick="window.location.href = '#'">
-				<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> Descargar <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-			</button>
-		</div>
-	</div>
-	<div class="well">
-		<h4 class="blue smaller">Reporte de Comisiones</h4>
-		<div class="center">
-			<button class="btn btn-sm btn-success" onclick="window.location.href = '?do=reportes.comisiones'">
+			<button class="btn btn-sm btn-success" id="reporterenovaciones">
 				<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> Descargar <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 			</button>
 		</div>
@@ -39,5 +64,10 @@
 	</div>
 </div>
 <script>
+$("#anioreporte").val((new Date).getFullYear()).change();
+$("#mesreporte").val((new Date).getMonth()+1).change();
+$("#reporterenovaciones").on("click", function(){
+        window.location.href = '?do=reportes.renovaciones&mes=' + $('#mesreporte').find(":selected").val()+"&anio=" + $('#anioreporte').find(":selected").val();
+    })
 $('#procesando').hide();
 </script>
